@@ -1,8 +1,8 @@
-import FindLender from "@/components/FindLender"
+import ShowLenders from "@/components/ShowLenders"
 
 const LendersPage = () => {
   return (
-    <FindLender />
+    <ShowLenders />
   )
 }
 
