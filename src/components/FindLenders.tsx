@@ -61,7 +61,7 @@ const FindLenders = () => {
     
     function onSubmit(data: z.infer<typeof FormSchema>) {
       const { name, state, downPayment } = data;
-      router.push(`/get-started/lenders?name=${name}&state=${state}&downPayment=${downPayment}`)
+      router.push(`/trek/lenders?name=${name}&state=${state}&downPayment=${downPayment}`)
     }
 
     return (

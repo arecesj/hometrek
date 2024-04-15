@@ -2,13 +2,14 @@
 import Link from "next/link"
 import {
   Home,
-  LineChart,
-  Package,
-  LayoutGrid,
+  UserRoundSearch,
   DoorOpen,
   Settings,
   HandCoins,
-  Users2,
+  Gauge,
+  Handshake,
+  ScrollText,
+  Shield,
 } from "lucide-react"
 import {
   Tooltip,
@@ -47,21 +48,21 @@ const SideNav = () => {
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
-                href="/"
+                href="/trek/dashboard"
                 className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
-                <LayoutGrid className="h-5 w-5"/>
-                <span className="sr-only">All Steps</span>
+                <Gauge className="h-5 w-5"/>
+                <span className="sr-only">Dashboard</span>
               </Link>
             </TooltipTrigger>
-            <TooltipContent side="right">All Steps</TooltipContent>
+            <TooltipContent side="right">Dashboard</TooltipContent>
           </Tooltip>
         </TooltipProvider>
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
-                href="/"
+                href="/trek/lenders"
                 className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
                 <HandCoins className="h-5 w-5"/>
@@ -75,28 +76,56 @@ const SideNav = () => {
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
-                href="/"
+                href="/trek/inspections"
                 className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
-                <Users2 className="h-5 w-5" />
-                <span className="sr-only">Customers</span>
+                <UserRoundSearch className="h-5 w-5"/>
+                <span className="sr-only">Inspections</span>
               </Link>
             </TooltipTrigger>
-            <TooltipContent side="right">Customers</TooltipContent>
+            <TooltipContent side="right">Inspections</TooltipContent>
           </Tooltip>
         </TooltipProvider>
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
-                href="/"
+                href="/trek/insurance"
                 className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
-                <LineChart className="h-5 w-5" />
-                <span className="sr-only">Analytics</span>
+                <Shield className="h-5 w-5"/>
+                <span className="sr-only">Insurance</span>
               </Link>
             </TooltipTrigger>
-            <TooltipContent side="right">Analytics</TooltipContent>
+            <TooltipContent side="right">Insurance</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link
+                href="/trek/title"
+                className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+              >
+                <ScrollText className="h-5 w-5"/>
+                <span className="sr-only">Title</span>
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent side="right">Title</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link
+                href="/trek/closing-day"
+                className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+              >
+                <Handshake className="h-5 w-5"/>
+                <span className="sr-only">Closing Day</span>
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent side="right">Closing Day</TooltipContent>
           </Tooltip>
         </TooltipProvider>
       </nav>
@@ -105,7 +134,7 @@ const SideNav = () => {
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
-                href="/"
+                href="/trek/settings"
                 className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
                 <Settings className="h-5 w-5" />
