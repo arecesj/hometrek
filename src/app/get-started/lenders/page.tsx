@@ -1,8 +1,11 @@
 import ShowLenders from "@/components/ShowLenders"
+import { Suspense } from "react"
 
 const LendersPage = () => {
   return (
-    <ShowLenders />
+    <Suspense>
+      <ShowLenders />
+    </Suspense>
   )
 }
 
