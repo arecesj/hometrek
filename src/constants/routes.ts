@@ -1,19 +1,22 @@
-export const routeNames = {
-  HOME: "Home",
-  DASHBOARD: "Dashboard",
-  LENDERS: "Lenders",
-  INSPECTIONS: "Inspections",
-  INSURANCE: "Insurance",
-  TITLE: "Title",
-  CLOSINGDAY: "Closing Day",
-  SETTINGS: "Settings",
+import { UrlObject } from "url";
+
+export enum routeNames {
+  HOME = "Home",
+  DASHBOARD = "Dashboard",
+  LENDERS = "Lenders",
+  INSPECTIONS = "Inspections",
+  INSURANCE = "Insurance",
+  TITLE = "Title",
+  CLOSINGDAY = "Closing Day",
+  SETTINGS = "Settings",
 }
+
 export const routes = {
   [routeNames.HOME]: {
-    route: "/"
+    route: "/",
   },
   [routeNames.DASHBOARD]: {
-    route: "/trek/dashboard"
+    route: "/trek/dashboard",
   },
   [routeNames.LENDERS]: {
     route: "/trek/lenders",
