@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { useSearchParams, redirect } from 'next/navigation'
+import { useEffect, useState } from "react";
 import {
   MoreVertical,
   Search,
@@ -47,10 +48,12 @@ import {
   Tabs,
   TabsContent,
 } from "@/components/ui/tabs"
-import { useEffect } from "react";
+import Loading from "./LoadingSpinner";
 
 const ShowLenders = () => {
   const searchParams = useSearchParams()
+  const [isLoading, setLoading] = useState<boolean>(true);
+  
   const userData = {
     name: searchParams.get("name"),
     state: searchParams.get("state"),
@@ -61,6 +64,7 @@ const ShowLenders = () => {
     for (const [key, value] of Object.entries(userData)) {
       if(!value) redirect('/')
     }
+    setLoading(false);
   }
   
   
@@ -69,7 +73,9 @@ const ShowLenders = () => {
   }, [userData])
 
   return (
-    <div className="flex min-h-screen w-full flex-col bg-beige">
+    <>
+    {isLoading ? (<Loading />) : (
+      <div className="flex min-h-screen w-full flex-col bg-beige">
       <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
         <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
           {/* TODO: Find if this can be useful at some point */}
@@ -530,6 +536,8 @@ const ShowLenders = () => {
         </main>
       </div>
     </div>
+    )}
+    </>
   )
 }
 
