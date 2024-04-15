@@ -1,21 +1,11 @@
 'use client';
 
-import Link from "next/link"
 import { useSearchParams, redirect } from 'next/navigation'
 import { useEffect, useState } from "react";
 import {
   MoreVertical,
-  Search,
-  User,
   RefreshCw
 } from "lucide-react"
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -49,6 +39,7 @@ import {
 import Loading from "@/components/LoadingSpinner";
 import Header from "@/components/Header";
 import { lenders } from "@/constants/lenders";
+import { routeNames } from '@/constants/routes';
 
 const ShowLenders = () => {
   const searchParams = useSearchParams()
@@ -78,7 +69,7 @@ const ShowLenders = () => {
     {isLoading ? (<Loading />) : (
       <div className="flex min-h-screen w-full flex-col bg-beige">
         <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
-          <Header />
+          <Header routeName={routeNames.LENDERS} />
           <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
             <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
               <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
@@ -287,7 +278,7 @@ const ShowLenders = () => {
                           <span className="text-muted-foreground">
                             Home Price
                           </span>
-                          <span>-</span>
+                          <span>$410,000</span>
                         </li>
                         <li className="flex items-center justify-between">
                           <span className="text-muted-foreground">
