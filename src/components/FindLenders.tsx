@@ -34,9 +34,10 @@ import { states } from "@/constants/states";
 
 const FormSchema = z.object({
     downPayment: z.string().refine((val) => {
-      return !Number.isNaN(parseInt(val, 10)) || val.length < 3
+      const int = parseInt(val, 10)
+      return !Number.isNaN(int) || val.length >= 10000
     }, {
-      message: "Down payment is required and should be a number"
+      message: "Down payment is required and needs to be at least $10,000"
     }),
     name: z.string().min(5, { 
       message: "Name is required",

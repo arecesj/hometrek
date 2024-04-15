@@ -49,10 +49,12 @@ import {
   TabsContent,
 } from "@/components/ui/tabs"
 import Loading from "./LoadingSpinner";
+import { lenders } from "@/constants/lenders";
 
 const ShowLenders = () => {
   const searchParams = useSearchParams()
   const [isLoading, setLoading] = useState<boolean>(true);
+  const date = new Date().toDateString();
   
   const userData = {
     name: searchParams.get("name"),
@@ -70,7 +72,7 @@ const ShowLenders = () => {
   
   useEffect(() => {
     checkSearchParams();
-  }, [userData])
+  }, [userData])  
 
   return (
     <>
@@ -137,7 +139,7 @@ const ShowLenders = () => {
             <BreadcrumbList>
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link href="#">Dashboard</Link>
+                  <Link href="#">Home</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
@@ -198,7 +200,7 @@ const ShowLenders = () => {
                   <div className="text-xs text-muted-foreground">
                     Hometrek Suggestion
                   </div>
-                  <CardDescription>X Lender</CardDescription>
+                  <CardDescription>Guaranteed Rate</CardDescription>
                   <CardTitle className="text-4xl">$1,500</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -215,7 +217,7 @@ const ShowLenders = () => {
                   <div className="text-xs text-muted-foreground">
                     Hometrek Suggestion
                   </div>
-                  <CardDescription>Y Lender</CardDescription>
+                  <CardDescription>NBKC Bank</CardDescription>
                   <CardTitle className="text-4xl">$1,250</CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -290,103 +292,36 @@ const ShowLenders = () => {
                           <TableHead className="hidden sm:table-cell">
                             Min. Down payment
                           </TableHead>
-                          <TableHead className="hidden md:table-cell">
+                          <TableHead className="hidden md:table-cell text-center">
                             Date
                           </TableHead>
                           <TableHead className="text-right">Loan Amount</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
-                        <TableRow className="bg-accent">
-                          <TableCell>
-                            <div className="font-medium">Lender A</div>
-                            <div className="hidden text-sm text-muted-foreground md:inline">
-                              liam@lenderA.com
-                            </div>
-                          </TableCell>
-                          <TableCell className="hidden sm:table-cell">
-                            620
-                          </TableCell>
-                          <TableCell className="hidden sm:table-cell">
-                            3%
-                          </TableCell>
-                          <TableCell className="hidden md:table-cell">
-                            2023-06-23
-                          </TableCell>
-                          <TableCell className="text-right">$400,000.00</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell>
-                            <div className="font-medium">Lender B</div>
-                            <div className="hidden text-sm text-muted-foreground md:inline">
-                              olivia@lenderB.com
-                            </div>
-                          </TableCell>
-                          <TableCell className="hidden sm:table-cell">
-                            620
-                          </TableCell>
-                          <TableCell className="hidden sm:table-cell">
-                            3%
-                          </TableCell>
-                          <TableCell className="hidden md:table-cell">
-                            2023-06-24
-                          </TableCell>
-                          <TableCell className="text-right">$400,000.00</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell>
-                            <div className="font-medium">Lender C</div>
-                            <div className="hidden text-sm text-muted-foreground md:inline">
-                              noah@lenderC.com
-                            </div>
-                          </TableCell>
-                          <TableCell className="hidden sm:table-cell">
-                            620
-                          </TableCell>
-                          <TableCell className="hidden sm:table-cell">
-                            3%
-                          </TableCell>
-                          <TableCell className="hidden md:table-cell">
-                            2023-06-25
-                          </TableCell>
-                          <TableCell className="text-right">$400,000.00</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell>
-                            <div className="font-medium">Lender D</div>
-                            <div className="hidden text-sm text-muted-foreground md:inline">
-                              emma@lenderD.com
-                            </div>
-                          </TableCell>
-                          <TableCell className="hidden sm:table-cell">
-                            620
-                          </TableCell>
-                          <TableCell className="hidden sm:table-cell">
-                            3%
-                          </TableCell>
-                          <TableCell className="hidden md:table-cell">
-                            2023-06-26
-                          </TableCell>
-                          <TableCell className="text-right">$450.00</TableCell>
-                        </TableRow>
-                        <TableRow>
-                          <TableCell>
-                            <div className="font-medium">Lender E</div>
-                            <div className="hidden text-sm text-muted-foreground md:inline">
-                              liam@lenderE.com
-                            </div>
-                          </TableCell>
-                          <TableCell className="hidden sm:table-cell">
-                            620
-                          </TableCell>
-                          <TableCell className="hidden sm:table-cell">
-                            3%
-                          </TableCell>
-                          <TableCell className="hidden md:table-cell">
-                            2023-06-23
-                          </TableCell>
-                          <TableCell className="text-right">$250.00</TableCell>
-                        </TableRow>                       
+                        {Object.entries(lenders).map(([key, value]) => {
+                          const { name, nmls, minCreditScore, minDownPaymentPercentage} = value;
+                          return(
+                            <TableRow key={key}>
+                              <TableCell>
+                                <div className="font-medium">{name}</div>
+                                <div className="hidden text-sm text-muted-foreground md:inline">
+                                  {`NMLS#${nmls}`}
+                                </div>
+                              </TableCell>
+                              <TableCell className="hidden sm:table-cell text-center">
+                                {minCreditScore}
+                              </TableCell>
+                              <TableCell className="hidden sm:table-cell text-center">
+                                {`${minDownPaymentPercentage}%`}
+                              </TableCell>
+                              <TableCell className="hidden md:table-cell text-center">
+                                {date}
+                              </TableCell>
+                              <TableCell className="text-right">{`$${userData.downPayment}`}</TableCell>
+                            </TableRow>
+                          )
+                        })}                   
                       </TableBody>
                     </Table>
                   </CardContent>
@@ -412,7 +347,7 @@ const ShowLenders = () => {
                       <span className="sr-only">Copy Potential Savings</span>
                     </Button> */}
                   </CardTitle>
-                  <CardDescription>Date: April 10, 2024 </CardDescription>
+                  <CardDescription>{`Date: ${date}`} </CardDescription>
                 </div>
                 <div className="ml-auto flex items-center gap-1">
                   <Button size="sm" variant="outline" className="h-8 gap-1">
@@ -439,7 +374,7 @@ const ShowLenders = () => {
               </CardHeader>
               <CardContent className="p-6 text-sm">
                 <div className="grid gap-3">
-                  <div className="font-semibold">User Breakdown: Jeewan Singh</div>
+                  <div className="font-semibold">{`User Breakdown: ${userData.name}`}</div>
                     <ul className="grid gap-3">
                       {/* <li className="flex items-center justify-between">
                         <span className="text-muted-foreground">
@@ -451,13 +386,13 @@ const ShowLenders = () => {
                         <span className="text-muted-foreground">
                           Home Price
                         </span>
-                        <span>$500,000.00</span>
+                        <span>-</span>
                       </li>
                       <li className="flex items-center justify-between">
                         <span className="text-muted-foreground">
                           Down Payment
                         </span>
-                        <span>$100,000.00</span>
+                        <span>{`$${userData.downPayment}`}</span>
                       </li>
                       {/* <li className="flex items-center justify-between">
                         <span className="text-muted-foreground">
@@ -511,9 +446,9 @@ const ShowLenders = () => {
                 </div>
               </CardContent>
               <CardFooter className="flex flex-row items-center border-t bg-muted/50 px-6 py-3">
-                <div className="text-xs text-muted-foreground">
+                {/* <div className="text-xs text-muted-foreground">
                   Updated <time dateTime="2023-11-23">April 10, 2024</time>
-                </div>
+                </div> */}
                 {/* <Pagination className="ml-auto mr-0 w-auto">
                   <PaginationContent>
                     <PaginationItem>
@@ -535,7 +470,7 @@ const ShowLenders = () => {
           </div>
         </main>
       </div>
-    </div>
+      </div>
     )}
     </>
   )
