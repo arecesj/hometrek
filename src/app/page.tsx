@@ -6,7 +6,7 @@ export default function Home() {
       <main className="flex min-h-[calc(100vh_-_theme(spacing.16))] flex-1 flex-col gap-4 bg-beige p-4 md:gap-8 md:p-10">
       <div className="flex justify-center">
         <h1 className="text-4xl font-bold tracking-tight">
-          Hometrek.ai
+          HomeTrek.ai
         </h1>
       </div>
         <div className="flex justify-center">
