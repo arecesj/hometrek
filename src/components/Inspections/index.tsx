@@ -27,7 +27,7 @@ export type FindInspectionsProps = {
 
 const Inspections = () => {
   const { context, setContext } = useAppContext()
-  const [isNewUser, setNewUser] = useState<boolean>(!context.user.zipCode || !context.inspections);
+  const [isNewUser, setNewUser] = useState<boolean>(!context.user || !context.inspections);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
