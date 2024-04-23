@@ -3,10 +3,8 @@
 import { FC } from "react"
 import Link from "next/link"
 import {
-  Search,
   User,
 } from "lucide-react"
-import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import {
   Breadcrumb,
@@ -48,12 +46,12 @@ const Header: FC<HeaderProps> = ({ routeName }) => {
         </BreadcrumbList>
       </Breadcrumb>
       <div className="relative ml-auto flex-1 md:grow-0">
-        <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
+        {/* <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
         <Input
           type="search"
           placeholder="Search..."
           className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px]"
-        />
+        /> */}
       </div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
@@ -66,12 +64,25 @@ const Header: FC<HeaderProps> = ({ routeName }) => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+          <DropdownMenuLabel>HomeTrek</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Settings</DropdownMenuItem>
-          <DropdownMenuItem>Support</DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link href="/trek/settings">
+              Settings
+            </Link>
+          </DropdownMenuItem>
+          {/* <DropdownMenuItem>Support</DropdownMenuItem> */}
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Logout</DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link href="/trek/login">
+              Settings
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link href="/trek/sign-up">
+              Sign up
+            </Link>
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </header>
