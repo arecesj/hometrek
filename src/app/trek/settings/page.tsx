@@ -1,8 +1,11 @@
+import PageFoundation from "@/components/PageFoundation"
+import { routeNames } from "@/constants/routes";
+
 const SettingsPage = () => {
   return (
-    <>
-    Settings Page!
-    </>
+    <PageFoundation routeName={routeNames.SETTINGS}>
+      Settings Page!
+    </PageFoundation>
   )
 }
 

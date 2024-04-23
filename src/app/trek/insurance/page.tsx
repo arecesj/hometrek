@@ -1,8 +1,11 @@
+import PageFoundation from "@/components/PageFoundation"
+import { routeNames } from "@/constants/routes";
+
 const InsurancePage = () => {
   return (
-    <>
-    Insurance Page!
-    </>
+    <PageFoundation routeName={routeNames.INSURANCE}>
+      Insurance Page!
+    </PageFoundation>
   )
 }
 

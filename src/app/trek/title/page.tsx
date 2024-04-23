@@ -1,8 +1,11 @@
+import PageFoundation from "@/components/PageFoundation"
+import { routeNames } from "@/constants/routes";
+
 const TitlePage = () => {
   return (
-    <>
-    Title Page!
-    </>
+    <PageFoundation routeName={routeNames.TITLE}>
+      Title Page!
+    </PageFoundation>
   )
 }
 
