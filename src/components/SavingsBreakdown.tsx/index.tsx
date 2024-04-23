@@ -1,9 +1,5 @@
 'use client'
-import { FC } from 'react'
-import {
-  MoreVertical,
-  RefreshCw
-} from "lucide-react"
+
 import {
   Card,
   CardContent,
@@ -13,24 +9,30 @@ import {
   CardTitle,
 } from "@/components/ui/card"
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
-import { formatToUSD, subtractNumStrings } from '@/utils/helpers'
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
+import { useAppContext } from '@/context'
+import UserBreakdown from "./UserBreakdown"
+import LenderBreakdown from "./LenderBreakdown"
+import HomeTrekSavings from "./HomeTrekSavings"
 
-type SavingsBreakdownProps = {
-  user: UserContext;
-  lenders: LendersContext;
-}
-
-const SavingsBreakdown: FC<SavingsBreakdownProps> = ({ user, lenders: {potentialDownPayment, potentialHomePrice} }) => {
-  const loanAmt = subtractNumStrings(potentialHomePrice, potentialDownPayment);
-  const htLoanAmt = subtractNumStrings(loanAmt, "1000")
+const SavingsBreakdown = () => {
+  const {
+    context: {
+      user,
+      lenders: {
+        potentialDownPayment,
+        potentialHomePrice,
+        selectedLender
+      }
+    }
+  } = useAppContext()
+  
+  const isLenderSelected = !!selectedLender && !!selectedLender.name;
+  
   return (
     <div>
       <Card
@@ -52,13 +54,13 @@ const SavingsBreakdown: FC<SavingsBreakdownProps> = ({ user, lenders: {potential
             <CardDescription>{`Date: ${user.date}`} </CardDescription>
           </div>
           <div className="ml-auto flex items-center gap-1">
-            <Button size="sm" variant="outline" className="h-8 gap-1">
+            {/* <Button size="sm" variant="outline" className="h-8 gap-1">
               <RefreshCw className="h-3.5 w-3.5"/>
               <span className="lg:sr-only xl:not-sr-only xl:whitespace-nowrap">
                 Recalculate 
               </span>
-            </Button>
-            <DropdownMenu>
+            </Button> */}
+            {/* <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button size="icon" variant="outline" className="h-8 w-8">
                   <MoreVertical className="h-3.5 w-3.5" />
@@ -71,81 +73,41 @@ const SavingsBreakdown: FC<SavingsBreakdownProps> = ({ user, lenders: {potential
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>Trash</DropdownMenuItem>
               </DropdownMenuContent>
-            </DropdownMenu>
+            </DropdownMenu> */}
           </div>
         </CardHeader>
         <CardContent className="p-6 text-sm">
-          <div className="grid gap-3">
-            <div className="font-semibold">{`User Breakdown: ${user.name}`}</div>
-              <ul className="grid gap-3">
-                {/* <li className="flex items-center justify-between">
-                  <span className="text-muted-foreground">
-                    Credit Score
-                  </span>
-                  <span>720</span>
-                </li> */}
-                <li className="flex items-center justify-between">
-                  <span className="text-muted-foreground">
-                    Home Price
-                  </span>
-                  <span>{`${formatToUSD(potentialHomePrice)}`}</span>
-                </li>
-                <li className="flex items-center justify-between">
-                  <span className="text-muted-foreground">
-                    Down Payment
-                  </span>
-                  <span>{`${formatToUSD(potentialDownPayment)}`}</span>
-                </li>
-                {/* <li className="flex items-center justify-between">
-                  <span className="text-muted-foreground">
-                    State
-                  </span>
-                  <span>New York</span>
-                </li> */}
-              </ul>
-            <Separator className="my-2" />
-            <div className="font-semibold">Selected Lender: A Lender</div>
-            <ul className="grid gap-3">
-              <li className="flex items-center justify-between">
-                <span className="text-muted-foreground">
-                  Original Loan Amount
-                </span>
-                <span className="text-decoration-line: line-through text-rose-700">{`${formatToUSD(loanAmt)}`}</span>
-              </li>
-              <li className="flex items-center justify-between">
-                <span className="text-muted-foreground">
-                  HomeTrek Loan Amount
-                </span>
-                <span>{`${formatToUSD(htLoanAmt)}`}</span>
-              </li>
-              <li className="flex items-center justify-between">
-                <span className="text-muted-foreground">
-                  Interest Rate
-                </span>
-                <span>7.2%</span>
-              </li>
-            </ul>
-            <Separator className="my-2" />
-            <div className="font-semibold">HomeTrek Savings</div>
-            <ul className="grid gap-3">
-              <li className="flex items-center justify-between">
-                <span className="text-muted-foreground">Using A Lender</span>
-                <span>$1000.00</span>
-              </li>
-              <li className="flex items-center justify-between">
-                <span className="text-muted-foreground">Something else here</span>
-                <span>$500</span>
-              </li>
-              <li className="flex items-center justify-between">
-                <span className="text-muted-foreground">Taxes</span>
-                <span>$25.00</span>
-              </li>
-              <li className="flex items-center justify-between font-semibold">
-                <span className="text-muted-foreground">Total Savings</span>
-                <span>$1,525.00</span>
-              </li>
-            </ul>
-          </div>
+          <Accordion
+            type="multiple"
+            className="w-full"
+            defaultValue={
+              [
+                "user",
+                "lender",
+                "inspector",
+                "appraiser",
+                "insurance",
+                "title",
+                "closingDay",
+                "homeTrekSavings"
+              ]
+            }
+          >
+            <UserBreakdown
+              name={user.name}
+              potentialHomePrice={potentialHomePrice}
+              potentialDownPayment={potentialDownPayment}
+            />
+            {isLenderSelected && (
+              <LenderBreakdown
+                isLenderSelected={isLenderSelected}
+                potentialHomePrice={potentialHomePrice}
+                potentialDownPayment={potentialDownPayment}
+                name={selectedLender.name}
+              />
+            )}
+            <HomeTrekSavings />
+          </Accordion>
         </CardContent>
         <CardFooter className="flex flex-row items-center border-t bg-muted/50 px-6 py-3">
           {/* <div className="text-xs text-muted-foreground">
