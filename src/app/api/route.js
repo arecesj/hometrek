@@ -8,8 +8,6 @@ export async function GET(request) {
 
 // To handle a POST request to /api
 export async function POST(request) {
-  console.log("DO WE MAKE IT?")
   // const body = JSON.parse(request.body)
-  console.log("body: ", body)
   return NextResponse.json({ message: "Hello World" }, { status: 200 });
 }
