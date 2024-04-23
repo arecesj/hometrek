@@ -1,6 +1,8 @@
 'use client'
 
 import { FC } from 'react'
+import { useRouter } from 'next/navigation'
+
 import {
   Table,
   TableBody,
@@ -23,7 +25,7 @@ import {
 } from "@/components/ui/card"
 import { formatToUSD } from '@/utils/helpers'
 import { Button } from '../ui/button'
-import Link from 'next/link'
+import { useAppContext } from '@/context'
 
 type LendersTableProps = {
   user: UserContext;
@@ -31,7 +33,8 @@ type LendersTableProps = {
   fakeLenders: Lenders;
 }
 
-const LendersTable: FC<LendersTableProps> = ({ user: { date } , fakeLenders, lenders }) => {
+const LendersTable: FC<LendersTableProps> = ({ user , fakeLenders, lenders }) => {
+  const { context, setContext } = useAppContext()
   return (
     <>
     <Tabs defaultValue="lenders">
@@ -99,14 +102,18 @@ const LendersTable: FC<LendersTableProps> = ({ user: { date } , fakeLenders, len
                     Min. Down payment
                   </TableHead>
                   <TableHead className="hidden md:table-cell text-center">
-                    Date
+                    Loan Amount
                   </TableHead>
-                  <TableHead className="text-right">Loan Amount</TableHead>
+                  <TableHead className="text-right">
+                    Select Lender
+                  </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {Object.entries(fakeLenders).map(([key, value]) => {
                   const { name, nmls, minCreditScore, minDownPaymentPercentage} = value;
+                  const lenderSelected = (!!context.lenders.selectedLender && !!context.lenders.selectedLender.name)
+                  const isSelectedLender = lenderSelected && context.lenders.selectedLender.name === name;
                   return(
                     <TableRow key={key}>
                       <TableCell>
@@ -122,9 +129,43 @@ const LendersTable: FC<LendersTableProps> = ({ user: { date } , fakeLenders, len
                         {`${minDownPaymentPercentage}%`}
                       </TableCell>
                       <TableCell className="hidden md:table-cell text-center">
-                        {date}
+                        {formatToUSD(lenders.potentialDownPayment)}
                       </TableCell>
-                      <TableCell className="text-right">{formatToUSD(lenders.potentialDownPayment)}</TableCell>
+                      <TableCell className="text-right">
+                      {isSelectedLender && (
+                        <Button
+                          variant="destructive"
+                          size="sm"
+                          onClick={() => {
+                            setContext({
+                              ...context,
+                              lenders: {
+                                ...context.lenders,
+                                selectedLender: {} as SelectedLender
+                              }
+                            })
+                          }}
+                        >
+                          {`Remove`}
+                        </Button>
+                      )}
+                      {!lenderSelected && (
+                        <Button
+                          size="sm"
+                          onClick={() => {
+                            setContext({
+                              ...context,
+                              lenders: {
+                                ...context.lenders,
+                                selectedLender: value
+                              }
+                            })
+                          }}
+                        >
+                          {`Select`}
+                        </Button>
+                      )}
+                      </TableCell>
                     </TableRow>
                   )
                 })}                   
@@ -134,27 +175,6 @@ const LendersTable: FC<LendersTableProps> = ({ user: { date } , fakeLenders, len
         </Card>
       </TabsContent>
     </Tabs>
-    <div className="space-x-2">
-      <Button
-        variant="outline"
-        size="sm"
-        onClick={() => {}}
-        // disabled={!table.getCanPreviousPage()}
-      >
-        Previous
-      </Button>
-      <Button
-        variant="outline"
-        size="sm"
-        asChild
-      >
-        <Link href="/trek/inspections">Next Step</Link>
-      </Button>
-    </div>
-    {/* <div className="flex items-center justify-end space-x-2 py-4">
-      
-        
-    </div> */}
     </>
   )
 }
