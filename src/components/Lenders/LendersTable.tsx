@@ -5,6 +5,7 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -20,15 +21,19 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
+import { formatToUSD } from '@/utils/helpers'
+import { Button } from '../ui/button'
+import Link from 'next/link'
 
-type LenderTableProps = {
-  userData: UserData;
-  lenders: Lenders;
-  date: string;
+type LendersTableProps = {
+  user: UserContext;
+  lenders: LendersContext;
+  fakeLenders: Lenders;
 }
 
-const LenderTable: FC<LenderTableProps> = ({userData, lenders, date}) => {
+const LendersTable: FC<LendersTableProps> = ({ user: { date } , fakeLenders, lenders }) => {
   return (
+    <>
     <Tabs defaultValue="lenders">
       <div className="flex items-center">
         {/* <TabsList>
@@ -84,11 +89,13 @@ const LenderTable: FC<LenderTableProps> = ({userData, lenders, date}) => {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Lender</TableHead>
-                  <TableHead className="hidden sm:table-cell">
+                  <TableHead>
+                    Lender
+                  </TableHead>
+                  <TableHead>
                     Min. Credit Score
                   </TableHead>
-                  <TableHead className="hidden sm:table-cell">
+                  <TableHead>
                     Min. Down payment
                   </TableHead>
                   <TableHead className="hidden md:table-cell text-center">
@@ -98,7 +105,7 @@ const LenderTable: FC<LenderTableProps> = ({userData, lenders, date}) => {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {Object.entries(lenders).map(([key, value]) => {
+                {Object.entries(fakeLenders).map(([key, value]) => {
                   const { name, nmls, minCreditScore, minDownPaymentPercentage} = value;
                   return(
                     <TableRow key={key}>
@@ -117,7 +124,7 @@ const LenderTable: FC<LenderTableProps> = ({userData, lenders, date}) => {
                       <TableCell className="hidden md:table-cell text-center">
                         {date}
                       </TableCell>
-                      <TableCell className="text-right">{`$${userData.downPayment}`}</TableCell>
+                      <TableCell className="text-right">{formatToUSD(lenders.potentialDownPayment)}</TableCell>
                     </TableRow>
                   )
                 })}                   
@@ -127,7 +134,29 @@ const LenderTable: FC<LenderTableProps> = ({userData, lenders, date}) => {
         </Card>
       </TabsContent>
     </Tabs>
+    <div className="space-x-2">
+      <Button
+        variant="outline"
+        size="sm"
+        onClick={() => {}}
+        // disabled={!table.getCanPreviousPage()}
+      >
+        Previous
+      </Button>
+      <Button
+        variant="outline"
+        size="sm"
+        asChild
+      >
+        <Link href="/trek/inspections">Next Step</Link>
+      </Button>
+    </div>
+    {/* <div className="flex items-center justify-end space-x-2 py-4">
+      
+        
+    </div> */}
+    </>
   )
 }
 
-export default LenderTable;
+export default LendersTable;
