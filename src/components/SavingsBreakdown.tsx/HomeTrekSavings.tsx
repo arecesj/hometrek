@@ -11,16 +11,16 @@ type HomeTrekSavingsProps = {}
 const HomeTrekSavings: FC<HomeTrekSavingsProps> = ({ }) => {
   return (
     <AccordionItem value="homeTrekSavings">
-      <AccordionTrigger>HomeTrekSavings</AccordionTrigger>
+      <AccordionTrigger>HomeTrek Savings</AccordionTrigger>
       <AccordionContent>
         <ul className="grid gap-3">
           <li className="flex items-center justify-between">
-            <span className="text-muted-foreground">Using A Lender</span>
-            <span>$1000.00</span>
+            <span className="text-muted-foreground">Lender Savings</span>
+            <span className="text-green-700">-$1000.00</span>
           </li>
           <li className="flex items-center justify-between">
-            <span className="text-muted-foreground">Something else here</span>
-            <span>$500</span>
+            <span className="text-muted-foreground">Inspection Savings</span>
+            <span className="text-green-700">-$500</span>
           </li>
           <li className="flex items-center justify-between">
             <span className="text-muted-foreground">Taxes</span>

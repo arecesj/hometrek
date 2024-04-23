@@ -38,9 +38,18 @@ type SelectedLender = {
 
 type InspectionsContext = {
   offeredInspectors: OfferedInspectors;
-  selectedInspector: any;
+  selectedInspector: SelectedInspector;
 }
+
 type OfferedInspectors = YelpBusinesses;
+
+type SelectedInspector = {
+  id: string;
+  name: string;
+  rating: string;
+  location: string;
+  display_phone: string;
+}
 
 type AppraisalsContext = {
   selectedAppraiser: any;

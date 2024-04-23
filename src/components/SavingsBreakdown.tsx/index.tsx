@@ -18,20 +18,19 @@ import { useAppContext } from '@/context'
 import UserBreakdown from "./UserBreakdown"
 import LenderBreakdown from "./LenderBreakdown"
 import HomeTrekSavings from "./HomeTrekSavings"
+import InspectorBreakdown from "./InspectorBreakdown"
 
 const SavingsBreakdown = () => {
   const {
     context: {
       user,
-      lenders: {
-        potentialDownPayment,
-        potentialHomePrice,
-        selectedLender
-      }
+      lenders,
+      inspections
     }
   } = useAppContext()
   
-  const isLenderSelected = !!selectedLender && !!selectedLender.name;
+  const isLenderSelected = !!lenders && !!lenders.selectedLender && !!lenders.selectedLender.name;
+  const isInspectorSelected = !!inspections && !!inspections.selectedInspector && !!inspections.selectedInspector.id;
   
   return (
     <div>
@@ -51,7 +50,7 @@ const SavingsBreakdown = () => {
                 <span className="sr-only">Copy Potential Savings</span>
               </Button> */}
             </CardTitle>
-            <CardDescription>{`Date: ${user.date}`} </CardDescription>
+            <CardDescription>{`Date: ${new Date().toDateString()}`} </CardDescription>
           </div>
           {/* <div className="ml-auto flex items-center gap-1">
             <Button size="sm" variant="outline" className="h-8 gap-1">
@@ -94,16 +93,23 @@ const SavingsBreakdown = () => {
             }
           >
             <UserBreakdown
-              name={user.name}
-              potentialHomePrice={potentialHomePrice}
-              potentialDownPayment={potentialDownPayment}
+              name={user.name ?? "-"}
+              potentialHomePrice={!!lenders ? lenders.potentialHomePrice : "0"}
+              potentialDownPayment={!!lenders ?lenders.potentialDownPayment : "0"}
             />
             {isLenderSelected && (
               <LenderBreakdown
                 isLenderSelected={isLenderSelected}
-                potentialHomePrice={potentialHomePrice}
-                potentialDownPayment={potentialDownPayment}
-                name={selectedLender.name}
+                potentialHomePrice={lenders.potentialHomePrice}
+                potentialDownPayment={lenders.potentialDownPayment}
+                name={lenders.selectedLender.name}
+              />
+            )}
+            {isInspectorSelected && (
+              <InspectorBreakdown
+                isInspectorSelected={isInspectorSelected}
+                name={inspections.selectedInspector.name}
+                display_phone={inspections.selectedInspector.display_phone}
               />
             )}
             <HomeTrekSavings />
