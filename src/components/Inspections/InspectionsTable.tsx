@@ -22,23 +22,37 @@ import {
 import { Button } from "@/components/ui/button"
 import { Star, StarHalf } from 'lucide-react'
 import { useAppContext } from '@/context'
+import { formatToUSD } from "@/utils/helpers"
 
 const InspectionsTable = () => {
-  const { context, context: { user: { zipCode } , inspections: { offeredInspectors } } } = useAppContext();
+  const {
+    context,
+    setContext,
+    context: {
+      user: {
+        zipCode
+      } ,
+      inspections: {
+        offeredInspectors,
+        selectedInspector
+      }
+    }
+  } = useAppContext();
   return (
     <Tabs defaultValue="inspections">
       <div className="flex items-center">
-        {/* TODO area for tabs later on */}
       </div>
       <TabsContent value="inspections">
-        <Card x-chunk="dashboard-05-chunk-3">
-          <CardHeader className="px-7">
-            <CardTitle>
+        <Card x-chunk="dashboard-05-chunk-4">
+          <CardHeader className="px-7 bg-muted/50">
+          <div className="grid gap-0.5">
+            <CardTitle className="group flex items-center gap-2 text-lg">
               Inspections
             </CardTitle>
             <CardDescription>
-              {`Here are the best home inspectors for ${zipCode}`}
+              {`Here are the best rates for home inspectors in ${zipCode}`}
             </CardDescription>
+          </div>
           </CardHeader>
           <CardContent>
             <Table>
@@ -54,24 +68,27 @@ const InspectionsTable = () => {
                     Location
                   </TableHead>
                   <TableHead>
-                    Phone Number
+                    Avg. Cost
                   </TableHead>
                   <TableHead className="text-right">
-                    Request Quote
+                    Select Inspector
                   </TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {offeredInspectors.map((inspector) => {
                   const {id, name, rating, location, display_phone} = inspector;
+                  const inspectorSelected = !!selectedInspector && !!selectedInspector.id
+                  const isSelectedInspector = inspectorSelected && selectedInspector.id === id;
+                  const greyoutField = inspectorSelected && !isSelectedInspector
                   const starRating = () => {
                     let stars = Array.from({ length: Math.floor(rating) as number }, (i: number) => (
-                      <Star key={i} className="h-3 w-3" fill="grey" strokeWidth={0} />
+                      <Star key={i} className="h-3 w-3" fill={greyoutField ? "white" : 'grey'} strokeWidth={0} />
                     ))
                     
                     rating > Math.floor(rating) &&
                       stars.push((
-                        <StarHalf className="h-3 w-3" fill="grey" strokeWidth={0} />
+                        <StarHalf className="h-3 w-3" fill={greyoutField ? "white" : 'grey'} strokeWidth={0} />
                       ))
                     
                     return (
@@ -84,7 +101,7 @@ const InspectionsTable = () => {
                   }
                     
                   return(
-                    <TableRow key={id}>
+                    <TableRow key={id} className={greyoutField ? "text-slate-300" : ""}>
                       <TableCell>
                       <div className="font-medium">{name}</div>
                         <div className="hidden text-sm text-muted-foreground md:inline">
@@ -92,8 +109,7 @@ const InspectionsTable = () => {
                         </div>
                       </TableCell>
                       <TableCell>
-                      We specialize in buyer and seller home inspections. Extensive knowledge inspecting properties of all
-                      types.
+                      We specialize in buyer and seller home inspections.
                       </TableCell>
                       <TableCell>
                         {location.display_address.map((addr, i) => (
@@ -101,12 +117,55 @@ const InspectionsTable = () => {
                         ))}
                       </TableCell>
                       <TableCell>
-                        {display_phone}
+                        {formatToUSD(display_phone)}
                       </TableCell>
                       <TableCell className="text-right">
-                        <Button>
-                          {`Let's Ride`}
-                        </Button>
+                      {!inspectorSelected ? (
+                          <Button
+                            size="sm"
+                            onClick={() => {
+                              setContext({
+                                ...context,
+                                inspections: {
+                                  ...context.inspections,
+                                  selectedInspector: {
+                                    id,
+                                    name,
+                                    rating,
+                                    location,
+                                    display_phone
+                                  }
+                                }
+                              })
+                            }}
+                          >
+                            {`Select`}
+                          </Button>
+                        ) :
+                        isSelectedInspector ? (
+                            <Button
+                              variant="destructive"
+                              size="sm"
+                              onClick={() => {
+                                setContext({
+                                  ...context,
+                                  inspections: {
+                                    ...context.inspections,
+                                    selectedInspector: {} as SelectedInspector
+                                  }
+                                })
+                              }}
+                            >
+                              {`Remove`}
+                            </Button>
+                          ) : (
+                            <Button
+                              size="sm"
+                              disabled
+                            >
+                              {`Select`}
+                            </Button>
+                          )}
                       </TableCell>
                     </TableRow>
                   )

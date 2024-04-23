@@ -7,7 +7,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import FindLenders from './FindLenders';
 import ShowLenders from "./ShowLenders";
 import { useAppContext } from "@/context";
-import { routeNames } from "@/constants/routes";
+import { routeNames, routes } from "@/constants/routes";
+import SubHeader from "../SubHeader.tsx";
 
 const FormSchema = z.object({
   potentialDownPayment: z.string().refine((val) => {
@@ -77,6 +78,14 @@ const Lenders = () => {
 
   return (
     <>
+      <SubHeader
+        subHeaderContent={"Find the best lenders in your area"}
+        showPreviousButton={false}
+        previousButtonContent={""}
+        previousButtonHref={""}
+        nextButtonContent={"Next: Find Inspectors"}
+        nextButtonHref={routes[routeNames.INSPECTIONS].route}
+      />
       {isNewUser ? (
         <FindLenders form={form} onSubmit={onSubmit} />
       ) : (
