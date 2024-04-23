@@ -53,14 +53,14 @@ const SavingsBreakdown = () => {
             </CardTitle>
             <CardDescription>{`Date: ${user.date}`} </CardDescription>
           </div>
-          <div className="ml-auto flex items-center gap-1">
-            {/* <Button size="sm" variant="outline" className="h-8 gap-1">
+          {/* <div className="ml-auto flex items-center gap-1">
+            <Button size="sm" variant="outline" className="h-8 gap-1">
               <RefreshCw className="h-3.5 w-3.5"/>
               <span className="lg:sr-only xl:not-sr-only xl:whitespace-nowrap">
                 Recalculate 
               </span>
-            </Button> */}
-            {/* <DropdownMenu>
+            </Button>
+            <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button size="icon" variant="outline" className="h-8 w-8">
                   <MoreVertical className="h-3.5 w-3.5" />
@@ -73,8 +73,8 @@ const SavingsBreakdown = () => {
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>Trash</DropdownMenuItem>
               </DropdownMenuContent>
-            </DropdownMenu> */}
-          </div>
+            </DropdownMenu>
+          </div> */}
         </CardHeader>
         <CardContent className="p-6 text-sm">
           <Accordion

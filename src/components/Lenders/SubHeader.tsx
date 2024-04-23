@@ -31,7 +31,6 @@ const SubHeader = () => {
             Start Over
           </Button> */}
           <Button
-            variant="outline"
             size="lg"
             asChild
           >

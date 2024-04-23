@@ -23,7 +23,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { formatToUSD } from '@/utils/helpers'
+import { formatToUSD, subtractNumStrings } from '@/utils/helpers'
 import { Button } from '../ui/button'
 import { useAppContext } from '@/context'
 
@@ -35,6 +35,7 @@ type LendersTableProps = {
 
 const LendersTable: FC<LendersTableProps> = ({ user , fakeLenders, lenders }) => {
   const { context, setContext } = useAppContext()
+  const loanAmt = subtractNumStrings(lenders.potentialHomePrice, lenders.potentialDownPayment)
   return (
     <>
     <Tabs defaultValue="lenders">
@@ -81,28 +82,32 @@ const LendersTable: FC<LendersTableProps> = ({ user , fakeLenders, lenders }) =>
         </div> */}
       </div>
       <TabsContent value="lenders">
-        <Card x-chunk="dashboard-05-chunk-3">
-          <CardHeader className="px-7">
-            <CardTitle>Lenders</CardTitle>
+        <Card x-chunk="dashboard-05-chunk-4">
+          <CardHeader className="px-7 bg-muted/50">
+          <div className="grid gap-0.5">
+            <CardTitle className="group flex items-center gap-2 text-lg">
+              Lenders
+            </CardTitle>
             <CardDescription>
               Here are the best lenders in your area
             </CardDescription>
+          </div>  
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-7 text-sm">
             <Table>
               <TableHeader>
                 <TableRow>
                   <TableHead>
                     Lender
                   </TableHead>
+                  <TableHead className="hidden md:table-cell text-center">
+                    Loan Amount
+                  </TableHead>
                   <TableHead>
                     Min. Credit Score
                   </TableHead>
                   <TableHead>
                     Min. Down payment
-                  </TableHead>
-                  <TableHead className="hidden md:table-cell text-center">
-                    Loan Amount
                   </TableHead>
                   <TableHead className="text-right">
                     Select Lender
@@ -112,15 +117,20 @@ const LendersTable: FC<LendersTableProps> = ({ user , fakeLenders, lenders }) =>
               <TableBody>
                 {Object.entries(fakeLenders).map(([key, value]) => {
                   const { name, nmls, minCreditScore, minDownPaymentPercentage} = value;
-                  const lenderSelected = (!!context.lenders.selectedLender && !!context.lenders.selectedLender.name)
+                  const lenderSelected = !!context.lenders.selectedLender && !!context.lenders.selectedLender.name
                   const isSelectedLender = lenderSelected && context.lenders.selectedLender.name === name;
+                  const greyoutField = lenderSelected && !isSelectedLender
                   return(
-                    <TableRow key={key}>
+                    <TableRow key={key} className={greyoutField ? "text-slate-300" : ""}>
+                    {/* <TableRow key={key}> */}
                       <TableCell>
                         <div className="font-medium">{name}</div>
-                        <div className="hidden text-sm text-muted-foreground md:inline">
+                        <div className={`hidden text-sm md:inline ${greyoutField ? "" : "text-muted-foreground"}`}>
                           {`NMLS#${nmls}`}
                         </div>
+                      </TableCell>
+                      <TableCell className="hidden md:table-cell text-center">
+                        {formatToUSD(loanAmt)}
                       </TableCell>
                       <TableCell className="hidden sm:table-cell text-center">
                         {minCreditScore}
@@ -128,43 +138,47 @@ const LendersTable: FC<LendersTableProps> = ({ user , fakeLenders, lenders }) =>
                       <TableCell className="hidden sm:table-cell text-center">
                         {`${minDownPaymentPercentage}%`}
                       </TableCell>
-                      <TableCell className="hidden md:table-cell text-center">
-                        {formatToUSD(lenders.potentialDownPayment)}
-                      </TableCell>
                       <TableCell className="text-right">
-                      {isSelectedLender && (
-                        <Button
-                          variant="destructive"
-                          size="sm"
-                          onClick={() => {
-                            setContext({
-                              ...context,
-                              lenders: {
-                                ...context.lenders,
-                                selectedLender: {} as SelectedLender
-                              }
-                            })
-                          }}
-                        >
-                          {`Remove`}
-                        </Button>
-                      )}
-                      {!lenderSelected && (
-                        <Button
-                          size="sm"
-                          onClick={() => {
-                            setContext({
-                              ...context,
-                              lenders: {
-                                ...context.lenders,
-                                selectedLender: value
-                              }
-                            })
-                          }}
-                        >
-                          {`Select`}
-                        </Button>
-                      )}
+                        {!lenderSelected ? (
+                          <Button
+                            size="sm"
+                            onClick={() => {
+                              setContext({
+                                ...context,
+                                lenders: {
+                                  ...context.lenders,
+                                  selectedLender: value
+                                }
+                              })
+                            }}
+                          >
+                            {`Select`}
+                          </Button>
+                        ) :
+                          isSelectedLender ? (
+                            <Button
+                              variant="destructive"
+                              size="sm"
+                              onClick={() => {
+                                setContext({
+                                  ...context,
+                                  lenders: {
+                                    ...context.lenders,
+                                    selectedLender: {} as SelectedLender
+                                  }
+                                })
+                              }}
+                            >
+                              {`Remove`}
+                            </Button>
+                          ) : (
+                            <Button
+                              size="sm"
+                              disabled
+                            >
+                              {`Select`}
+                            </Button>
+                          )}
                       </TableCell>
                     </TableRow>
                   )
