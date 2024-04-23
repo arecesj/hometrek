@@ -122,7 +122,6 @@ const LendersTable: FC<LendersTableProps> = ({ user , fakeLenders, lenders }) =>
                   const greyoutField = lenderSelected && !isSelectedLender
                   return(
                     <TableRow key={key} className={greyoutField ? "text-slate-300" : ""}>
-                    {/* <TableRow key={key}> */}
                       <TableCell>
                         <div className="font-medium">{name}</div>
                         <div className={`hidden text-sm md:inline ${greyoutField ? "" : "text-muted-foreground"}`}>
