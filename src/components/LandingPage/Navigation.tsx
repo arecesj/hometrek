@@ -1,3 +1,6 @@
+import Link from "next/link"
+import { Button } from "../ui/button"
+
 const Navigation = () => {
   const sideBar =
     `flex flex-col absolute top-0 -right-2/3 w-2/3 h-screen px-5 overflow-y-auto transition-transform ease-in-out -translate-x-full bg-[hsl(0,0%,98%)]`
@@ -21,9 +24,9 @@ const Navigation = () => {
         
         <div className="hidden lg:flex lg:items-center text-[hsl(0,0%,41%)]"> 
           {/* <a href="" className="mr-6 hover:text-[hsl(0,0%,8%)]">Login</a> */}
-          <div className="lg:text-[hsl(0,0%,41%)] lg:bg-transparent border-2 border-[hsl(0,0%,41%)] hover:text-[hsl(0,0%,8%)] hover:border-[hsl(0,0%,8%)] py-2 px-4 rounded-xl">
-            <a href="/trek/lenders" className="text-base font-medium">Get Started</a>
-          </div>
+          <Button asChild className="lg:text-[hsl(0,0%,41%)] lg:bg-transparent border-2 border-[hsl(0,0%,41%)] hover:text-white hover:border-[hsl(0,0%,8%)] py-2 px-4 rounded-xl">
+            <Link href="/trek/lenders" className="text-base font-medium">Get Started</Link>
+          </Button>
         </div>
         {/* desktop menu end */}
 
