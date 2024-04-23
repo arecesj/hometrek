@@ -79,8 +79,8 @@ const Inspections = () => {
         showPreviousButton={true}
         previousButtonContent={"Back to Lenders"}
         previousButtonHref={routes[routeNames.LENDERS].route}
-        nextButtonContent={"Next: Find Insurance"}
-        nextButtonHref={routes[routeNames.INSURANCE].route}
+        nextButtonContent={"Next: Find Appraiser"}
+        nextButtonHref={routes[routeNames.APPRAISALS].route}
       />
       {isNewUser ? (
         <FindInspections form={form} onSubmit={onSubmit}/>
