@@ -24,10 +24,17 @@ type LendersContext = {
   potentialDownPayment: string;
   potentialHomePrice: string;
   offeredLenders: OfferedLenders;
-  selectedLender: any;
+  selectedLender: SelectedLender;
 }
 
 type OfferedLenders = Lenders;
+
+type SelectedLender = {
+    name: string;
+    nmls: number;
+    minCreditScore: number;
+    minDownPaymentPercentage: number
+}
 
 type InspectionsContext = {
   offeredInspectors: OfferedInspectors;
