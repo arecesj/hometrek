@@ -1,10 +1,9 @@
-import { UrlObject } from "url";
-
 export enum routeNames {
   HOME = "Home",
   DASHBOARD = "Dashboard",
   LENDERS = "Lenders",
   INSPECTIONS = "Inspections",
+  APPRAISALS = "Appraisals",
   INSURANCE = "Insurance",
   TITLE = "Title",
   CLOSINGDAY = "Closing Day",
@@ -23,6 +22,9 @@ export const routes = {
   },
   [routeNames.INSPECTIONS]: {
     route: "/trek/inspections",
+  },
+  [routeNames.APPRAISALS]: {
+    route: "/trek/appraisals",
   },
   [routeNames.INSURANCE]: {
     route: "/trek/insurance",
