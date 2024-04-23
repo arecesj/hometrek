@@ -21,13 +21,16 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { Separator } from "@/components/ui/separator"
+import { formatToUSD, subtractNumStrings } from '@/utils/helpers'
 
 type SavingsBreakdownProps = {
-  userData: UserData;
-  date: string;
+  user: UserContext;
+  lenders: LendersContext;
 }
 
-const SavingsBreakdown: FC<SavingsBreakdownProps> = ({ userData, date }) => {
+const SavingsBreakdown: FC<SavingsBreakdownProps> = ({ user, lenders: {potentialDownPayment, potentialHomePrice} }) => {
+  const loanAmt = subtractNumStrings(potentialHomePrice, potentialDownPayment);
+  const htLoanAmt = subtractNumStrings(loanAmt, "1000")
   return (
     <div>
       <Card
@@ -46,7 +49,7 @@ const SavingsBreakdown: FC<SavingsBreakdownProps> = ({ userData, date }) => {
                 <span className="sr-only">Copy Potential Savings</span>
               </Button> */}
             </CardTitle>
-            <CardDescription>{`Date: ${date}`} </CardDescription>
+            <CardDescription>{`Date: ${user.date}`} </CardDescription>
           </div>
           <div className="ml-auto flex items-center gap-1">
             <Button size="sm" variant="outline" className="h-8 gap-1">
@@ -73,7 +76,7 @@ const SavingsBreakdown: FC<SavingsBreakdownProps> = ({ userData, date }) => {
         </CardHeader>
         <CardContent className="p-6 text-sm">
           <div className="grid gap-3">
-            <div className="font-semibold">{`User Breakdown: ${userData.name}`}</div>
+            <div className="font-semibold">{`User Breakdown: ${user.name}`}</div>
               <ul className="grid gap-3">
                 {/* <li className="flex items-center justify-between">
                   <span className="text-muted-foreground">
@@ -85,13 +88,13 @@ const SavingsBreakdown: FC<SavingsBreakdownProps> = ({ userData, date }) => {
                   <span className="text-muted-foreground">
                     Home Price
                   </span>
-                  <span>$410,000</span>
+                  <span>{`${formatToUSD(potentialHomePrice)}`}</span>
                 </li>
                 <li className="flex items-center justify-between">
                   <span className="text-muted-foreground">
                     Down Payment
                   </span>
-                  <span>{`$${userData.downPayment}`}</span>
+                  <span>{`${formatToUSD(potentialDownPayment)}`}</span>
                 </li>
                 {/* <li className="flex items-center justify-between">
                   <span className="text-muted-foreground">
@@ -107,13 +110,13 @@ const SavingsBreakdown: FC<SavingsBreakdownProps> = ({ userData, date }) => {
                 <span className="text-muted-foreground">
                   Original Loan Amount
                 </span>
-                <span className="text-decoration-line: line-through text-rose-700">$400,000.00</span>
+                <span className="text-decoration-line: line-through text-rose-700">{`${formatToUSD(loanAmt)}`}</span>
               </li>
               <li className="flex items-center justify-between">
                 <span className="text-muted-foreground">
                   HomeTrek Loan Amount
                 </span>
-                <span>$390,000.00</span>
+                <span>{`${formatToUSD(htLoanAmt)}`}</span>
               </li>
               <li className="flex items-center justify-between">
                 <span className="text-muted-foreground">
@@ -170,4 +173,4 @@ const SavingsBreakdown: FC<SavingsBreakdownProps> = ({ userData, date }) => {
   )
 }
 
-export default SavingsBreakdown
+export default SavingsBreakdown;
