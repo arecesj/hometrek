@@ -75,12 +75,12 @@ const Header: FC<HeaderProps> = ({ routeName }) => {
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             <Link href="/trek/login">
-              Settings
+              Login
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Link href="/trek/sign-up">
-              Sign up
+            <Link href="/trek/signup">
+              Signup
             </Link>
           </DropdownMenuItem>
         </DropdownMenuContent>

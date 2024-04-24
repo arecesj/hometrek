@@ -16,7 +16,7 @@ const Insurance = () => {
         showPreviousButton={true}
         previousButtonContent={"Back to Appraisals"}
         previousButtonHref={routes[routeNames.APPRAISALS].route}
-        nextButtonContent={"Next: Find Title"}
+        nextButtonContent={"Next: Title Insurance"}
         nextButtonHref={routes[routeNames.TITLE].route}
       />
     </>

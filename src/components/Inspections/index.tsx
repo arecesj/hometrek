@@ -79,7 +79,7 @@ const Inspections = () => {
         showPreviousButton={true}
         previousButtonContent={"Back to Lenders"}
         previousButtonHref={routes[routeNames.LENDERS].route}
-        nextButtonContent={"Next: Find Appraiser"}
+        nextButtonContent={"Next: Appraisals"}
         nextButtonHref={routes[routeNames.APPRAISALS].route}
       />
       {isNewUser ? (

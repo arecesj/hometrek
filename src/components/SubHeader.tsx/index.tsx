@@ -45,6 +45,7 @@ const SubHeader: FC<SubHeaderProps> = ({
               variant="outline"
               size="lg"
               onClick={() => router.push(previousButtonHref)}
+              className="w-[226px]"
             >
               {previousButtonContent}
             </Button>
@@ -53,6 +54,7 @@ const SubHeader: FC<SubHeaderProps> = ({
           <Button
             size="lg"
             asChild
+            className="w-[226px]"
           >
             <Link href={nextButtonHref}>{nextButtonContent}</Link>
           </Button>
