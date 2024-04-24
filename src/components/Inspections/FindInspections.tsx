@@ -26,13 +26,17 @@ const FindInspections: FC<FindInspectionsProps> = ({ form, onSubmit}) => {
   return (
     <div className="flex justify-center">
       <Card className="w-[450px]">
-        <CardHeader>
-          <CardTitle>{`Let's find a home inspector`}</CardTitle>
+        <CardHeader className="px-7 bg-muted/50">
+          <div className="grid gap-0.5">
+            <CardTitle className="group flex items-center gap-2 text-lg">
+              {`Let's find a home inspector`}
+            </CardTitle>
+          </div>
           <CardDescription>
             The right home inspector is crucial to your HomeTrek success
           </CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-7">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="w-5/5 space-y-6">
               <FormField
@@ -51,7 +55,9 @@ const FindInspections: FC<FindInspectionsProps> = ({ form, onSubmit}) => {
                   </FormItem>
                 )}
               />
-              <Button type="submit">{`Let's Inspect!`}</Button>
+              <div className="flex justify-end">
+                <Button type="submit">{`Let's Inspect!`}</Button>
+              </div>
             </form>
           </Form>
         </CardContent>
