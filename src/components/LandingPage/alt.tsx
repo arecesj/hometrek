@@ -1,7 +1,7 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import window from "../../app/images/window.jpg"
+import window from "../../images/window.jpg"
 
 const Alt = () => {
   return (
