@@ -1,9 +1,9 @@
 import PageFoundation from "@/components/PageFoundation"
-import { routeNames } from "@/constants/routes";
+import { trekRouteName } from "@/constants/routes";
 
 const SettingsPage = () => {
   return (
-    <PageFoundation routeName={routeNames.SETTINGS}>
+    <PageFoundation routeName={trekRouteName.SETTINGS}>
       Settings Page!
     </PageFoundation>
   )

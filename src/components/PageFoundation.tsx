@@ -1,11 +1,11 @@
 'use client'
 
 import { FC, ReactNode } from "react"
-import { routeNames } from "@/constants/routes"
 import Header from "./Header";
+import { trekRouteName } from "@/constants/routes"
 
 type PageFoundationProps = {
-  routeName: routeNames;
+  routeName: trekRouteName;
   children: ReactNode;
 }
 

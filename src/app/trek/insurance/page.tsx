@@ -1,10 +1,10 @@
 import Insurance from "@/components/Insurance";
 import PageFoundation from "@/components/PageFoundation"
-import { routeNames } from "@/constants/routes";
+import { trekRouteName } from "@/constants/routes";
 
 const InsurancePage = () => {
   return (
-    <PageFoundation routeName={routeNames.INSURANCE}>
+    <PageFoundation routeName={trekRouteName.INSURANCE}>
       <Insurance />
     </PageFoundation>
   )

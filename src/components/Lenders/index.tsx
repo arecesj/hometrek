@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import FindLenders from './FindLenders';
 import ShowLenders from "./ShowLenders";
 import { useAppContext } from "@/context";
-import { routeNames, routes } from "@/constants/routes";
+import { trekRouteName, trekRoutes } from "@/constants/routes";
 import SubHeader from "../SubHeader.tsx";
 
 const FormSchema = z.object({
@@ -74,7 +74,7 @@ const Lenders = () => {
     setNewUser(false)
   }
 
-  useEffect(() => setContext({ ...context, route: routeNames.LENDERS }), [])
+  useEffect(() => setContext({ ...context, route: trekRouteName.LENDERS }), [])
 
   return (
     <>
@@ -84,7 +84,7 @@ const Lenders = () => {
         previousButtonContent={""}
         previousButtonHref={""}
         nextButtonContent={"Next: Inspections"}
-        nextButtonHref={routes[routeNames.INSPECTIONS].route}
+        nextButtonHref={trekRoutes[trekRouteName.INSPECTIONS].route}
       />
       {isNewUser ? (
         <FindLenders form={form} onSubmit={onSubmit} />

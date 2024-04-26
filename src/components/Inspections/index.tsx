@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import FindInspections from "./FindInspections";
 import ShowInspections from "./ShowInspections";
 import { useAppContext } from "@/context";
-import { routeNames, routes } from "@/constants/routes";
+import { trekRouteName, trekRoutes } from "@/constants/routes";
 import { yelpHomeInspectors } from "@/constants/yelpBusinesses";
 import SubHeader from "../SubHeader.tsx";
 
@@ -71,16 +71,16 @@ const Inspections = () => {
     // });
   }
   
-  useEffect(() => setContext({ ...context, route: routeNames.INSPECTIONS }), [])
+  useEffect(() => setContext({ ...context, route: trekRouteName.INSPECTIONS }), [])
   return (
     <>
       <SubHeader
         subHeaderContent={"Find the best inspectors in your area"}
         showPreviousButton={true}
         previousButtonContent={"Back to Lenders"}
-        previousButtonHref={routes[routeNames.LENDERS].route}
+        previousButtonHref={trekRoutes[trekRouteName.LENDERS].route}
         nextButtonContent={"Next: Appraisals"}
-        nextButtonHref={routes[routeNames.APPRAISALS].route}
+        nextButtonHref={trekRoutes[trekRouteName.APPRAISALS].route}
       />
       {isNewUser ? (
         <FindInspections form={form} onSubmit={onSubmit}/>

@@ -19,7 +19,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip"
 import { TooltipProvider } from "@radix-ui/react-tooltip"
-import { routeNames } from "@/constants/routes";
+import { trekRouteName, trekRoutes, universalRouteName, universalRoutes } from "@/constants/routes";
 
 
 type SideNavProps = {
@@ -33,7 +33,7 @@ const SideNav: FC<SideNavProps> = ({ routeName }) => {
     <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
       <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
         <Link
-          href="/"
+          href={universalRoutes[universalRouteName.HOME].route}
           className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
         >
           <DoorOpen className="h-4 w-4 transition-all group-hover:scale-110" />
@@ -43,8 +43,8 @@ const SideNav: FC<SideNavProps> = ({ routeName }) => {
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
-                href="/trek/dashboard"
-                className={routeName === routeNames.DASHBOARD ? selectedClass : mutedClass}
+                href={trekRoutes[trekRouteName.DASHBOARD].route}
+                className={routeName === trekRouteName.DASHBOARD ? selectedClass : mutedClass}
               >
                 <Home className="h-5 w-5" />
                 <span className="sr-only">Home</span>
@@ -57,8 +57,8 @@ const SideNav: FC<SideNavProps> = ({ routeName }) => {
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
-                href="/trek/lenders"
-                className={routeName === routeNames.LENDERS ? selectedClass : mutedClass}
+                href={trekRoutes[trekRouteName.LENDERS].route}
+                className={routeName === trekRouteName.LENDERS ? selectedClass : mutedClass}
               >
                 <HandCoins className="h-5 w-5"/>
                 <span className="sr-only">Lenders</span>
@@ -71,8 +71,8 @@ const SideNav: FC<SideNavProps> = ({ routeName }) => {
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
-                href="/trek/inspections"
-                className={routeName === routeNames.INSPECTIONS ? selectedClass : mutedClass}
+                href={trekRoutes[trekRouteName.INSPECTIONS].route}
+                className={routeName === trekRouteName.INSPECTIONS ? selectedClass : mutedClass}
               >
                 <UserRoundSearch className="h-5 w-5"/>
                 <span className="sr-only">Inspections</span>
@@ -85,8 +85,8 @@ const SideNav: FC<SideNavProps> = ({ routeName }) => {
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
-                href="/trek/appraisals"
-                className={routeName === routeNames.APPRAISALS ? selectedClass : mutedClass}
+                href={trekRoutes[trekRouteName.APPRAISALS].route}
+                className={routeName === trekRouteName.APPRAISALS ? selectedClass : mutedClass}
               >
                 <NotebookPen className="h-5 w-5"/>
                 <span className="sr-only">Appraisals</span>
@@ -99,8 +99,8 @@ const SideNav: FC<SideNavProps> = ({ routeName }) => {
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
-                href="/trek/insurance"
-                className={routeName === routeNames.INSURANCE ? selectedClass : mutedClass}
+                href={trekRoutes[trekRouteName.INSURANCE].route}
+                className={routeName === trekRouteName.INSURANCE ? selectedClass : mutedClass}
               >
                 <Shield className="h-5 w-5"/>
                 <span className="sr-only">Insurance</span>
@@ -113,8 +113,8 @@ const SideNav: FC<SideNavProps> = ({ routeName }) => {
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
-                href="/trek/title"
-                className={routeName === routeNames.TITLE ? selectedClass : mutedClass}
+                href={trekRoutes[trekRouteName.TITLE].route}
+                className={routeName === trekRouteName.TITLE ? selectedClass : mutedClass}
               >
                 <ScrollText className="h-5 w-5"/>
                 <span className="sr-only">Title</span>
@@ -127,7 +127,7 @@ const SideNav: FC<SideNavProps> = ({ routeName }) => {
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
-                href="/trek/closing-day"
+                href={trekRoutes[trekRouteName.CLOSINGDAY].route}
                 className={routeName === "closing-day" ? selectedClass : mutedClass}
               >
                 <Handshake className="h-5 w-5"/>
@@ -143,8 +143,8 @@ const SideNav: FC<SideNavProps> = ({ routeName }) => {
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
-                href="/trek/settings"
-                className={routeName === routeNames.SETTINGS.toLowerCase() ? selectedClass : mutedClass}
+                href={trekRoutes[trekRouteName.SETTINGS].route}
+                className={routeName === trekRouteName.SETTINGS.toLowerCase() ? selectedClass : mutedClass}
               >
                 <Settings className="h-5 w-5" />
                 <span className="sr-only">Settings</span>

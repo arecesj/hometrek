@@ -1,9 +1,9 @@
 import PageFoundation from "@/components/PageFoundation"
-import { routeNames } from "@/constants/routes";
+import { trekRouteName } from "@/constants/routes";
 
 const DashboardPage = () => {
   return (
-    <PageFoundation routeName={routeNames.DASHBOARD}>
+    <PageFoundation routeName={trekRouteName.DASHBOARD}>
     Dashboard Page!
     </PageFoundation>
   )

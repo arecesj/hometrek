@@ -1,10 +1,10 @@
 import PageFoundation from "@/components/PageFoundation"
 import Title from "@/components/Title";
-import { routeNames } from "@/constants/routes";
+import { trekRouteName } from "@/constants/routes";
 
 const TitlePage = () => {
   return (
-    <PageFoundation routeName={routeNames.TITLE}>
+    <PageFoundation routeName={trekRouteName.TITLE}>
       <Title />
     </PageFoundation>
   )

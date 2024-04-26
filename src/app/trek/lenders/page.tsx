@@ -1,10 +1,10 @@
 import PageFoundation from "@/components/PageFoundation"
 import Lenders from "@/components/Lenders"
-import { routeNames } from "@/constants/routes"
+import { trekRouteName } from "@/constants/routes"
 
 const LendersPage = () => {
   return (
-    <PageFoundation routeName={routeNames.LENDERS}>
+    <PageFoundation routeName={trekRouteName.LENDERS}>
       <Lenders />
     </PageFoundation>
   )

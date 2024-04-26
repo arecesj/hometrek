@@ -1,10 +1,10 @@
-import { routeNames } from "@/constants/routes";
 import PageFoundation from "@/components/PageFoundation";
 import Inspections from "@/components/Inspections";
+import { trekRouteName } from "@/constants/routes";
 
 const InspectionsPage = () => {
   return (
-    <PageFoundation routeName={routeNames.INSPECTIONS}>
+    <PageFoundation routeName={trekRouteName.INSPECTIONS}>
       <Inspections />
     </PageFoundation>
   )

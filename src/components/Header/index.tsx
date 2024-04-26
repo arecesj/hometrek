@@ -21,10 +21,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
-import { routeNames, routes } from "@/constants/routes";
+import { trekRouteName, trekRoutes, universalRouteName, universalRoutes } from "@/constants/routes";
 
 type HeaderProps = {
-  routeName: routeNames;
+  routeName: trekRouteName;
 }
 
 const Header: FC<HeaderProps> = ({ routeName }) => {
@@ -40,7 +40,7 @@ const Header: FC<HeaderProps> = ({ routeName }) => {
           <BreadcrumbSeparator />
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
-              <Link href={routes[routeName].route}>{routeName}</Link>
+              <Link href={trekRoutes[routeName].route}>{routeName}</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
         </BreadcrumbList>
@@ -67,19 +67,19 @@ const Header: FC<HeaderProps> = ({ routeName }) => {
           <DropdownMenuLabel>HomeTrek</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem>
-            <Link href="/trek/settings">
+            <Link href={trekRoutes[trekRouteName.SETTINGS].route}>
               Settings
             </Link>
           </DropdownMenuItem>
           {/* <DropdownMenuItem>Support</DropdownMenuItem> */}
           <DropdownMenuSeparator />
           <DropdownMenuItem>
-            <Link href="/trek/login">
+            <Link href={universalRoutes[universalRouteName.LOGIN].route}>
               Login
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <Link href="/trek/signup">
+            <Link href={universalRoutes[universalRouteName.SIGNUP].route}>
               Signup
             </Link>
           </DropdownMenuItem>

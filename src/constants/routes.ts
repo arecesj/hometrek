@@ -1,5 +1,10 @@
-export enum routeNames {
+export enum universalRouteName {
   HOME = "Home",
+  SIGNUP = "Sign up",
+  LOGIN = "Log in",
+}
+
+export enum trekRouteName {
   DASHBOARD = "Dashboard",
   LENDERS = "Lenders",
   INSPECTIONS = "Inspections",
@@ -10,33 +15,59 @@ export enum routeNames {
   SETTINGS = "Settings",
 }
 
-export const routes = {
-  [routeNames.HOME]: {
+export enum aggRouteName {
+  START = "Get Started",
+  DASHBOARD = "Dashboard",
+  SETTINGS = "Settings",
+}
+
+export const universalRoutes = {
+  [universalRouteName.HOME]: {
     route: "/",
   },
-  [routeNames.DASHBOARD]: {
+  [universalRouteName.SIGNUP]: {
+    route: "/signup",
+  },
+  [universalRouteName.LOGIN]: {
+    route: "/login",
+  },
+}
+
+export const trekRoutes = {
+  [trekRouteName.DASHBOARD]: {
     route: "/trek/dashboard",
   },
-  [routeNames.LENDERS]: {
+  [trekRouteName.LENDERS]: {
     route: "/trek/lenders",
   },
-  [routeNames.INSPECTIONS]: {
+  [trekRouteName.INSPECTIONS]: {
     route: "/trek/inspections",
   },
-  [routeNames.APPRAISALS]: {
+  [trekRouteName.APPRAISALS]: {
     route: "/trek/appraisals",
   },
-  [routeNames.INSURANCE]: {
+  [trekRouteName.INSURANCE]: {
     route: "/trek/insurance",
   },
-  [routeNames.TITLE]: {
+  [trekRouteName.TITLE]: {
     route: "/trek/title",
   },
-  [routeNames.CLOSINGDAY]: {
+  [trekRouteName.CLOSINGDAY]: {
     route: "/trek/closing-day",
   },
-  [routeNames.SETTINGS]: {
+  [trekRouteName.SETTINGS]: {
     route: "/trek/settings",
   },
+}
 
+export const aggRoutes = {
+  [aggRouteName.DASHBOARD]: {
+    route: "/agg/dashboard",
+  },
+  [aggRouteName.START]: {
+    route: "/agg/start",
+  },
+  [aggRouteName.SETTINGS]: {
+    route: "/agg/settings",
+  },
 }
