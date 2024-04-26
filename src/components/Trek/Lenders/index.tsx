@@ -8,7 +8,7 @@ import FindLenders from './FindLenders';
 import ShowLenders from "./ShowLenders";
 import { useAppContext } from "@/context";
 import { trekRouteName, trekRoutes } from "@/constants/routes";
-import SubHeader from "../../SubHeader.tsx";
+import SubHeader from "@/components/SubHeader.tsx";
 
 const FormSchema = z.object({
   potentialDownPayment: z.string().refine((val) => {

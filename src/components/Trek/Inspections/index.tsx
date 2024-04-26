@@ -9,7 +9,7 @@ import ShowInspections from "./ShowInspections";
 import { useAppContext } from "@/context";
 import { trekRouteName, trekRoutes } from "@/constants/routes";
 import { yelpHomeInspectors } from "@/constants/yelpBusinesses";
-import SubHeader from "../../SubHeader.tsx";
+import SubHeader from "@/components/SubHeader.tsx";
 
 const FormSchema = z.object({
   zipCode: z.string().refine((val) => {

@@ -1,9 +1,9 @@
 'use client'
 
 import LendersTable from './LendersTable';
-import SavingsBreakdown from '../SavingsBreakdown.tsx';
 import { useAppContext } from '@/context';
 import { lenders as lendersConst } from '@/constants/lenders';
+import SavingsBreakdown from '../SavingsBreakdown.tsx';
 
 
 const ShowLenders = () => {

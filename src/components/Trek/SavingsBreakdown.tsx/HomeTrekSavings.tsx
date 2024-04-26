@@ -1,10 +1,6 @@
 'use client'
 import { FC } from "react"
-import { 
-  AccordionItem,
-  AccordionContent,
-  AccordionTrigger
-} from "../../ui/accordion"
+import { AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 
 type HomeTrekSavingsProps = {}
 

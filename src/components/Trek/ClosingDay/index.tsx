@@ -2,8 +2,8 @@
 
 import { useEffect } from "react"
 import { trekRouteName, trekRoutes } from "@/constants/routes"
-import { useAppContext } from "@/context";
-import SubHeader from "../../SubHeader.tsx/index.jsx"
+import { useAppContext } from "@/context"
+import SubHeader from "@/components/SubHeader.tsx"
 
 const ClosingDay = () => {
   const { trekContext, setTrekContext } = useAppContext()
