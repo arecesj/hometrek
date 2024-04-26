@@ -22,7 +22,7 @@ import InspectorBreakdown from "./InspectorBreakdown"
 
 const SavingsBreakdown = () => {
   const {
-    context: {
+    trekContext: {
       user,
       lenders,
       inspections

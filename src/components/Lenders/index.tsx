@@ -42,8 +42,8 @@ export type FindLendersProps = {
 }
 
 const Lenders = () => {
-  const { context, setContext } = useAppContext()
-  const [isNewUser, setNewUser] = useState<boolean>(!context.user || !context.lenders);
+  const { trekContext, setTrekContext } = useAppContext()
+  const [isNewUser, setNewUser] = useState<boolean>(!trekContext.user || !trekContext.lenders);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -57,16 +57,16 @@ const Lenders = () => {
 
   const onSubmit = (data: z.infer<typeof FormSchema>) => {
     const { name, state, potentialDownPayment, potentialHomePrice } = data
-    setContext({
-      ...context,
+    setTrekContext({
+      ...trekContext,
       user: {
-        ...context.user,
+        ...trekContext.user,
         name,
         state,
         date: new Date().toDateString()
       },
       lenders: {
-        ...context.lenders,
+        ...trekContext.lenders,
         potentialDownPayment,
         potentialHomePrice,
       }
@@ -74,7 +74,7 @@ const Lenders = () => {
     setNewUser(false)
   }
 
-  useEffect(() => setContext({ ...context, route: trekRouteName.LENDERS }), [])
+  useEffect(() => setTrekContext({ ...trekContext, route: trekRouteName.LENDERS }), [])
 
   return (
     <>

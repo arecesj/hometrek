@@ -26,9 +26,9 @@ import { formatToUSD } from "@/utils/helpers"
 
 const InspectionsTable = () => {
   const {
-    context,
-    setContext,
-    context: {
+    trekContext,
+    setTrekContext,
+    trekContext: {
       user: {
         zipCode
       } ,
@@ -124,10 +124,10 @@ const InspectionsTable = () => {
                           <Button
                             size="sm"
                             onClick={() => {
-                              setContext({
-                                ...context,
+                              setTrekContext({
+                                ...trekContext,
                                 inspections: {
-                                  ...context.inspections,
+                                  ...trekContext.inspections,
                                   selectedInspector: {
                                     id,
                                     name,
@@ -147,10 +147,10 @@ const InspectionsTable = () => {
                               variant="destructive"
                               size="sm"
                               onClick={() => {
-                                setContext({
-                                  ...context,
+                                setTrekContext({
+                                  ...trekContext,
                                   inspections: {
-                                    ...context.inspections,
+                                    ...trekContext.inspections,
                                     selectedInspector: {} as SelectedInspector
                                   }
                                 })

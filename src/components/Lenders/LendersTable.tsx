@@ -34,7 +34,7 @@ type LendersTableProps = {
 }
 
 const LendersTable: FC<LendersTableProps> = ({ user , fakeLenders, lenders }) => {
-  const { context, setContext } = useAppContext()
+  const { trekContext, setTrekContext } = useAppContext()
   const loanAmt = subtractNumStrings(lenders.potentialHomePrice, lenders.potentialDownPayment)
   return (
     <>
@@ -117,8 +117,8 @@ const LendersTable: FC<LendersTableProps> = ({ user , fakeLenders, lenders }) =>
               <TableBody>
                 {Object.entries(fakeLenders).map(([key, value]) => {
                   const { name, nmls, minCreditScore, minDownPaymentPercentage} = value;
-                  const lenderSelected = !!context.lenders.selectedLender && !!context.lenders.selectedLender.name
-                  const isSelectedLender = lenderSelected && context.lenders.selectedLender.name === name;
+                  const lenderSelected = !!trekContext.lenders.selectedLender && !!trekContext.lenders.selectedLender.name
+                  const isSelectedLender = lenderSelected && trekContext.lenders.selectedLender.name === name;
                   const greyoutField = lenderSelected && !isSelectedLender
                   return(
                     <TableRow key={key} className={greyoutField ? "text-slate-300" : ""}>
@@ -142,10 +142,10 @@ const LendersTable: FC<LendersTableProps> = ({ user , fakeLenders, lenders }) =>
                           <Button
                             size="sm"
                             onClick={() => {
-                              setContext({
-                                ...context,
+                              setTrekContext({
+                                ...trekContext,
                                 lenders: {
-                                  ...context.lenders,
+                                  ...trekContext.lenders,
                                   selectedLender: value
                                 }
                               })
@@ -159,10 +159,10 @@ const LendersTable: FC<LendersTableProps> = ({ user , fakeLenders, lenders }) =>
                               variant="destructive"
                               size="sm"
                               onClick={() => {
-                                setContext({
-                                  ...context,
+                                setTrekContext({
+                                  ...trekContext,
                                   lenders: {
-                                    ...context.lenders,
+                                    ...trekContext.lenders,
                                     selectedLender: {} as SelectedLender
                                   }
                                 })

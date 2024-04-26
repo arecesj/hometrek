@@ -1,8 +1,14 @@
+
+/* CONTEXT TYPES */
 type ContextProps = {
-  context: ContextStateProps;
-  setContext: Dispatch<SetStateAction<ContextStateProps>>;
+  trekContext: TrekContext;
+  setTrekContext: Dispatch<SetStateAction<TrekContext>>;
+  aggContext: AggContext;
+  setAggContext: Dispatch<SetStateAction<AggContext>>;
 }
-type ContextStateProps = {
+
+/* TREK CONTEXT TYPES */
+type TrekContext = {
   user: UserContext;
   lenders: LendersContext;
   inspections: InspectionsContext;
@@ -65,18 +71,19 @@ type TitleContext = {
 
 type ClosingDayContext = any;
 
-type LendersUserData = {
-  name: string;
-  state: string;
-  downPayment: string;
-  // potentialDownPayment: string;
-  // potentialHomePrice: string;
+/* AGG CONTEXT TYPES */
+type AggContext = {
+  user: AggUserContext;
+  lenders: AggLendersContext;
+  inspections: AggINspectionsContext;
+  appraisals: AggAppraisalsContext;
+  insurance: AggInsuranceContext;
+  title: AggTitleContext;
+  closingDay: AggClosingDayContext;
 }
 
-type InspectionsUserData = {
-  zipCode: string;
-}
 
+/* OTHER TYPES */
 type Lenders = {
   [key: string]: {
     name: string;
