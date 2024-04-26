@@ -10,9 +10,11 @@ import {
 } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { aggRouteName, aggRoutes } from '@/constants/routes'
+import { useAppContext } from '@/context'
 
 
 const FindExistingMortgage = () => {
+  const { aggContext, aggContext: { lenders } , setAggContext } = useAppContext()
   const router = useRouter();
   
   return (
@@ -32,6 +34,16 @@ const FindExistingMortgage = () => {
         <div className="flex items-center justify-center space-x-2 py-4 px-6">
             <Button
               className="w-[300px] h-[80px]"
+              onClick={() => {
+                setAggContext({
+                  ...aggContext,
+                  lenders: {
+                    ...lenders,
+                    hasLender: true
+                  }
+                })
+                router.push(aggRoutes[aggRouteName.INSPECTIONS].route)
+              }}
             >
               Grab mortgage
             </Button>

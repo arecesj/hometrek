@@ -16,7 +16,7 @@ type TrekContext = {
   insurance: InsuranceContext;
   title: TitleContext;
   closingDay: ClosingDayContext;
-  route: routeNames;
+  route: trekRouteName;
 }
 
 type UserContext = {
@@ -75,11 +75,37 @@ type ClosingDayContext = any;
 type AggContext = {
   user: AggUserContext;
   lenders: AggLendersContext;
-  inspections: AggINspectionsContext;
+  inspections: AggInspectionsContext;
   appraisals: AggAppraisalsContext;
   insurance: AggInsuranceContext;
   title: AggTitleContext;
   closingDay: AggClosingDayContext;
+  route: aggRouteName;
+}
+
+type AggUserContext = any;
+
+type AggLendersContext = {
+  hasLender: boolean;
+}
+type AggInspectionsContext = {
+  hasInspector: boolean;
+  hasInspected: boolean;
+}
+type AggAppraisalsContext = {
+  hasAppraiser: boolean;
+  hasAppraised: boolean;
+}
+type AggInsuranceContext = {
+  hasInsurance: boolean;
+}
+type AggTitleContext = {
+  hasTitle: boolean;
+  hasTitleInsurance: boolean;
+}
+
+type AggClosingDayContext = {
+  hasClosed: boolean;
 }
 
 

@@ -1,7 +1,8 @@
+import { Analytics } from "@vercel/analytics/react"
 import type { Metadata } from "next";
 import { Mulish } from "next/font/google";
 import "./globals.css";
-import { AppWrapper } from "@/context"
+import { AppWrapper } from "@/context";
 
 const mulish = Mulish({ subsets: ["latin"] });
 
@@ -20,6 +21,7 @@ export default function RootLayout({
       <body className={mulish.className}>
         <AppWrapper>
           {children}
+          <Analytics />
         </AppWrapper>
       </body>
     </html>
