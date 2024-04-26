@@ -8,7 +8,7 @@ export default function GetStartedLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const {context: { route }} = useAppContext()
+  const {trekContext: { route }} = useAppContext()
 
   return (
     <>
