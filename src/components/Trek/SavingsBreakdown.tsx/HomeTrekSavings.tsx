@@ -4,7 +4,7 @@ import {
   AccordionItem,
   AccordionContent,
   AccordionTrigger
-} from "../ui/accordion"
+} from "../../ui/accordion"
 
 type HomeTrekSavingsProps = {}
 

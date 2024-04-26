@@ -3,7 +3,7 @@
 import { useEffect } from "react"
 import { trekRouteName, trekRoutes } from "@/constants/routes"
 import { useAppContext } from "@/context";
-import SubHeader from "../SubHeader.tsx"
+import SubHeader from "../../SubHeader.tsx/index.jsx"
 
 const Appraisals = () => {
   const { trekContext, setTrekContext } = useAppContext()

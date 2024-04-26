@@ -1,5 +1,5 @@
 import PageFoundation from "@/components/PageFoundation";
-import Inspections from "@/components/Inspections";
+import Inspections from "@/components/Trek/Inspections";
 import { trekRouteName } from "@/constants/routes";
 
 const InspectionsPage = () => {

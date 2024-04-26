@@ -1,5 +1,5 @@
 import PageFoundation from "@/components/PageFoundation"
-import Lenders from "@/components/Lenders"
+import Lenders from "@/components/Trek/Lenders"
 import { trekRouteName } from "@/constants/routes"
 
 const LendersPage = () => {

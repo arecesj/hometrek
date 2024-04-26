@@ -1,4 +1,4 @@
-import Appraisals from "@/components/Appraisals";
+import Appraisals from "@/components/Trek/Appraisals";
 import PageFoundation from "@/components/PageFoundation"
 import { trekRouteName } from "@/constants/routes";
 

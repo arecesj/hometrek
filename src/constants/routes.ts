@@ -16,8 +16,13 @@ export enum trekRouteName {
 }
 
 export enum aggRouteName {
-  START = "Get Started",
   DASHBOARD = "Dashboard",
+  LENDERS = "Lenders",
+  INSPECTIONS = "Inspections",
+  APPRAISALS = "Appraisals",
+  INSURANCE = "Insurance",
+  TITLE = "Title",
+  CLOSINGDAY = "Closing Day",
   SETTINGS = "Settings",
 }
 
@@ -64,8 +69,23 @@ export const aggRoutes = {
   [aggRouteName.DASHBOARD]: {
     route: "/agg/dashboard",
   },
-  [aggRouteName.START]: {
-    route: "/agg/start",
+  [aggRouteName.LENDERS]: {
+    route: "/agg/lenders",
+  },
+  [aggRouteName.INSPECTIONS]: {
+    route: "/agg/inspections",
+  },
+  [aggRouteName.APPRAISALS]: {
+    route: "/agg/appraisals",
+  },
+  [aggRouteName.INSURANCE]: {
+    route: "/agg/insurance",
+  },
+  [aggRouteName.TITLE]: {
+    route: "/agg/title",
+  },
+  [aggRouteName.CLOSINGDAY]: {
+    route: "/agg/closing-day",
   },
   [aggRouteName.SETTINGS]: {
     route: "/agg/settings",

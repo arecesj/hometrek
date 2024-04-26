@@ -1,4 +1,4 @@
-import ClosingDay from "@/components/ClosingDay";
+import ClosingDay from "@/components/Trek/ClosingDay";
 import PageFoundation from "@/components/PageFoundation"
 import { trekRouteName } from "@/constants/routes";
 
