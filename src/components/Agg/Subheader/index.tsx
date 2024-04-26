@@ -3,15 +3,15 @@
 import { FC } from "react"
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { Button } from '../ui/button'
+import { Button } from "@/components/ui/button"
+import { universalRouteName, universalRoutes } from "@/constants/routes"
 
 type SubHeaderProps = {
   subHeaderContent: string;
   showPreviousButton: boolean;
   previousButtonContent: string;
   previousButtonHref: string;
-  nextButtonContent: string;
-  nextButtonHref: string;
+  showCreateProfileButton: boolean;
 }
 
 const SubHeader: FC<SubHeaderProps> = ({
@@ -19,8 +19,7 @@ const SubHeader: FC<SubHeaderProps> = ({
   showPreviousButton,
   previousButtonContent,
   previousButtonHref,
-  nextButtonContent,
-  nextButtonHref
+  showCreateProfileButton
 }) => {
   const router = useRouter();
 
@@ -51,13 +50,17 @@ const SubHeader: FC<SubHeaderProps> = ({
             </Button>
 
           )}
-          <Button
+          {showCreateProfileButton && (
+            <Button
             size="lg"
             asChild
             className="w-[226px]"
-          >
-            <Link href={nextButtonHref}>{nextButtonContent}</Link>
-          </Button>
+            >
+              <Link href={universalRoutes[universalRouteName.SIGNUP].route}>
+                Save your profile
+              </Link>
+            </Button>
+          )}
         </div>
       </div>
     </div>

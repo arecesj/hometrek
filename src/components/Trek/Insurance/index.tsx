@@ -3,7 +3,7 @@
 import { useEffect } from "react"
 import { trekRouteName, trekRoutes } from "@/constants/routes"
 import { useAppContext } from "@/context"
-import SubHeader from "@/components/SubHeader.tsx"
+import SubHeader from "@/components/Trek/SubHeader.tsx"
 
 const Insurance = () => {
   const { trekContext, setTrekContext } = useAppContext()
