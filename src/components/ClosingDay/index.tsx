@@ -14,7 +14,7 @@ const ClosingDay = () => {
       <SubHeader
         subHeaderContent={"Let's get you the keys to your dream home"}
         showPreviousButton={true}
-        previousButtonContent={"Back to Home Title"}
+        previousButtonContent={"Back to Title Insurance"}
         previousButtonHref={routes[routeNames.TITLE].route}
         nextButtonContent={"Next: Dashboard"}
         nextButtonHref={routes[routeNames.DASHBOARD].route}
