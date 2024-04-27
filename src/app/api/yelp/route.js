@@ -24,7 +24,7 @@ export async function POST(request) {
   }).then(response => {
     return NextResponse.json(response.jsonBody, { status: response.statusCode });
   }).catch(e => {
-    console.log(e);
+    console.error(e);
     return NextResponse.json(
       {
         "message": "There was an issue processing the request"
