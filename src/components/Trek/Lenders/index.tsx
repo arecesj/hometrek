@@ -34,10 +34,10 @@ const FormSchema = z.object({
 export type FindLendersProps = {
   onSubmit: (data: z.infer<typeof FormSchema>) => void;
   form: UseFormReturn<{
-    name: string;
-    state: string;
-    potentialDownPayment: string;
-    potentialHomePrice: string;
+    name?: string;
+    state?: string;
+    potentialDownPayment?: string;
+    potentialHomePrice?: string;
   }, any, undefined>;
 }
 

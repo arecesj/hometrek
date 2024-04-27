@@ -23,7 +23,7 @@ const FormSchema = z.object({
 export type FindInspectionsProps = {
   onSubmit: (data: z.infer<typeof FormSchema>) => void;
   form: UseFormReturn<{
-    zipCode: string;
+    zipCode?: string;
   }, any, undefined>;
 }
 
