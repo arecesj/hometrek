@@ -67,18 +67,17 @@ const SideNav = () => {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Link
-                href={aggRoutes[aggRouteName.LENDERS].route}
-                className={route === aggRouteName.LENDERS ? selectedClass : mutedClass}
-              >
-                {(!!lenders && !!lenders.hasLender) ? (
-                  <BadgeCheck className="h-5 w-5" color="#3e9392"/>
-                ) : (
+              {(!!lenders && !!lenders.hasLender) ? (
+                <BadgeCheck className="h-5 w-5" color="#3e9392"/>
+              ) : (
+                <Link
+                  href={aggRoutes[aggRouteName.LENDERS].route}
+                  className={route === aggRouteName.LENDERS ? selectedClass : mutedClass}
+                >
                   <HandCoins className="h-5 w-5"/>
-                )
-                }
-                <span className="sr-only">Lenders</span>
-              </Link>
+                  <span className="sr-only">Lenders</span>
+                </Link>
+              )}
             </TooltipTrigger>
             <TooltipContent side="right">Lenders</TooltipContent>
           </Tooltip>
@@ -86,18 +85,17 @@ const SideNav = () => {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Link
-                href={aggRoutes[aggRouteName.INSPECTIONS].route}
-                className={route === aggRouteName.INSPECTIONS ? selectedClass : mutedClass}
-              >
-                {(!!inspections && !!inspections.hasInspector && !!inspections.hasInspected) ? (
-                  <BadgeCheck className="h-5 w-5" color="#3e9392"/>
-                ) : (
+              {(!!inspections && !!inspections.hasInspector && !!inspections.hasInspected) ? (
+                <BadgeCheck className="h-5 w-5" color="#3e9392"/>
+              ) : (
+                <Link
+                  href={aggRoutes[aggRouteName.INSPECTIONS].route}
+                  className={route === aggRouteName.INSPECTIONS ? selectedClass : mutedClass}
+                >
                   <UserRoundSearch className="h-5 w-5"/>
-                )
-                }
-                <span className="sr-only">Inspections</span>
-              </Link>
+                  <span className="sr-only">Inspections</span>
+                </Link>
+              )}
             </TooltipTrigger>
             <TooltipContent side="right">Inspections</TooltipContent>
           </Tooltip>
@@ -105,18 +103,17 @@ const SideNav = () => {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Link
-                href={aggRoutes[aggRouteName.APPRAISALS].route}
-                className={route === aggRouteName.APPRAISALS ? selectedClass : mutedClass}
-              >
-                {(!!appraisals && !!appraisals.hasAppraiser && !appraisals.hasAppraised) ? (
-                  <BadgeCheck className="h-5 w-5" color="#3e9392"/>
-                ) : (
+              {(!!appraisals && !!appraisals.hasAppraiser && !appraisals.hasAppraised) ? (
+                <BadgeCheck className="h-5 w-5" color="#3e9392"/>
+              ) : (
+                <Link
+                  href={aggRoutes[aggRouteName.APPRAISALS].route}
+                  className={route === aggRouteName.APPRAISALS ? selectedClass : mutedClass}
+                >
                   <NotebookPen className="h-5 w-5"/>
-                )
-                }
-                <span className="sr-only">Appraisals</span>
-              </Link>
+                  <span className="sr-only">Appraisals</span>
+                </Link>
+              )}
             </TooltipTrigger>
             <TooltipContent side="right">Appraisals</TooltipContent>
           </Tooltip>
@@ -124,18 +121,17 @@ const SideNav = () => {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Link
-                href={aggRoutes[aggRouteName.INSURANCE].route}
-                className={route === aggRouteName.INSURANCE ? selectedClass : mutedClass}
-              >
-                {(!!insurance && !!insurance.hasInsurance) ? (
-                  <BadgeCheck className="h-5 w-5" color="#3e9392"/>
-                ) : (
+              {(!!insurance && !!insurance.hasInsurance) ? (
+                <BadgeCheck className="h-5 w-5" color="#3e9392"/>
+              ) : (
+                <Link
+                  href={aggRoutes[aggRouteName.INSURANCE].route}
+                  className={route === aggRouteName.INSURANCE ? selectedClass : mutedClass}
+                >
                   <Shield className="h-5 w-5"/>
-                )
-                }
-                <span className="sr-only">Insurance</span>
-              </Link>
+                  <span className="sr-only">Insurance</span>
+                </Link>
+              )}
             </TooltipTrigger>
             <TooltipContent side="right">Insurance</TooltipContent>
           </Tooltip>
@@ -143,18 +139,17 @@ const SideNav = () => {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Link
-                href={aggRoutes[aggRouteName.TITLE].route}
-                className={route === aggRouteName.TITLE ? selectedClass : mutedClass}
-              >
-                {(!!title && !!title.hasTitle && !!title.hasTitleInsurance) ? (
-                  <BadgeCheck className="h-5 w-5" color="#3e9392"/>
-                ) : (
+              {(!!title && !!title.hasTitle && !!title.hasTitleInsurance) ? (
+                <BadgeCheck className="h-5 w-5" color="#3e9392"/>
+              ) : (
+                <Link
+                  href={aggRoutes[aggRouteName.TITLE].route}
+                  className={route === aggRouteName.TITLE ? selectedClass : mutedClass}
+                >
                   <ScrollText className="h-5 w-5"/>
-                )
-                }
-                <span className="sr-only">Title</span>
-              </Link>
+                  <span className="sr-only">Title</span>
+                </Link>
+              )}
             </TooltipTrigger>
             <TooltipContent side="right">Title</TooltipContent>
           </Tooltip>
@@ -162,18 +157,17 @@ const SideNav = () => {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <Link
-                href={aggRoutes[aggRouteName.CLOSINGDAY].route}
-                className={route === "closing-day" ? selectedClass : mutedClass}
-              >
-                {(!!closingDay && !!closingDay.hasClosed) ? (
-                  <BadgeCheck className="h-5 w-5" color="#3e9392"/>
-                ) : (
+              {(!!closingDay && !!closingDay.hasClosed) ? (
+                <BadgeCheck className="h-5 w-5" color="#3e9392"/>
+              ) : (
+                <Link
+                  href={aggRoutes[aggRouteName.CLOSINGDAY].route}
+                  className={route === "closing-day" ? selectedClass : mutedClass}
+                >
                   <Handshake className="h-5 w-5"/>
-                )
-                }
-                <span className="sr-only">Closing Day</span>
-              </Link>
+                  <span className="sr-only">Closing Day</span>
+                </Link>
+              )}
             </TooltipTrigger>
             <TooltipContent side="right">Closing Day</TooltipContent>
           </Tooltip>
