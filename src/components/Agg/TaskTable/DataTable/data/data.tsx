@@ -1,33 +1,33 @@
-import { ArrowDown, ArrowRight, ArrowUp, Circle, CircleCheck, CircleHelp, CircleX, Timer } from "lucide-react"
+import { ArrowDown, ArrowRight, ArrowUp, Circle, CircleCheck, CircleHelp, CircleX, HandCoins, Handshake, NotebookPen, ScrollText, Shield, Timer, UserRoundSearch } from "lucide-react"
 
 export const labels = [
   {
-    value: "bug",
-    label: "Bug",
+    value: "payment",
+    label: "Payment",
   },
   {
-    value: "feature",
-    label: "Feature",
+    value: "meeting",
+    label: "Meeting",
   },
   {
-    value: "documentation",
-    label: "Documentation",
+    value: "document",
+    label: "Document",
   },
 ]
 
 export const statuses = [
   {
-    value: "backlog",
-    label: "Backlog",
+    value: "blocked",
+    label: "Blocked",
     icon: CircleHelp,
   },
   {
     value: "todo",
-    label: "Todo",
+    label: "To do",
     icon: Circle,
   },
   {
-    value: "in progress",
+    value: "inprogress",
     label: "In Progress",
     icon: Timer,
   },
@@ -58,5 +58,38 @@ export const priorities = [
     label: "High",
     value: "high",
     icon: ArrowUp,
+  },
+]
+
+export const categories = [
+  {
+    label: "Lenders",
+    value: "lenders",
+    icon: HandCoins,
+  },
+  {
+    label: "Inpsections",
+    value: "inspections",
+    icon: UserRoundSearch,
+  },
+  {
+    label: "Appraisals",
+    value: "appraisals",
+    icon: NotebookPen,
+  },
+  {
+    label: "Home Insurance",
+    value: "homeinsurance",
+    icon: Shield,
+  },
+  {
+    label: "Title",
+    value: "title",
+    icon: ScrollText,
+  },
+  {
+    label: "Closing Day",
+    value: "closingday",
+    icon: Handshake,
   },
 ]
