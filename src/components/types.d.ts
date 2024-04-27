@@ -108,11 +108,13 @@ type AggAppraisalsContext = {
 
 type AggInsuranceContext = {
   hasInsurance: boolean;
+  insuranceDetails: any;
 }
 
 type AggTitleContext = {
   hasTitle: boolean;
   hasTitleInsurance: boolean;
+  titleDetails: any;
 }
 
 type AggClosingDayContext = {

@@ -1,14 +1,15 @@
 'use client'
 
+import Insurance from "@/components/Agg/Insurance"
 import PageFoundation from "@/components/Agg/PageFoundation"
 import { aggRouteName } from "@/constants/routes"
 
-const InspectionsPage = () => {
+const InsurancePage = () => {
   return (
-    <PageFoundation routeName={aggRouteName.INSPECTIONS}>
-      Inspections page!
+    <PageFoundation routeName={aggRouteName.INSURANCE}>
+      <Insurance />
     </PageFoundation>
   )
 }
 
-export default InspectionsPage
+export default InsurancePage
