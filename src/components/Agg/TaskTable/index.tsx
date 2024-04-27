@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import DataTable from "./DataTable"
-import { columns } from "./DataTable/Columns"
+import { columns } from "./DataTable/columns"
 
 const TaskTable = () => {
   return (
