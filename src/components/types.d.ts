@@ -87,6 +87,8 @@ type AggUserContext = any;
 
 type AggLendersContext = {
   hasLender: boolean;
+  accessToken: string;
+  mortgage: any;
 }
 type AggInspectionsContext = {
   hasInspector: boolean;
