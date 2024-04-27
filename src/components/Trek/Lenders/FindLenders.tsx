@@ -142,7 +142,7 @@ const FindLenders: FC<FindLendersProps> = ({ form, onSubmit }) => {
           </CardContent>
         </Card>
       </div>
-      )
+    )
 }
 
 export default FindLenders;

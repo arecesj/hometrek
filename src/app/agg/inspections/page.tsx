@@ -7,7 +7,7 @@ import { aggRouteName } from "@/constants/routes"
 
 const InpsectionsPage = () => {
   return (
-    <PageFoundation routeName={aggRouteName.LENDERS}>
+    <PageFoundation routeName={aggRouteName.INSPECTIONS}>
       <Inpsections />
     </PageFoundation>
   )

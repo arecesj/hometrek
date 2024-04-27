@@ -47,7 +47,7 @@ const FindExistingMortgage = () => {
         <CardContent className="p-7">
           <div className="flex items-center justify-center space-x-2 py-4 px-6">
             <PlaidButton
-              className="w-[300px] h-[80px]"
+              className="w-[275px] h-[80px]"
               onConnectionSuccess={onConnectionSuccess}
             />
             <div>
@@ -55,7 +55,7 @@ const FindExistingMortgage = () => {
             </div>
             <Button
               variant="outline"
-              className="w-[300px] h-[80px]"
+              className="w-[275px] h-[80px]"
               onClick={() => {
                 setAggContext({
                   ...aggContext,

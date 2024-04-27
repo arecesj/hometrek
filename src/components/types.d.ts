@@ -83,24 +83,38 @@ type AggContext = {
   route: aggRouteName;
 }
 
-type AggUserContext = any;
+type AggUserContext = {
+  isLoggedin: boolean;
+  userID: string;
+};
 
 type AggLendersContext = {
   hasLender: boolean;
   accessToken: string;
-  mortgage: any;
+  mortgageDetails: any;
 }
+
 type AggInspectionsContext = {
   hasInspector: boolean;
   hasInspected: boolean;
+  inspectionDetails: AggInspectionDetails;
 }
+
+type AggInspectionDetails = {
+  name: string;
+  date: Date;
+  cost: string;
+}
+
 type AggAppraisalsContext = {
   hasAppraiser: boolean;
   hasAppraised: boolean;
 }
+
 type AggInsuranceContext = {
   hasInsurance: boolean;
 }
+
 type AggTitleContext = {
   hasTitle: boolean;
   hasTitleInsurance: boolean;

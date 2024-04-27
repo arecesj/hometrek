@@ -17,12 +17,11 @@ const products = [Products.Liabilities, Products.Auth]
 
 // To handle a POST request to /api/plaid/create_link_token
 export async function POST(request) {
-  const { client_user_id } = await request.json();
   const isProd = process.env.NODE_ENV === Environments.PROD;
   
   const plaidRequest = {
     user: {
-      client_user_id,
+      client_user_id: 'user',
     },
     client_name: isProd ? "HomeTrek" : "HomeTrek Dev App",
     products: products,
