@@ -100,15 +100,10 @@ type AggInspectionsContext = {
   inspectionDetails: AggInspectionDetails;
 }
 
-type AggInspectionDetails = {
-  name: string;
-  date: Date;
-  cost: string;
-}
-
 type AggAppraisalsContext = {
   hasAppraiser: boolean;
   hasAppraised: boolean;
+  appraisalDetails: AggAppraisalDetails;
 }
 
 type AggInsuranceContext = {
@@ -124,6 +119,17 @@ type AggClosingDayContext = {
   hasClosed: boolean;
 }
 
+type AggInspectionDetails = {
+  name: string;
+  date: Date;
+  cost: string;
+}
+
+type AggAppraisalDetails = {
+  name: string;
+  date: Date;
+  cost: string;
+}
 
 /* OTHER TYPES */
 type Lenders = {

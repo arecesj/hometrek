@@ -38,8 +38,8 @@ const FormSchema = z.object({
   date: z.date().optional(),
 })
 
-const AddExistingInspector = () => {
-  const { aggContext, aggContext: { inspections } , setAggContext } = useAppContext()
+const AddExistingAppraiser = () => {
+  const { aggContext, aggContext: { appraisals } , setAggContext } = useAppContext()
   const router = useRouter();
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -48,13 +48,13 @@ const AddExistingInspector = () => {
 
 const onSubmit = (data: z.infer<typeof FormSchema>) => {
   const { name, date, cost } = data
-  let i: AggInspectionsContext;
+  let i: AggAppraisalsContext;
   
   if(name || date || cost) {
     i = {
-      hasInspector: true,
-      hasInspected: !!date && date < new Date(),
-      inspectionDetails: {
+      hasAppraiser: true,
+      hasAppraised: !!date && date < new Date(),
+      appraisalDetails: {
         name,
         date,
         cost
@@ -62,20 +62,20 @@ const onSubmit = (data: z.infer<typeof FormSchema>) => {
     }
   } else {
     i = {
-      hasInspector: false,
-      hasInspected: false,
-      inspectionDetails: null
+      hasAppraiser: false,
+      hasAppraised: false,
+      appraisalDetails: null
     }
   }
 
   setAggContext({
     ...aggContext,
-    inspections: {
-      ...inspections,
+    appraisals: {
+      ...appraisals,
       ...i
     }
   })
-  router.push(aggRoutes[aggRouteName.APPRAISALS].route)
+  router.push(aggRoutes[aggRouteName.INSURANCE].route)
 }
 
   const formFieldClassName = "w-[100%]"
@@ -85,10 +85,10 @@ const onSubmit = (data: z.infer<typeof FormSchema>) => {
           <CardHeader className="px-7 bg-muted/50">
             <div className="grid gap-0.5">
               <CardTitle className="group flex items-center gap-2 text-lg">
-                Enter your home inspection information
+                Enter your home appraiser information
               </CardTitle>
             </div>
-            <CardDescription>Deets for the inspa</CardDescription>
+            <CardDescription>Deets for the apraisa</CardDescription>
           </CardHeader>
           <CardContent className="p-7">
             <Form {...form}>
@@ -99,7 +99,7 @@ const onSubmit = (data: z.infer<typeof FormSchema>) => {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Home Inspection Company</FormLabel>
+                        <FormLabel>Home Appraiser Company</FormLabel>
                         <FormDescription>
                           The company working with you
                         </FormDescription>
@@ -117,9 +117,9 @@ const onSubmit = (data: z.infer<typeof FormSchema>) => {
                     name="date"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Date of inspection</FormLabel>
+                        <FormLabel>Date of appraisal</FormLabel>
                         <FormDescription>
-                        Select the date of the home inspection
+                        Select the date of the home appraisal
                         </FormDescription>
                         <Popover>
                           <PopoverTrigger asChild>
@@ -162,9 +162,9 @@ const onSubmit = (data: z.infer<typeof FormSchema>) => {
                     render={({ field }) => {
                       return (
                         <FormItem>
-                          <FormLabel>Inspection price</FormLabel>
+                          <FormLabel>Appraisal price</FormLabel>
                           <FormDescription>
-                            A rough estimate of the cost of the home inspection
+                            A rough estimate of the cost of the home appraisal
                           </FormDescription>
                           <FormControl>
                             <Input type="number" {...field } />
@@ -200,4 +200,4 @@ const onSubmit = (data: z.infer<typeof FormSchema>) => {
     )
 }
 
-export default AddExistingInspector;
+export default AddExistingAppraiser;

@@ -34,7 +34,6 @@ const PlaidButton: FC<PlaidButtonProps> = ({ className, onConnectionSuccess }) =
       body: JSON.stringify({ public_token: publicToken })
     });
     
-    // TODO: store this in the context
     const { access_token } = await response.json();
     setConnectingStatus(false)
     onConnectionSuccess(access_token)
