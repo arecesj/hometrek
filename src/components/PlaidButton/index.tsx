@@ -18,6 +18,8 @@ const PlaidButton: FC<PlaidButtonProps> = ({ className, onConnectionSuccess }) =
   const [token, setToken] = useState<string | null>(null);
   
   const createLinkToken = async () => {
+    // TODO: If we go this approach,
+    // then set the userSID as the client_user_id in the call body
     const response = await fetch("/api/plaid/create_link_token", { method: 'POST' });
     const { link_token } = await response.json();
     setToken(link_token);
