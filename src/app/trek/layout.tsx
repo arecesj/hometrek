@@ -11,9 +11,9 @@ export default function GetStartedLayout({
   const {trekContext: { route }} = useAppContext()
 
   return (
-    <div>
+    <>
       <SideNav routeName={route}/>
       <body>{children}</body>
-    </div>
+    </>
   );
 }
