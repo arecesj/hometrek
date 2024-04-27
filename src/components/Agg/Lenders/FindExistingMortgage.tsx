@@ -11,11 +11,25 @@ import {
 import { Button } from "@/components/ui/button"
 import { aggRouteName, aggRoutes } from '@/constants/routes'
 import { useAppContext } from '@/context'
+import PlaidButton from '@/components/PlaidButton'
 
 
 const FindExistingMortgage = () => {
   const { aggContext, aggContext: { lenders } , setAggContext } = useAppContext()
   const router = useRouter();
+
+  const onConnectionSuccess = (accessToken: string) => {
+    setAggContext({
+      ...aggContext,
+      lenders: {
+        ...lenders,
+        hasLender: true,
+        accessToken,
+      }
+    })
+    router.push(aggRoutes[aggRouteName.INSPECTIONS].route)
+  }
+
   
   return (
     <div className="flex justify-center">
@@ -31,22 +45,11 @@ const FindExistingMortgage = () => {
           </CardDescription>
         </CardHeader>
         <CardContent className="p-7">
-        <div className="flex items-center justify-center space-x-2 py-4 px-6">
-            <Button
+          <div className="flex items-center justify-center space-x-2 py-4 px-6">
+            <PlaidButton
               className="w-[300px] h-[80px]"
-              onClick={() => {
-                setAggContext({
-                  ...aggContext,
-                  lenders: {
-                    ...lenders,
-                    hasLender: true
-                  }
-                })
-                router.push(aggRoutes[aggRouteName.INSPECTIONS].route)
-              }}
-            >
-              Grab mortgage
-            </Button>
+              onConnectionSuccess={onConnectionSuccess}
+            />
             <div>
               - OR -
             </div>
@@ -54,14 +57,19 @@ const FindExistingMortgage = () => {
               variant="outline"
               className="w-[300px] h-[80px]"
               onClick={() => {
-                // hasLender: false
+                setAggContext({
+                  ...aggContext,
+                  lenders: {
+                    ...lenders,
+                    hasLender: false
+                  }
+                })
                 router.push(aggRoutes[aggRouteName.INSPECTIONS].route)
               }}
             >
               Skip, for now
             </Button>
         </div>
-          
         </CardContent>
       </Card>
     </div>
