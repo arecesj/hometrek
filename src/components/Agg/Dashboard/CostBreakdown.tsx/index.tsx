@@ -12,12 +12,12 @@ import {
   Accordion,
 } from "@/components/ui/accordion"
 import { useAppContext } from '@/context'
-import UserBreakdown from "./UserBreakdown"
-import LenderBreakdown from "./LenderBreakdown"
-import HomeTrekSavings from "./HomeTrekSavings"
-import InspectorBreakdown from "./InspectorBreakdown"
+// import UserBreakdown from "./UserBreakdown"
+// import LenderBreakdown from "./LenderBreakdown"
+// import HomeTrekSavings from "./HomeTrekSavings"
+// import InspectorBreakdown from "./InspectorBreakdown"
 
-const SavingsBreakdown = () => {
+const CostBreakdown = () => {
   const {
     trekContext: {
       user,
@@ -89,7 +89,7 @@ const SavingsBreakdown = () => {
               ]
             }
           >
-            <UserBreakdown
+            {/* <UserBreakdown
               name={user.name ?? "-"}
               potentialHomePrice={!!lenders ? lenders.potentialHomePrice : "0"}
               potentialDownPayment={!!lenders ?lenders.potentialDownPayment : "0"}
@@ -109,7 +109,7 @@ const SavingsBreakdown = () => {
                 display_phone={inspections.selectedInspector.display_phone}
               />
             )}
-            <HomeTrekSavings />
+            <HomeTrekSavings /> */}
           </Accordion>
         </CardContent>
         <CardFooter className="flex flex-row items-center border-t bg-muted/50 px-6 py-3">
@@ -138,4 +138,4 @@ const SavingsBreakdown = () => {
   )
 }
 
-export default SavingsBreakdown;
+export default CostBreakdown;
