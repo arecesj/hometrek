@@ -18,7 +18,6 @@ export async function POST(request) {
   const { public_token }  = await request.json()
 
   return plaidClient.itemPublicTokenExchange({ public_token }).then(response => {
-    console.log("RESP: ", response)
     return NextResponse.json(response.data, { status: response.statusCode });
   }).catch(e => {
     console.log(e)
