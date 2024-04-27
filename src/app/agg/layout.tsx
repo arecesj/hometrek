@@ -8,9 +8,9 @@ export default function GetStartedLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
+    <div>
       <SideNav />
       <body>{children}</body>
-    </>
+    </div>
   );
 }

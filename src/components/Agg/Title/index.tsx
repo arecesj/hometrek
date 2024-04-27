@@ -11,7 +11,7 @@ const Title = () => {
 
   useEffect(() => setAggContext({ ...aggContext, route: aggRouteName.CLOSINGDAY }), [])
   return (
-    <>
+    <div>
       <SubHeader
         subHeaderContent={"Let's keep track of your home title"}
         showPreviousButton={false}
@@ -20,7 +20,7 @@ const Title = () => {
         showCreateProfileButton={true}
       />
       <FindExistingTitle />
-    </>
+    </div>
   )
 }
 

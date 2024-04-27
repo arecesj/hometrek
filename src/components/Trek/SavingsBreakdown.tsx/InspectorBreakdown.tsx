@@ -18,23 +18,22 @@ const InspectorBreakdown: FC<InspectorBreakdownProps> = ({ isInspectorSelected, 
 
   const showInspectorName = isInspectorSelected && name;
   return (
-    <>
-    <AccordionItem value="inspector">
-      <AccordionTrigger className="font-semibold">{`Selected Inspector: ${showInspectorName}`}</AccordionTrigger>
-      <AccordionContent>
-        <ul className="grid gap-3">
-          <li className="flex items-center justify-between">
-            <span className="text-muted-foreground">
-              Avg. Customer Cost
-            </span>
-            <span>{`${formatToUSD(display_phone)}`}</span>
-          </li>
-        </ul>
-      </AccordionContent>
+    <div>
+      <AccordionItem value="inspector">
+        <AccordionTrigger className="font-semibold">{`Selected Inspector: ${showInspectorName}`}</AccordionTrigger>
+        <AccordionContent>
+          <ul className="grid gap-3">
+            <li className="flex items-center justify-between">
+              <span className="text-muted-foreground">
+                Avg. Customer Cost
+              </span>
+              <span>{`${formatToUSD(display_phone)}`}</span>
+            </li>
+          </ul>
+        </AccordionContent>
 
-    </AccordionItem>
-      
-    </>
+      </AccordionItem>
+    </div>
   )
 }
 

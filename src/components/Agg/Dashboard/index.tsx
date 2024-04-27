@@ -12,7 +12,7 @@ const Dashboard = () => {
 
   useEffect(() => setAggContext({ ...aggContext, route: aggRouteName.DASHBOARD }), [])
   return (
-    <>
+    <div>
       <SubHeader
         subHeaderContent={"Where we track it all"}
         showPreviousButton={false}
@@ -27,7 +27,7 @@ const Dashboard = () => {
         <CostBreakdown />
       </div>
       
-    </>
+    </div>
   )
 }
 

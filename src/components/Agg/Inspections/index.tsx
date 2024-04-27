@@ -11,7 +11,7 @@ const Inpsections = () => {
 
   useEffect(() => setAggContext({ ...aggContext, route: aggRouteName.INSPECTIONS }), [])
   return (
-    <>
+    <div>
       <SubHeader
         subHeaderContent={"Let's keep track of your inspection"}
         showPreviousButton={false}
@@ -20,7 +20,7 @@ const Inpsections = () => {
         showCreateProfileButton={true}
       />
       <AddExistingInspector />
-    </>
+    </div>
   )
 }
 

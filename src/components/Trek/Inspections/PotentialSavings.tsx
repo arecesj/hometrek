@@ -1,9 +1,9 @@
 'use client'
 const PotentialSavings = () => {
   return(
-    <>
+    <div>
     Potential Savings
-    </>
+    </div>
   )
 }
 

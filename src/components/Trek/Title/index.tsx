@@ -10,7 +10,7 @@ const Title = () => {
 
   useEffect(() => setTrekContext({ ...trekContext, route: trekRouteName.TITLE }), [])
   return(
-    <>
+    <div>
       <SubHeader
         subHeaderContent={"Find the best title insurance in your area"}
         showPreviousButton={true}
@@ -19,7 +19,7 @@ const Title = () => {
         nextButtonContent={"Next: Closing Day"}
         nextButtonHref={trekRoutes[trekRouteName.CLOSINGDAY].route}
       />
-    </>
+    </div>
   )
 }
 

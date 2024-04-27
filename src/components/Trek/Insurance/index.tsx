@@ -10,7 +10,7 @@ const Insurance = () => {
 
   useEffect(() => setTrekContext({ ...trekContext, route: trekRouteName.INSURANCE }), [])
   return(
-    <>
+    <div>
       <SubHeader
         subHeaderContent={"Find the best home insurance in your area"}
         showPreviousButton={true}
@@ -19,7 +19,7 @@ const Insurance = () => {
         nextButtonContent={"Next: Title Insurance"}
         nextButtonHref={trekRoutes[trekRouteName.TITLE].route}
       />
-    </>
+    </div>
   )
 }
 

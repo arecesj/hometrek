@@ -10,7 +10,7 @@ const ClosingDay = () => {
 
   useEffect(() => setTrekContext({ ...trekContext, route: trekRouteName.CLOSINGDAY }), [])
   return(
-    <>
+    <div>
       <SubHeader
         subHeaderContent={"Let's get you the keys to your dream home"}
         showPreviousButton={true}
@@ -19,7 +19,7 @@ const ClosingDay = () => {
         nextButtonContent={"Next: Dashboard"}
         nextButtonHref={trekRoutes[trekRouteName.DASHBOARD].route}
       />
-    </>
+    </div>
   )
 }
 

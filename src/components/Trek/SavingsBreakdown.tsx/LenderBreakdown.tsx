@@ -21,35 +21,34 @@ const LenderBreakdown: FC<LenderBreakdownProps> = ({ isLenderSelected, potential
     const htLoanAmt = subtractNumStrings(loanAmt, "1000");
     const showLenderName = isLenderSelected && name;
     return (
-      <>
-      <AccordionItem value="lender">
-        <AccordionTrigger className="font-semibold">{`Selected Lender: ${showLenderName}`}</AccordionTrigger>
-        <AccordionContent>
-          <ul className="grid gap-3">
-            <li className="flex items-center justify-between">
-              <span className="text-muted-foreground">
-                Original Loan Amount
-              </span>
-              <span className="text-decoration-line: line-through text-rose-700">{`${formatToUSD(loanAmt)}`}</span>
-            </li>
-            <li className="flex items-center justify-between">
-              <span className="text-muted-foreground">
-                HomeTrek Loan Amount
-              </span>
-              <span>{`${formatToUSD(htLoanAmt)}`}</span>
-            </li>
-            <li className="flex items-center justify-between">
-              <span className="text-muted-foreground">
-                Interest Rate
-              </span>
-              <span>7.2%</span>
-            </li>
-          </ul>
-        </AccordionContent>
+      <div>
+        <AccordionItem value="lender">
+          <AccordionTrigger className="font-semibold">{`Selected Lender: ${showLenderName}`}</AccordionTrigger>
+          <AccordionContent>
+            <ul className="grid gap-3">
+              <li className="flex items-center justify-between">
+                <span className="text-muted-foreground">
+                  Original Loan Amount
+                </span>
+                <span className="text-decoration-line: line-through text-rose-700">{`${formatToUSD(loanAmt)}`}</span>
+              </li>
+              <li className="flex items-center justify-between">
+                <span className="text-muted-foreground">
+                  HomeTrek Loan Amount
+                </span>
+                <span>{`${formatToUSD(htLoanAmt)}`}</span>
+              </li>
+              <li className="flex items-center justify-between">
+                <span className="text-muted-foreground">
+                  Interest Rate
+                </span>
+                <span>7.2%</span>
+              </li>
+            </ul>
+          </AccordionContent>
 
-      </AccordionItem>
-        
-      </>
+        </AccordionItem>
+      </div>
     )
 }
 

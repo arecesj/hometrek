@@ -11,7 +11,7 @@ const Insurance = () => {
 
   useEffect(() => setAggContext({ ...aggContext, route: aggRouteName.INSURANCE }), [])
   return (
-    <>
+    <div>
       <SubHeader
         subHeaderContent={"Let's keep track of your home insurance"}
         showPreviousButton={false}
@@ -20,7 +20,7 @@ const Insurance = () => {
         showCreateProfileButton={true}
       />
       <FindExistingInsurance />
-    </>
+    </div>
   )
 }
 

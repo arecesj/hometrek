@@ -11,7 +11,7 @@ const Lenders = () => {
   
   useEffect(() => setAggContext({ ...aggContext, route: aggRouteName.LENDERS }), [])
   return (
-    <>
+    <div>
       <SubHeader
         subHeaderContent={"Let's grab your existing mortgage"}
         showPreviousButton={false}
@@ -20,7 +20,7 @@ const Lenders = () => {
         showCreateProfileButton={true}
       />
       <FindExistingMortgage />
-    </>
+    </div>
   )
 }
 

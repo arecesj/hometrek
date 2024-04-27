@@ -10,7 +10,7 @@ const Appraisals = () => {
 
   useEffect(() => setTrekContext({ ...trekContext, route: trekRouteName.APPRAISALS }), [])
   return(
-    <>
+    <div>
       <SubHeader
         subHeaderContent={"Find the best home appraisers in your area"}
         showPreviousButton={true}
@@ -19,7 +19,7 @@ const Appraisals = () => {
         nextButtonContent={"Next: Home Insurance"}
         nextButtonHref={trekRoutes[trekRouteName.INSURANCE].route}
       />
-    </>
+    </div>
   )
 }
 

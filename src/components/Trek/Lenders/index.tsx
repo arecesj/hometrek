@@ -77,7 +77,7 @@ const Lenders = () => {
   useEffect(() => setTrekContext({ ...trekContext, route: trekRouteName.LENDERS }), [])
 
   return (
-    <>
+    <div>
       <SubHeader
         subHeaderContent={"Find the best lenders in your area"}
         showPreviousButton={false}
@@ -91,7 +91,7 @@ const Lenders = () => {
       ) : (
         <ShowLenders />  
       )}
-    </>
+    </div>
   )
 }
 

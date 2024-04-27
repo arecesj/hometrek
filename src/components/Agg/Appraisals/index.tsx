@@ -11,7 +11,7 @@ const Appraisals = () => {
 
   useEffect(() => setAggContext({ ...aggContext, route: aggRouteName.APPRAISALS }), [])
   return (
-    <>
+    <div>
       <SubHeader
         subHeaderContent={"Let's keep track of the home appraisal"}
         showPreviousButton={false}
@@ -20,7 +20,7 @@ const Appraisals = () => {
         showCreateProfileButton={true}
       />
       <AddExistingAppraiser />
-    </>
+    </div>
   )
 }
 

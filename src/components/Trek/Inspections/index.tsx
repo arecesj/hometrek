@@ -73,7 +73,7 @@ const Inspections = () => {
   
   useEffect(() => setTrekContext({ ...trekContext, route: trekRouteName.INSPECTIONS }), [])
   return (
-    <>
+    <div>
       <SubHeader
         subHeaderContent={"Find the best inspectors in your area"}
         showPreviousButton={true}
@@ -87,7 +87,7 @@ const Inspections = () => {
       ) : (
         <ShowInspections />
       )}
-    </>
+    </div>
   )
 }
 
