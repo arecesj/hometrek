@@ -4,6 +4,7 @@ import {
   PlaidLinkOnSuccess,
   PlaidLinkOnExit,
 } from 'react-plaid-link';
+import { v4 as uuidv4 } from 'uuid';
 import { Button } from '../ui/button';
 import { LoaderCircle } from 'lucide-react';
 
@@ -17,7 +18,13 @@ const PlaidButton: FC<PlaidButtonProps> = ({ className, onConnectionSuccess }) =
   const [token, setToken] = useState<string | null>(null);
   
   const createLinkToken = async () => {
-    const response = await fetch("/api/plaid/create_link_token", { method: 'POST' });
+    const response = await fetch("/api/plaid/create_link_token", {
+        method: 'POST',
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ client_user_id: uuidv4() })
+      });
     const { link_token } = await response.json();
     setToken(link_token);
   };
@@ -65,7 +72,9 @@ const PlaidButton: FC<PlaidButtonProps> = ({ className, onConnectionSuccess }) =
       disabled={!ready || isConnecting}
       >
       {isConnecting && (
-        <LoaderCircle className="mr-3 h-5 w-5 animate-spin" />
+        <LoaderCircle
+          className="mr-3 h-5 w-5 animate-spin"
+        />
       )}
       Connect with Plaid
     </Button>
