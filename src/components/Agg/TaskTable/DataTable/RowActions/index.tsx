@@ -2,10 +2,11 @@
 
 import { Row } from "@tanstack/react-table"
 import { taskSchema } from "../data/schema"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
-import { categories } from "../data/data"
 import { Ellipsis } from "lucide-react"
+// import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+// import { categories, statuses } from "../data/data"
 
 
 interface RowActionsProps<TData> {
@@ -15,7 +16,7 @@ interface RowActionsProps<TData> {
 export default function RowActions<TData>({
   row,
 }: RowActionsProps<TData>) {
-  const task = taskSchema.parse(row.original)
+  const { category, status } = taskSchema.parse(row.original)
 
   return (
     <DropdownMenu>
@@ -30,8 +31,44 @@ export default function RowActions<TData>({
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
         <DropdownMenuItem>Edit</DropdownMenuItem>
-        <DropdownMenuItem>Make a copy</DropdownMenuItem>
-        <DropdownMenuItem>Favorite</DropdownMenuItem>
+        <DropdownMenuItem>Mark as done</DropdownMenuItem>
+        {category === "connectlenders" && status !== "done" && (
+          <>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className="font-bold">
+              Connect with Plaid
+            </DropdownMenuItem>
+          </>
+        )}
+        {category === "connecthomeinsurance" && status !== "done" && (
+          <>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className="font-bold">
+              Connect with Canopy Connect
+            </DropdownMenuItem>
+          </>
+        )}
+        {category === "connecttitle" && status !== "done" && (
+          <>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem className="font-bold">
+              Connect with Canopy Connect
+            </DropdownMenuItem>
+          </>
+        )}
+        {/* <DropdownMenuSeparator />
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger>Status</DropdownMenuSubTrigger>
+          <DropdownMenuSubContent>
+            <DropdownMenuRadioGroup value={task.status}>
+              {statuses.map((status) => (
+                <DropdownMenuRadioItem key={status.value} value={status.value}>
+                  {status.label}
+                </DropdownMenuRadioItem>
+              ))}
+            </DropdownMenuRadioGroup>
+          </DropdownMenuSubContent>
+        </DropdownMenuSub>
         <DropdownMenuSeparator />
         <DropdownMenuSub>
           <DropdownMenuSubTrigger>Categories</DropdownMenuSubTrigger>
@@ -44,12 +81,7 @@ export default function RowActions<TData>({
               ))}
             </DropdownMenuRadioGroup>
           </DropdownMenuSubContent>
-        </DropdownMenuSub>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          Delete
-          <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
-        </DropdownMenuItem>
+        </DropdownMenuSub> */}
       </DropdownMenuContent>
     </DropdownMenu>
   )
