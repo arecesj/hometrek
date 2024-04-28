@@ -1,10 +1,12 @@
 'use client'
 
+import { useRouter } from "next/navigation"
 import { Row } from "@tanstack/react-table"
 import { taskSchema } from "../data/schema"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { Ellipsis } from "lucide-react"
+import { aggRouteName, aggRoutes } from "@/constants/routes"
 // import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 // import { categories, statuses } from "../data/data"
 
@@ -16,7 +18,27 @@ interface RowActionsProps<TData> {
 export default function RowActions<TData>({
   row,
 }: RowActionsProps<TData>) {
-  const { category, status } = taskSchema.parse(row.original)
+  const router = useRouter();
+  const { category } = taskSchema.parse(row.original)
+  
+  const editRoute = (category: string) => {
+    switch(category) {
+      case "lenders":
+        return aggRoutes[aggRouteName.LENDERS].route;
+      case "inspections":
+        return aggRoutes[aggRouteName.INSPECTIONS].route;
+      case "appraisals":
+        return aggRoutes[aggRouteName.APPRAISALS].route;
+      case "insurance":
+        return aggRoutes[aggRouteName.INSURANCE].route;
+      case "title":
+        return aggRoutes[aggRouteName.TITLE].route;
+      case "closingday":
+        return aggRoutes[aggRouteName.CLOSINGDAY].route;
+      default:
+        return aggRoutes[aggRouteName.DASHBOARD].route;
+    }
+  }
 
   return (
     <DropdownMenu>
@@ -30,32 +52,10 @@ export default function RowActions<TData>({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
-        <DropdownMenuItem>Edit</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => {
+          router.push(editRoute(category))
+        }}>Edit / View </DropdownMenuItem>
         <DropdownMenuItem>Mark as done</DropdownMenuItem>
-        {category === "connectlenders" && status !== "done" && (
-          <>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className="font-bold">
-              Connect with Plaid
-            </DropdownMenuItem>
-          </>
-        )}
-        {category === "connecthomeinsurance" && status !== "done" && (
-          <>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className="font-bold">
-              Connect with Canopy Connect
-            </DropdownMenuItem>
-          </>
-        )}
-        {category === "connecttitle" && status !== "done" && (
-          <>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem className="font-bold">
-              Connect with Canopy Connect
-            </DropdownMenuItem>
-          </>
-        )}
         {/* <DropdownMenuSeparator />
         <DropdownMenuSub>
           <DropdownMenuSubTrigger>Status</DropdownMenuSubTrigger>

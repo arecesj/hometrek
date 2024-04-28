@@ -6,10 +6,6 @@ export const categories = [
     label: "Lenders",
   },
   {
-    value: "connectlenders",
-    label: "Lenders",
-  },
-  {
     value: "inspections",
     label: "Inpsections",
   },
@@ -18,11 +14,7 @@ export const categories = [
     label: "Appraisals",
   },
   {
-    value: "homeinsurance",
-    label: "Home Insurance",
-  },
-  {
-    value: "connecthomeinsurance",
+    value: "insurance",
     label: "Home Insurance",
   },
   {
@@ -30,12 +22,12 @@ export const categories = [
     label: "Title",
   },
   {
-    value: "connecttitle",
-    label: "Title",
-  },
-  {
     value: "closingday",
     label: "Closing Day",
+  },
+  {
+    value: "payments",
+    label: "Payments",
   },
 ]
 
