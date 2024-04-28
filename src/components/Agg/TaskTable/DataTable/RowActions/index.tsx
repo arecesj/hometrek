@@ -7,6 +7,8 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSepara
 import { Button } from "@/components/ui/button"
 import { Ellipsis } from "lucide-react"
 import { aggRouteName, aggRoutes } from "@/constants/routes"
+import { Dialog, DialogTrigger } from "@/components/ui/dialog"
+import TaskDialogContent from "./TaskDialogContent"
 // import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 // import { categories, statuses } from "../data/data"
 
@@ -19,9 +21,9 @@ export default function RowActions<TData>({
   row,
 }: RowActionsProps<TData>) {
   const router = useRouter();
-  const { category } = taskSchema.parse(row.original)
+  const currTask  = taskSchema.parse(row.original)
   
-  const editRoute = (category: string) => {
+  const viewRoute = (category: string) => {
     switch(category) {
       case "lenders":
         return aggRoutes[aggRouteName.LENDERS].route;
@@ -52,10 +54,24 @@ export default function RowActions<TData>({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
+        <Dialog>
+          <DialogTrigger asChild>
+            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
+              Edit
+            </DropdownMenuItem>
+          </DialogTrigger>
+          <TaskDialogContent currTask={currTask} />
+        </Dialog>
         <DropdownMenuItem onClick={() => {
-          router.push(editRoute(category))
-        }}>Edit / View </DropdownMenuItem>
-        <DropdownMenuItem>Mark as done</DropdownMenuItem>
+          router.push(viewRoute(currTask.category))
+        }}>
+          View
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => {}}
+        >
+          Mark as done
+        </DropdownMenuItem>
         {/* <DropdownMenuSeparator />
         <DropdownMenuSub>
           <DropdownMenuSubTrigger>Status</DropdownMenuSubTrigger>

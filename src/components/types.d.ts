@@ -123,10 +123,10 @@ type AggClosingDayContext = {
 }
 
 type AggTaskContext = {
+  id: string;
   category: string;
   task: string;
   status: string;
-  label: string;
   priority: string;
 }
 

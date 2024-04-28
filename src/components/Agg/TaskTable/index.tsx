@@ -1,11 +1,21 @@
 'use client'
 
+import { FC } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { newUserTasks } from "@/constants/newUserTasks"
 import DataTable from "./DataTable"
 import { columns } from "./DataTable/columns"
 
-const TaskTable = () => {
+type TaskTableProps = {
+  tasks: {
+    id: string;
+    task: string;
+    status: string;
+    category: string;
+    priority: string;
+  }[]
+}
+
+const TaskTable: FC<TaskTableProps> = ({ tasks }) => {
   return (
     <Card x-chunk="dashboard-05-chunk-4">
       <CardHeader className="px-7 bg-muted/50">
@@ -19,7 +29,7 @@ const TaskTable = () => {
         </div>  
       </CardHeader>
       <CardContent className="p-7 text-sm">
-        <DataTable data={newUserTasks} columns={columns} />
+        <DataTable data={tasks} columns={columns} />
       </CardContent>
     </Card>
   )
