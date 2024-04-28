@@ -81,6 +81,7 @@ type AggContext = {
   title: AggTitleContext;
   closingDay: AggClosingDayContext;
   route: aggRouteName;
+  tasks: AggTaskContext[];
 }
 
 type AggUserContext = {
@@ -119,6 +120,14 @@ type AggTitleContext = {
 
 type AggClosingDayContext = {
   hasClosed: boolean;
+}
+
+type AggTaskContext = {
+  category: string;
+  task: string;
+  status: string;
+  label: string;
+  priority: string;
 }
 
 type AggInspectionDetails = {

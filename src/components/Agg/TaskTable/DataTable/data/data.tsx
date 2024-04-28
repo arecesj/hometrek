@@ -2,16 +2,28 @@ import { ArrowDown, ArrowRight, ArrowUp, Circle, CircleCheck, CircleHelp, Circle
 
 export const labels = [
   {
-    value: "payment",
-    label: "Payment",
+    value: "lenders",
+    label: "Lenders",
   },
   {
-    value: "meeting",
-    label: "Meeting",
+    value: "inspections",
+    label: "Inpsections",
   },
   {
-    value: "document",
-    label: "Document",
+    value: "appraisals",
+    label: "Appraisals",
+  },
+  {
+    value: "homeinsurance",
+    label: "Home Insurance",
+  },
+  {
+    value: "title",
+    label: "Title",
+  },
+  {
+    value: "closingday",
+    label: "Closing Day",
   },
 ]
 

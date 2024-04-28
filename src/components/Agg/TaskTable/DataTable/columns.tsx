@@ -37,9 +37,14 @@ export const columns: ColumnDef<Task>[] = [
   {
     accessorKey: "category",
     header: ({ column }) => (
-      <ColumnHeader column={column} title="Task" />
+      <ColumnHeader column={column} title="Category" />
     ),
-    cell: ({ row }) => <div className="w-[80px]">{row.getValue("category")}</div>,
+    cell: ({ row }) => {
+      const label = labels.find((label) => label.value === row.original.label)
+      return (
+          <Badge variant="secondary">{label.label}</Badge>
+      )
+    },
   },
   {
     accessorKey: "task",
@@ -47,12 +52,9 @@ export const columns: ColumnDef<Task>[] = [
       <ColumnHeader column={column} title="Task" />
     ),
     cell: ({ row }) => {
-      const label = labels.find((label) => label.value === row.original.label)
-
       return (
         <div className="flex space-x-2">
-          {label && <Badge variant="outline">{label.label}</Badge>}
-          <span className="max-w-[500px] truncate font-medium">
+          <span className="max-w-[400px] truncate font-medium">
             {row.getValue("task")}
           </span>
         </div>

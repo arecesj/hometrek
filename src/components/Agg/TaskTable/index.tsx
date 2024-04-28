@@ -1,6 +1,9 @@
 'use client'
 
+import { useEffect } from "react"
+import { useAppContext } from "@/context"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { newUserTasks } from "@/constants/newUserTasks"
 import DataTable from "./DataTable"
 import { columns } from "./DataTable/columns"
 
@@ -18,7 +21,7 @@ const TaskTable = () => {
         </div>  
       </CardHeader>
       <CardContent className="p-7 text-sm">
-        <DataTable data={[]} columns={columns} />
+        <DataTable data={newUserTasks} columns={columns} />
       </CardContent>
     </Card>
   )
