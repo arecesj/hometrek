@@ -4,7 +4,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Badge } from "@/components/ui/badge"
 import { CheckedState } from "@radix-ui/react-checkbox"
-import { labels, priorities, statuses } from "./data/data"
+import { categories, priorities, statuses } from "./data/data"
 import { Task } from "./data/schema"
 import ColumnHeader from "./ColumnHeader"
 import RowActions from "./RowActions"
@@ -40,9 +40,9 @@ export const columns: ColumnDef<Task>[] = [
       <ColumnHeader column={column} title="Category" />
     ),
     cell: ({ row }) => {
-      const label = labels.find((label) => label.value === row.original.label)
+      const category = categories.find((category) => category.value === row.original.category)
       return (
-          <Badge variant="secondary">{label.label}</Badge>
+          <Badge variant="secondary">{category.label}</Badge>
       )
     },
   },

@@ -4,7 +4,7 @@ import { Row } from "@tanstack/react-table"
 import { taskSchema } from "../data/schema"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
-import { labels } from "../data/data"
+import { categories } from "../data/data"
 import { Ellipsis } from "lucide-react"
 
 
@@ -34,12 +34,12 @@ export default function RowActions<TData>({
         <DropdownMenuItem>Favorite</DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuSub>
-          <DropdownMenuSubTrigger>Labels</DropdownMenuSubTrigger>
+          <DropdownMenuSubTrigger>Categories</DropdownMenuSubTrigger>
           <DropdownMenuSubContent>
-            <DropdownMenuRadioGroup value={task.label}>
-              {labels.map((label) => (
-                <DropdownMenuRadioItem key={label.value} value={label.value}>
-                  {label.label}
+            <DropdownMenuRadioGroup value={task.category}>
+              {categories.map((category) => (
+                <DropdownMenuRadioItem key={category.value} value={category.value}>
+                  {category.label}
                 </DropdownMenuRadioItem>
               ))}
             </DropdownMenuRadioGroup>

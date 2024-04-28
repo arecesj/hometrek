@@ -1,6 +1,6 @@
 import { ArrowDown, ArrowRight, ArrowUp, Circle, CircleCheck, CircleHelp, CircleX, HandCoins, Handshake, NotebookPen, ScrollText, Shield, Timer, UserRoundSearch } from "lucide-react"
 
-export const labels = [
+export const categories = [
   {
     value: "lenders",
     label: "Lenders",
@@ -70,38 +70,5 @@ export const priorities = [
     label: "High",
     value: "high",
     icon: ArrowUp,
-  },
-]
-
-export const categories = [
-  {
-    label: "Lenders",
-    value: "lenders",
-    icon: HandCoins,
-  },
-  {
-    label: "Inpsections",
-    value: "inspections",
-    icon: UserRoundSearch,
-  },
-  {
-    label: "Appraisals",
-    value: "appraisals",
-    icon: NotebookPen,
-  },
-  {
-    label: "Home Insurance",
-    value: "homeinsurance",
-    icon: Shield,
-  },
-  {
-    label: "Title",
-    value: "title",
-    icon: ScrollText,
-  },
-  {
-    label: "Closing Day",
-    value: "closingday",
-    icon: Handshake,
   },
 ]
