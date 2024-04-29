@@ -1,5 +1,6 @@
 'use client'
 
+import { useState } from "react"
 import { useRouter } from 'next/navigation'
 import {
   Card,
@@ -15,6 +16,8 @@ import CanopyButton from '@/components/CanopyButton'
 
 
 const FindExistingTitle = () => {
+  const [isDisabled, setDisabled] = useState<boolean>(false)
+  const [isConnected, setConnected] = useState<boolean>(false)
   const { aggContext, aggContext: { title } , setAggContext } = useAppContext()
   const router = useRouter();
 
@@ -49,6 +52,8 @@ const FindExistingTitle = () => {
           <div className="flex items-center justify-center space-x-2 py-4 px-6">
             <CanopyButton
               className="w-[275px] h-[80px]"
+              isDisabled
+              isConnected
             />
             <div>
               - OR -
