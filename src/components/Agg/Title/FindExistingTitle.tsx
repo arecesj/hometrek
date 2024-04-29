@@ -23,8 +23,8 @@ const FindExistingTitle = () => {
       ...aggContext,
       title: {
         ...title,
-        hasTitle: true,
-        hasTitleInsurance: true,
+        hasTitleAgent: true,
+        hasTitleTransfer: true,
         titleDetails: {},
       }
     })
@@ -61,8 +61,8 @@ const FindExistingTitle = () => {
                   ...aggContext,
                   title: {
                     ...title,
-                    hasTitle: false,
-                    hasTitleInsurance: false
+                    hasTitleAgent: false,
+                    hasTitleTransfer: false
                   }
                 })
                 router.push(aggRoutes[aggRouteName.CLOSINGDAY].route)

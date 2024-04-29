@@ -113,9 +113,9 @@ type AggInsuranceContext = {
 }
 
 type AggTitleContext = {
-  hasTitle: boolean;
-  hasTitleInsurance: boolean;
-  titleDetails: any;
+  hasTitleAgent: boolean;
+  hasTitleTransfer: boolean;
+  titleDetails: AggTitleDetails;
 }
 
 type AggClosingDayContext = {
@@ -137,6 +137,12 @@ type AggInspectionDetails = {
 }
 
 type AggAppraisalDetails = {
+  name: string;
+  date: Date;
+  cost: string;
+}
+
+type AggTitleDetails = {
   name: string;
   date: Date;
   cost: string;

@@ -41,9 +41,9 @@ const FormSchema = z.object({
   date: z.date().optional(),
 })
 
-const AddExistingAppraiser = () => {
+const AddExistingTitleAgent = () => {
   const [isDisabled, setDisabled] = useState<boolean>(false)
-  const { aggContext, aggContext: { appraisals } , setAggContext } = useAppContext()
+  const { aggContext, aggContext: { title } , setAggContext } = useAppContext()
   const router = useRouter();
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -52,12 +52,13 @@ const AddExistingAppraiser = () => {
 
 const onSubmit = (data: z.infer<typeof FormSchema>) => {
   const { name, date, cost } = data
-  let i: AggAppraisalsContext;
+  let i: AggTitleContext;
+  
   if((name || date || cost) && !isDisabled) {
     i = {
-      hasAppraiser: true,
-      hasAppraised: !!date && date < new Date(),
-      appraisalDetails: {
+      hasTitleAgent: !!name.length,
+      hasTitleTransfer: !!date && date < new Date(),
+      titleDetails: {
         name,
         date,
         cost
@@ -65,20 +66,20 @@ const onSubmit = (data: z.infer<typeof FormSchema>) => {
     }
   } else {
     i = {
-      hasAppraiser: isDisabled,
-      hasAppraised: isDisabled,
-      appraisalDetails: null
+      hasTitleAgent: isDisabled,
+      hasTitleTransfer: isDisabled,
+      titleDetails: null
     }
   }
 
   setAggContext({
     ...aggContext,
-    appraisals: {
-      ...appraisals,
+    title: {
+      ...title,
       ...i
     }
   })
-  router.push(aggRoutes[aggRouteName.INSURANCE].route)
+  router.push(aggRoutes[aggRouteName.CLOSINGDAY].route)
 }
 
   const formFieldClassName = "w-[100%]"
@@ -90,10 +91,10 @@ const onSubmit = (data: z.infer<typeof FormSchema>) => {
             <CardHeader className="px-7 bg-muted/50">
               <div className="grid gap-0.5">
                 <CardTitle className="group flex items-center gap-2 text-lg">
-                  Enter your home appraiser information
+                  Enter your home title agent information
                 </CardTitle>
               </div>
-              <CardDescription>Deets for the apraisa</CardDescription>
+              <CardDescription>Deets for the title agent</CardDescription>
             </CardHeader>
             <CardContent className="p-7 w-full grid grid-cols-2 gap-6">
               <div className={formFieldClassName}>
@@ -103,7 +104,7 @@ const onSubmit = (data: z.infer<typeof FormSchema>) => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className={isDisabled ? "text-slate-300" : ""}>
-                        Home Appraiser Company
+                        Title Agent Company
                       </FormLabel>
                       <FormDescription className={isDisabled ? "text-slate-300" : ""}>
                         The company working with you
@@ -126,10 +127,10 @@ const onSubmit = (data: z.infer<typeof FormSchema>) => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className={isDisabled ? "text-slate-300" : ""}>
-                        Date of appraisal
+                        Date of title transfer
                       </FormLabel>
                       <FormDescription className={isDisabled ? "text-slate-300" : ""}>
-                      Select the date of the home appraisal
+                      Select the date of the home title transger
                       </FormDescription>
                       <Popover>
                         <PopoverTrigger asChild>
@@ -174,10 +175,10 @@ const onSubmit = (data: z.infer<typeof FormSchema>) => {
                     return (
                       <FormItem>
                         <FormLabel className={isDisabled ? "text-slate-300" : ""}>
-                          Appraisal price
+                          Title Agent estimate
                         </FormLabel>
                         <FormDescription className={isDisabled ? "text-slate-300" : ""}>
-                          A rough estimate of the cost of the home appraisal
+                          A rough estimate of the cost of the title agent
                         </FormDescription>
                         <FormControl>
                           <Input
@@ -230,4 +231,4 @@ const onSubmit = (data: z.infer<typeof FormSchema>) => {
     )
 }
 
-export default AddExistingAppraiser;
+export default AddExistingTitleAgent;

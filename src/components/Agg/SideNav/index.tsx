@@ -103,7 +103,7 @@ const SideNav = () => {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              {(!!appraisals && !!appraisals.hasAppraiser && !appraisals.hasAppraised) ? (
+              {(!!appraisals && !!appraisals.hasAppraiser && !!appraisals.hasAppraised) ? (
                 <BadgeCheck className="h-5 w-5" color="#3e9392"/>
               ) : (
                 <Link
@@ -139,7 +139,7 @@ const SideNav = () => {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              {(!!title && !!title.hasTitle && !!title.hasTitleInsurance) ? (
+              {(!!title && !!title.hasTitleAgent && !!title.hasTitleTransfer) ? (
                 <BadgeCheck className="h-5 w-5" color="#3e9392"/>
               ) : (
                 <Link

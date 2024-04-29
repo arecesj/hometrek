@@ -11,9 +11,10 @@ import { LoaderCircle } from 'lucide-react';
 type PlaidButtonProps = {
   className: string;
   onConnectionSuccess: (accessToken: string) => void;
+  isDisabled: boolean;
 }
 
-const PlaidButton: FC<PlaidButtonProps> = ({ className, onConnectionSuccess }) => {
+const PlaidButton: FC<PlaidButtonProps> = ({ className, onConnectionSuccess, isDisabled }) => {
   const [isConnecting, setConnectingStatus] = useState<boolean> (false);
   const [token, setToken] = useState<string | null>(null);
   
@@ -64,7 +65,7 @@ const PlaidButton: FC<PlaidButtonProps> = ({ className, onConnectionSuccess }) =
         setConnectingStatus(true)
         open()
       }}
-      disabled={!ready || isConnecting}
+      disabled={!ready || isConnecting || isDisabled}
       >
       {isConnecting && (
         <LoaderCircle

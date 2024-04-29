@@ -35,7 +35,7 @@ export const generateNewUserTasks = (aggContext: AggContext) => {
     {
       id: `HT${uuidv4()}`,
       task: "Connect HomeTrek blah blah blah",
-      status: (title?.hasTitle && title?.hasTitleInsurance) ? "done" : (title?.hasTitle || title?.hasTitleInsurance) ? "inprogress" : "todo",
+      status: (title?.hasTitleAgent && title?.hasTitleTransfer) ? "done" : (title?.hasTitleAgent || title?.hasTitleTransfer) ? "inprogress" : "todo",
       category: "title",
       priority: "medium"
     },
