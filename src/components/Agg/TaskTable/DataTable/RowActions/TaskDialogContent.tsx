@@ -18,7 +18,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-import { categories } from "../data/data"
+import { categories, priorities, statuses } from "../data/data"
 
 type TaskDialogContentProps = {
   currTask: {
@@ -63,11 +63,9 @@ const TaskDialogContent: FC<TaskDialogContentProps> = ({ currTask }) => {
           <SelectContent>
             <SelectGroup>
               <SelectLabel>Statuses</SelectLabel>
-              <SelectItem value="apple">Apple</SelectItem>
-              <SelectItem value="banana">Banana</SelectItem>
-              <SelectItem value="blueberry">Blueberry</SelectItem>
-              <SelectItem value="grapes">Grapes</SelectItem>
-              <SelectItem value="pineapple">Pineapple</SelectItem>
+              {statuses.map((status) =>
+                <SelectItem key={status.value} value={status.value}>{status.label}</SelectItem>  
+              )}
             </SelectGroup>
           </SelectContent>
         </Select>
@@ -77,12 +75,10 @@ const TaskDialogContent: FC<TaskDialogContentProps> = ({ currTask }) => {
           </SelectTrigger>
           <SelectContent>
             <SelectGroup>
-              <SelectLabel>Fruits</SelectLabel>
-              <SelectItem value="apple">Apple</SelectItem>
-              <SelectItem value="banana">Banana</SelectItem>
-              <SelectItem value="blueberry">Blueberry</SelectItem>
-              <SelectItem value="grapes">Grapes</SelectItem>
-              <SelectItem value="pineapple">Pineapple</SelectItem>
+              <SelectLabel>Priorities</SelectLabel>
+              {priorities.map((priority) => 
+                <SelectItem key={priority.value} value={priority.value}>{priority.label}</SelectItem>  
+              )}
             </SelectGroup>
           </SelectContent>
         </Select>

@@ -57,7 +57,7 @@ export default function RowActions<TData>({
         <Dialog>
           <DialogTrigger asChild>
             <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-              Edit
+              Edit task
             </DropdownMenuItem>
           </DialogTrigger>
           <TaskDialogContent currTask={currTask} />
@@ -65,7 +65,7 @@ export default function RowActions<TData>({
         <DropdownMenuItem onClick={() => {
           router.push(viewRoute(currTask.category))
         }}>
-          View
+          View page
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => {}}
