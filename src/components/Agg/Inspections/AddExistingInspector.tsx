@@ -97,105 +97,105 @@ const onSubmit = (data: z.infer<typeof FormSchema>) => {
                 <CardDescription>Deets for the inspa</CardDescription>
               </CardHeader>
               <CardContent className="p-7 w-full grid grid-cols-2 gap-6">
-                    <div className={formFieldClassName}>
-                      <FormField
-                        control={form.control}
-                        name="name"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className={isDisabled ? "text-slate-300" : ""}>
-                              Home Inspection Company
-                            </FormLabel>
-                            <FormDescription className={isDisabled ? "text-slate-300" : ""}>
-                              The company working with you
-                            </FormDescription>
+                <div className={formFieldClassName}>
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className={isDisabled ? "text-slate-300" : ""}>
+                          Home Inspection Company
+                        </FormLabel>
+                        <FormDescription className={isDisabled ? "text-slate-300" : ""}>
+                          The company working with you
+                        </FormDescription>
+                        <FormControl>
+                          <Input
+                            placeholder="" {...field}
+                            disabled={isDisabled}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                    disabled={isDisabled}
+                  />
+                </div>
+                <div className={formFieldClassName}>
+                  <FormField
+                    control={form.control}
+                    name="date"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className={isDisabled ? "text-slate-300" : ""}>
+                          Date of inspection
+                        </FormLabel>
+                        <FormDescription className={isDisabled ? "text-slate-300" : ""}>
+                          Select the date of the home inspection
+                        </FormDescription>
+                        <Popover>
+                          <PopoverTrigger asChild>
                             <FormControl>
-                              <Input
-                                placeholder="" {...field}
+                              <Button
+                                variant={"outline"}
+                                className={cn(
+                                  "w-[100%] pl-3 text-left font-normal",
+                                  !field.value && "text-muted-foreground"
+                                )}
                                 disabled={isDisabled}
-                              />
+                              >
+                                {field.value ? (
+                                  format(field.value, "PPP")
+                                ) : (
+                                  <span>Pick a date</span>
+                                )}
+                                <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                              </Button>
                             </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                        disabled={isDisabled}
-                      />
-                    </div>
-                    <div className={formFieldClassName}>
-                      <FormField
-                        control={form.control}
-                        name="date"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel className={isDisabled ? "text-slate-300" : ""}>
-                              Date of inspection
-                            </FormLabel>
-                            <FormDescription className={isDisabled ? "text-slate-300" : ""}>
-                              Select the date of the home inspection
-                            </FormDescription>
-                            <Popover>
-                              <PopoverTrigger asChild>
-                                <FormControl>
-                                  <Button
-                                    variant={"outline"}
-                                    className={cn(
-                                      "w-[100%] pl-3 text-left font-normal",
-                                      !field.value && "text-muted-foreground"
-                                    )}
-                                    disabled={isDisabled}
-                                  >
-                                    {field.value ? (
-                                      format(field.value, "PPP")
-                                    ) : (
-                                      <span>Pick a date</span>
-                                    )}
-                                    <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                                  </Button>
-                                </FormControl>
-                              </PopoverTrigger>
-                              <PopoverContent className="w-auto p-0" align="start">
-                                <Calendar
-                                  mode="single"
-                                  selected={field.value}
-                                  onSelect={field.onChange}
-                                  disabled={(date) => date < new Date("1900-01-01")}
-                                  initialFocus
-                                />
-                              </PopoverContent>
-                            </Popover>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                        disabled={isDisabled}
-                      />
-                    </div>
-                    <div className={formFieldClassName}>
-                      <FormField
-                        control={form.control}
-                        name="cost"
-                        render={({ field }) => {
-                          return (
-                            <FormItem>
-                              <FormLabel className={isDisabled ? "text-slate-300" : ""}>
-                                Inspection price
-                              </FormLabel>
-                              <FormDescription className={isDisabled ? "text-slate-300" : ""}>
-                                A rough estimate of the cost of the home inspection
-                              </FormDescription>
-                              <FormControl>
-                                <Input
-                                  type="number" {...field }
-                                  disabled={isDisabled}
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )
-                        }
-                          
-                        }
-                      />
-                    </div>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-auto p-0" align="start">
+                            <Calendar
+                              mode="single"
+                              selected={field.value}
+                              onSelect={field.onChange}
+                              disabled={(date) => date < new Date("1900-01-01")}
+                              initialFocus
+                            />
+                          </PopoverContent>
+                        </Popover>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                    disabled={isDisabled}
+                  />
+                </div>
+                <div className={formFieldClassName}>
+                  <FormField
+                    control={form.control}
+                    name="cost"
+                    render={({ field }) => {
+                      return (
+                        <FormItem>
+                          <FormLabel className={isDisabled ? "text-slate-300" : ""}>
+                            Inspection price
+                          </FormLabel>
+                          <FormDescription className={isDisabled ? "text-slate-300" : ""}>
+                            A rough estimate of the cost of the home inspection
+                          </FormDescription>
+                          <FormControl>
+                            <Input
+                              type="number" {...field }
+                              disabled={isDisabled}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )
+                    }
+                      
+                    }
+                  />
+                </div>
               </CardContent>
               <CardFooter className="grid grid-cols-2 gap-6">
                 <div className="pl-2 flex justify-start space-x-2">
