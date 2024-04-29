@@ -16,9 +16,12 @@ const Alt = () => {
               Save time & money while avoiding bureaucratic headaches
             </p>
           </div>
-          <div className="grid gap-4">
+          <div className="flex gap-4">
             <Button asChild size="lg" className=" w-[150px] text-white bg-[hsl(0,0%,8%)] hover:bg-transparent hover:border hover:text-[hsl(0,0%,8%)] hover:border-[hsl(0,0%,8%)] py-3 px-6 rounded-xl">
-              <Link href="/trek/lenders">Get Started</Link>
+              <Link href="/agg/lenders">Track</Link>
+            </Button>
+            <Button asChild size="lg" className=" w-[150px] text-white bg-[hsl(0,0%,8%)] hover:bg-transparent hover:border hover:text-[hsl(0,0%,8%)] hover:border-[hsl(0,0%,8%)] py-3 px-6 rounded-xl">
+              <Link href="/trek/lenders">Find Lenders</Link>
             </Button>
           </div>
         </div>
