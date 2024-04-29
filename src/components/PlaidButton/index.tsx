@@ -4,17 +4,17 @@ import {
   PlaidLinkOnSuccess,
   PlaidLinkOnExit,
 } from 'react-plaid-link';
-import { v4 as uuidv4 } from 'uuid';
 import { Button } from '../ui/button';
-import { LoaderCircle } from 'lucide-react';
+import { CircleCheckBig, LoaderCircle } from 'lucide-react';
 
 type PlaidButtonProps = {
   className: string;
   onConnectionSuccess: (accessToken: string) => void;
   isDisabled: boolean;
+  isConnected: boolean;
 }
 
-const PlaidButton: FC<PlaidButtonProps> = ({ className, onConnectionSuccess, isDisabled }) => {
+const PlaidButton: FC<PlaidButtonProps> = ({ className, onConnectionSuccess, isDisabled, isConnected }) => {
   const [isConnecting, setConnectingStatus] = useState<boolean> (false);
   const [token, setToken] = useState<string | null>(null);
   
@@ -65,14 +65,21 @@ const PlaidButton: FC<PlaidButtonProps> = ({ className, onConnectionSuccess, isD
         setConnectingStatus(true)
         open()
       }}
-      disabled={!ready || isConnecting || isDisabled}
+      disabled={!ready || isConnecting || isDisabled || isConnected}
       >
       {isConnecting && (
         <LoaderCircle
           className="mr-3 h-5 w-5 animate-spin"
         />
       )}
-      Connect with Plaid
+      {isConnected ? (
+        <>
+          <CircleCheckBig 
+            className="mr-3 h-5 w-5"
+          />
+          Connected
+        </>
+        ) : "Connect with Plaid"}
     </Button>
   )
 }

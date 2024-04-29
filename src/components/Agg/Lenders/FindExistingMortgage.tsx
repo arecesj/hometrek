@@ -19,6 +19,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 
 const FindExistingMortgage = () => {
   const [isDisabled, setDisabled] = useState<boolean>(false)
+  const [isConnected, setConnected] = useState<boolean>(false)
   const { aggContext, aggContext: { lenders } , setAggContext } = useAppContext()
   const router = useRouter();
 
@@ -31,6 +32,7 @@ const FindExistingMortgage = () => {
         accessToken,
       }
     })
+    setConnected(true)
   }
 
   const onNext = () => {
@@ -77,9 +79,10 @@ const FindExistingMortgage = () => {
               className="w-[250px] h-[80px]"
               onConnectionSuccess={onConnectionSuccess}
               isDisabled={isDisabled}
+              isConnected={isConnected}
             />
-        </div>
-        <div className="pl-1 flex justify-center space-x-2">
+          </div>
+          <div className="pl-1 flex justify-center space-x-2">
             <Checkbox id="track" onClick={() => {
               setDisabled(!isDisabled)
             }} />
@@ -91,9 +94,8 @@ const FindExistingMortgage = () => {
               </label>
           </div>
         </CardContent>
-        <CardFooter className="grid grid-cols-2 gap-6">  
-          <div></div>
-          <div className="flex justify-end space-x-2">
+        <CardFooter className="flex justify-end ">  
+          <div className="space-x-2">
             <Button
               type="submit"
               className="w-[116px] self-end"

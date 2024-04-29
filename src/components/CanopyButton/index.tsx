@@ -4,9 +4,12 @@ import { LoaderCircle } from 'lucide-react';
 
 type CanopyButtonProps = {
   className: string;
+  isDisabled: boolean;
+  isConnected: boolean;
+
 }
 
-const CanopyButton: FC<CanopyButtonProps> = ({ className }) => {
+const CanopyButton: FC<CanopyButtonProps> = ({ className, isDisabled, isConnected }) => {
   const [isConnecting, setConnectingStatus] = useState<boolean> (false);
   return (
     <Button
@@ -15,7 +18,7 @@ const CanopyButton: FC<CanopyButtonProps> = ({ className }) => {
         setConnectingStatus(true)
         // open()
       }}
-      disabled={isConnecting}
+      disabled={isConnecting || isDisabled || isConnected}
       >
       {isConnecting && (
         <LoaderCircle

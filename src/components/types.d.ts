@@ -1,5 +1,8 @@
 
 /* CONTEXT TYPES */
+/* CONTEXT TYPES */
+/* CONTEXT TYPES */
+
 type ContextProps = {
   trekContext: TrekContext;
   setTrekContext: Dispatch<SetStateAction<TrekContext>>;
@@ -8,6 +11,9 @@ type ContextProps = {
 }
 
 /* TREK CONTEXT TYPES */
+/* TREK CONTEXT TYPES */
+/* TREK CONTEXT TYPES */
+
 type TrekContext = {
   user: UserContext;
   lenders: LendersContext;
@@ -72,6 +78,9 @@ type TitleContext = {
 type ClosingDayContext = any;
 
 /* AGG CONTEXT TYPES */
+/* AGG CONTEXT TYPES */
+/* AGG CONTEXT TYPES */
+
 type AggContext = {
   user: AggUserContext;
   lenders: AggLendersContext;
@@ -149,6 +158,9 @@ type AggTitleDetails = {
 }
 
 /* OTHER TYPES */
+/* OTHER TYPES */
+/* OTHER TYPES */
+
 type Lenders = {
   [key: string]: {
     name: string;
