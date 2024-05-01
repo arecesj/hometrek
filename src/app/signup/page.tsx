@@ -22,6 +22,7 @@ import { useToast } from "@/components/ui/use-toast"
 import { aggRouteName, aggRoutes, universalRouteName, universalRoutes } from "@/constants/routes";
 import { createUser } from "@/client/user";
 import { LoaderCircle } from "lucide-react";
+import { isUserAuthenticated } from "@/utils/helpers"
 
 const FormSchema = z.object({
   name: z.string().min(3, "Name is required").max(100),
@@ -63,7 +64,7 @@ const Signup = () => {
   }
 
   useEffect(() => {
-    if(status === "authenticated") router.push(aggRoutes[aggRouteName.DASHBOARD].route)
+    if(isUserAuthenticated(status)) router.push(aggRoutes[aggRouteName.DASHBOARD].route)
   }, [status])
   
   return (

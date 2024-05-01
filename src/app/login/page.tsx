@@ -22,6 +22,7 @@ import {
 import { useToast } from "@/components/ui/use-toast"
 import { aggRouteName, aggRoutes, universalRouteName, universalRoutes } from "@/constants/routes"
 import { LoaderCircle } from "lucide-react"
+import { isUserAuthenticated } from "@/utils/helpers"
 
 const FormSchema = z.object({
   email: z.string().min(1, "Email is required").email("Invalid email"),
@@ -29,7 +30,7 @@ const FormSchema = z.object({
 })
 
 const Login = () => {
-  const { data: session, status } = useSession()
+  const { data, data: session, status } = useSession()
   const router = useRouter()
   const [isLoggingIn, setLoggingIn] = useState<boolean>(false)
   const { toast } = useToast()
@@ -67,7 +68,7 @@ const Login = () => {
   }
 
   useEffect(() => {
-    if(status === "authenticated") router.push(aggRoutes[aggRouteName.DASHBOARD].route)
+    if(isUserAuthenticated(status)) router.push(aggRoutes[aggRouteName.DASHBOARD].route)
   }, [status])
   
   return (
