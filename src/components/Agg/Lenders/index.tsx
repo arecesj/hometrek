@@ -1,12 +1,15 @@
 'use client'
 
+import { useSession } from "next-auth/react"
 import { useEffect } from "react";
 import FindExistingMortgage from "./FindExistingMortgage";
 import SubHeader from "@/components/Agg/Subheader";
 import { useAppContext } from "@/context";
 import { aggRouteName } from "@/constants/routes";
+import { isUserAuthenticated } from "@/utils/helpers";
 
 const Lenders = () => {
+  const { data: session, status } = useSession()
   const { aggContext, setAggContext } = useAppContext()
   
   useEffect(() => setAggContext({ ...aggContext, route: aggRouteName.LENDERS }), [])
@@ -17,7 +20,7 @@ const Lenders = () => {
         showPreviousButton={false}
         previousButtonContent={""}
         previousButtonHref={""}
-        showCreateProfileButton={true}
+        showCreateProfileButton={!isUserAuthenticated(status)}
       />
       <FindExistingMortgage />
     </div>

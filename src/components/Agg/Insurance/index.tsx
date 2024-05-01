@@ -1,12 +1,15 @@
 'use client'
 
+import { useSession } from "next-auth/react"
+import { useEffect } from "react"
 import { useAppContext } from "@/context"
 import SubHeader from "../Subheader"
 import { aggRouteName } from "@/constants/routes"
-import { useEffect } from "react"
 import FindExistingInsurance from "./FindExistingInsurance"
+import { isUserAuthenticated } from "@/utils/helpers"
 
 const Insurance = () => {
+  const { data: session, status } = useSession()
   const { aggContext, setAggContext } = useAppContext()
 
   useEffect(() => setAggContext({ ...aggContext, route: aggRouteName.INSURANCE }), [])
@@ -17,7 +20,7 @@ const Insurance = () => {
         showPreviousButton={false}
         previousButtonContent={""}
         previousButtonHref={""}
-        showCreateProfileButton={true}
+        showCreateProfileButton={!isUserAuthenticated(status)}
       />
       <FindExistingInsurance />
     </div>
