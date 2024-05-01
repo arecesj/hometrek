@@ -23,11 +23,11 @@ const Navigation = () => {
         </div> */}
         
         <div className="hidden lg:flex lg:items-center text-[hsl(0,0%,41%)] space-x-2"> 
-          <Button asChild className="lg:text-[hsl(0,0%,41%)] lg:bg-transparent border-2 border-[hsl(0,0%,41%)] hover:text-white hover:border-[hsl(0,0%,8%)] py-3 px-6 rounded-xl">
-            <Link href="/agg/lenders" className="text-base font-medium">Track</Link>
+          <Button asChild className="text-white bg-[hsl(0,0%,8%)] hover:bg-transparent hover:border hover:text-[hsl(0,0%,8%)] hover:border-[hsl(0,0%,8%)] py-3 px-6 rounded-xl">
+            <Link href="/signup" className="text-base font-medium">Sign up</Link>
           </Button>
-          <Button asChild className="lg:text-[hsl(0,0%,41%)] lg:bg-transparent border-2 border-[hsl(0,0%,41%)] hover:text-white hover:border-[hsl(0,0%,8%)] py-3 px-6 rounded-xl">
-            <Link href="/trek/lenders" className="text-base font-medium">Find lenders</Link>
+          <Button asChild className="lg:text-[hsl(0,0%,8%)] lg:bg-transparent border-2 border-[hsl(0,0%,8%)] hover:text-white hover:border-[hsl(0,0%,8%)] py-3 px-6 rounded-xl">
+            <Link href="/login" className="text-base font-medium">Login</Link>
           </Button>
         </div>
         {/* desktop menu end */}

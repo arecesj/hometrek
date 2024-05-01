@@ -10,3 +10,6 @@ export const subtractNumStrings = (ns1: string, ns2: string) => {
   const sub = parseFloat(ns1) - parseFloat(ns2)
   return sub.toString()
 }
+
+
+export const isUserAuthenticated = (status: string) => status === "authenticated"

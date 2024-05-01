@@ -2,6 +2,7 @@
 
 import { FC } from "react"
 import { useRouter } from "next/navigation";
+import { useSession, signOut } from "next-auth/react"
 import Link from "next/link"
 import {
   User,
@@ -23,12 +24,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { aggRouteName, aggRoutes, universalRouteName, universalRoutes } from "@/constants/routes";
+import { isUserAuthenticated } from "@/utils/helpers";
 
 type HeaderProps = {
   routeName: aggRouteName;
 }
 
 const Header: FC<HeaderProps> = ({ routeName }) => {
+  const { data: session, status } = useSession()
   const router = useRouter();
   return (
     <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
@@ -75,20 +78,35 @@ const Header: FC<HeaderProps> = ({ routeName }) => {
           </DropdownMenuItem>
           {/* <DropdownMenuItem>Support</DropdownMenuItem> */}
           <DropdownMenuSeparator />
-          <DropdownMenuItem
-            onClick={() => {
-            router.push(universalRoutes[universalRouteName.LOGIN].route)
-            }}
-          >
-            Login
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            onClick={() => {
-            router.push(universalRoutes[universalRouteName.SIGNUP].route)
-            }}
-          >
-            Signup
-          </DropdownMenuItem>
+          { isUserAuthenticated(status) ? (
+            <DropdownMenuItem
+              onClick={() => {
+                signOut({
+                  redirect: true,
+                  callbackUrl: "/"
+                })
+              }}
+            >
+              Logout
+            </DropdownMenuItem>  
+          ) : (
+            <>
+              <DropdownMenuItem
+                onClick={() => {
+                router.push(universalRoutes[universalRouteName.LOGIN].route)
+                }}
+              >
+                Login
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => {
+                router.push(universalRoutes[universalRouteName.SIGNUP].route)
+                }}
+              >
+                Signup
+              </DropdownMenuItem>
+            </>
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
     </header>
