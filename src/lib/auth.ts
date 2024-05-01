@@ -1,5 +1,3 @@
-/* eslint-disable padded-blocks */
-
 import { NextAuthOptions } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
@@ -35,7 +33,7 @@ export const authOptions: NextAuthOptions = {
           return null
         }
         
-        const { id, name, email, password } = isExistingUser
+        const { id, name, email, password = "" } = isExistingUser
         const doPasswordsMatch = await compare(credentials.password, password)
         if(!doPasswordsMatch) {
           return null
