@@ -32,16 +32,17 @@ export const authOptions: NextAuthOptions = {
         if(!isExistingUser) {
           return null
         }
-
-        const doPasswordsMatch = await compare(credentials.password, isExistingUser.password)
+        
+        const { id, name, email, password } = isExistingUser
+        const doPasswordsMatch = await compare(credentials.password, password)
         if(!doPasswordsMatch) {
           return null
         }
 
         return {
-          id: `${isExistingUser.id}`,
-          name: isExistingUser.name,
-          email: isExistingUser.email,
+          id,
+          name,
+          email,
         }
       }
     })
