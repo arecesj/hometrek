@@ -1,6 +1,7 @@
 'use client';
 
 import { FC } from "react"
+import { useRouter } from "next/navigation";
 import Link from "next/link"
 import {
   User,
@@ -28,6 +29,7 @@ type HeaderProps = {
 }
 
 const Header: FC<HeaderProps> = ({ routeName }) => {
+  const router = useRouter();
   return (
     <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
       <Breadcrumb className="hidden md:flex">
@@ -73,15 +75,19 @@ const Header: FC<HeaderProps> = ({ routeName }) => {
           </DropdownMenuItem>
           {/* <DropdownMenuItem>Support</DropdownMenuItem> */}
           <DropdownMenuSeparator />
-          <DropdownMenuItem>
-            <Link href={universalRoutes[universalRouteName.LOGIN].route}>
-              Login
-            </Link>
+          <DropdownMenuItem
+            onClick={() => {
+            router.push(universalRoutes[universalRouteName.LOGIN].route)
+            }}
+          >
+            Login
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Link href={universalRoutes[universalRouteName.SIGNUP].route}>
-              Signup
-            </Link>
+          <DropdownMenuItem
+            onClick={() => {
+            router.push(universalRoutes[universalRouteName.SIGNUP].route)
+            }}
+          >
+            Signup
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>

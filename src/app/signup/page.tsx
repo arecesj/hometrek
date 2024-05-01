@@ -1,12 +1,71 @@
 'use client'
 
+import { useEffect, useState } from "react"
+import { useSession } from "next-auth/react"
+import { useRouter } from "next/navigation"
+import { useForm } from "react-hook-form"
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form"
+import { useToast } from "@/components/ui/use-toast"
+import { aggRouteName, aggRoutes, universalRouteName, universalRoutes } from "@/constants/routes";
+import { createUser } from "@/client/user";
+import { LoaderCircle } from "lucide-react";
+
+const FormSchema = z.object({
+  name: z.string().min(3, "Name is required").max(100),
+  email: z.string().min(1, "Email is required").email("Invalid email"),
+  password: z.string().min(1, "Password is required").min(7, "Password must have at least 7 characters")
+})
 
 const Signup = () => {
+  const { data: session, status } = useSession()
+  const router = useRouter()
+  const [isCreating, setCreating] = useState<boolean>(false)
+  const { toast } = useToast()
+  
+  const form = useForm<z.infer<typeof FormSchema>>({
+    resolver: zodResolver(FormSchema),
+  });
+
+  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
+    const { name, email, password } = data
+    setCreating(true)
+    
+    const response = await createUser(name, email, password)
+    if (response.ok) {
+      toast({
+        title: "Successfully created your account.",
+        description: "Redirecting you to the dashboard.",
+      })
+      
+      setCreating(false)
+      router.push(aggRoutes[aggRouteName.DASHBOARD].route)
+    } else {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem creating your account. Please try again later.",
+      })
+      setCreating(false)
+    }
+  }
+
+  useEffect(() => {
+    if(status === "authenticated") router.push(aggRoutes[aggRouteName.DASHBOARD].route)
+  }, [status])
+  
   return (
     <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
       <div className="hidden bg-muted lg:block">
@@ -26,39 +85,86 @@ const Signup = () => {
             Enter your information to create an account
             </p>
           </div>
-          <div className="grid gap-4">
-            <div className="grid gap-2">
-              <Label htmlFor="email">Name</Label>
-              <Input
-                id="name"
-                type="text"
-                placeholder="Juan Areces"
-                required
-              />
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="juan@hometrek.ai"
-                required
-              />
-            </div>
-            <div className="grid gap-2">
-              <Label htmlFor="password">Password</Label>
-              <Input id="password" type="password" required />
-            </div>
-            <Button type="submit" className="w-full">
-              Create an account
-            </Button>
-            <Button variant="outline" className="w-full">
-              Sign up with Google
-            </Button>
-          </div>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+              <div className="grid gap-4">
+                <div className="grid gap-2">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>
+                          Name
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            type="text"
+                            placeholder="Juan Areces" {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>
+                          Email
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            type="email"
+                            placeholder="juan@hometrek.ai" {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <FormField
+                    control={form.control}
+                    name="password"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>
+                          Password
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            type="password"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <Button type="submit" className="w-full" disabled={isCreating}>    
+                {isCreating && (
+                  <LoaderCircle
+                    className="mr-3 h-5 w-5 animate-spin"
+                  />
+                )}              
+                  Create an account
+                </Button>
+              </div>
+            </form>
+          </Form>
+          <Button variant="outline" className="w-full" disabled={isCreating}>
+            Sign up with Google
+          </Button>
           <div className="mt-4 text-center text-sm">
             {"Already have an account? "}
-            <Link href="/login" className="underline">
+            <Link href={universalRoutes[universalRouteName.LOGIN].route} className="underline">
               Login
             </Link>
           </div>

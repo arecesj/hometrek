@@ -94,7 +94,6 @@ type AggContext = {
 }
 
 type AggUserContext = {
-  isLoggedIn: boolean;
   userSID: string;
 };
 
