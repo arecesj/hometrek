@@ -33,8 +33,8 @@ export const authOptions: NextAuthOptions = {
           return null
         }
 
-        const doesPasswordMatch = await compare(credentials.password, isExistingUser.password)
-        if(!doesPasswordMatch) {
+        const doPasswordsMatch = await compare(credentials.password, isExistingUser.password)
+        if(!doPasswordsMatch) {
           return null
         }
 
