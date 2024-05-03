@@ -16,17 +16,16 @@ datasource db {
 // USER AND ACCOUNT
 
 model User {
-  id            String    @id @default(cuid())
+  id            String       @id @default(cuid())
   name          String
-  email         String    @unique
-  password      String
-  emailVerified DateTime? @map("email_verified")
-  trek          Trek?
-  agg           Agg?
+  email         String       @unique
+  password      String?
+  emailVerified DateTime?    @map("email_verified")
+  homeClosing   HomeClosing?
   accounts      Account[]
   sessions      Session[]
-  createdAt     DateTime  @default(now()) @map(name: "created_at")
-  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
+  createdAt     DateTime     @default(now()) @map(name: "created_at")
+  updatedAt     DateTime     @updatedAt @map(name: "updated_at")
 }
 
 model Account {
@@ -50,43 +49,57 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
-// TREK EXPERIENCE
-// TREK EXPERIENCE
-// TREK EXPERIENCE
+// HOMECLOSING
+// HOMECLOSING
+// HOMECLOSING
 
-model Trek {
-  id          String          @id @default(cuid())
-  userId      String          @map("user_id")
-  createdAt   DateTime        @default(now()) @map(name: "created_at")
-  updatedAt   DateTime        @updatedAt @map(name: "updated_at")
-  lenders     TrekLender?
-  inspections TrekInspection?
-  appraisal   TrekAppraisal?
-  insurance   TrekInsurance?
-  title       TrekTitle?
-  tasks       TrekTask[]
-  // costs
+model HomeClosing {
+  id          String      @id @default(cuid())
+  userId      String      @map("user_id")
+  state       String?
+  zipCode     String?
+  lenders     Lender?
+  inspections Inspection?
+  appraisal   Appraisal?
+  insurance   Insurance?
+  title       Title?
+  closingDay  ClosingDay?
+  tasks       Task[]
+  costs       Cost?
+  createdAt   DateTime    @default(now()) @map(name: "created_at")
+  updatedAt   DateTime    @updatedAt @map(name: "updated_at")
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId])
 }
 
-model TrekLender {
-  id                   String              @id @default(cuid())
-  trekId               String?             @map("trek_id")
+// LENDER
+// LENDER
+// LENDER
+
+model Lender {
+  id                   String           @id @default(cuid())
+  homeClosingId        String?          @map("home_closing_id")
+  // trek
   potentialHomePrice   String?
   potentialDownPayment String?
-  selectedLender       TrekSelectedLender?
+  selectedLender       SelectedLender?
+  // agg
+  hasOwnLender         Boolean?
+  plaidAccessToken     String?
+  mortgageDetails      MortgageDetails?
+  createdAt            DateTime         @default(now()) @map(name: "created_at")
+  updatedAt            DateTime         @updatedAt @map(name: "updated_at")
 
-  trek Trek? @relation(fields: [trekId], references: [id])
+  homeClosing HomeClosing? @relation(fields: [homeClosingId], references: [id])
 
-  @@unique([trekId])
+  @@unique([homeClosingId])
 }
 
-model TrekSelectedLender {
+model SelectedLender {
   id                       String   @id @default(cuid())
-  trekLenderId             String   @map("trek_lender_id")
+  lenderId                 String   @map("lender_id")
   name                     String
   nmls                     String
   minCreditScore           String
@@ -95,107 +108,101 @@ model TrekSelectedLender {
   createdAt                DateTime @default(now()) @map(name: "created_at")
   updatedAt                DateTime @updatedAt @map(name: "updated_at")
 
-  trekLender TrekLender? @relation(fields: [trekLenderId], references: [id])
+  lender Lender? @relation(fields: [lenderId], references: [id])
 
-  @@unique([trekLenderId])
+  @@unique([lenderId])
 }
 
-model TrekInspection {
-  id                String                 @id @default(cuid())
-  trekId            String?                @map("trek_id")
-  selectedInspector TrekSelectedInspector?
+model MortgageDetails {
+  id        String   @id @default(cuid())
+  lenderId  String?  @map("lender_id")
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
 
-  trek Trek? @relation(fields: [trekId], references: [id])
+  lender Lender? @relation(fields: [lenderId], references: [id])
 
-  @@unique([trekId])
+  @@unique([lenderId])
 }
 
-model TrekSelectedInspector {
-  id               String   @id @default(cuid())
-  trekInspectionId String   @map("trek_inspection_id")
-  name             String
-  imageUrl         String   @map(name: "image_url")
-  rating           Int
-  distance         BigInt
-  pitch            String
-  location         String
-  avgCost          Decimal  @map(name: "avg_cost")
-  createdAt        DateTime @default(now()) @map(name: "created_at")
-  updatedAt        DateTime @updatedAt @map(name: "updated_at")
+// INSPECTION
+// INSPECTION
+// INSPECTION
 
-  trekInspection TrekInspection? @relation(fields: [trekInspectionId], references: [id])
+model Inspection {
+  id                String             @id @default(cuid())
+  homeClosingId     String?            @map("home_closing_id")
+  // trek
+  selectedInspector SelectedInspector?
+  // agg
+  hasInspector      Boolean?
+  hasInspected      Boolean?
+  inspectionDetails InspectionDetails?
+  createdAt         DateTime           @default(now()) @map(name: "created_at")
+  updatedAt         DateTime           @updatedAt @map(name: "updated_at")
 
-  @@unique([trekInspectionId])
+  homeClosing HomeClosing? @relation(fields: [homeClosingId], references: [id])
+
+  @@unique([homeClosingId])
 }
 
-model TrekAppraisal {
-  id                String                 @id @default(cuid())
-  trekId            String?                @map("trek_id")
-  selectedAppraiser TrekSelectedAppraiser?
+model SelectedInspector {
+  id           String   @id @default(cuid())
+  inspectionId String   @map("inspection_id")
+  name         String
+  imageURL     String   @map(name: "image_url")
+  rating       Int
+  distance     BigInt
+  pitch        String
+  location     String
+  avgCost      Decimal  @map(name: "avg_cost")
+  createdAt    DateTime @default(now()) @map(name: "created_at")
+  updatedAt    DateTime @updatedAt @map(name: "updated_at")
 
-  trek Trek? @relation(fields: [trekId], references: [id])
+  inspection Inspection? @relation(fields: [inspectionId], references: [id])
 
-  @@unique([trekId])
+  @@unique([inspectionId])
 }
 
-model TrekSelectedAppraiser {
-  id              String   @id @default(cuid())
-  trekAppraisalId String   @map("trek_appraisal_id")
-  name            String
-  imageUrl        String   @map(name: "image_url")
-  rating          Int
-  distance        BigInt
-  pitch           String
-  location        String
-  avgCost         Decimal  @map(name: "avg_cost")
-  createdAt       DateTime @default(now()) @map(name: "created_at")
-  updatedAt       DateTime @updatedAt @map(name: "updated_at")
+model InspectionDetails {
+  id           String    @id @default(cuid())
+  inspectionId String?   @map("inspection_id")
+  name         String?
+  date         DateTime?
+  cost         Decimal
+  createdAt    DateTime  @default(now()) @map(name: "created_at")
+  updatedAt    DateTime  @updatedAt @map(name: "updated_at")
 
-  trekAppraisal TrekAppraisal? @relation(fields: [trekAppraisalId], references: [id])
+  inspection Inspection? @relation(fields: [inspectionId], references: [id])
 
-  @@unique([trekAppraisalId])
+  @@unique([inspectionId])
 }
 
-model TrekInsurance {
-  id                   String               @id @default(cuid())
-  trekId               String?              @map("trek_id")
-  potentialHomePrice   String?
-  potentialDownPayment String?
-  selectedInsurer      TrekSelectedInsurer?
+// APPRAISAL
+// APPRAISAL
+// APPRAISAL
 
-  trek Trek? @relation(fields: [trekId], references: [id])
+model Appraisal {
+  id                String             @id @default(cuid())
+  homeClosingId     String?            @map("home_closing_id")
+  //trek
+  selectedAppraiser SelectedAppraiser?
+  //agg
+  hasAppraiser      Boolean?
+  hasAppraised      Boolean?
+  appraisalDetails  AppraisalDetails?
+  createdAt         DateTime           @default(now()) @map(name: "created_at")
+  updatedAt         DateTime           @updatedAt @map(name: "updated_at")
 
-  @@unique([trekId])
+  homeClosing HomeClosing? @relation(fields: [homeClosingId], references: [id])
+
+  @@unique([homeClosingId])
 }
 
-model TrekSelectedInsurer {
-  id              String   @id @default(cuid())
-  trekInsuranceId String   @map("trek_insurance_id")
-  name            String
-  policy          String
-  createdAt       DateTime @default(now()) @map(name: "created_at")
-  updatedAt       DateTime @updatedAt @map(name: "updated_at")
-
-  trekLender TrekInsurance? @relation(fields: [trekInsuranceId], references: [id])
-
-  @@unique([trekInsuranceId])
-}
-
-model TrekTitle {
-  id            String                  @id @default(cuid())
-  trekId        String?                 @map("trek_id")
-  selectedAgent TrekSelectedTitleAgent?
-
-  trek Trek? @relation(fields: [trekId], references: [id])
-
-  @@unique([trekId])
-}
-
-model TrekSelectedTitleAgent {
+model SelectedAppraiser {
   id          String   @id @default(cuid())
-  trekTitleId String   @map("trek_title_id")
+  appraisalId String?  @map("appraisal_id")
   name        String
-  imageUrl    String   @map(name: "image_url")
+  imageURL    String   @map(name: "image_url")
   rating      Int
   distance    BigInt
   pitch       String
@@ -204,164 +211,175 @@ model TrekSelectedTitleAgent {
   createdAt   DateTime @default(now()) @map(name: "created_at")
   updatedAt   DateTime @updatedAt @map(name: "updated_at")
 
-  trekTitle TrekTitle? @relation(fields: [trekTitleId], references: [id])
+  appraisal Appraisal? @relation(fields: [appraisalId], references: [id])
 
-  @@unique([trekTitleId])
+  @@unique([appraisalId])
 }
 
-model TrekTask {
-  id       String  @id @default(cuid())
-  trekId   String? @map("trek_id")
-  category String
-  task     String
-  status   String
-  priority String
+model AppraisalDetails {
+  id          String    @id @default(cuid())
+  appraisalId String?   @map("appraisal_id")
+  name        String?
+  date        DateTime?
+  cost        Decimal
+  createdAt   DateTime  @default(now()) @map(name: "created_at")
+  updatedAt   DateTime  @updatedAt @map(name: "updated_at")
 
-  trek Trek? @relation(fields: [trekId], references: [id])
+  appraisal Appraisal? @relation(fields: [appraisalId], references: [id])
 
-  @@unique([trekId])
+  @@unique([appraisalId])
 }
 
-// AGG EXPERIENCE
-// AGG EXPERIENCE
-// AGG EXPERIENCE
+// INSURANCE
+// INSURANCE
+// INSURANCE
 
-model Agg {
-  id          String         @id @default(cuid())
-  userId      String         @map("user_id")
-  createdAt   DateTime       @default(now()) @map(name: "created_at")
-  updatedAt   DateTime       @updatedAt @map(name: "updated_at")
-  lenders     AggLender?
-  inspections AggInspection?
-  appraisals  AggAppraisal?
-  insurance   AggInsurance?
-  title       AggTitle?
-  tasks       AggTask[]
-  // TODO: Do we also want costs and closing day?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([userId])
-}
-
-model AggLender {
-  id               String              @id @default(cuid())
-  aggId            String?             @map("agg_id")
-  hasLender        Boolean?
-  plaidAccessToken String?
-  mortgageDetails  AggMortgageDetails?
-
-  agg Agg? @relation(fields: [aggId], references: [id])
-
-  @@unique([aggId])
-}
-
-model AggInspection {
-  id                String                @id @default(cuid())
-  aggId             String?               @map("agg_id")
-  hasInspector      Boolean?
-  hasInspected      Boolean?
-  inspectionDetails AggInspectionDetails?
-
-  agg Agg? @relation(fields: [aggId], references: [id])
-
-  @@unique([aggId])
-}
-
-model AggAppraisal {
-  id               String               @id @default(cuid())
-  aggId            String?              @map("agg_id")
-  hasAppraiser     Boolean?
-  hasAppraised     Boolean?
-  appraisalDetails AggAppraisalDetails?
-
-  agg Agg? @relation(fields: [aggId], references: [id])
-
-  @@unique([aggId])
-}
-
-model AggInsurance {
-  id           String   @id @default(cuid())
-  aggId        String?  @map("agg_id")
-  hasInsurance Boolean?
+model Insurance {
+  id                   String             @id @default(cuid())
+  homeClosingId        String?            @map("home_closing_id")
+  //trek
+  potentialHomePrice   String?
+  potentialDownPayment String?
+  selectedInsurance    SelectedInsurance?
+  //agg
+  hasInsurance         Boolean?
   // TODO: canopyAccessToken?
   // TODO: Figure this out after connecting with Canopy
-  // insuranceDetails 
+  insuranceDetails     InsuranceDetails?
+  createdAt            DateTime           @default(now()) @map(name: "created_at")
+  updatedAt            DateTime           @updatedAt @map(name: "updated_at")
 
-  agg Agg? @relation(fields: [aggId], references: [id])
+  homeClosing HomeClosing? @relation(fields: [homeClosingId], references: [id])
 
-  @@unique([aggId])
+  @@unique([homeClosingId])
 }
 
-model AggTitle {
-  id               String           @id @default(cuid())
-  aggId            String?          @map("agg_id")
-  hasTitleAgent    Boolean?
-  hasTitleTransfer Boolean?
-  titleDetails     AggTitleDetails?
+model SelectedInsurance {
+  id          String   @id @default(cuid())
+  insuranceId String?  @map("insurance_id")
+  name        String
+  policy      String
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  updatedAt   DateTime @updatedAt @map(name: "updated_at")
 
-  agg Agg? @relation(fields: [aggId], references: [id])
+  insurance Insurance? @relation(fields: [insuranceId], references: [id])
 
-  @@unique([aggId])
+  @@unique([insuranceId])
 }
 
-model AggTask {
-  id       String  @id @default(cuid())
-  aggId    String? @map("agg_id")
-  category String
-  task     String
-  status   String
-  priority String
-
-  agg Agg? @relation(fields: [aggId], references: [id])
-
-  @@unique([aggId])
-}
-
-model AggMortgageDetails {
+model InsuranceDetails {
   id          String  @id @default(cuid())
-  aggLenderId String? @map("agg_lender_id")
+  insuranceId String? @map("insurance_id")
 
-  aggLender AggLender? @relation(fields: [aggLenderId], references: [id])
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
 
-  @@unique([aggLenderId])
+  insurance Insurance? @relation(fields: [insuranceId], references: [id])
+
+  @@unique([insuranceId])
 }
 
-model AggInspectionDetails {
-  id              String    @id @default(cuid())
-  aggInspectionId String?   @map("agg_inspector_id")
-  name            String?
-  date            DateTime?
-  cost            Decimal
+// TITLE
+// TITLE
+// TITLE
 
-  aggInspection AggInspection? @relation(fields: [aggInspectionId], references: [id])
+model Title {
+  id                 String              @id @default(cuid())
+  homeClosingId      String?             @map("home_closing_id")
+  // trek
+  selectedTitleAgent SelectedTitleAgent?
+  //agg
+  hasTitleAgent      Boolean?
+  hasTitleTransfer   Boolean?
+  titleDetails       TitleDetails?
+  createdAt          DateTime            @default(now()) @map(name: "created_at")
+  updatedAt          DateTime            @updatedAt @map(name: "updated_at")
 
-  @@unique([aggInspectionId])
+  homeClosing HomeClosing? @relation(fields: [homeClosingId], references: [id])
+
+  @@unique([homeClosingId])
 }
 
-model AggAppraisalDetails {
-  id             String    @id @default(cuid())
-  aggAppraisalId String?   @map("agg_appraisal_id")
-  name           String?
-  date           DateTime?
-  cost           Decimal
+model SelectedTitleAgent {
+  id        String   @id @default(cuid())
+  titleId   String?  @map("title_id")
+  name      String
+  imageURL  String   @map(name: "image_url")
+  rating    Int
+  distance  BigInt
+  pitch     String
+  location  String
+  avgCost   Decimal  @map(name: "avg_cost")
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
 
-  aggAppraisal AggAppraisal? @relation(fields: [aggAppraisalId], references: [id])
+  title Title? @relation(fields: [titleId], references: [id])
 
-  @@unique([aggAppraisalId])
+  @@unique([titleId])
 }
 
-model AggTitleDetails {
+model TitleDetails {
   id           String    @id @default(cuid())
-  aggTitleId   String?   @map("agg_title_id")
+  titleId      String?   @map("title_id")
   name         String?
   date         DateTime?
   cost         Decimal
   transferDate DateTime?
+  createdAt    DateTime  @default(now()) @map(name: "created_at")
+  updatedAt    DateTime  @updatedAt @map(name: "updated_at")
 
-  aggTitle AggTitle? @relation(fields: [aggTitleId], references: [id])
+  title Title? @relation(fields: [titleId], references: [id])
 
-  @@unique([aggTitleId])
+  @@unique([titleId])
+}
+
+// CLOSING DAY
+// CLOSING DAY
+// CLOSING DAY
+
+model ClosingDay {
+  id            String   @id @default(cuid())
+  homeClosingId String?  @map("home_closing_id")
+  createdAt     DateTime @default(now()) @map(name: "created_at")
+  updatedAt     DateTime @updatedAt @map(name: "updated_at")
+
+  homeClosing HomeClosing? @relation(fields: [homeClosingId], references: [id])
+
+  @@unique([homeClosingId])
+}
+
+// TASK
+// TASK
+// TASK
+
+model Task {
+  id            String   @id @default(cuid())
+  homeClosingId String?  @map("home_closing_id")
+  category      String
+  task          String
+  status        String
+  priority      String
+  createdAt     DateTime @default(now()) @map(name: "created_at")
+  updatedAt     DateTime @updatedAt @map(name: "updated_at")
+
+  homeClosing HomeClosing? @relation(fields: [homeClosingId], references: [id])
+
+  @@unique([homeClosingId])
+}
+
+// COST
+// COST
+// COST
+
+model Cost {
+  id            String   @id @default(cuid())
+  homeClosingId String?  @map("home_closing_id")
+  createdAt     DateTime @default(now()) @map(name: "created_at")
+  updatedAt     DateTime @updatedAt @map(name: "updated_at")
+
+  homeClosing HomeClosing? @relation(fields: [homeClosingId], references: [id])
+
+  @@unique([homeClosingId])
 }
 
 // PARTNERSHIPS
@@ -372,7 +390,7 @@ model HomeTrekOfferedLenders {
   id                       String   @id @default(cuid())
   name                     String
   nmls                     String
-  imageUrl                 String   @map(name: "image_url")
+  imageURL                 String   @map(name: "image_url")
   rating                   Int
   distance                 BigInt
   pitch                    String
@@ -387,7 +405,7 @@ model HomeTrekOfferedLenders {
 model HomeTrekOfferedInspectors {
   id        String   @id @default(cuid())
   name      String
-  imageUrl  String   @map(name: "image_url")
+  imageURL  String   @map(name: "image_url")
   rating    Int
   distance  BigInt
   pitch     String
@@ -400,7 +418,7 @@ model HomeTrekOfferedInspectors {
 model HomeTrekOfferedAppraisers {
   id        String   @id @default(cuid())
   name      String
-  imageUrl  String   @map(name: "image_url")
+  imageURL  String   @map(name: "image_url")
   rating    Int
   distance  BigInt
   pitch     String
@@ -413,7 +431,7 @@ model HomeTrekOfferedAppraisers {
 model HomeTrekOfferedInsurer {
   id        String   @id @default(cuid())
   name      String
-  imageUrl  String   @map(name: "image_url")
+  imageURL  String   @map(name: "image_url")
   rating    Int
   distance  BigInt
   pitch     String
@@ -426,7 +444,7 @@ model HomeTrekOfferedInsurer {
 model HomeTrekOfferedTitleAgents {
   id        String   @id @default(cuid())
   name      String
-  imageUrl  String   @map(name: "image_url")
+  imageURL  String   @map(name: "image_url")
   rating    Int
   distance  BigInt
   pitch     String
@@ -439,7 +457,7 @@ model HomeTrekOfferedTitleAgents {
 model HomeTrekOfferedTitleInsurance {
   id        String   @id @default(cuid())
   name      String
-  imageUrl  String   @map(name: "image_url")
+  imageURL  String   @map(name: "image_url")
   rating    Int
   distance  BigInt
   pitch     String

@@ -17,7 +17,6 @@ const newUserValidation = z
 
 
 export async function POST(request) {
-  console.log("HI!")
   try {
     const body = await request.json();
     const { email, name, password } = newUserValidation.parse(body);

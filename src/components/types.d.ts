@@ -1,56 +1,94 @@
 
-/* CONTEXT TYPES */
-/* CONTEXT TYPES */
-/* CONTEXT TYPES */
+// CONTEXT
+// CONTEXT
+// CONTEXT
 
 type ContextProps = {
+  //past
   trekContext: TrekContext;
   setTrekContext: Dispatch<SetStateAction<TrekContext>>;
   aggContext: AggContext;
   setAggContext: Dispatch<SetStateAction<AggContext>>;
+  //future
+  userContext: UserContext;
+  setUserContext: Dispatch<SetStateAction<UserContext>>;
+  homeClosingContext: HomeClosingContext;
+  setHomeClosingContext: Dispatch<SetStateAction<HomeClosingContext>>;
+  routeContext: string;
+  setRouteContext: Dispatch<SetStateAction<string>>;
 }
 
-/* TREK CONTEXT TYPES */
-/* TREK CONTEXT TYPES */
-/* TREK CONTEXT TYPES */
+// HOME CLOSING CONTEXT
+// HOME CLOSING CONTEXT
+// HOME CLOSING CONTEXT
 
-type TrekContext = {
-  user: UserContext;
+type HomeClosingContext = {
+  id: string;
+  state: string;
+  zipCode: string;
   lenders: LendersContext;
   inspections: InspectionsContext;
-  appraisals: AppraisalsContext;
+  appraisal: AppraisalsContext;
   insurance: InsuranceContext;
   title: TitleContext;
   closingDay: ClosingDayContext;
-  route: trekRouteName;
+  tasks: TaskContext[];
+  createdAt: Date;
+  updatedAt: Date;
 }
+
+// USER CONTEXT
+// USER CONTEXT
+// USER CONTEXT
 
 type UserContext = {
+  id: string;
   name: string;
-  state: string;
-  zipCode: string;
-  date: string;
+  email: string;
 }
 
+// LENDERS CONTEXT
+// LENDERS CONTEXT
+// LENDERS CONTEXT
+
 type LendersContext = {
+  id: string;
+  // trek
   potentialDownPayment: string;
   potentialHomePrice: string;
   offeredLenders: OfferedLenders;
   selectedLender: SelectedLender;
+  //agg
+  hasOwnLender: boolean;
+  plaidAccessToken: string;
+  // TODO after Plaid API hook up
+  mortgageDetails: any;
 }
 
 type OfferedLenders = Lenders;
 
 type SelectedLender = {
-    name: string;
-    nmls: number;
-    minCreditScore: number;
-    minDownPaymentPercentage: number
+  id: string;
+  name: string;
+  nmls: string;
+  minCreditScore: string;
+  minDownPaymentPercentage: string
+  currInterestRate: string;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
+// INSPECTIONS CONTEXT
+// INSPECTIONS CONTEXT
+// INSPECTIONS CONTEXT
+
 type InspectionsContext = {
+  id: string;
   offeredInspectors: OfferedInspectors;
   selectedInspector: SelectedInspector;
+  hasInspector: boolean;
+  hasInspected: boolean;
+  inspectionDetails: InspectionDetails
 }
 
 type OfferedInspectors = YelpBusinesses;
@@ -58,107 +96,137 @@ type OfferedInspectors = YelpBusinesses;
 type SelectedInspector = {
   id: string;
   name: string;
-  rating: string;
+  imageURL: string;
+  rating: number;
+  distance: number;
+  pitch: string;
   location: string;
-  display_phone: string;
+  avgCost: number;
+  createdAt: Date;
+  updatedAt: Date;
 }
+
+type InspectionDetails = {
+  id: string;
+  name: string;
+  date: Date;
+  cost: string;
+}
+
+// APPRAISALS CONTEXT
+// APPRAISALS CONTEXT
+// APPRAISALS CONTEXT
 
 type AppraisalsContext = {
-  selectedAppraiser: any;
+  id: string;
+  // trek
+  selectedAppraiser: SelectedAppraiser;
+  // agg
+  hasAppraiser: boolean;
+  hasAppraised: boolean;
+  appraisalDetails: AppraisalDetails;
 }
+
+type SelectedAppraiser = {
+  id: string;
+  name: string;
+  imageURL: string;
+  rating: number;
+  distance: number;
+  pitch: string;
+  location: string;
+  avgCost: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+type AppraisalDetails = {
+  id: string;
+  name: string;
+  date: Date;
+  cost: string;
+}
+
+// INSURANCE CONTEXT
+// INSURANCE CONTEXT
+// INSURANCE CONTEXT
 
 type InsuranceContext = {
+  id: string;
+  // trek
   selectedPolicy: any;
+  // agg
+  hasInsurance: boolean;
+  insuranceDetails: any;
+  createdAt: Date;
+  updatedAt: Date;
 }
 
+// TITLE CONTEXT
+// TITLE CONTEXT
+// TITLE CONTEXT
+
 type TitleContext = {
-  selectedInsurance: any;
+  id: string;
+  // trek
+  selectedTitleAgent: any;
+  // agg
+  hasTitleAgent: boolean;
+  hasTitleTransfer: boolean;
+  titleDetails: TitleDetails;
+  createdAt: Date;
+  updatedAt: Date;
 }
+
+type SelectedTitleAgent = {
+  id: string;
+  name: string;
+  imageURL: string;
+  rating: number;
+  distance: number;
+  pitch: string;
+  location: string;
+  avgCost: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+type TitleDetails = {
+  id: string;
+  name: string;
+  date: Date;
+  cost: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+// CLOSING DAY CONTEXT
+// CLOSING DAY CONTEXT
+// CLOSING DAY CONTEXT
 
 type ClosingDayContext = any;
 
-/* AGG CONTEXT TYPES */
-/* AGG CONTEXT TYPES */
-/* AGG CONTEXT TYPES */
-
-type AggContext = {
-  user: AggUserContext;
-  lenders: AggLendersContext;
-  inspections: AggInspectionsContext;
-  appraisals: AggAppraisalsContext;
-  insurance: AggInsuranceContext;
-  title: AggTitleContext;
-  closingDay: AggClosingDayContext;
-  route: aggRouteName;
-  tasks: AggTaskContext[];
-}
-
-type AggUserContext = {
-  userSID: string;
-};
-
-type AggLendersContext = {
-  hasLender: boolean;
-  accessToken: string;
-  mortgageDetails: any;
-}
-
-type AggInspectionsContext = {
-  hasInspector: boolean;
-  hasInspected: boolean;
-  inspectionDetails: AggInspectionDetails;
-}
-
-type AggAppraisalsContext = {
-  hasAppraiser: boolean;
-  hasAppraised: boolean;
-  appraisalDetails: AggAppraisalDetails;
-}
-
-type AggInsuranceContext = {
-  hasInsurance: boolean;
-  insuranceDetails: any;
-}
-
-type AggTitleContext = {
-  hasTitleAgent: boolean;
-  hasTitleTransfer: boolean;
-  titleDetails: AggTitleDetails;
-}
-
-type AggClosingDayContext = {
-  hasClosed: boolean;
-}
-
-type AggTaskContext = {
+// TASK CONTEXT
+// TASK CONTEXT
+// TASK CONTEXT
+type TaskContext = {
   id: string;
   category: string;
   task: string;
   status: string;
   priority: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
-type AggInspectionDetails = {
-  name: string;
-  date: Date;
-  cost: string;
-}
+// COST CONTEXT
+// COST CONTEXT
+// COST CONTEXT
+type CostContext = any;
 
-type AggAppraisalDetails = {
-  name: string;
-  date: Date;
-  cost: string;
-}
-
-type AggTitleDetails = {
-  name: string;
-  date: Date;
-  cost: string;
-}
-
-/* OTHER TYPES */
-/* OTHER TYPES */
-/* OTHER TYPES */
+// OTHER TYPES
+// OTHER TYPES
+// OTHER TYPES
 
 type Lenders = {
   [key: string]: {
