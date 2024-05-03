@@ -10,9 +10,9 @@ import { isUserAuthenticated } from "@/utils/helpers"
 
 const Inpsections = () => {
   const { data: session, status } = useSession()
-  const { aggContext, setAggContext } = useAppContext()
+  const { setRouteContext } = useAppContext()
 
-  useEffect(() => setAggContext({ ...aggContext, route: aggRouteName.INSPECTIONS }), [])
+  useEffect(() => setRouteContext(aggRouteName.INSPECTIONS), [])
   return (
     <div>
       <SubHeader

@@ -43,7 +43,7 @@ const FormSchema = z.object({
 
 const AddExistingAppraiser = () => {
   const [isDisabled, setDisabled] = useState<boolean>(false)
-  const { aggContext, aggContext: { appraisals } , setAggContext } = useAppContext()
+  const { homeClosingContext, homeClosingContext: { appraisals } , setHomeClosingContext } = useAppContext()
   const router = useRouter();
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -52,7 +52,7 @@ const AddExistingAppraiser = () => {
 
 const onSubmit = (data: z.infer<typeof FormSchema>) => {
   const { name, date, cost } = data
-  let i: AggAppraisalsContext;
+  let i: AppraisalsContext;
   if((name || date || cost) && !isDisabled) {
     i = {
       hasAppraiser: true,
@@ -71,8 +71,8 @@ const onSubmit = (data: z.infer<typeof FormSchema>) => {
     }
   }
 
-  setAggContext({
-    ...aggContext,
+  setHomeClosingContext({
+    ...homeClosingContext,
     appraisals: {
       ...appraisals,
       ...i

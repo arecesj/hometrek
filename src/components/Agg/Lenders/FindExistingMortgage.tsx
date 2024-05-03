@@ -20,12 +20,12 @@ import { Checkbox } from '@/components/ui/checkbox'
 const FindExistingMortgage = () => {
   const [isDisabled, setDisabled] = useState<boolean>(false)
   const [isConnected, setConnected] = useState<boolean>(false)
-  const { aggContext, aggContext: { lenders } , setAggContext } = useAppContext()
+  const { homeClosingContext, homeClosingContext: { lenders } , setHomeClosingContext } = useAppContext()
   const router = useRouter();
 
   const onConnectionSuccess = (accessToken: string) => {
-    setAggContext({
-      ...aggContext,
+    setHomeClosingContext({
+      ...homeClosingContext,
       lenders: {
         ...lenders,
         hasLender: true,
@@ -37,8 +37,8 @@ const FindExistingMortgage = () => {
 
   const onNext = () => {
     if(isDisabled) {
-      setAggContext({
-        ...aggContext,
+      setHomeClosingContext({
+        ...homeClosingContext,
         lenders: {
           ...lenders,
           hasLender: true,
@@ -49,8 +49,8 @@ const FindExistingMortgage = () => {
   }
 
   const onSkip = () => {
-    setAggContext({
-      ...aggContext,
+    setHomeClosingContext({
+      ...homeClosingContext,
       lenders: {
         ...lenders,
         hasLender: false

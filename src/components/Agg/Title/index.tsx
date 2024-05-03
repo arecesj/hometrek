@@ -11,9 +11,9 @@ import { isUserAuthenticated } from "@/utils/helpers"
 
 const Title = () => {
   const { data: session, status } = useSession()
-  const { aggContext, setAggContext } = useAppContext()
+  const { setRouteContext } = useAppContext()
 
-  useEffect(() => setAggContext({ ...aggContext, route: aggRouteName.CLOSINGDAY }), [])
+  useEffect(() => setRouteContext(aggRouteName.CLOSINGDAY), [])
   return (
     <div>
       <SubHeader

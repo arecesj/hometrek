@@ -17,18 +17,18 @@ type ContextProps = {
 // HOME CLOSING CONTEXT
 
 type HomeClosingContext = {
-  id: string;
+  id?: string;
   state: string;
   zipCode: string;
   lenders: LendersContext;
   inspections: InspectionsContext;
-  appraisal: AppraisalsContext;
+  appraisals: AppraisalsContext;
   insurance: InsuranceContext;
   title: TitleContext;
   closingDay: ClosingDayContext;
   tasks: TaskContext[];
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 // USER CONTEXT
@@ -36,7 +36,7 @@ type HomeClosingContext = {
 // USER CONTEXT
 
 type UserContext = {
-  id: string;
+  id?: string;
   name: string;
   email: string;
 }
@@ -46,30 +46,30 @@ type UserContext = {
 // LENDERS CONTEXT
 
 type LendersContext = {
-  id: string;
+  id?: string;
   // trek
-  potentialDownPayment: string;
-  potentialHomePrice: string;
-  offeredLenders: OfferedLenders;
-  selectedLender: SelectedLender;
+  potentialDownPayment?: string;
+  potentialHomePrice?: string;
+  offeredLenders?: OfferedLenders;
+  selectedLender?: SelectedLender;
   //agg
-  hasOwnLender: boolean;
-  plaidAccessToken: string;
+  hasOwnLender?: boolean;
+  plaidAccessToken?: string;
   // TODO after Plaid API hook up
-  mortgageDetails: any;
+  mortgageDetails?: any;
 }
 
 type OfferedLenders = Lenders;
 
 type SelectedLender = {
-  id: string;
+  id?: string;
   name: string;
   nmls: string;
   minCreditScore: string;
   minDownPaymentPercentage: string
   currInterestRate: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 // INSPECTIONS CONTEXT
@@ -77,18 +77,18 @@ type SelectedLender = {
 // INSPECTIONS CONTEXT
 
 type InspectionsContext = {
-  id: string;
-  offeredInspectors: OfferedInspectors;
-  selectedInspector: SelectedInspector;
-  hasInspector: boolean;
-  hasInspected: boolean;
-  inspectionDetails: InspectionDetails
+  id?: string;
+  offeredInspectors?: OfferedInspectors;
+  selectedInspector?: SelectedInspector;
+  hasInspector?: boolean;
+  hasInspected?: boolean;
+  inspectionDetails?: InspectionDetails
 }
 
 type OfferedInspectors = YelpBusinesses;
 
 type SelectedInspector = {
-  id: string;
+  id?: string;
   name: string;
   imageURL: string;
   rating: number;
@@ -96,12 +96,12 @@ type SelectedInspector = {
   pitch: string;
   location: string;
   avgCost: number;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 type InspectionDetails = {
-  id: string;
+  id?: string;
   name: string;
   date: Date;
   cost: string;
@@ -112,17 +112,17 @@ type InspectionDetails = {
 // APPRAISALS CONTEXT
 
 type AppraisalsContext = {
-  id: string;
+  id?: string;
   // trek
-  selectedAppraiser: SelectedAppraiser;
+  selectedAppraiser?: SelectedAppraiser;
   // agg
-  hasAppraiser: boolean;
-  hasAppraised: boolean;
-  appraisalDetails: AppraisalDetails;
+  hasAppraiser?: boolean;
+  hasAppraised?: boolean;
+  appraisalDetails?: AppraisalDetails;
 }
 
 type SelectedAppraiser = {
-  id: string;
+  id?: string;
   name: string;
   imageURL: string;
   rating: number;
@@ -130,12 +130,12 @@ type SelectedAppraiser = {
   pitch: string;
   location: string;
   avgCost: number;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 type AppraisalDetails = {
-  id: string;
+  id?: string;
   name: string;
   date: Date;
   cost: string;
@@ -146,14 +146,14 @@ type AppraisalDetails = {
 // INSURANCE CONTEXT
 
 type InsuranceContext = {
-  id: string;
+  id?: string;
   // trek
   selectedPolicy: any;
   // agg
   hasInsurance: boolean;
   insuranceDetails: any;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 // TITLE CONTEXT
@@ -161,19 +161,19 @@ type InsuranceContext = {
 // TITLE CONTEXT
 
 type TitleContext = {
-  id: string;
+  id?: string;
   // trek
-  selectedTitleAgent: any;
+  selectedTitleAgent?: any;
   // agg
-  hasTitleAgent: boolean;
-  hasTitleTransfer: boolean;
-  titleDetails: TitleDetails;
-  createdAt: Date;
-  updatedAt: Date;
+  hasTitleAgent?: boolean;
+  hasTitleTransfer?: boolean;
+  titleDetails?: TitleDetails;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 type SelectedTitleAgent = {
-  id: string;
+  id?: string;
   name: string;
   imageURL: string;
   rating: number;
@@ -181,17 +181,17 @@ type SelectedTitleAgent = {
   pitch: string;
   location: string;
   avgCost: number;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 type TitleDetails = {
-  id: string;
+  id?: string;
   name: string;
   date: Date;
   cost: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 // CLOSING DAY CONTEXT
@@ -204,13 +204,13 @@ type ClosingDayContext = any;
 // TASK CONTEXT
 // TASK CONTEXT
 type TaskContext = {
-  id: string;
+  id?: string;
   category: string;
   task: string;
   status: string;
   priority: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 // COST CONTEXT
@@ -234,7 +234,7 @@ type Lenders = {
 type YelpBusinesses = YelpBusiness[]
 
 type YelpBusiness = {
-  id: string,
+  id?: string,
   alias: string,
   name: string,
   image_url: string,

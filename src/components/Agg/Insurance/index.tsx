@@ -10,9 +10,9 @@ import { isUserAuthenticated } from "@/utils/helpers"
 
 const Insurance = () => {
   const { data: session, status } = useSession()
-  const { aggContext, setAggContext } = useAppContext()
+  const { setRouteContext } = useAppContext()
 
-  useEffect(() => setAggContext({ ...aggContext, route: aggRouteName.INSURANCE }), [])
+  useEffect(() => setRouteContext(aggRouteName.INSURANCE), [])
   return (
     <div>
       <SubHeader

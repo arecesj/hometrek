@@ -12,10 +12,10 @@ import { isUserAuthenticated } from "@/utils/helpers"
 
 const Dashboard = () => {
   const { data: session, status } = useSession()
-  const { aggContext, setAggContext } = useAppContext()
-  const tasks = generateNewUserTasks(aggContext);
+  const { homeClosingContext, setRouteContext } = useAppContext()
+  const tasks = generateNewUserTasks(homeClosingContext);
 
-  useEffect(() => setAggContext({ ...aggContext, route: aggRouteName.DASHBOARD }), [])
+  useEffect(() => setRouteContext(aggRouteName.DASHBOARD), [])
   return (
     <div>
       <SubHeader

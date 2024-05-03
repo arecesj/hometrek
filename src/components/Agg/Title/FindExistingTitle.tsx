@@ -18,12 +18,12 @@ import CanopyButton from '@/components/CanopyButton'
 const FindExistingTitle = () => {
   const [isDisabled, setDisabled] = useState<boolean>(false)
   const [isConnected, setConnected] = useState<boolean>(false)
-  const { aggContext, aggContext: { title } , setAggContext } = useAppContext()
+  const { homeClosingContext, homeClosingContext: { title } , setHomeClosingContext } = useAppContext()
   const router = useRouter();
 
   const onConnectionSuccess = (accessToken: string) => {
-    setAggContext({
-      ...aggContext,
+    setHomeClosingContext({
+      ...homeClosingContext,
       title: {
         ...title,
         hasTitleAgent: true,
@@ -62,8 +62,8 @@ const FindExistingTitle = () => {
               variant="outline"
               className="w-[275px] h-[80px]"
               onClick={() => {
-                setAggContext({
-                  ...aggContext,
+                setHomeClosingContext({
+                  ...homeClosingContext,
                   title: {
                     ...title,
                     hasTitleAgent: false,

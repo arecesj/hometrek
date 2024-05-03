@@ -26,8 +26,8 @@ import { useAppContext } from "@/context";
 
 const SideNav = () => {
   const {
-    aggContext: {
-      route,
+    routeContext,
+    homeClosingContext: {
       lenders,
       inspections,
       appraisals,
@@ -55,7 +55,7 @@ const SideNav = () => {
             <TooltipTrigger asChild>
               <Link
                 href={aggRoutes[aggRouteName.DASHBOARD].route}
-                className={route === aggRouteName.DASHBOARD ? selectedClass : mutedClass}
+                className={routeContext === aggRouteName.DASHBOARD ? selectedClass : mutedClass}
               >
                 <Home className="h-5 w-5" />
                 <span className="sr-only">Home</span>
@@ -67,12 +67,12 @@ const SideNav = () => {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              {(!!lenders && !!lenders.hasLender) ? (
+              {(!!lenders && !!lenders.hasOwnLender) ? (
                 <BadgeCheck className="h-5 w-5" color="#3e9392"/>
               ) : (
                 <Link
                   href={aggRoutes[aggRouteName.LENDERS].route}
-                  className={route === aggRouteName.LENDERS ? selectedClass : mutedClass}
+                  className={routeContext === aggRouteName.LENDERS ? selectedClass : mutedClass}
                 >
                   <HandCoins className="h-5 w-5"/>
                   <span className="sr-only">Lenders</span>
@@ -90,7 +90,7 @@ const SideNav = () => {
               ) : (
                 <Link
                   href={aggRoutes[aggRouteName.INSPECTIONS].route}
-                  className={route === aggRouteName.INSPECTIONS ? selectedClass : mutedClass}
+                  className={routeContext === aggRouteName.INSPECTIONS ? selectedClass : mutedClass}
                 >
                   <UserRoundSearch className="h-5 w-5"/>
                   <span className="sr-only">Inspections</span>
@@ -108,7 +108,7 @@ const SideNav = () => {
               ) : (
                 <Link
                   href={aggRoutes[aggRouteName.APPRAISALS].route}
-                  className={route === aggRouteName.APPRAISALS ? selectedClass : mutedClass}
+                  className={routeContext === aggRouteName.APPRAISALS ? selectedClass : mutedClass}
                 >
                   <NotebookPen className="h-5 w-5"/>
                   <span className="sr-only">Appraisals</span>
@@ -126,7 +126,7 @@ const SideNav = () => {
               ) : (
                 <Link
                   href={aggRoutes[aggRouteName.INSURANCE].route}
-                  className={route === aggRouteName.INSURANCE ? selectedClass : mutedClass}
+                  className={routeContext === aggRouteName.INSURANCE ? selectedClass : mutedClass}
                 >
                   <Shield className="h-5 w-5"/>
                   <span className="sr-only">Insurance</span>
@@ -144,7 +144,7 @@ const SideNav = () => {
               ) : (
                 <Link
                   href={aggRoutes[aggRouteName.TITLE].route}
-                  className={route === aggRouteName.TITLE ? selectedClass : mutedClass}
+                  className={routeContext === aggRouteName.TITLE ? selectedClass : mutedClass}
                 >
                   <ScrollText className="h-5 w-5"/>
                   <span className="sr-only">Title</span>
@@ -162,7 +162,7 @@ const SideNav = () => {
               ) : (
                 <Link
                   href={aggRoutes[aggRouteName.CLOSINGDAY].route}
-                  className={route === "closing-day" ? selectedClass : mutedClass}
+                  className={routeContext === "closing-day" ? selectedClass : mutedClass}
                 >
                   <Handshake className="h-5 w-5"/>
                   <span className="sr-only">Closing Day</span>
@@ -179,7 +179,7 @@ const SideNav = () => {
             <TooltipTrigger asChild>
               <Link
                 href={aggRoutes[aggRouteName.SETTINGS].route}
-                className={route === aggRouteName.SETTINGS.toLowerCase() ? selectedClass : mutedClass}
+                className={routeContext === aggRouteName.SETTINGS.toLowerCase() ? selectedClass : mutedClass}
               >
                 <Settings className="h-5 w-5" />
                 <span className="sr-only">Settings</span>

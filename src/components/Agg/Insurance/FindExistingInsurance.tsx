@@ -20,12 +20,12 @@ import { Checkbox } from "@/components/ui/checkbox"
 const FindExistingInsurance = () => {
   const [isDisabled, setDisabled] = useState<boolean>(false)
   const [isConnected, setConnected] = useState<boolean>(false)
-  const { aggContext, aggContext: { insurance } , setAggContext } = useAppContext()
+  const { homeClosingContext, homeClosingContext: { insurance } , setHomeClosingContext } = useAppContext()
   const router = useRouter();
 
   const onConnectionSuccess = (accessToken: string) => {
-    setAggContext({
-      ...aggContext,
+    setHomeClosingContext({
+      ...homeClosingContext,
       insurance: {
         ...insurance,
         hasInsurance: true,
@@ -38,8 +38,8 @@ const FindExistingInsurance = () => {
 
   const onNext = () => {
     if(isDisabled) {
-      setAggContext({
-        ...aggContext,
+      setHomeClosingContext({
+        ...homeClosingContext,
         insurance: {
           ...insurance,
           hasInsurance: true
@@ -50,8 +50,8 @@ const FindExistingInsurance = () => {
   }
 
   const onSkip = () => {
-    setAggContext({
-      ...aggContext,
+    setHomeClosingContext({
+      ...homeClosingContext,
       insurance: {
         ...insurance,
         hasInsurance: false

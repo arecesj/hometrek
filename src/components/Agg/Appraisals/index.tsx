@@ -10,9 +10,9 @@ import { isUserAuthenticated } from "@/utils/helpers"
 
 const Appraisals = () => {
   const { data: session, status } = useSession()
-  const { aggContext, setAggContext } = useAppContext()
+  const { setRouteContext } = useAppContext()
 
-  useEffect(() => setAggContext({ ...aggContext, route: aggRouteName.APPRAISALS }), [])
+  useEffect(() => setRouteContext(aggRouteName.APPRAISALS), [])
   return (
     <div>
       <SubHeader

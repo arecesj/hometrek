@@ -1,13 +1,13 @@
 import {v4 as uuidv4} from "uuid"
 
-export const generateNewUserTasks = (aggContext: AggContext) => {
-  const { lenders, inspections, appraisals, insurance, title, closingDay } = aggContext
+export const generateNewUserTasks = (homeClosingContext: HomeClosingContext) => {
+  const { lenders, inspections, appraisals, insurance, title, closingDay } = homeClosingContext
 
   return [
     {
       id: `HT${uuidv4()}`,
       task: "Connect HomeTrek with your mortgage lender via Plaid's secure platform",
-      status: lenders?.hasLender ? "done" : "todo",
+      status: lenders?.hasOwnLender ? "done" : "todo",
       category: "lenders",
       priority: "medium"
     },

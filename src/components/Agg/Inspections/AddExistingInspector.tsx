@@ -43,7 +43,7 @@ const FormSchema = z.object({
 
 const AddExistingInspector = () => {
   const [isDisabled, setDisabled] = useState<boolean>(false)
-  const { aggContext, aggContext: { inspections } , setAggContext } = useAppContext()
+  const { homeClosingContext, homeClosingContext: { inspections } , setHomeClosingContext } = useAppContext()
   const router = useRouter();
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -52,7 +52,7 @@ const AddExistingInspector = () => {
 
 const onSubmit = (data: z.infer<typeof FormSchema>) => {
   const { name, date, cost } = data
-  let i: AggInspectionsContext;
+  let i: InspectionsContext;
 
   if((name || date || cost) && !isDisabled) {
     i = {
@@ -72,8 +72,8 @@ const onSubmit = (data: z.infer<typeof FormSchema>) => {
     }
   }
 
-  setAggContext({
-    ...aggContext,
+  setHomeClosingContext({
+    ...homeClosingContext,
     inspections: {
       ...inspections,
       ...i

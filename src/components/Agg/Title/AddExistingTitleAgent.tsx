@@ -43,7 +43,7 @@ const FormSchema = z.object({
 
 const AddExistingTitleAgent = () => {
   const [isDisabled, setDisabled] = useState<boolean>(false)
-  const { aggContext, aggContext: { title } , setAggContext } = useAppContext()
+  const { homeClosingContext, homeClosingContext: { title } , setHomeClosingContext } = useAppContext()
   const router = useRouter();
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -52,7 +52,7 @@ const AddExistingTitleAgent = () => {
 
 const onSubmit = (data: z.infer<typeof FormSchema>) => {
   const { name, date, cost } = data
-  let i: AggTitleContext;
+  let i: TitleContext;
   
   if((name || date || cost) && !isDisabled) {
     i = {
@@ -72,8 +72,8 @@ const onSubmit = (data: z.infer<typeof FormSchema>) => {
     }
   }
 
-  setAggContext({
-    ...aggContext,
+  setHomeClosingContext({
+    ...homeClosingContext,
     title: {
       ...title,
       ...i
