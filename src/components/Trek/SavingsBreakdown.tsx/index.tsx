@@ -19,8 +19,8 @@ import InspectorBreakdown from "./InspectorBreakdown"
 
 const SavingsBreakdown = () => {
   const {
-    trekContext: {
-      user,
+    userContext,
+    homeClosingContext: {
       lenders,
       inspections
     }
@@ -90,7 +90,7 @@ const SavingsBreakdown = () => {
             }
           >
             <UserBreakdown
-              name={user.name ?? "-"}
+              name={userContext?.name ?? "-"}
               potentialHomePrice={!!lenders ? lenders.potentialHomePrice : "0"}
               potentialDownPayment={!!lenders ?lenders.potentialDownPayment : "0"}
             />
@@ -106,7 +106,7 @@ const SavingsBreakdown = () => {
               <InspectorBreakdown
                 isInspectorSelected={isInspectorSelected}
                 name={inspections.selectedInspector.name}
-                display_phone={inspections.selectedInspector.display_phone}
+                display_phone={"000-000-0000"}
               />
             )}
             <HomeTrekSavings />

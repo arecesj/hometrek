@@ -19,11 +19,10 @@ import { useAppContext } from '@/context'
 
 const CostBreakdown = () => {
   const {
-    trekContext: {
-      user,
+    homeClosingContext: {
       lenders,
       inspections
-    }
+    },
   } = useAppContext()
   
   const isLenderSelected = !!lenders && !!lenders.selectedLender && !!lenders.selectedLender.name;

@@ -28,8 +28,13 @@ export type FindInspectionsProps = {
 }
 
 const Inspections = () => {
-  const { trekContext, setTrekContext } = useAppContext()
-  const [isNewUser, setNewUser] = useState<boolean>(!trekContext.user || !trekContext.inspections);
+  const {
+    userContext,
+    homeClosingContext,
+    setHomeClosingContext,
+    setRouteContext
+  } = useAppContext()
+  const [isNewUser, setNewUser] = useState<boolean>(!userContext?.id || !homeClosingContext?.inspections);
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -40,13 +45,11 @@ const Inspections = () => {
 
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
-    setTrekContext({
-      ...trekContext,
-      user: {
-        ...trekContext.user,
-        zipCode: data.zipCode
-    },
+    setHomeClosingContext({
+      ...homeClosingContext,
+      zipCode: data.zipCode,
       inspections: {
+        ...homeClosingContext.inspections,
         offeredInspectors: yelpHomeInspectors
       }
     })
@@ -71,7 +74,7 @@ const Inspections = () => {
     // });
   }
   
-  useEffect(() => setTrekContext({ ...trekContext, route: trekRouteName.INSPECTIONS }), [])
+  useEffect(() => setRouteContext(trekRouteName.INSPECTIONS), [])
   return (
     <div>
       <SubHeader

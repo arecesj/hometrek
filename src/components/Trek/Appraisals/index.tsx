@@ -6,9 +6,9 @@ import { useAppContext } from "@/context";
 import SubHeader from "@/components/Trek/SubHeader.tsx"
 
 const Appraisals = () => {
-  const { trekContext, setTrekContext } = useAppContext()
+  const { setRouteContext } = useAppContext()
 
-  useEffect(() => setTrekContext({ ...trekContext, route: trekRouteName.APPRAISALS }), [])
+  useEffect(() => setRouteContext(trekRouteName.APPRAISALS), [])
   return(
     <div>
       <SubHeader

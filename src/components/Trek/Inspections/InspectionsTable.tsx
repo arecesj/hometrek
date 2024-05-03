@@ -26,17 +26,15 @@ import { formatToUSD } from "@/utils/helpers"
 
 const InspectionsTable = () => {
   const {
-    trekContext,
-    setTrekContext,
-    trekContext: {
-      user: {
-        zipCode
-      } ,
+    homeClosingContext,
+    homeClosingContext: {
+      zipCode,
       inspections: {
         offeredInspectors,
         selectedInspector
       }
-    }
+    },
+    setHomeClosingContext
   } = useAppContext();
   return (
     <Tabs defaultValue="inspections">
@@ -124,10 +122,10 @@ const InspectionsTable = () => {
                           <Button
                             size="sm"
                             onClick={() => {
-                              setTrekContext({
-                                ...trekContext,
+                              setHomeClosingContext({
+                                ...homeClosingContext,
                                 inspections: {
-                                  ...trekContext.inspections,
+                                  ...homeClosingContext.inspections,
                                   selectedInspector: {
                                     id,
                                     name,
@@ -147,10 +145,10 @@ const InspectionsTable = () => {
                               variant="destructive"
                               size="sm"
                               onClick={() => {
-                                setTrekContext({
-                                  ...trekContext,
+                                setHomeClosingContext({
+                                  ...homeClosingContext,
                                   inspections: {
-                                    ...trekContext.inspections,
+                                    ...homeClosingContext.inspections,
                                     selectedInspector: {} as SelectedInspector
                                   }
                                 })

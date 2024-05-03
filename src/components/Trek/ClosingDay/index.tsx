@@ -6,9 +6,9 @@ import { useAppContext } from "@/context"
 import SubHeader from "@/components/Trek/SubHeader.tsx"
 
 const ClosingDay = () => {
-  const { trekContext, setTrekContext } = useAppContext()
+  const { setRouteContext } = useAppContext()
 
-  useEffect(() => setTrekContext({ ...trekContext, route: trekRouteName.CLOSINGDAY }), [])
+  useEffect(() => setRouteContext(trekRouteName.CLOSINGDAY), [])
   return(
     <div>
       <SubHeader

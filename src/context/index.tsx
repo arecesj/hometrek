@@ -6,11 +6,23 @@ const AppContext = createContext<ContextProps>({} as ContextProps);
 export const AppWrapper = ({ children } : {
   children: ReactNode
 }) => {
-  let [trekContext, setTrekContext] = useState<TrekContext>({} as TrekContext)
-  let [aggContext, setAggContext] = useState<AggContext>({} as AggContext)
+  let [userContext, setUserContext] = useState<UserContext>({} as UserContext)
+  let [homeClosingContext, setHomeClosingContext] = useState<HomeClosingContext>({} as HomeClosingContext)
+  let [routeContext, setRouteContext] = useState<string>("")
 
   return (
-    <AppContext.Provider value={{trekContext, setTrekContext, aggContext, setAggContext}}>
+    <AppContext.Provider
+      value={
+        {
+        userContext,
+        setUserContext,
+        homeClosingContext,
+        setHomeClosingContext,
+        routeContext,
+        setRouteContext
+        }
+      }
+    >
       {children}
     </AppContext.Provider>
   )

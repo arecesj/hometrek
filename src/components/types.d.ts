@@ -4,12 +4,6 @@
 // CONTEXT
 
 type ContextProps = {
-  //past
-  trekContext: TrekContext;
-  setTrekContext: Dispatch<SetStateAction<TrekContext>>;
-  aggContext: AggContext;
-  setAggContext: Dispatch<SetStateAction<AggContext>>;
-  //future
   userContext: UserContext;
   setUserContext: Dispatch<SetStateAction<UserContext>>;
   homeClosingContext: HomeClosingContext;

@@ -34,7 +34,7 @@ type LendersTableProps = {
 }
 
 const LendersTable: FC<LendersTableProps> = ({ user , fakeLenders, lenders }) => {
-  const { trekContext, setTrekContext } = useAppContext()
+  const { homeClosingContext, setHomeClosingContext } = useAppContext()
   const loanAmt = subtractNumStrings(lenders.potentialHomePrice, lenders.potentialDownPayment)
   return (
     <div>
@@ -117,8 +117,8 @@ const LendersTable: FC<LendersTableProps> = ({ user , fakeLenders, lenders }) =>
                 <TableBody>
                   {Object.entries(fakeLenders).map(([key, value]) => {
                     const { name, nmls, minCreditScore, minDownPaymentPercentage} = value;
-                    const lenderSelected = !!trekContext.lenders.selectedLender && !!trekContext.lenders.selectedLender.name
-                    const isSelectedLender = lenderSelected && trekContext.lenders.selectedLender.name === name;
+                    const lenderSelected = !!homeClosingContext.lenders.selectedLender && !!homeClosingContext.lenders.selectedLender.name
+                    const isSelectedLender = lenderSelected && homeClosingContext.lenders.selectedLender.name === name;
                     const greyoutField = lenderSelected && !isSelectedLender
                     return(
                       <TableRow key={key} className={greyoutField ? "text-slate-300" : ""}>
@@ -142,10 +142,10 @@ const LendersTable: FC<LendersTableProps> = ({ user , fakeLenders, lenders }) =>
                             <Button
                               size="sm"
                               onClick={() => {
-                                setTrekContext({
-                                  ...trekContext,
+                                setHomeClosingContext({
+                                  ...homeClosingContext,
                                   lenders: {
-                                    ...trekContext.lenders,
+                                    ...homeClosingContext.lenders,
                                     selectedLender: value
                                   }
                                 })
@@ -159,10 +159,10 @@ const LendersTable: FC<LendersTableProps> = ({ user , fakeLenders, lenders }) =>
                                 variant="destructive"
                                 size="sm"
                                 onClick={() => {
-                                  setTrekContext({
-                                    ...trekContext,
+                                  setHomeClosingContext({
+                                    ...homeClosingContext,
                                     lenders: {
-                                      ...trekContext.lenders,
+                                      ...homeClosingContext.lenders,
                                       selectedLender: {} as SelectedLender
                                     }
                                   })
