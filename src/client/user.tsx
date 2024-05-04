@@ -1,5 +1,5 @@
 export const createUser = async (name: string, email: string, password: string) => {
-  return await fetch('/api/user', {
+  return await fetch('/api/auth/user', {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
