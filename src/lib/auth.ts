@@ -68,8 +68,19 @@ export const authOptions: NextAuthOptions = {
     })
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, account, isNewUser }) {
       if (user) {
+        if(isNewUser && account.provider === "google") {
+          await prisma.homeClosing.create({
+            data: {
+              user: {
+                connect: {
+                  email: user.email
+                }
+              }
+            }
+          })
+        }
         return {
           ...token,
           id: user?.id
