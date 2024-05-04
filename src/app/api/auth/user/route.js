@@ -1,7 +1,7 @@
-import prisma from "@/lib/prisma";
+import { z } from "zod"
 import { hash } from "bcrypt";
 import { NextResponse } from "next/server";
-import { z } from "zod"
+import prisma from "@/lib/prisma";
 
 
 const newUserValidation = z
@@ -60,13 +60,5 @@ export async function POST(request) {
 
 export async function PATCH(request) {
   // const body = JSON.parse(request.body)
-  return NextResponse.json({ message: "Hello World" }, { status: 200 });
-}
-
-// DELETE
-// DELETE
-// DELETE
-
-export async function DELETE(request) {
   return NextResponse.json({ message: "Hello World" }, { status: 200 });
 }
