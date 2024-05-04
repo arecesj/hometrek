@@ -63,7 +63,7 @@ model HomeClosing {
   zipCode     String?
   lenders     Lender?
   inspections Inspection?
-  appraisal   Appraisal?
+  appraisals  Appraisal?
   insurance   Insurance?
   title       Title?
   closingDay  ClosingDay?
@@ -95,7 +95,7 @@ model Lender {
   createdAt            DateTime         @default(now()) @map(name: "created_at")
   updatedAt            DateTime         @updatedAt @map(name: "updated_at")
 
-  homeClosing HomeClosing? @relation(fields: [homeClosingId], references: [id])
+  homeClosing HomeClosing? @relation(fields: [homeClosingId], references: [id], onDelete: Cascade)
 
   @@unique([homeClosingId])
 }
@@ -111,7 +111,7 @@ model SelectedLender {
   createdAt                DateTime @default(now()) @map(name: "created_at")
   updatedAt                DateTime @updatedAt @map(name: "updated_at")
 
-  lender Lender? @relation(fields: [lenderId], references: [id])
+  lender Lender? @relation(fields: [lenderId], references: [id], onDelete: Cascade)
 
   @@unique([lenderId])
 }
@@ -122,7 +122,7 @@ model MortgageDetails {
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")
 
-  lender Lender? @relation(fields: [lenderId], references: [id])
+  lender Lender? @relation(fields: [lenderId], references: [id], onDelete: Cascade)
 
   @@unique([lenderId])
 }
@@ -143,7 +143,7 @@ model Inspection {
   createdAt         DateTime           @default(now()) @map(name: "created_at")
   updatedAt         DateTime           @updatedAt @map(name: "updated_at")
 
-  homeClosing HomeClosing? @relation(fields: [homeClosingId], references: [id])
+  homeClosing HomeClosing? @relation(fields: [homeClosingId], references: [id], onDelete: Cascade)
 
   @@unique([homeClosingId])
 }
@@ -161,7 +161,7 @@ model SelectedInspector {
   createdAt    DateTime @default(now()) @map(name: "created_at")
   updatedAt    DateTime @updatedAt @map(name: "updated_at")
 
-  inspection Inspection? @relation(fields: [inspectionId], references: [id])
+  inspection Inspection? @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
 
   @@unique([inspectionId])
 }
@@ -175,7 +175,7 @@ model InspectionDetails {
   createdAt    DateTime  @default(now()) @map(name: "created_at")
   updatedAt    DateTime  @updatedAt @map(name: "updated_at")
 
-  inspection Inspection? @relation(fields: [inspectionId], references: [id])
+  inspection Inspection? @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
 
   @@unique([inspectionId])
 }
@@ -196,7 +196,7 @@ model Appraisal {
   createdAt         DateTime           @default(now()) @map(name: "created_at")
   updatedAt         DateTime           @updatedAt @map(name: "updated_at")
 
-  homeClosing HomeClosing? @relation(fields: [homeClosingId], references: [id])
+  homeClosing HomeClosing? @relation(fields: [homeClosingId], references: [id], onDelete: Cascade)
 
   @@unique([homeClosingId])
 }
@@ -214,7 +214,7 @@ model SelectedAppraiser {
   createdAt   DateTime @default(now()) @map(name: "created_at")
   updatedAt   DateTime @updatedAt @map(name: "updated_at")
 
-  appraisal Appraisal? @relation(fields: [appraisalId], references: [id])
+  appraisal Appraisal? @relation(fields: [appraisalId], references: [id], onDelete: Cascade)
 
   @@unique([appraisalId])
 }
@@ -228,7 +228,7 @@ model AppraisalDetails {
   createdAt   DateTime  @default(now()) @map(name: "created_at")
   updatedAt   DateTime  @updatedAt @map(name: "updated_at")
 
-  appraisal Appraisal? @relation(fields: [appraisalId], references: [id])
+  appraisal Appraisal? @relation(fields: [appraisalId], references: [id], onDelete: Cascade)
 
   @@unique([appraisalId])
 }
@@ -252,7 +252,7 @@ model Insurance {
   createdAt            DateTime           @default(now()) @map(name: "created_at")
   updatedAt            DateTime           @updatedAt @map(name: "updated_at")
 
-  homeClosing HomeClosing? @relation(fields: [homeClosingId], references: [id])
+  homeClosing HomeClosing? @relation(fields: [homeClosingId], references: [id], onDelete: Cascade)
 
   @@unique([homeClosingId])
 }
@@ -265,7 +265,7 @@ model SelectedInsurance {
   createdAt   DateTime @default(now()) @map(name: "created_at")
   updatedAt   DateTime @updatedAt @map(name: "updated_at")
 
-  insurance Insurance? @relation(fields: [insuranceId], references: [id])
+  insurance Insurance? @relation(fields: [insuranceId], references: [id], onDelete: Cascade)
 
   @@unique([insuranceId])
 }
@@ -277,7 +277,7 @@ model InsuranceDetails {
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")
 
-  insurance Insurance? @relation(fields: [insuranceId], references: [id])
+  insurance Insurance? @relation(fields: [insuranceId], references: [id], onDelete: Cascade)
 
   @@unique([insuranceId])
 }
@@ -298,7 +298,7 @@ model Title {
   createdAt          DateTime            @default(now()) @map(name: "created_at")
   updatedAt          DateTime            @updatedAt @map(name: "updated_at")
 
-  homeClosing HomeClosing? @relation(fields: [homeClosingId], references: [id])
+  homeClosing HomeClosing? @relation(fields: [homeClosingId], references: [id], onDelete: Cascade)
 
   @@unique([homeClosingId])
 }
@@ -316,7 +316,7 @@ model SelectedTitleAgent {
   createdAt DateTime @default(now()) @map(name: "created_at")
   updatedAt DateTime @updatedAt @map(name: "updated_at")
 
-  title Title? @relation(fields: [titleId], references: [id])
+  title Title? @relation(fields: [titleId], references: [id], onDelete: Cascade)
 
   @@unique([titleId])
 }
@@ -331,7 +331,7 @@ model TitleDetails {
   createdAt    DateTime  @default(now()) @map(name: "created_at")
   updatedAt    DateTime  @updatedAt @map(name: "updated_at")
 
-  title Title? @relation(fields: [titleId], references: [id])
+  title Title? @relation(fields: [titleId], references: [id], onDelete: Cascade)
 
   @@unique([titleId])
 }
@@ -346,7 +346,7 @@ model ClosingDay {
   createdAt     DateTime @default(now()) @map(name: "created_at")
   updatedAt     DateTime @updatedAt @map(name: "updated_at")
 
-  homeClosing HomeClosing? @relation(fields: [homeClosingId], references: [id])
+  homeClosing HomeClosing? @relation(fields: [homeClosingId], references: [id], onDelete: Cascade)
 
   @@unique([homeClosingId])
 }
@@ -365,7 +365,7 @@ model Task {
   createdAt     DateTime @default(now()) @map(name: "created_at")
   updatedAt     DateTime @updatedAt @map(name: "updated_at")
 
-  homeClosing HomeClosing? @relation(fields: [homeClosingId], references: [id])
+  homeClosing HomeClosing? @relation(fields: [homeClosingId], references: [id], onDelete: Cascade)
 
   @@unique([homeClosingId])
 }
@@ -380,7 +380,7 @@ model Cost {
   createdAt     DateTime @default(now()) @map(name: "created_at")
   updatedAt     DateTime @updatedAt @map(name: "updated_at")
 
-  homeClosing HomeClosing? @relation(fields: [homeClosingId], references: [id])
+  homeClosing HomeClosing? @relation(fields: [homeClosingId], references: [id], onDelete: Cascade)
 
   @@unique([homeClosingId])
 }

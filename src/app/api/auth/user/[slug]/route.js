@@ -1,5 +1,6 @@
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import { isUserAuthorized } from "@/lib/auth"
 
 
 // UPDATE
@@ -7,7 +8,11 @@ import { NextResponse } from "next/server";
 // UPDATE
 
 export async function PATCH(request, { params }) {
-  // const body = JSON.parse(request.body)
+  const canUserCallRoute = await isUserAuthorized();
+  if(!canUserCallRoute) {
+    return NextResponse.json({ message: "Unauthorized." }, { status: 401 });
+  }
+  const body = await request.json()
   return NextResponse.json({ message: "Hello World" }, { status: 200 });
 }
 
@@ -16,6 +21,11 @@ export async function PATCH(request, { params }) {
 // DELETE
 
 export async function DELETE(request, { params }) {
+  const canUserCallRoute = await isUserAuthorized();
+  if(!canUserCallRoute) {
+    return NextResponse.json({ message: "Unauthorized." }, { status: 401 });
+  }
+  
   const userID = params.slug
   try {
     const isExistingUser = await prisma.user.findUnique({
