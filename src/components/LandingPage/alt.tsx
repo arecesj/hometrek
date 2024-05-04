@@ -1,11 +1,11 @@
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import window from "../../images/window.jpg"
+import spanish_home from "@/images/spanish_home.jpg"
 
 const Alt = () => {
   return (
-    <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
+    <div className="w-full lg:grid lg:min-h-[700px] lg:grid-cols-2 xl:min-h-[700px]">
       <div className="flex items-start justify-center py-40">
         <div className="mx-auto grid w-[490px] gap-6">
           <div className="grid gap-2 text-left">
@@ -26,14 +26,8 @@ const Alt = () => {
           </div>
         </div>
       </div>
-      <div className="hidden bg-muted lg:block">
-        <Image
-          src={window}
-          alt="Window"
-          width="1920"
-          height="1080"
-          className="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
-        />
+      <div className="b relative h-[700px] w-full overflow-hidden brightness-90">
+        <Image fill src={spanish_home} alt="img" className="w-full object-cover" />
       </div>
     </div>
   )

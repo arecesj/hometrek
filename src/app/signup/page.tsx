@@ -23,6 +23,7 @@ import { aggRouteName, aggRoutes, universalRouteName, universalRoutes } from "@/
 import { createUser } from "@/client/user";
 import { LoaderCircle } from "lucide-react";
 import { isUserAuthenticated } from "@/utils/helpers"
+import sunset_home from "@/images/sunset_home.jpg"
 
 const FormSchema = z.object({
   name: z.string().min(3, "Name is required").max(100),
@@ -70,14 +71,8 @@ const Signup = () => {
   
   return (
     <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
-      <div className="hidden bg-muted lg:block">
-        <Image
-          src="/placeholder.svg"
-          alt="Image"
-          width="1920"
-          height="1080"
-          className="h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
-        />
+      <div className="b relative h-[800px] w-full overflow-hidden">
+        <Image fill src={sunset_home} alt="sunset home" className="w-full object-cover" />
       </div>
       <div className="flex items-center justify-center py-12">
         <div className="mx-auto grid w-[350px] gap-6">
