@@ -8,11 +8,11 @@ export default function GetStartedLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const {trekContext: { route }} = useAppContext()
+  const { routeContext } = useAppContext()
 
   return (
     <div>
-      <SideNav routeName={route}/>
+      <SideNav routeName={routeContext}/>
       <section>
         {children}
       </section>

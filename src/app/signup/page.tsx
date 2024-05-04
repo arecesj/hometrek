@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from "react"
-import { useSession } from "next-auth/react"
+import { signIn, useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import { z } from "zod";
@@ -52,12 +52,13 @@ const Signup = () => {
       })
       
       setCreating(false)
-      router.push(aggRoutes[aggRouteName.DASHBOARD].route)
+      signIn('credentials', { email, password, callbackUrl: aggRoutes[aggRouteName.DASHBOARD].route })
     } else {
+      const resp = await response.json();
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
-        description: "There was a problem creating your account. Please try again later.",
+        description: resp.message,
       })
       setCreating(false)
     }
@@ -160,7 +161,12 @@ const Signup = () => {
               </div>
             </form>
           </Form>
-          <Button variant="outline" className="w-full" disabled={isCreating}>
+          <Button
+            variant="outline"
+            className="w-full"
+            disabled={isCreating}
+            onClick={() => signIn('google')}
+          >
             Sign up with Google
           </Button>
           <div className="mt-4 text-center text-sm">

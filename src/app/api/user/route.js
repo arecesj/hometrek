@@ -1,7 +1,3 @@
-// CREATE
-// CREATE
-// CREATE
-
 import prisma from "@/lib/prisma";
 import { hash } from "bcrypt";
 import { NextResponse } from "next/server";
@@ -15,6 +11,9 @@ const newUserValidation = z
     password: z.string().min(1, "Password is required").min(7, "Password must have at least 7 characters")
   })
 
+// CREATE
+// CREATE
+// CREATE
 
 export async function POST(request) {
   try {
@@ -22,20 +21,30 @@ export async function POST(request) {
     const { email, name, password } = newUserValidation.parse(body);
     
     const isExistingUser = await prisma.user.findUnique({
-      where: { email: email }
+      where: { email }
     })
-
+    
     if(isExistingUser) {
       return NextResponse.json({ user: null, message: "User with this email already exists"}, { status: 409 })
     }
-
-    const hashedPassword = await hash(password, 10)
-
+    
     const newUser = await prisma.user.create({
       data: {
         email,
         name,
-        password: hashedPassword
+      }
+    })
+    
+    const hashedPassword = await hash(password, 10)
+    await prisma.account.create({
+      data: {
+        type: "credentials",
+        password: hashedPassword,
+        user: {
+          connect: {
+            email
+          }
+        }
       }
     })
 
@@ -59,6 +68,5 @@ export async function PATCH(request) {
 // DELETE
 
 export async function DELETE(request) {
-  // const body = JSON.parse(request.body)
   return NextResponse.json({ message: "Hello World" }, { status: 200 });
 }

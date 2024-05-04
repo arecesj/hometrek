@@ -30,7 +30,7 @@ const FormSchema = z.object({
 })
 
 const Login = () => {
-  const { data, data: session, status } = useSession()
+  const { data: session, status } = useSession()
   const router = useRouter()
   const [isLoggingIn, setLoggingIn] = useState<boolean>(false)
   const { toast } = useToast()
@@ -141,12 +141,18 @@ const Login = () => {
                   )}  
                   Login
                 </Button>
-                <Button variant="outline" className="w-full" disabled={isLoggingIn}>
-                  Login with Google
-                </Button>
               </div>
             </form>
           </Form>
+          <div className="flex justify-center"> or </div>
+          <Button
+            variant="outline"
+            className="w-full"
+            disabled={isLoggingIn}
+            onClick={() => signIn('google')}
+          >
+            Login with Google
+          </Button>
           <div className="mt-4 text-center text-sm">
             {"Don't have an account? "}
             <Link href={universalRoutes[universalRouteName.SIGNUP].route} className="underline">

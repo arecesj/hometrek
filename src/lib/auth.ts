@@ -1,5 +1,6 @@
 import { NextAuthOptions } from "next-auth"
-import CredentialsProvider from "next-auth/providers/credentials";
+import CredentialsProvider from "next-auth/providers/credentials"
+import GoogleProvider from "next-auth/providers/google"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import prisma from "./prisma"
 import { compare } from "bcrypt"
@@ -9,6 +10,7 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
+    maxAge: 1 * 24 * 60 * 60, // 1 day
   },
   pages: {
     signIn: "/login",
@@ -33,18 +35,36 @@ export const authOptions: NextAuthOptions = {
           return null
         }
         
-        const { id, name, email, password } = isExistingUser
+        const { id, name, email } = isExistingUser
+
+        const hasAccount = await prisma.account.findFirst({
+          where: {
+            userId: id
+          }
+        })
+        
+        if(!hasAccount || !hasAccount?.password) {
+          return null
+        }
+        
+        const { password } = hasAccount
         const doPasswordsMatch = await compare(credentials.password, password)
+        
         if(!doPasswordsMatch) {
           return null
         }
 
         return {
           id,
+          accountID: hasAccount.id,
           name,
           email,
         }
       }
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET
     })
   ],
   callbacks: {
