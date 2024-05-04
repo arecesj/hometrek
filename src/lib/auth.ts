@@ -1,4 +1,4 @@
-import { NextAuthOptions } from "next-auth"
+import { NextAuthOptions, getServerSession } from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import GoogleProvider from "next-auth/providers/google"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
@@ -98,4 +98,9 @@ export const authOptions: NextAuthOptions = {
       }
     },
   }
+}
+
+export const isUserAuthorized = async () => {
+  const session = await getServerSession(authOptions)
+  return !!session
 }

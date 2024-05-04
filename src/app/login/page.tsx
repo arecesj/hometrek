@@ -54,7 +54,9 @@ const Login = () => {
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
-        description: "There was a problem logging into your account. Please try again.",
+        description: response.status === 401 ?
+          "Looks like either the email or password were incorrect. Please try again." : 
+          "There was a problem logging into your account. Please try again.",
       })
       setLoggingIn(false)
     } else {
