@@ -53,12 +53,3 @@ export async function POST(request) {
     return NextResponse.json({ message: "There was an internal error" }, { status: 500 });
   }
 }
-
-// UPDATE
-// UPDATE
-// UPDATE
-
-export async function PATCH(request) {
-  // const body = JSON.parse(request.body)
-  return NextResponse.json({ message: "Hello World" }, { status: 200 });
-}
