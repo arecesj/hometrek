@@ -1,14 +1,40 @@
-import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
-import { isUserAuthorized } from "@/lib/auth"
+import { getServerSession } from "next-auth"
+import prisma from "@/lib/prisma";
+import { authOptions } from "@/lib/auth"
+
+// GET
+// GET
+// GET
+
+export async function GET(request) {
+  const session = await getServerSession(authOptions)
+  if(!!session) {
+    return NextResponse.json({ message: "Unauthorized." }, { status: 401 });
+  }
+  
+  const id = session.user?.id
+  try {
+    const homeClosing = await prisma.homeClosing.findUnique({
+      where: {
+        id
+      }
+    })
+
+    return NextResponse.json({homeClosing, message: "Successfully retrieves user home closing information"}, { status: 200 })
+  } catch (error) {
+    return NextResponse.json({ message: "Unable to get the user's home closing information at this time." }, { status: 500 });
+  }
+
+}
 
 // POST
 // POST
 // POST
 
 export async function POST(request) {
-  const canUserCallRoute = await isUserAuthorized();
-  if(!canUserCallRoute) {
+  const session = await getServerSession(authOptions)
+  if(!!session) {
     return NextResponse.json({ message: "Unauthorized." }, { status: 401 });
   }
 

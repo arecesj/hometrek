@@ -1,15 +1,15 @@
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
-import { isUserAuthorized } from "@/lib/auth"
-
+import { getServerSession } from "next-auth"
+import { authOptions } from "@/lib/auth"
 
 // UPDATE
 // UPDATE
 // UPDATE
 
 export async function PATCH(request, { params }) {
-  const canUserCallRoute = await isUserAuthorized();
-  if(!canUserCallRoute) {
+  const session = await getServerSession(authOptions)
+  if(!!session) {
     return NextResponse.json({ message: "Unauthorized." }, { status: 401 });
   }
   const body = await request.json()
@@ -21,8 +21,8 @@ export async function PATCH(request, { params }) {
 // DELETE
 
 export async function DELETE(request, { params }) {
-  const canUserCallRoute = await isUserAuthorized();
-  if(!canUserCallRoute) {
+  const session = await getServerSession(authOptions)
+  if(!!session) {
     return NextResponse.json({ message: "Unauthorized." }, { status: 401 });
   }
   
