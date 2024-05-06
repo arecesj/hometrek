@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 
 // import "@/styles/mdx.css";
 import { Metadata } from "next";
-import { Tag } from "@/components/Resources/Blog/Tag";
+import Tag from "@/components/Resources/Blog/Tag";
 import MDXContent from "@/components/Resources/Blog/MDXContent";
 
 interface PostPageProps {
