@@ -1,41 +1,49 @@
-import { FC } from "react";
-import { posts } from "#site/content"
+import { slug } from "github-slugger";
+import { Metadata } from "next";
+import { posts } from "#site/content";
 import PostItem from "@/components/Resources/Blog/PostItem";
-import { getAllTags, sortPosts, sortTagsByCount } from "@/lib/utils";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { QueryPagination } from "@/components/Resources/Blog/QueryPagination";
 import Tag from "@/components/Resources/Blog/Tag";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { getAllTags, getPostsByTagSlug, sortTagsByCount } from "@/lib/utils";
+import ResetTag from "@/components/Resources/Blog/ResetTag";
 
-const POSTS_PER_PAGE = 5;
-
-type BlogPageProps = {
-  searchParams: {
-    page?: string;
+interface TagPageProps {
+  params: {
+    tag: string;
   };
 }
 
-const BlogPage: FC<BlogPageProps> = ({ searchParams }) => {
-  const currentPage = Number(searchParams?.page) || 1;
-  // @ts-ignore
-  const sortedPosts = sortPosts(posts.filter((post) => post.published));
-  const totalPages = Math.ceil(sortedPosts.length / POSTS_PER_PAGE);
+export async function generateMetadata({
+  params,
+}: TagPageProps): Promise<Metadata> {
+  const { tag } = params;
+  return {
+    title: tag,
+    description: `Posts on the topic of ${tag}`,
+  };
+}
 
-  const displayPosts = sortedPosts.slice(
-    POSTS_PER_PAGE * (currentPage - 1),
-    POSTS_PER_PAGE * currentPage
-  );
+export const generateStaticParams = () => {
+  const tags = getAllTags(posts);
+  const paths = Object.keys(tags).map((tag) => ({ tag: slug(tag) }));
+  return paths;
+};
 
+const TagPage = ({ params }: TagPageProps) => {
+  const { tag } = params;
+  const title = tag.split("-").join(" ");
+
+  const displayPosts = getPostsByTagSlug(posts, tag);
   const tags = getAllTags(posts);
   const sortedTags = sortTagsByCount(tags);
 
-  return(
+  return (
     <div className="container max-w-4xl py-6 lg:py-10">
       <div className="flex flex-col items-start gap-4 md:flex-row md:justify-between md:gap-8">
         <div className="flex-1 space-y-4">
-          <h1 className="inline-block font-bold text-4xl lg:text-5xl">Blog</h1>
-          <p className="text-xl text-muted-foreground">
-            Learn more about how to close your dream home
-          </p>
+          <h1 className="inline-block font-black text-4xl lg:text-5xl capitalize">
+            {title}
+          </h1>
         </div>
       </div>
       <div className="grid grid-cols-12 gap-3 mt-8">
@@ -62,24 +70,21 @@ const BlogPage: FC<BlogPageProps> = ({ searchParams }) => {
           ) : (
             <p>Nothing to see here yet</p>
           )}
-          <QueryPagination
-            totalPages={totalPages}
-            className="justify-end mt-4"
-          />
         </div>
         <Card className="col-span-12 row-start-3 h-fit sm:col-span-4 sm:col-start-9 sm:row-start-1">
           <CardHeader>
             <CardTitle>Tags</CardTitle>
           </CardHeader>
           <CardContent className="flex flex-wrap gap-2">
-            {sortedTags?.map((tag) => (
-              <Tag tag={tag} key={tag} count={tags[tag]} />
+            {sortedTags?.map((t) => (
+              <Tag tag={t} key={t} count={tags[t]} current={slug(t) === tag} />
             ))}
+            <ResetTag />
           </CardContent>
         </Card>
       </div>
     </div>
-  )
+  );
 }
 
-export default BlogPage;
+export default TagPage

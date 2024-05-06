@@ -1,3 +1,4 @@
+import { slug } from "github-slugger";
 import { Post } from "#site/content";
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
