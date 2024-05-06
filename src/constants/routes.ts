@@ -15,7 +15,7 @@ export enum trekRouteName {
   SETTINGS = "Settings",
 }
 
-export enum aggRouteName {
+export enum manageRouteName {
   DASHBOARD = "Dashboard",
   LENDERS = "Lenders",
   INSPECTIONS = "Inspections",
@@ -65,29 +65,29 @@ export const trekRoutes = {
   },
 }
 
-export const aggRoutes = {
-  [aggRouteName.DASHBOARD]: {
-    route: "/agg/dashboard",
+export const manageRoutes = {
+  [manageRouteName.DASHBOARD]: {
+    route: "/manage/dashboard",
   },
-  [aggRouteName.LENDERS]: {
-    route: "/agg/lenders",
+  [manageRouteName.LENDERS]: {
+    route: "/manage/lenders",
   },
-  [aggRouteName.INSPECTIONS]: {
-    route: "/agg/inspections",
+  [manageRouteName.INSPECTIONS]: {
+    route: "/manage/inspections",
   },
-  [aggRouteName.APPRAISALS]: {
-    route: "/agg/appraisals",
+  [manageRouteName.APPRAISALS]: {
+    route: "/manage/appraisals",
   },
-  [aggRouteName.INSURANCE]: {
-    route: "/agg/insurance",
+  [manageRouteName.INSURANCE]: {
+    route: "/manage/insurance",
   },
-  [aggRouteName.TITLE]: {
-    route: "/agg/title",
+  [manageRouteName.TITLE]: {
+    route: "/manage/title",
   },
-  [aggRouteName.CLOSINGDAY]: {
-    route: "/agg/closing-day",
+  [manageRouteName.CLOSINGDAY]: {
+    route: "/manage/closing-day",
   },
-  [aggRouteName.SETTINGS]: {
-    route: "/agg/settings",
+  [manageRouteName.SETTINGS]: {
+    route: "/manage/settings",
   },
 }

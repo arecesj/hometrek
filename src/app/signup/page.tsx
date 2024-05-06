@@ -19,7 +19,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { useToast } from "@/components/ui/use-toast"
-import { aggRouteName, aggRoutes, universalRouteName, universalRoutes } from "@/constants/routes";
+import { manageRouteName, manageRoutes, universalRouteName, universalRoutes } from "@/constants/routes";
 import { createUser } from "@/client/user";
 import { LoaderCircle } from "lucide-react";
 import { isUserAuthenticated } from "@/utils/helpers"
@@ -54,7 +54,7 @@ const Signup = () => {
       })
       
       setCreating(false)
-      signIn('credentials', { email, password, callbackUrl: aggRoutes[aggRouteName.DASHBOARD].route })
+      signIn('credentials', { email, password, callbackUrl: manageRoutes[manageRouteName.DASHBOARD].route })
     } else {
       const resp = await response.json();
       toast({
@@ -67,7 +67,7 @@ const Signup = () => {
   }
 
   useEffect(() => {
-    if(isUserAuthenticated(status)) router.push(aggRoutes[aggRouteName.DASHBOARD].route)
+    if(isUserAuthenticated(status)) router.push(manageRoutes[manageRouteName.DASHBOARD].route)
   }, [status])
   
   return (

@@ -20,7 +20,7 @@ import {
   FormMessage,
 } from "@/components/ui/form"
 import { useToast } from "@/components/ui/use-toast"
-import { aggRouteName, aggRoutes, universalRouteName, universalRoutes } from "@/constants/routes"
+import { manageRouteName, manageRoutes, universalRouteName, universalRoutes } from "@/constants/routes"
 import { LoaderCircle } from "lucide-react"
 import { isUserAuthenticated } from "@/utils/helpers"
 import bedroom from "@/images/bedroom.jpg"
@@ -67,12 +67,12 @@ const Login = () => {
       })
       
       setLoggingIn(false)
-      router.push(aggRoutes[aggRouteName.DASHBOARD].route)
+      router.push(manageRoutes[manageRouteName.DASHBOARD].route)
     }
   }
 
   useEffect(() => {
-    if(isUserAuthenticated(status)) router.push(aggRoutes[aggRouteName.DASHBOARD].route)
+    if(isUserAuthenticated(status)) router.push(manageRoutes[manageRouteName.DASHBOARD].route)
   }, [status])
   
   return (

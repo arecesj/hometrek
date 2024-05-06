@@ -52,7 +52,7 @@ type LendersContext = {
   potentialHomePrice?: string;
   offeredLenders?: OfferedLenders;
   selectedLender?: SelectedLender;
-  //agg
+  // manage
   hasOwnLender?: boolean;
   plaidAccessToken?: string;
   // TODO after Plaid API hook up
@@ -115,7 +115,7 @@ type AppraisalsContext = {
   id?: string;
   // trek
   selectedAppraiser?: SelectedAppraiser;
-  // agg
+  //  manage
   hasAppraiser?: boolean;
   hasAppraised?: boolean;
   appraisalDetails?: AppraisalDetails;
@@ -149,7 +149,7 @@ type InsuranceContext = {
   id?: string;
   // trek
   selectedPolicy: any;
-  // agg
+  //  manage
   hasInsurance: boolean;
   insuranceDetails: any;
   createdAt?: Date;
@@ -164,7 +164,7 @@ type TitleContext = {
   id?: string;
   // trek
   selectedTitleAgent?: any;
-  // agg
+  //  manage
   hasTitleAgent?: boolean;
   hasTitleTransfer?: boolean;
   titleDetails?: TitleDetails;
