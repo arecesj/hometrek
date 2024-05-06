@@ -24,6 +24,7 @@ import { aggRouteName, aggRoutes, universalRouteName, universalRoutes } from "@/
 import { LoaderCircle } from "lucide-react"
 import { isUserAuthenticated } from "@/utils/helpers"
 import bedroom from "@/images/bedroom.jpg"
+import Navigation from "@/components/LandingPage/Navigation"
 
 const FormSchema = z.object({
   email: z.string().min(1, "Email is required").email("Invalid email"),
@@ -75,90 +76,92 @@ const Login = () => {
   }, [status])
   
   return (
-    <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
-      <div className="b relative h-[800px] w-full overflow-hidden">
-        <Image fill src={bedroom} alt="img" className="w-full object-cover" />
-      </div>
-      <div className="flex items-center justify-center py-12">
-        <div className="mx-auto grid w-[350px] gap-6">
-          <div className="grid gap-2 text-center">
-            <h1 className="text-3xl font-bold">Login</h1>
-            <p className="text-balance text-muted-foreground">
-              Enter your email below to login to your account
-            </p>
-          </div>
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)}>
-              <div className="grid gap-4">
-                <div className="grid gap-2">
-                  <FormField
-                    control={form.control}
-                    name="email"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>
-                          Email
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            type="email"
-                            placeholder="juan@hometrek.ai" {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <div className="grid gap-2">
-                  <FormField
-                    control={form.control}
-                    name="password"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel>
-                          Password
-                        </FormLabel>
-                        <FormControl>
-                          <Input
-                            type="password"
-                            {...field}
-                          />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-                <Button type="submit" className="w-full" disabled={isLoggingIn}>
-                  {isLoggingIn && (
-                    <LoaderCircle
-                      className="mr-3 h-5 w-5 animate-spin"
+    <>
+      <Navigation isHome={false} />
+      <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
+        <div className="b relative h-[800px] w-full overflow-hidden">
+          <Image fill src={bedroom} alt="img" className="w-full object-cover" />
+        </div>
+        <div className="flex items-center justify-center py-12">
+          <div className="mx-auto grid w-[350px] gap-6">
+            <div className="grid gap-2 text-center">
+              <h1 className="text-3xl font-bold">Login</h1>
+              <p className="text-balance text-muted-foreground">
+                Enter your email below to login to your account
+              </p>
+            </div>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)}>
+                <div className="grid gap-4">
+                  <div className="grid gap-2">
+                    <FormField
+                      control={form.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>
+                            Email
+                          </FormLabel>
+                          <FormControl>
+                            <Input
+                              type="email"
+                              placeholder="juan@hometrek.ai" {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
                     />
-                  )}  
-                  Login
-                </Button>
-              </div>
-            </form>
-          </Form>
-          <div className="flex justify-center"> or </div>
-          <Button
-            variant="outline"
-            className="w-full"
-            disabled={isLoggingIn}
-            onClick={() => signIn('google')}
-          >
-            Login with Google
-          </Button>
-          <div className="mt-4 text-center text-sm">
-            {"Don't have an account? "}
-            <Link href={universalRoutes[universalRouteName.SIGNUP].route} className="underline">
-              Sign up
-            </Link>
+                  </div>
+                  <div className="grid gap-2">
+                    <FormField
+                      control={form.control}
+                      name="password"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>
+                            Password
+                          </FormLabel>
+                          <FormControl>
+                            <Input
+                              type="password"
+                              {...field}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  <Button type="submit" className="w-full" disabled={isLoggingIn}>
+                    {isLoggingIn && (
+                      <LoaderCircle
+                        className="mr-3 h-5 w-5 animate-spin"
+                      />
+                    )}  
+                    Login
+                  </Button>
+                </div>
+              </form>
+            </Form>
+            <Button
+              variant="outline"
+              className="w-full"
+              disabled={isLoggingIn}
+              onClick={() => signIn('google')}
+            >
+              Login with Google
+            </Button>
+            <div className="mt-4 text-center text-sm">
+              {"Don't have an account? "}
+              <Link href={universalRoutes[universalRouteName.SIGNUP].route} className="underline">
+                Sign up
+              </Link>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
