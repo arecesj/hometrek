@@ -15,17 +15,17 @@ export async function GET(request, { params }) {
   
   const id = params.slug
   try {
-    const homeClosing = await prisma.homeClosing.findUnique({
+    const lender = await prisma.lender.findUnique({
       where: {
         id
       }
     })
 
-    if(!homeClosing) {
-      return NextResponse.json({ message: "This user does not have any home closing information." }, { status: 400 });
+    if(!lender) {
+      return NextResponse.json({ message: "This user does not have any lender information." }, { status: 400 });
     }
 
-    return NextResponse.json({ homeClosing, message: "Successfully retrieved user's home closing information"}, { status: 200 })
+    return NextResponse.json({ lender, message: "Successfully retrieved user's lender information"}, { status: 200 })
   } catch (error) {
     return NextResponse.json({ message: "Unable to retrieve the user's home closing information at this time." }, { status: 500 });
   }
@@ -43,18 +43,25 @@ export async function PUT(request, { params }) {
   
   const id = params.slug
   const body = await request.json()
+try {
+  const oldLender = await prisma.lenders.findUnique({
+    where: {
+      id
+    }
+  })
+  const lender = await prisma.lender.update({
+    data: {
+      ...oldLender,
+      ...body
+    },
+    where: {
+      id
+    },
+  })
 
-  try {
-    await prisma.homeClosing.update({
-      data: {
-        ...body
-      },
-      where: {
-        id
-      },
-    })
+  return NextResponse.json({ lender, message: "Successfully retrieved user's lender information"}, { status: 200 })
   } catch (error) {
-    
+    return NextResponse.json({ message: "Unable to delete the user's home closing information at this time." }, { status: 500 });
   }
 }
 
@@ -70,17 +77,17 @@ export async function DELETE(request, { params }) {
 
   const id = params.slug
   try {
-    const isExistingHC = await prisma.homeClosing.findUnique({
+    const isExistingLender = await prisma.lender.findUnique({
       where: {
         id
       }
     })
     
-    if(!isExistingHC) {
-      return NextResponse.json({ message: "This user does not have home closing information." }, { status: 400 });
+    if(!isExistingLender) {
+      return NextResponse.json({ message: "This user does not have any lender information." }, { status: 400 });
     }
 
-    await prisma.homeClosing.delete({
+    await prisma.lender.delete({
       where: {
         id
       }

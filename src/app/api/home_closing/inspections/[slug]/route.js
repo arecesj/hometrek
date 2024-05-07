@@ -15,17 +15,17 @@ export async function GET(request, { params }) {
   
   const id = params.slug
   try {
-    const homeClosing = await prisma.homeClosing.findUnique({
+    const inspection = await prisma.inspection.findUnique({
       where: {
         id
       }
     })
 
-    if(!homeClosing) {
-      return NextResponse.json({ message: "This user does not have any home closing information." }, { status: 400 });
+    if(!inspection) {
+      return NextResponse.json({ message: "This user does not have any inspection information." }, { status: 400 });
     }
 
-    return NextResponse.json({ homeClosing, message: "Successfully retrieved user's home closing information"}, { status: 200 })
+    return NextResponse.json({ inspection, message: "Successfully retrieved user's inspection information"}, { status: 200 })
   } catch (error) {
     return NextResponse.json({ message: "Unable to retrieve the user's home closing information at this time." }, { status: 500 });
   }
@@ -35,7 +35,7 @@ export async function GET(request, { params }) {
 // UPDATE
 // UPDATE
 
-export async function PUT(request, { params }) {
+export async function PATCH(request, { params }) {
   const session = await getServerSession(authOptions)
   if(!!session) {
     return NextResponse.json({ message: "Unauthorized." }, { status: 401 });
@@ -45,16 +45,24 @@ export async function PUT(request, { params }) {
   const body = await request.json()
 
   try {
-    await prisma.homeClosing.update({
+    const oldInspection = await prisma.inspection.findUnique({
+      where: {
+        id
+      }
+    })
+    const inspection = await prisma.inspection.update({
       data: {
+        ...oldInspection,
         ...body
       },
       where: {
         id
       },
     })
+
+    return NextResponse.json({ inspection, message: "Successfully retrieved user's inspection information"}, { status: 200 })
   } catch (error) {
-    
+    return NextResponse.json({ message: "Unable to retrieve the user's home closing information at this time." }, { status: 500 });
   }
 }
 
@@ -70,17 +78,17 @@ export async function DELETE(request, { params }) {
 
   const id = params.slug
   try {
-    const isExistingHC = await prisma.homeClosing.findUnique({
+    const isExistingInspection = await prisma.inspection.findUnique({
       where: {
         id
       }
     })
     
-    if(!isExistingHC) {
-      return NextResponse.json({ message: "This user does not have home closing information." }, { status: 400 });
+    if(!isExistingInspection) {
+      return NextResponse.json({ message: "This user does not have any inspection information." }, { status: 400 });
     }
 
-    await prisma.homeClosing.delete({
+    await prisma.inspection.delete({
       where: {
         id
       }

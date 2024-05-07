@@ -13,11 +13,11 @@ export async function GET(request) {
     return NextResponse.json({ message: "Unauthorized." }, { status: 401 });
   }
 
-  const id = session.user?.id
+  const user_id = session.user?.id
   try {
     const homeClosing = await prisma.homeClosing.findUnique({
       where: {
-        id
+        user_id
       }
     })
 
