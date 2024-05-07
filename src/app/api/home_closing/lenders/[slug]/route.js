@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth"
 import prisma from "@/lib/prisma";
 import { authOptions } from "@/lib/auth"
+import { lenderValidation } from "@/lib/apiValidations";
 
 // GET
 // GET
@@ -35,33 +36,29 @@ export async function GET(request, { params }) {
 // UPDATE
 // UPDATE
 
-export async function PUT(request, { params }) {
+export async function PATCH(request, { params }) {
   const session = await getServerSession(authOptions)
   if(!!session) {
     return NextResponse.json({ message: "Unauthorized." }, { status: 401 });
   }
-  
-  const id = params.slug
-  const body = await request.json()
-try {
-  const oldLender = await prisma.lenders.findUnique({
-    where: {
-      id
-    }
-  })
-  const lender = await prisma.lender.update({
-    data: {
-      ...oldLender,
-      ...body
-    },
-    where: {
-      id
-    },
-  })
 
-  return NextResponse.json({ lender, message: "Successfully retrieved user's lender information"}, { status: 200 })
+  try {
+    const id = params.slug
+    const body = await request.json()
+    const updatedLender = lenderValidation.parse(body)
+    
+    const lender = await prisma.lender.update({
+      data: {
+        ...updatedLender
+      },
+      where: {
+        id
+      },
+    })
+
+    return NextResponse.json({ lender, message: "Successfully updated user's lender information"}, { status: 200 })
   } catch (error) {
-    return NextResponse.json({ message: "Unable to delete the user's home closing information at this time." }, { status: 500 });
+    return NextResponse.json({ message: "Unable to update the user's home closing information at this time." }, { status: 500 });
   }
 }
 

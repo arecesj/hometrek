@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth"
 import prisma from "@/lib/prisma";
 import { authOptions } from "@/lib/auth"
+import { insuranceValidation } from "@/lib/apiValidations";
 
 // GET
 // GET
@@ -40,29 +41,25 @@ export async function PATCH(request, { params }) {
   if(!!session) {
     return NextResponse.json({ message: "Unauthorized." }, { status: 401 });
   }
-  
-  const id = params.slug
-  const body = await request.json()
 
   try {
-    const oldInsurance = await prisma.insurance.findUnique({
-      where: {
-        id
-      }
-    })
+      
+    const id = params.slug
+    const body = await request.json()
+    const updatedInsurance = insuranceValidation.parse(body)
+    
     const insurance = await prisma.insurance.update({
       data: {
-        ...oldInsurance,
-        ...body
+        ...updatedInsurance
       },
       where: {
         id
       },
     })
 
-    return NextResponse.json({ insurance, message: "Successfully retrieved user's insurance information"}, { status: 200 })
+    return NextResponse.json({ insurance, message: "Successfully updated user's insurance information"}, { status: 200 })
   } catch (error) {
-    return NextResponse.json({ message: "Unable to retrieve the user's home closing information at this time." }, { status: 500 });
+    return NextResponse.json({ message: "Unable to updated the user's insurance information at this time." }, { status: 500 });
   }
 }
 

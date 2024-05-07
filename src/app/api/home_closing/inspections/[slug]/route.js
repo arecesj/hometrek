@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth"
 import prisma from "@/lib/prisma";
 import { authOptions } from "@/lib/auth"
+import { inspectionValidation } from "@/lib/apiValidations";
 
 // GET
 // GET
@@ -40,29 +41,24 @@ export async function PATCH(request, { params }) {
   if(!!session) {
     return NextResponse.json({ message: "Unauthorized." }, { status: 401 });
   }
-  
-  const id = params.slug
-  const body = await request.json()
 
   try {
-    const oldInspection = await prisma.inspection.findUnique({
-      where: {
-        id
-      }
-    })
-    const inspection = await prisma.inspection.update({
+    const id = params.slug
+    const body = await request.json()
+    const updatedInspection = inspectionValidation.parse(body)
+    
+    const inspections = await prisma.inspection.update({
       data: {
-        ...oldInspection,
-        ...body
+        ...updatedInspection
       },
       where: {
         id
       },
     })
 
-    return NextResponse.json({ inspection, message: "Successfully retrieved user's inspection information"}, { status: 200 })
+    return NextResponse.json({ inspections, message: "Successfully updated user's inspection information"}, { status: 200 })
   } catch (error) {
-    return NextResponse.json({ message: "Unable to retrieve the user's home closing information at this time." }, { status: 500 });
+    return NextResponse.json({ message: "Unable to updated the user's inspection information at this time." }, { status: 500 });
   }
 }
 

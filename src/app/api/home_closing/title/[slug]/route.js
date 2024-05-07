@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth"
 import prisma from "@/lib/prisma";
 import { authOptions } from "@/lib/auth"
+import { titleValidation } from "@/lib/apiValidations";
 
 // GET
 // GET
@@ -40,30 +41,24 @@ export async function PATCH(request, { params }) {
   if(!!session) {
     return NextResponse.json({ message: "Unauthorized." }, { status: 401 });
   }
-  
-  const id = params.slug
-  const body = await request.json()
 
   try {
+    const id = params.slug
+    const body = await request.json()
+    const updatedTitle = titleValidation.parse(body)
     
-    const oldTitle = await prisma.title.findUnique({
-      where: {
-        id
-      }
-    })
     const title = await prisma.title.update({
       data: {
-        ...oldTitle,
-        ...body
+        ...updatedTitle
       },
       where: {
         id
       },
     })
 
-    return NextResponse.json({ title, message: "Successfully retrieved user's title information"}, { status: 200 })
+    return NextResponse.json({ title, message: "Successfully updated user's title information"}, { status: 200 })
   } catch (error) {
-    return NextResponse.json({ message: "Unable to retrieve the user's home closing information at this time." }, { status: 500 });
+    return NextResponse.json({ message: "Unable to update the user's home closing information at this time." }, { status: 500 });
   }
 }
 

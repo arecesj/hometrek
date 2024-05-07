@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth"
 import prisma from "@/lib/prisma";
 import { authOptions } from "@/lib/auth"
+import { taskValidation } from "@/lib/apiValidations";
 
 // GET
 // GET
@@ -60,5 +61,43 @@ export async function DELETE(request) {
     })
   } catch (error) {
     return NextResponse.json({ message: "Unable to get the user's home closing information at this time." }, { status: 500 });
+  }
+}
+
+// POST
+// POST
+// POST
+
+export async function POST(request) {
+  const session = await getServerSession(authOptions)
+  if(!!session) {
+    return NextResponse.json({ message: "Unauthorized." }, { status: 401 });
+  }
+  
+  try {
+    const user_id = session.user?.id
+    const body = await request.json();
+    const newTask = taskValidation.parse(body)
+    
+    const homeClosing = await prisma.homeClosing.findUnique({
+      where: {
+        user_id
+      }
+    })
+    
+    const task = await prisma.task.create({
+      data: {
+        ...newTask,
+        homeClosing: {
+            connect: {
+              id: homeClosing.id
+            }
+        }
+      },
+    })
+
+    return NextResponse.json({task, message: "Successfully created a new task"}, { status: 201 })
+  } catch (error) {
+    return NextResponse.json({ message: "Unable to create task at this time." }, { status: 500 });
   }
 }

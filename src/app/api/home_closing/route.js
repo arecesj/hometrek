@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth"
 import prisma from "@/lib/prisma";
 import { authOptions } from "@/lib/auth"
+import { homeclosingValidation } from "@/lib/apiValidations";
 
 // GET
 // GET
@@ -37,52 +38,52 @@ export async function POST(request) {
   if(!!session) {
     return NextResponse.json({ message: "Unauthorized." }, { status: 401 });
   }
-
-  const body = await request.json();
   
   try {
+    const body = await request.json();
+    const newHomeClosing = homeclosingValidation.parse(body)
     const homeClosing = await prisma.homeClosing.create({
       data: {
-        state: body.state,
-        zipCode: body.zipCode,
+        state: newHomeClosing.state,
+        zipCode: newHomeClosing.zipCode,
         lenders: {
           create: {
-            ...body.lenders
+            ...newHomeClosing.lenders
           }
         },
         inspections: {
           create: {
-            ...body.inspections
+            ...newHomeClosing.inspections
           }
         } ,
         appraisals: {
           create: {
-            ...body.appraisals
+            ...newHomeClosing.appraisals
           }
         },
         insurance: {
           create: {
-            ...body.insurance
+            ...newHomeClosing.insurance
           }
         },
         title: {
           create: {
-            ...body.title
+            ...newHomeClosing.title
           }
         },
         closingDay: {
           create: {
-            ...body.closingDay
+            ...newHomeClosing.closingDay
           }
         },
         tasks: {
           create: {
-            ...body.tasks
+            ...newHomeClosing.tasks
           }
         },
         costs: {
           create: {
-            ...body.costs
+            ...newHomeClosing.costs
           }
         },
         user: {

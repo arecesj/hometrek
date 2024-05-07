@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth"
 import prisma from "@/lib/prisma";
 import { authOptions } from "@/lib/auth"
+import { homeclosingValidation } from "@/lib/apiValidations";
 
 // GET
 // GET
@@ -35,26 +36,29 @@ export async function GET(request, { params }) {
 // UPDATE
 // UPDATE
 
-export async function PUT(request, { params }) {
+export async function PATCH(request, { params }) {
   const session = await getServerSession(authOptions)
   if(!!session) {
     return NextResponse.json({ message: "Unauthorized." }, { status: 401 });
   }
-  
-  const id = params.slug
-  const body = await request.json()
 
   try {
-    await prisma.homeClosing.update({
+    const id = params.slug
+    const body = await request.json()
+    const updatedHomeClosing = homeclosingValidation.parse(body)
+    
+    const homeClosing = await prisma.homeClosing.update({
       data: {
-        ...body
+        ...updatedHomeClosing
       },
       where: {
         id
       },
     })
+
+    return NextResponse.json({ homeClosing, message: "Successfully updated user's home closing information"}, { status: 200 })
   } catch (error) {
-    
+    return NextResponse.json({ message: "Unable to updated the user's home closing information at this time." }, { status: 500 });
   }
 }
 

@@ -1,15 +1,7 @@
-import { z } from "zod"
 import { hash } from "bcrypt";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-
-
-const newUserValidation = z
-  .object({
-    name: z.string().min(3, "Name is required").max(100),
-    email: z.string().min(1, "Email is required").email("Invalid email"),
-    password: z.string().min(1, "Password is required").min(7, "Password must have at least 7 characters")
-  })
+import { newUserValidation } from "@/lib/apiValidations";
 
 // CREATE
 // CREATE
