@@ -88,7 +88,7 @@ model Lender {
   potentialHomePrice   String?
   potentialDownPayment String?
   selectedLender       SelectedLender?
-  // agg
+  // manage
   hasOwnLender         Boolean?
   plaidAccessToken     String?
   mortgageDetails      MortgageDetails?
@@ -136,7 +136,7 @@ model Inspection {
   homeClosingId     String?            @map("home_closing_id")
   // trek
   selectedInspector SelectedInspector?
-  // agg
+  // manage
   hasInspector      Boolean?
   hasInspected      Boolean?
   inspectionDetails InspectionDetails?
@@ -171,7 +171,7 @@ model InspectionDetails {
   inspectionId String?   @map("inspection_id")
   name         String?
   date         DateTime?
-  cost         Decimal
+  cost         Decimal?
   createdAt    DateTime  @default(now()) @map(name: "created_at")
   updatedAt    DateTime  @updatedAt @map(name: "updated_at")
 
@@ -189,7 +189,7 @@ model Appraisal {
   homeClosingId     String?            @map("home_closing_id")
   //trek
   selectedAppraiser SelectedAppraiser?
-  //agg
+  //manage
   hasAppraiser      Boolean?
   hasAppraised      Boolean?
   appraisalDetails  AppraisalDetails?
@@ -224,7 +224,7 @@ model AppraisalDetails {
   appraisalId String?   @map("appraisal_id")
   name        String?
   date        DateTime?
-  cost        Decimal
+  cost        Decimal?
   createdAt   DateTime  @default(now()) @map(name: "created_at")
   updatedAt   DateTime  @updatedAt @map(name: "updated_at")
 
@@ -244,7 +244,7 @@ model Insurance {
   potentialHomePrice   String?
   potentialDownPayment String?
   selectedInsurance    SelectedInsurance?
-  //agg
+  //manage
   hasInsurance         Boolean?
   // TODO: canopyAccessToken?
   // TODO: Figure this out after connecting with Canopy
@@ -291,7 +291,7 @@ model Title {
   homeClosingId      String?             @map("home_closing_id")
   // trek
   selectedTitleAgent SelectedTitleAgent?
-  //agg
+  //manage
   hasTitleAgent      Boolean?
   hasTitleTransfer   Boolean?
   titleDetails       TitleDetails?
@@ -326,7 +326,7 @@ model TitleDetails {
   titleId      String?   @map("title_id")
   name         String?
   date         DateTime?
-  cost         Decimal
+  cost         Decimal?
   transferDate DateTime?
   createdAt    DateTime  @default(now()) @map(name: "created_at")
   updatedAt    DateTime  @updatedAt @map(name: "updated_at")
