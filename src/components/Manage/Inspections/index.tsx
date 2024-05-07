@@ -6,7 +6,7 @@ import { useAppContext } from "@/context"
 import SubHeader from "../Subheader"
 import AddExistingInspector from "./AddExistingInspector"
 import { manageRouteName } from "@/constants/routes"
-import { isUserAuthenticated } from "@/utils/helpers"
+import { isUserAuthenticated } from "@/lib/utils"
 
 const Inpsections = () => {
   const { data: session, status } = useSession()

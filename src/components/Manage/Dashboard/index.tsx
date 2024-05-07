@@ -8,7 +8,7 @@ import { useEffect } from "react"
 import CostBreakdown from "./CostBreakdown.tsx"
 import TaskTable from "../TaskTable"
 import { generateNewUserTasks } from "@/constants/newUserTasks"
-import { isUserAuthenticated } from "@/utils/helpers"
+import { isUserAuthenticated } from "@/lib/utils"
 
 const Dashboard = () => {
   const { data: session, status } = useSession()

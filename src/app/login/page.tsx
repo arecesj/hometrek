@@ -22,9 +22,9 @@ import {
 import { useToast } from "@/components/ui/use-toast"
 import { manageRouteName, manageRoutes, universalRouteName, universalRoutes } from "@/constants/routes"
 import { LoaderCircle } from "lucide-react"
-import { isUserAuthenticated } from "@/utils/helpers"
 import bedroom from "@/images/bedroom.jpg"
 import Navigation from "@/components/LandingPage/Navigation"
+import { isUserAuthenticated } from "@/lib/utils"
 
 const FormSchema = z.object({
   email: z.string().min(1, "Email is required").email("Invalid email"),

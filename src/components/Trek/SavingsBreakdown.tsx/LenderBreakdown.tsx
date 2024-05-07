@@ -6,7 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import { formatToUSD, subtractNumStrings } from "@/utils/helpers";
+import { formatToUSD, subtractNumStrings } from "@/lib/utils";
 
 
 type LenderBreakdownProps = {

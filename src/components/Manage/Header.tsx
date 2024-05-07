@@ -24,7 +24,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { manageRouteName, manageRoutes, universalRouteName, universalRoutes } from "@/constants/routes";
-import { isUserAuthenticated } from "@/utils/helpers";
+import { isUserAuthenticated } from "@/lib/utils";
 
 type HeaderProps = {
   routeName: manageRouteName;

@@ -23,9 +23,9 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { formatToUSD, subtractNumStrings } from '@/utils/helpers'
 import { Button } from '../../ui/button'
 import { useAppContext } from '@/context'
+import { formatToUSD, subtractNumStrings } from '@/lib/utils'
 
 type LendersTableProps = {
   user: UserContext;

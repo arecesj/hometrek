@@ -6,7 +6,7 @@ import { useAppContext } from "@/context"
 import SubHeader from "../Subheader"
 import { manageRouteName } from "@/constants/routes"
 import AddExistingAppraiser from "./AddExistingAppraiser"
-import { isUserAuthenticated } from "@/utils/helpers"
+import { isUserAuthenticated } from "@/lib/utils"
 
 const Appraisals = () => {
   const { data: session, status } = useSession()

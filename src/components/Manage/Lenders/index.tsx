@@ -6,7 +6,7 @@ import FindExistingMortgage from "./FindExistingMortgage";
 import SubHeader from "@/components/Manage/Subheader";
 import { useAppContext } from "@/context";
 import { manageRouteName } from "@/constants/routes";
-import { isUserAuthenticated } from "@/utils/helpers";
+import { isUserAuthenticated } from "@/lib/utils";
 
 const Lenders = () => {
   const { data: session, status } = useSession()

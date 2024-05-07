@@ -22,7 +22,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Star, StarHalf } from 'lucide-react'
 import { useAppContext } from '@/context'
-import { formatToUSD } from "@/utils/helpers"
+import { formatToUSD } from "@/lib/utils"
 
 const InspectionsTable = () => {
   const {

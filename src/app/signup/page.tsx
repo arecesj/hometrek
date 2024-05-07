@@ -22,9 +22,9 @@ import { useToast } from "@/components/ui/use-toast"
 import { manageRouteName, manageRoutes, universalRouteName, universalRoutes } from "@/constants/routes";
 import { createUser } from "@/client/user";
 import { LoaderCircle } from "lucide-react";
-import { isUserAuthenticated } from "@/utils/helpers"
 import sunset_home from "@/images/sunset_home.jpg"
 import Navigation from "@/components/LandingPage/Navigation"
+import { isUserAuthenticated } from "@/lib/utils"
 
 const FormSchema = z.object({
   name: z.string().min(3, "Name is required").max(100),

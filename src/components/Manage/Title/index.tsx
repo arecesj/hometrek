@@ -6,7 +6,7 @@ import { useAppContext } from "@/context"
 import SubHeader from "../Subheader"
 import { manageRouteName } from "@/constants/routes"
 import AddExistingTitleAgent from "./AddExistingTitleAgent"
-import { isUserAuthenticated } from "@/utils/helpers"
+import { isUserAuthenticated } from "@/lib/utils"
 // import FindExistingTitle from "./FindExistingTitle"
 
 const Title = () => {

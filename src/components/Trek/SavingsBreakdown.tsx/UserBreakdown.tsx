@@ -6,7 +6,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion"
-import { formatToUSD } from "@/utils/helpers";
+import { formatToUSD } from "@/lib/utils";
 
 type UserBreakdownProps = {
   name: string;
