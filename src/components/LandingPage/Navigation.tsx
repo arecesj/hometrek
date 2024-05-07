@@ -53,16 +53,16 @@ const Navigation: FC<NavigationProps> = ({ isHome }) => {
               {!isOpen ?  <IconMenu/> : <IconClose/> }
           </button> */}
           <div className={`${sideBar} ${' -left-1/3 pointer-events-none'}`}>
-              <ul className="text-[hsl(0,0%,41%)] mt-3 text-lg">
+              {/* <ul className="text-[hsl(0,0%,41%)] mt-3 text-lg">
                   <li className="mb-3"><a href="">Products</a></li>
                   <li className="mb-3"><a href="">Company</a></li>
                   <li className="mb-3"><a href="">Careers</a></li>
                   <li className="mb-10"><a href="">About</a></li>
-              </ul>
+              </ul> */}
               <div className="text-center text-lg text-[hsl(0,0%,41%)]"> 
-                  <a href="" className="block mb-5 hover:text-[hsl(0,0%,8%)]">Login</a>
+                  <a href="/signup" className="block mb-5 hover:text-[hsl(0,0%,8%)]">Sign up</a>
                   <div className="text-[hsl(0,0%,41%)] lg:bg-transparent border-2 border-[hsl(0,0%,41%)] hover:text-[hsl(0,0%,8%)] hover:border-[hsl(0,0%,8%)] py-2 px-4 rounded-xl">
-                      <a href="">Register</a>
+                      <a href="/login">Login</a>
                   </div>
               </div>
           </div>
