@@ -28,7 +28,7 @@ const FindExistingMortgage = () => {
       ...homeClosingContext,
       lenders: {
         ...lenders,
-        hasLender: true,
+        hasOwnLender: true,
         accessToken,
       }
     })
@@ -41,7 +41,7 @@ const FindExistingMortgage = () => {
         ...homeClosingContext,
         lenders: {
           ...lenders,
-          hasLender: true,
+          hasOwnLender: true,
         }
       })
     }
@@ -53,7 +53,7 @@ const FindExistingMortgage = () => {
       ...homeClosingContext,
       lenders: {
         ...lenders,
-        hasLender: false
+        hasOwnLender: false
       }
     })
     router.push(manageRoutes[manageRouteName.INSPECTIONS].route)
