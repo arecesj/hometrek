@@ -1,7 +1,7 @@
 import { hash } from "bcrypt";
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
-import { newUserValidation } from "@/lib/apiValidations";
+import { homeClosingValidation, newUserValidation } from "@/lib/apiValidations";
 
 // CREATE
 // CREATE
@@ -9,13 +9,28 @@ import { newUserValidation } from "@/lib/apiValidations";
 
 export async function POST(request) {
   try {
-    const body = await request.json();
-    const { email, name, password } = newUserValidation.parse(body);
+    const { user, homeClosing } = await request.json();
+    const {
+      email,
+      name,
+      password
+    } = newUserValidation.parse(user);
+    const {
+      state,
+      zipCode,
+      lenders,
+      inspections,
+      appraisals,
+      insurance,
+      title,
+      closingDay,
+      tasks,
+      costs
+    } = homeClosingValidation.parse(homeClosing)
     
     const isExistingUser = await prisma.user.findUnique({
       where: { email }
     })
-    
     if(isExistingUser) {
       return NextResponse.json({ user: null, message: "User with this email already exists"}, { status: 409 })
     }
@@ -40,7 +55,48 @@ export async function POST(request) {
       }
     })
 
-    return NextResponse.json({ user: { id: newUser.id, email: newUser.email, name: newUser.name }, message: "User created successfully"}, { status: 201 })
+    const newHomeClosing = await prisma.homeClosing.create({
+      data: {
+        state: state,
+        zipCode: zipCode,
+        lenders: {
+          create: lenders
+        },
+        inspections: {
+          create: inspections
+        },
+        appraisals: {
+          create: appraisals
+        },
+        insurance: {
+          create: insurance
+        },
+        title: {
+          create: title
+        },
+        closingDay: {
+          create: closingDay
+        },
+        costs: {
+          create: costs
+        },
+        tasks: {
+          create: tasks
+        },
+        user: {
+            connect: {
+              id: newUser.id
+            }
+        }
+      },
+    })
+
+    const resp = {
+      user: { id: newUser.id, email: newUser.email, name: newUser.name },
+      homeClosing: { ...newHomeClosing }
+    }
+
+    return NextResponse.json({ ...resp, message: "User created successfully"}, { status: 201 })
   } catch (error) {
     return NextResponse.json({ message: "There was an internal error" }, { status: 500 });
   }

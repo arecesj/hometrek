@@ -7,12 +7,12 @@ export const getHomeClosing = async (userID: string) => {
   })
 }
 
-export const createHomeClosing = async (homeClosingContext: Object) => {
+export const createHomeClosing = async (userId: string, homeClosingContext: HomeClosingContext) => {
   return await fetch('/api/home_closing', {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
-    body: JSON.stringify(homeClosingContext)
+    body: JSON.stringify({ userId, homeClosingContext })
   })
 }

@@ -7,7 +7,7 @@ export const categories = [
   },
   {
     value: "inspections",
-    label: "Inpsections",
+    label: "Inspections",
   },
   {
     value: "appraisals",

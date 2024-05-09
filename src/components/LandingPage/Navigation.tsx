@@ -1,13 +1,16 @@
 import { FC } from "react"
+import { useSession, signOut } from "next-auth/react"
 import Link from "next/link"
 import Image from 'next/image'
 import { Button } from "../ui/button"
+import { isUserAuthenticated } from "@/lib/utils"
 
 type NavigationProps = {
   isHome: boolean
 }
 
 const Navigation: FC<NavigationProps> = ({ isHome }) => {
+  const { data: session, status } = useSession()
   const sideBar =
     `flex flex-col absolute top-0 -right-2/3 w-2/3 h-screen px-5 overflow-y-auto transition-transform ease-in-out -translate-x-full bg-[hsl(0,0%,98%)]`
   const homeTrekImage = (
@@ -37,13 +40,34 @@ const Navigation: FC<NavigationProps> = ({ isHome }) => {
           </ul>
         </div> */}
         
-        <div className="hidden lg:flex lg:items-center text-[hsl(0,0%,41%)] space-x-2"> 
-          <Button asChild className="text-white bg-[hsl(0,0%,8%)] hover:bg-transparent hover:border hover:text-[hsl(0,0%,8%)] hover:border-[hsl(0,0%,8%)] py-3 px-6 rounded-xl">
-            <Link href="/signup" className="text-base font-medium">Sign up</Link>
-          </Button>
-          <Button asChild className="lg:text-[hsl(0,0%,8%)] lg:bg-transparent border-2 border-[hsl(0,0%,8%)] hover:text-white hover:border-[hsl(0,0%,8%)] py-3 px-6 rounded-xl">
-            <Link href="/login" className="text-base font-medium">Login</Link>
-          </Button>
+        <div className="hidden lg:flex lg:items-center text-[hsl(0,0%,41%)] space-x-2">
+          {isUserAuthenticated(status) ? (
+            <>
+              <Button asChild className="text-white bg-[hsl(0,0%,8%)] hover:bg-transparent hover:border hover:text-[hsl(0,0%,8%)] hover:border-[hsl(0,0%,8%)] py-3 px-6 rounded-xl">
+                <Link href="/manage/dashboard" className="text-base font-medium">Dashboard</Link>
+              </Button>
+              <Button
+                onClick={() => {
+                  signOut({
+                    redirect: true,
+                    callbackUrl: "/"
+                  })
+                }}
+                className="lg:text-[hsl(0,0%,8%)] lg:bg-transparent border-2 border-[hsl(0,0%,8%)] hover:text-white hover:border-[hsl(0,0%,8%)] py-3 px-6 rounded-xl"
+              >
+                Sign out
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button asChild className="text-white bg-[hsl(0,0%,8%)] hover:bg-transparent hover:border hover:text-[hsl(0,0%,8%)] hover:border-[hsl(0,0%,8%)] py-3 px-6 rounded-xl">
+                <Link href="/signup" className="text-base font-medium">Sign up</Link>
+              </Button>
+              <Button asChild className="lg:text-[hsl(0,0%,8%)] lg:bg-transparent border-2 border-[hsl(0,0%,8%)] hover:text-white hover:border-[hsl(0,0%,8%)] py-3 px-6 rounded-xl">
+                <Link href="/login" className="text-base font-medium">Login</Link>
+              </Button>
+            </>
+          )}
         </div>
         {/* desktop menu end */}
 

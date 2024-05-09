@@ -356,18 +356,16 @@ model ClosingDay {
 // TASK
 
 model Task {
-  id            String   @id @default(cuid())
-  homeClosingId String?  @map("home_closing_id")
+  id            String       @id @default(cuid())
+  homeClosingId String?      @map("home_closing_id")
   category      String
   task          String
   status        String
   priority      String
-  createdAt     DateTime @default(now()) @map(name: "created_at")
-  updatedAt     DateTime @updatedAt @map(name: "updated_at")
-
-  homeClosing HomeClosing? @relation(fields: [homeClosingId], references: [id], onDelete: Cascade)
-
-  @@unique([homeClosingId])
+  createdAt     DateTime     @default(now()) @map(name: "created_at")
+  updatedAt     DateTime     @updatedAt @map(name: "updated_at")
+  
+  homeClosing   HomeClosing? @relation(fields: [homeClosingId], references: [id], onDelete: Cascade)
 }
 
 // COST

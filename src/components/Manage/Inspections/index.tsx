@@ -8,7 +8,7 @@ import AddExistingInspector from "./AddExistingInspector"
 import { manageRouteName } from "@/constants/routes"
 import { isUserAuthenticated } from "@/lib/utils"
 
-const Inpsections = () => {
+const Inspections = () => {
   const { data: session, status } = useSession()
   const { setRouteContext } = useAppContext()
 
@@ -27,4 +27,4 @@ const Inpsections = () => {
   )
 }
 
-export default Inpsections
+export default Inspections

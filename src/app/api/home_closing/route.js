@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth"
 import prisma from "@/lib/prisma";
 import { authOptions } from "@/lib/auth"
-import { homeclosingValidation } from "@/lib/apiValidations";
+import { homeClosingValidation } from "@/lib/apiValidations";
 
 // GET
 // GET
@@ -41,7 +41,7 @@ export async function POST(request) {
   
   try {
     const body = await request.json();
-    const newHomeClosing = homeclosingValidation.parse(body)
+    const newHomeClosing = homeClosingValidation.parse(body)
     const homeClosing = await prisma.homeClosing.create({
       data: {
         state: newHomeClosing.state,
@@ -77,9 +77,7 @@ export async function POST(request) {
           }
         },
         tasks: {
-          create: {
-            ...newHomeClosing.tasks
-          }
+          create: newHomeClosing.tasks
         },
         costs: {
           create: {

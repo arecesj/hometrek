@@ -24,6 +24,8 @@ import { LoaderCircle } from "lucide-react";
 import Navigation from "@/components/LandingPage/Navigation"
 import { isUserAuthenticated } from "@/lib/utils"
 import { Card, CardContent } from "@/components/ui/card"
+import { useAppContext } from "@/context"
+import { generateNewUserTasks } from "@/constants/newUserTasks"
 
 const FormSchema = z.object({
   name: z.string().min(3, "Name is required").max(100),
@@ -32,7 +34,8 @@ const FormSchema = z.object({
 })
 
 const Signup = () => {
-  const { data: session, status } = useSession()
+  const { data, data: session, status } = useSession()
+  const { homeClosingContext } = useAppContext()
   const router = useRouter()
   const [isCreating, setCreating] = useState<boolean>(false)
   const { toast } = useToast()
@@ -41,26 +44,39 @@ const Signup = () => {
     resolver: zodResolver(FormSchema),
   });
 
+  const createSuccessToast = () => {
+    return toast({
+      title: "Successfully created your account.",
+      description: "Redirecting you to the dashboard.",
+    })
+  }
+
+  const createFailureToast = (m: string) => {
+    return toast({
+      variant: "destructive",
+      title: "Uh oh! Something went wrong.",
+      description: m,
+    })
+  }
+
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     const { name, email, password } = data
     setCreating(true)
     
-    const response = await createUser(name, email, password)
+    let homeClosingBody = homeClosingContext;
+    if(!homeClosingContext.tasks?.length) {
+      const tasks = generateNewUserTasks(homeClosingContext);
+      homeClosingBody = {...homeClosingBody, tasks}
+    }
+    
+    const response = await createUser(data, homeClosingBody)
     if (response.ok) {
-      toast({
-        title: "Successfully created your account.",
-        description: "Redirecting you to the dashboard.",
-      })
-      
+      createSuccessToast()
       setCreating(false)
       signIn('credentials', { email, password, callbackUrl: manageRoutes[manageRouteName.DASHBOARD].route })
     } else {
       const resp = await response.json();
-      toast({
-        variant: "destructive",
-        title: "Uh oh! Something went wrong.",
-        description: resp.message,
-      })
+      createFailureToast(resp.message)
       setCreating(false)
     }
   }

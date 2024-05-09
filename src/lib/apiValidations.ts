@@ -18,7 +18,7 @@ export const lenderValidation = z
       minCreditScore: z.string(),
       minDownPaymentPercentage: z.string(),
       currInterestRate: z.string(),
-    }).optional(),
+    }).optional().nullable(),
     // manage
     hasOwnLender: z.boolean().optional(),
     plaidAccessToken: z.string().optional(),
@@ -36,7 +36,7 @@ export const inspectionValidation = z
       pitch: z.string(),
       location: z.string(),
       avgCost: z.number(),
-    }).optional(),
+    }).optional().nullable(),
     // manage
     hasInspector: z.boolean().optional(),
     hasInspected: z.boolean().optional(),
@@ -44,7 +44,7 @@ export const inspectionValidation = z
       name: z.string().optional(),
       date: z.date().optional(),
       cost: z.number().optional(),
-    }).optional(),
+    }).optional().nullable(),
   })
 
 export const appraisalValidation = z
@@ -58,7 +58,7 @@ export const appraisalValidation = z
       pitch: z.string(),
       location: z.string(),
       avgCost: z.number(),
-    }).optional(),
+    }).optional().nullable(),
     // manage
     hasAppraiser: z.boolean().optional(),
     hasAppraised: z.boolean().optional(),
@@ -66,7 +66,7 @@ export const appraisalValidation = z
       name: z.string().optional(),
       date: z.date().optional(),
       cost: z.number().optional(),
-    }).optional(),
+    }).optional().nullable(),
   })
 
 export const insuranceValidation = z
@@ -77,12 +77,12 @@ export const insuranceValidation = z
     selectedInsurance: z.object({
       name: z.string(),
       policy: z.string(),
-    }).optional(),
+    }).optional().nullable(),
     // manage
     hasInsurance: z.boolean().optional(),
     // TODO: Canopy token?
     // canopyAccessToken: z.string().optional(),
-    insuranceDetails: z.object({}).optional(),
+    insuranceDetails: z.object({}).optional().nullable(),
   })
 
 export const titleValidation = z
@@ -96,7 +96,7 @@ export const titleValidation = z
       pitch: z.string(),
       location: z.string(),
       avgCost: z.number(),
-    }).optional(),
+    }).optional().nullable(),
     // manage
     hasTitleAgent: z.boolean().optional(),
     hasTitleTransfer: z.boolean().optional(),
@@ -104,7 +104,7 @@ export const titleValidation = z
       name: z.string().optional(),
       date: z.date().optional(),
       cost: z.number().optional(),
-    }).optional(),
+    }).optional().nullable(),
   })
 
 export const closingDayValidation = z.object({})

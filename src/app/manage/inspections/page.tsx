@@ -1,16 +1,16 @@
 'use client'
 
-import Inpsections from "@/components/Manage/Inspections"
+import Inspections from "@/components/Manage/Inspections"
 import PageFoundation from "@/components/Manage/PageFoundation"
 import { manageRouteName } from "@/constants/routes"
 
 
-const InpsectionsPage = () => {
+const InspectionsPage = () => {
   return (
     <PageFoundation routeName={manageRouteName.INSPECTIONS}>
-      <Inpsections />
+      <Inspections />
     </PageFoundation>
   )
 }
 
-export default InpsectionsPage
+export default InspectionsPage
