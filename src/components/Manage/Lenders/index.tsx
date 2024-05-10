@@ -3,6 +3,7 @@
 import { useSession } from "next-auth/react"
 import { useEffect } from "react";
 import FindExistingMortgage from "./FindExistingMortgage";
+import SessionFindExistingMortgage from "./SessionFindExistingMortgage";
 import SubHeader from "@/components/Manage/Subheader";
 import { useAppContext } from "@/context";
 import { manageRouteName } from "@/constants/routes";
@@ -22,7 +23,11 @@ const Lenders = () => {
         previousButtonHref={""}
         showCreateProfileButton={!isUserAuthenticated(status)}
       />
-      <FindExistingMortgage />
+      {isUserAuthenticated(status) ? (
+        <SessionFindExistingMortgage />
+      ) : (
+        <FindExistingMortgage />
+      )}
     </div>
   )
 }
