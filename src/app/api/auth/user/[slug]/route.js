@@ -9,7 +9,7 @@ import { authOptions } from "@/lib/auth"
 
 export async function PATCH(request, { params }) {
   const session = await getServerSession(authOptions)
-  if(!!session) {
+  if(!session) {
     return NextResponse.json({ message: "Unauthorized." }, { status: 401 });
   }
   const body = await request.json()
@@ -22,7 +22,7 @@ export async function PATCH(request, { params }) {
 
 export async function DELETE(request, { params }) {
   const session = await getServerSession(authOptions)
-  if(!!session) {
+  if(!session) {
     return NextResponse.json({ message: "Unauthorized." }, { status: 401 });
   }
   

@@ -10,20 +10,23 @@ import { lenderValidation } from "@/lib/apiValidations";
 
 export async function GET(request) {
   const session = await getServerSession(authOptions)
-  if(!!session) {
+  if(!session) {
     return NextResponse.json({ message: "Unauthorized." }, { status: 401 });
   }
 
-  const user_id = session.user?.id
+  const userId = session.user?.id
   try {
     const homeClosing = await prisma.homeClosing.findUnique({
       where: {
-        user_id
+        userId
+      },
+      include: {
+        lenders: true
       }
     })
 
     if(!homeClosing?.lenders) {
-      return NextResponse.json({ message: "The user has no lender information" }, { status: 404 });
+      return NextResponse.json({ message: "The user has no lender information" }, { status: 200 });
     }
     const lenders = homeClosing?.lenders
     return NextResponse.json({lenders, message: "Successfully retrieves user's lenders information"}, { status: 200 })
@@ -38,18 +41,18 @@ export async function GET(request) {
 
 export async function POST(request) {
   const session = await getServerSession(authOptions)
-  if(!!session) {
+  if(!session) {
     return NextResponse.json({ message: "Unauthorized." }, { status: 401 });
   }
   
   try {
-    const user_id = session.user?.id
+    const userId = session.user?.id
     const body = await request.json();
     const newLender = lenderValidation.parse(body)
     
     const homeClosing = await prisma.homeClosing.findUnique({
       where: {
-        user_id
+        userId
       }
     })
     
@@ -66,6 +69,7 @@ export async function POST(request) {
 
     return NextResponse.json({lenders, message: "Successfully created user lender information"}, { status: 201 })
   } catch (error) {
+    console.log("ERROR:", error)
     return NextResponse.json({ message: "Unable to add lender information at this time." }, { status: 500 });
   }
 }

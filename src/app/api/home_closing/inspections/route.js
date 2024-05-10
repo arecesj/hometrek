@@ -10,15 +10,15 @@ import { inspectionValidation } from "@/lib/apiValidations";
 
 export async function GET(request) {
   const session = await getServerSession(authOptions)
-  if(!!session) {
+  if(!session) {
     return NextResponse.json({ message: "Unauthorized." }, { status: 401 });
   }
 
-  const user_id = session.user?.id
+  const userId = session.user?.id
   try {
     const homeClosing = await prisma.homeClosing.findUnique({
       where: {
-        user_id
+        userId
       }
     })
 
@@ -38,18 +38,18 @@ export async function GET(request) {
 
 export async function POST(request) {
   const session = await getServerSession(authOptions)
-  if(!!session) {
+  if(!session) {
     return NextResponse.json({ message: "Unauthorized." }, { status: 401 });
   }
   
   try {
-    const user_id = session.user?.id
+    const userId = session.user?.id
     const body = await request.json();
     const newInspection = inspectionValidation.parse(body)
     
     const homeClosing = await prisma.homeClosing.findUnique({
       where: {
-        user_id
+        userId
       }
     })
     

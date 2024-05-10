@@ -10,7 +10,7 @@ import { homeClosingValidation } from "@/lib/apiValidations";
 
 export async function GET(request) {
   const session = await getServerSession(authOptions)
-  if(!!session) {
+  if(!session) {
     return NextResponse.json({ message: "Unauthorized." }, { status: 401 });
   }
   
@@ -35,7 +35,7 @@ export async function GET(request) {
 
 export async function POST(request) {
   const session = await getServerSession(authOptions)
-  if(!!session) {
+  if(!session) {
     return NextResponse.json({ message: "Unauthorized." }, { status: 401 });
   }
   

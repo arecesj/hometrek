@@ -10,7 +10,7 @@ import { taskValidation } from "@/lib/apiValidations";
 
 export async function GET(request, { params }) {
   const session = await getServerSession(authOptions)
-  if(!!session) {
+  if(!session) {
     return NextResponse.json({ message: "Unauthorized." }, { status: 401 });
   }
   
@@ -38,7 +38,7 @@ export async function GET(request, { params }) {
 
 export async function PATCH(request, { params }) {
   const session = await getServerSession(authOptions)
-  if(!!session) {
+  if(!session) {
     return NextResponse.json({ message: "Unauthorized." }, { status: 401 });
   }
 
@@ -68,7 +68,7 @@ export async function PATCH(request, { params }) {
 
 export async function DELETE(request, { params }) {
   const session = await getServerSession(authOptions)
-  if(!!session) {
+  if(!session) {
     return NextResponse.json({ message: "Unauthorized." }, { status: 401 });
   }
 
