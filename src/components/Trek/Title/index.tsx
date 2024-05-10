@@ -16,8 +16,8 @@ const Title = () => {
         showPreviousButton={true}
         previousButtonContent={"Back to Home Insurance"}
         previousButtonHref={trekRoutes[trekRouteName.INSURANCE].route}
-        nextButtonContent={"Next: Closing Day"}
-        nextButtonHref={trekRoutes[trekRouteName.CLOSINGDAY].route}
+        nextButtonContent={"Next: Dashboard"}
+        nextButtonHref={trekRoutes[trekRouteName.DASHBOARD].route}
       />
     </div>
   )

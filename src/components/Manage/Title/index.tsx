@@ -13,7 +13,7 @@ const Title = () => {
   const { data: session, status } = useSession()
   const { setRouteContext } = useAppContext()
 
-  useEffect(() => setRouteContext(manageRouteName.CLOSINGDAY), [])
+  useEffect(() => setRouteContext(manageRouteName.TITLE), [])
   return (
     <div>
       <SubHeader

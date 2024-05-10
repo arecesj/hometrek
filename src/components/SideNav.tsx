@@ -4,11 +4,11 @@ import { FC } from "react";
 import Link from "next/link"
 import Image from 'next/image'
 import {
-  Home,
+  LayoutGrid,
   UserRoundSearch,
   Settings,
   HandCoins,
-  Handshake,
+  // Handshake,
   ScrollText,
   Shield,
   NotebookPen
@@ -53,11 +53,11 @@ const SideNav: FC<SideNavProps> = ({ routeName }) => {
                 href={trekRoutes[trekRouteName.DASHBOARD].route}
                 className={routeName === trekRouteName.DASHBOARD ? selectedClass : mutedClass}
               >
-                <Home className="h-5 w-5" />
-                <span className="sr-only">Home</span>
+                <LayoutGrid className="h-5 w-5" />
+                <span className="sr-only">Dashboard</span>
               </Link>
             </TooltipTrigger>
-            <TooltipContent side="right">Home</TooltipContent>
+            <TooltipContent side="right">Dashboard</TooltipContent>
           </Tooltip>
         </TooltipProvider>
         <TooltipProvider>
@@ -130,7 +130,7 @@ const SideNav: FC<SideNavProps> = ({ routeName }) => {
             <TooltipContent side="right">Title</TooltipContent>
           </Tooltip>
         </TooltipProvider>
-        <TooltipProvider>
+        {/* <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
@@ -143,7 +143,7 @@ const SideNav: FC<SideNavProps> = ({ routeName }) => {
             </TooltipTrigger>
             <TooltipContent side="right">Closing Day</TooltipContent>
           </Tooltip>
-        </TooltipProvider>
+        </TooltipProvider> */}
       </nav>
       <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
         <TooltipProvider>

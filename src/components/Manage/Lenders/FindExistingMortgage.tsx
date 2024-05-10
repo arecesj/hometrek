@@ -18,9 +18,9 @@ import { Checkbox } from '@/components/ui/checkbox'
 
 
 const FindExistingMortgage = () => {
-  const [isDisabled, setDisabled] = useState<boolean>(false)
-  const [isConnected, setConnected] = useState<boolean>(false)
   const { homeClosingContext, homeClosingContext: { lenders } , setHomeClosingContext } = useAppContext()
+  const [isDisabled, setDisabled] = useState<boolean>(homeClosingContext?.lenders?.hasOwnLender)
+  const [isConnected, setConnected] = useState<boolean>(!!homeClosingContext?.lenders?.plaidAccessToken)
   const router = useRouter();
 
   const onConnectionSuccess = (accessToken: string) => {
@@ -83,7 +83,7 @@ const FindExistingMortgage = () => {
             />
           </div>
           <div className="pl-1 flex justify-center space-x-2">
-            <Checkbox id="track" onClick={() => {
+            <Checkbox id="track" checked={isDisabled} onClick={() => {
               setDisabled(!isDisabled)
             }} />
               <label

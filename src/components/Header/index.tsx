@@ -36,7 +36,7 @@ const Header: FC<HeaderProps> = ({ routeName }) => {
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
-              <Link href="/trek/dashboard">Home</Link>
+              <Link href="/trek/dashboard">Dashboard</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />

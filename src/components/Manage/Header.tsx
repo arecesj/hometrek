@@ -39,15 +39,19 @@ const Header: FC<HeaderProps> = ({ routeName }) => {
         <BreadcrumbList>
           <BreadcrumbItem>
             <BreadcrumbLink asChild>
-              <Link href={manageRoutes[manageRouteName.DASHBOARD].route}>Home</Link>
+              <Link href={manageRoutes[manageRouteName.DASHBOARD].route}>Dashboard</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
-          <BreadcrumbSeparator />
-          <BreadcrumbItem>
-            <BreadcrumbLink asChild>
-              <Link href={manageRoutes[routeName].route}>{routeName}</Link>
-            </BreadcrumbLink>
-          </BreadcrumbItem>
+          {routeName !== manageRouteName.DASHBOARD && (
+            <>
+              <BreadcrumbSeparator />
+              <BreadcrumbItem>
+                <BreadcrumbLink asChild>
+                  <Link href={manageRoutes[routeName].route}>{routeName}</Link>
+                </BreadcrumbLink>
+              </BreadcrumbItem>
+            </>
+          )}
         </BreadcrumbList>
       </Breadcrumb>
       <div className="relative ml-auto flex-1 md:grow-0">

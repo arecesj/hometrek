@@ -79,7 +79,7 @@ const onSubmit = (data: z.infer<typeof FormSchema>) => {
       ...i
     }
   })
-  router.push(manageRoutes[manageRouteName.CLOSINGDAY].route)
+  router.push(manageRoutes[manageRouteName.DASHBOARD].route)
 }
 
   const formFieldClassName = "w-[100%]"
