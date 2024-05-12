@@ -117,10 +117,19 @@ model SelectedLender {
 }
 
 model MortgageDetails {
-  id        String   @id @default(cuid())
-  lenderId  String?  @map("lender_id")
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @updatedAt @map(name: "updated_at")
+  id                     String   @id @default(cuid())
+  lenderId               String?  @map("lender_id")
+  mask                   String
+  name                   String
+  officialName           String   @map("official_name")
+  type                   String
+  currentBalance         Float    @map("current_balance")
+  availableBalance       Float    @map("available_balance")
+  isoCurrencyCode        String   @map("iso_currency_code")
+  limit                  String
+  unofficialCurrencyCode String   @map("unofficial_currency_code")
+  createdAt              DateTime @default(now()) @map(name: "created_at")
+  updatedAt              DateTime @updatedAt @map(name: "updated_at")
 
   lender Lender? @relation(fields: [lenderId], references: [id], onDelete: Cascade)
 
@@ -356,16 +365,16 @@ model ClosingDay {
 // TASK
 
 model Task {
-  id            String       @id @default(cuid())
-  homeClosingId String?      @map("home_closing_id")
+  id            String   @id @default(cuid())
+  homeClosingId String?  @map("home_closing_id")
   category      String
   task          String
   status        String
   priority      String
-  createdAt     DateTime     @default(now()) @map(name: "created_at")
-  updatedAt     DateTime     @updatedAt @map(name: "updated_at")
-  
-  homeClosing   HomeClosing? @relation(fields: [homeClosingId], references: [id], onDelete: Cascade)
+  createdAt     DateTime @default(now()) @map(name: "created_at")
+  updatedAt     DateTime @updatedAt @map(name: "updated_at")
+
+  homeClosing HomeClosing? @relation(fields: [homeClosingId], references: [id], onDelete: Cascade)
 }
 
 // COST

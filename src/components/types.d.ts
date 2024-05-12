@@ -55,8 +55,8 @@ type LendersContext = {
   // manage
   hasOwnLender?: boolean;
   plaidAccessToken?: string;
-  // TODO after Plaid API hook up
-  mortgageDetails?: any;
+  mortgageDetails?: MortgageDetails;
+  assets?: any;
 }
 
 type OfferedLenders = Lenders;
@@ -70,6 +70,19 @@ type SelectedLender = {
   currInterestRate: string;
   createdAt?: Date;
   updatedAt?: Date;
+}
+
+type MortgageDetails = {
+  mask: string;
+  name: string;
+  official_name: string;
+  subtype: string;
+  type: string;
+  availableBalance: number | null;
+  currentBalance: number | null;
+  isoCurrencyCode: "USD";
+  limit: any;
+  unofficialCurrencyCode: any;
 }
 
 // INSPECTIONS CONTEXT
