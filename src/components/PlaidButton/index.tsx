@@ -6,6 +6,7 @@ import {
 } from 'react-plaid-link';
 import { Button } from '../ui/button';
 import { CircleCheckBig, LoaderCircle } from 'lucide-react';
+import { getPlaidLinkToken, getPlaidAccessToken } from '@/client/plaid';
 
 type PlaidButtonProps = {
   className: string;
@@ -21,19 +22,13 @@ const PlaidButton: FC<PlaidButtonProps> = ({ className, onConnectionSuccess, isD
   const createLinkToken = async () => {
     // TODO: If we go this approach,
     // then set the userSID as the client_user_id in the call body
-    const response = await fetch("/api/plaid/create_link_token", { method: 'POST' });
+    const response = await getPlaidLinkToken()
     const { link_token } = await response.json();
     setToken(link_token);
   };
 
   const exchangePublicToken = async (publicToken: string) => {
-    const response = await fetch("/api/plaid/exchange_public_token", {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ public_token: publicToken })
-    });
+    const response = await getPlaidAccessToken(publicToken)
     
     const { access_token } = await response.json();
     setConnectingStatus(false)
