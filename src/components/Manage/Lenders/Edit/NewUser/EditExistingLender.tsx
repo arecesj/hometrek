@@ -11,14 +11,13 @@ import ConnectExistingMortgage from "../ConnectExistingMortgage";
 import { useAppContext } from "@/context";
 
 const EditExistingLender = () => {
-  console.log("INSIDE THE RIGHT ONE")
   const router = useRouter()
   const { toast } = useToast()
   
   const { homeClosingContext, setHomeClosingContext } = useAppContext()
   const existingTask = homeClosingContext?.tasks?.find(t => t?.category === "lenders") ?? {} as TaskContext
   const [editedLenderDetails, setEditedLenderDetails] = useState<LendersContext>(null)
-  const [editedTask, setEditedTask] = useState<TaskContext>(null)
+  const [editedTask, setEditedTask] = useState<TaskContext>(existingTask ?? null)
   const [isConnected, setConnected] = useState<boolean>(false)
 
   const successToast = (title: string, description: string) => {
