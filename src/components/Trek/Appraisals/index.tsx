@@ -16,7 +16,7 @@ const Appraisals = () => {
         showPreviousButton={true}
         previousButtonContent={"Back to Inspections"}
         previousButtonHref={trekRoutes[trekRouteName.INSPECTIONS].route}
-        nextButtonContent={"Next: Home Insurance"}
+        nextButtonContent={"Next: Insurance"}
         nextButtonHref={trekRoutes[trekRouteName.INSURANCE].route}
       />
     </div>

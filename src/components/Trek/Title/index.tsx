@@ -14,7 +14,7 @@ const Title = () => {
       <SubHeader
         subHeaderContent={"Find the best title insurance in your area"}
         showPreviousButton={true}
-        previousButtonContent={"Back to Home Insurance"}
+        previousButtonContent={"Back to Insurance"}
         previousButtonHref={trekRoutes[trekRouteName.INSURANCE].route}
         nextButtonContent={"Next: Dashboard"}
         nextButtonHref={trekRoutes[trekRouteName.DASHBOARD].route}
