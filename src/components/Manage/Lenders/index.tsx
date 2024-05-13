@@ -2,8 +2,8 @@
 
 import { useSession } from "next-auth/react"
 import { useEffect } from "react";
-import FindExistingMortgage from "./FindExistingMortgage";
-import SessionFindExistingMortgage from "./SessionFindExistingMortgage";
+import FindExistingMortgage from "./NewUser/FindExistingMortgage";
+import SessionFindExistingMortgage from "./Session/FindExistingMortgage";
 import SubHeader from "@/components/Manage/Subheader";
 import { useAppContext } from "@/context";
 import { manageRouteName } from "@/constants/routes";

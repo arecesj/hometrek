@@ -18,11 +18,17 @@ export enum trekRouteName {
 export enum manageRouteName {
   DASHBOARD = "Dashboard",
   LENDERS = "Lenders",
+  LENDERS_EDIT = "Lenders Edit",
   INSPECTIONS = "Inspections",
+  INSPECTIONS_EDIT = "Inspections Edit",
   APPRAISALS = "Appraisals",
+  APPRAISALS_EDIT = "Appraisals Edit",
   INSURANCE = "Insurance",
+  INSURANCE_EDIT = "Insurance Edit",
   TITLE = "Title",
+  TITLE_EDIT = "Title Edit",
   CLOSINGDAY = "Closing Day",
+  CLOSINGDAY_EDIT = "Closing Day Edit",
   SETTINGS = "Settings",
 }
 
@@ -72,20 +78,38 @@ export const manageRoutes = {
   [manageRouteName.LENDERS]: {
     route: "/manage/lenders",
   },
+  [manageRouteName.LENDERS_EDIT]: {
+    route: "/manage/lenders/edit",
+  },
   [manageRouteName.INSPECTIONS]: {
     route: "/manage/inspections",
+  },
+  [manageRouteName.INSPECTIONS_EDIT]: {
+    route: "/manage/inspections/edit",
   },
   [manageRouteName.APPRAISALS]: {
     route: "/manage/appraisals",
   },
+  [manageRouteName.APPRAISALS_EDIT]: {
+    route: "/manage/appraisals/edit",
+  },
   [manageRouteName.INSURANCE]: {
     route: "/manage/insurance",
+  },
+  [manageRouteName.INSURANCE_EDIT]: {
+    route: "/manage/insurance/edit",
   },
   [manageRouteName.TITLE]: {
     route: "/manage/title",
   },
+  [manageRouteName.TITLE_EDIT]: {
+    route: "/manage/title/edit",
+  },
   [manageRouteName.CLOSINGDAY]: {
     route: "/manage/closing-day",
+  },
+  [manageRouteName.CLOSINGDAY_EDIT]: {
+    route: "/manage/closing-day/edit",
   },
   [manageRouteName.SETTINGS]: {
     route: "/manage/settings",

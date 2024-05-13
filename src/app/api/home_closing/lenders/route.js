@@ -69,7 +69,6 @@ export async function POST(request) {
 
     return NextResponse.json({lenders, message: "Successfully created user lender information"}, { status: 201 })
   } catch (error) {
-    console.log("ERROR:", error)
     return NextResponse.json({ message: "Unable to add lender information at this time." }, { status: 500 });
   }
 }
