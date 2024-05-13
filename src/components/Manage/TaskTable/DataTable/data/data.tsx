@@ -15,7 +15,7 @@ export const categories = [
   },
   {
     value: "insurance",
-    label: "Home Insurance",
+    label: "Insurance",
   },
   {
     value: "title",

@@ -6,13 +6,7 @@ import DataTable from "./DataTable"
 import { columns } from "./DataTable/columns"
 
 type TaskTableProps = {
-  tasks: {
-    id: string;
-    task: string;
-    status: string;
-    category: string;
-    priority: string;
-  }[]
+  tasks: TaskContext[]
 }
 
 const TaskTable: FC<TaskTableProps> = ({ tasks }) => {

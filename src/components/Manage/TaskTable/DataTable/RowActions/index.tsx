@@ -26,17 +26,17 @@ export default function RowActions<TData>({
   const viewRoute = (category: string) => {
     switch(category) {
       case "lenders":
-        return manageRoutes[manageRouteName.LENDERS].route;
+        return manageRoutes[manageRouteName.LENDERS_EDIT].route;
       case "inspections":
-        return manageRoutes[manageRouteName.INSPECTIONS].route;
+        return manageRoutes[manageRouteName.INSPECTIONS_EDIT].route;
       case "appraisals":
-        return manageRoutes[manageRouteName.APPRAISALS].route;
+        return manageRoutes[manageRouteName.APPRAISALS_EDIT].route;
       case "insurance":
-        return manageRoutes[manageRouteName.INSURANCE].route;
+        return manageRoutes[manageRouteName.INSURANCE_EDIT].route;
       case "title":
-        return manageRoutes[manageRouteName.TITLE].route;
+        return manageRoutes[manageRouteName.TITLE_EDIT].route;
       case "closingday":
-        return manageRoutes[manageRouteName.CLOSINGDAY].route;
+        return manageRoutes[manageRouteName.CLOSINGDAY_EDIT].route;
       default:
         return manageRoutes[manageRouteName.DASHBOARD].route;
     }
@@ -54,18 +54,10 @@ export default function RowActions<TData>({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
-        <Dialog>
-          <DialogTrigger asChild>
-            <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-              Edit task
-            </DropdownMenuItem>
-          </DialogTrigger>
-          <TaskDialogContent currTask={currTask} />
-        </Dialog>
         <DropdownMenuItem onClick={() => {
           router.push(viewRoute(currTask.category))
         }}>
-          View page
+          Edit / View Page
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => {}}
