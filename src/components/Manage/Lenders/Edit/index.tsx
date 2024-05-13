@@ -5,17 +5,22 @@ import { useSession } from "next-auth/react";
 import { useAppContext } from "@/context";
 import { manageRouteName } from "@/constants/routes";
 import SessionEditExistingLender from "./Session/EditExistingLender";
+import NewUserEditExistingLender from "./NewUser/EditExistingLender";
+import { isUserAuthenticated } from "@/lib/utils";
 
 const LendersEdit = () => {
   const { data: session, status } = useSession()
-  const { homeClosingContext, setRouteContext } = useAppContext()
+  const { setRouteContext } = useAppContext()
   
   useEffect(() => setRouteContext(manageRouteName.LENDERS_EDIT), [])
   return(
-    <SessionEditExistingLender
-      existingLenders={homeClosingContext.lenders}
-      existingTask={homeClosingContext?.tasks?.find(t => t.category === "lenders") ?? {} as TaskContext}
-    />
+    <>
+      {isUserAuthenticated(status) ? (
+        <SessionEditExistingLender />
+      ) : (
+        <NewUserEditExistingLender />
+      )}
+    </>
   )
 }
 

@@ -43,7 +43,7 @@ const TaskDetails: FC<TaskDetailsProps> = (props) => {
             <Input
               id="description"
               type="text"
-              defaultValue={editedTask.task}
+              defaultValue={editedTask?.task}
               placeholder="Task description"
               onChange={(e) => {
                 e.preventDefault()

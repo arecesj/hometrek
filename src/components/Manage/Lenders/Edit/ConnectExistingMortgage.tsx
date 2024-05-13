@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, useState } from "react"
+import { FC } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import PlaidButton from "@/components/PlaidButton";
 
@@ -13,7 +13,7 @@ const ConnectExistingMortgage: FC<ConnectExistingMortgageProps> = (props) => {
   const { onConnectionSuccess, isConnected } = props
 
   return (
-    <Card className="w-[850px]">
+    <Card className="w-[850px] h-[290px]">
       <CardHeader className="px-7 bg-muted/50">
         <div className="grid gap-0.5">
           <CardTitle className="group flex items-center gap-2 text-lg">

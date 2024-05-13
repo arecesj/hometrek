@@ -16,7 +16,7 @@ const Dashboard = () => {
   const { data: session, status } = useSession()
   const { homeClosingContext, setHomeClosingContext, setRouteContext } = useAppContext()
   const [isLoading, setLoading] = useState<boolean>(true)
-  
+  console.log("HC: ", homeClosingContext)
   useEffect(() => {
     setRouteContext(manageRouteName.DASHBOARD)
     
