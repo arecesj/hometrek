@@ -117,19 +117,35 @@ model SelectedLender {
 }
 
 model MortgageDetails {
-  id                     String   @id @default(cuid())
-  lenderId               String?  @map("lender_id")
-  mask                   String
-  name                   String
-  officialName           String   @map("official_name")
-  type                   String
-  currentBalance         Float    @map("current_balance")
-  availableBalance       Float    @map("available_balance")
-  isoCurrencyCode        String   @map("iso_currency_code")
-  limit                  String
-  unofficialCurrencyCode String   @map("unofficial_currency_code")
-  createdAt              DateTime @default(now()) @map(name: "created_at")
-  updatedAt              DateTime @updatedAt @map(name: "updated_at")
+  id                         String    @id @default(cuid())
+  lenderId                   String?   @map("lender_id")
+  accountId                  String?   @map("account_id")
+  accountNumber              String?   @map("account_number")
+  currentLateFee             BigInt?   @map("current_late_fee")
+  escrowBalance              BigInt?   @map("escrow_balance")
+  hasPMI                     Boolean?  @map("has_pmi")
+  hasPrepaymentPenalty       Boolean?  @map("has_prepayment_penalty")
+  interestRatePercentage     BigInt?   @map("interest_rate_percentage")
+  interestRateType           String?   @map("interest_rate_type")
+  lastPaymentAmount          BigInt?   @map("last_payment_amount")
+  lastPaymentDate            DateTime? @map("last_payment_date")
+  loanTerm                   String?   @map("loan_term")
+  loanTypeDescription        String?   @map("loan_type_description")
+  maturityDate               DateTime? @map("maturity_date")
+  nextMonthlyPayment         BigInt?   @map("next_monthly_payment")
+  nextPaymentDueDate         DateTime? @map("next_payment_due_date")
+  originationDate            DateTime? @map("origination_date")
+  originationPrincipalAmount BigInt?   @map("origination_principal_amount")
+  pastDueAmount              BigInt?   @map("past_due_amount")
+  city                       String?
+  country                    String?
+  postalCode                 String?   @map("postal_code")
+  region                     String?
+  street                     String?
+  ytdInterestPaid            BigInt?   @map("ytd_interest_paid")
+  ytdPrincipalPaid           BigInt?   @map("ytd_principal_paid")
+  createdAt                  DateTime  @default(now()) @map(name: "created_at")
+  updatedAt                  DateTime  @updatedAt @map(name: "updated_at")
 
   lender Lender? @relation(fields: [lenderId], references: [id], onDelete: Cascade)
 

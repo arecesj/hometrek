@@ -73,16 +73,31 @@ type SelectedLender = {
 }
 
 type MortgageDetails = {
-  mask: string;
-  name: string;
-  official_name: string;
-  subtype: string;
-  type: string;
-  availableBalance: number | null;
-  currentBalance: number | null;
-  isoCurrencyCode: "USD";
-  limit: any;
-  unofficialCurrencyCode: any;
+  accountId?: string;
+  accountNumber?: string;
+  currentLateFee?: number;
+  escrowBalance?: number;
+  hasPMI?: boolean;
+  hasPrepaymentPenalty?: boolean;
+  interestRatePercentage?: number;
+  interestRateType?: string;
+  lastPaymentAmount?: number;
+  lastPaymentDate?: Date;
+  loanTerm?: string;
+  loanTypeDescription?: string;
+  maturityDate?: Date;
+  nextMonthlyPayment?: number;
+  nextPaymentDueDate?: Date;
+  originationDate?: Date;
+  originationPrincipalAmount?: number;
+  pastDueAmount?: number;
+  city?: string;
+  country?: string;
+  postalCode?: string;
+  region?: string;
+  street?: string;
+  ytdInterestPaid?: number;
+  ytdPrincipalPaid?: number;
 }
 
 // INSPECTIONS CONTEXT
