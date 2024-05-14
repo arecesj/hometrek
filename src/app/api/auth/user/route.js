@@ -89,6 +89,9 @@ export async function POST(request) {
             }
         }
       },
+      include: {
+        tasks: true,
+      },
     })
 
     const resp = {

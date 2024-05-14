@@ -19,6 +19,9 @@ export async function GET(request) {
     const homeClosing = await prisma.homeClosing.findUnique({
       where: {
         userId
+      },
+      include: {
+        inspections: true
       }
     })
 
