@@ -25,7 +25,6 @@ const Dashboard = () => {
     const tasksResp = await getTask()
     if(tasksResp.ok) {
       const body = await tasksResp.json()
-      console.log("BOD:", body)
       setTasks(body.tasks)
     } else {
       getTasksFailureToast("Unable to get your tasks right now.")
