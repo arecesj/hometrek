@@ -59,11 +59,11 @@ export default function RowActions<TData>({
         }}>
           Edit / View Page
         </DropdownMenuItem>
-        <DropdownMenuItem
+        {/* <DropdownMenuItem
           onClick={() => {}}
         >
           Mark as done
-        </DropdownMenuItem>
+        </DropdownMenuItem> */}
         {/* <DropdownMenuSeparator />
         <DropdownMenuSub>
           <DropdownMenuSubTrigger>Status</DropdownMenuSubTrigger>

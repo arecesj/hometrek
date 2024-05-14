@@ -16,9 +16,8 @@ const EditExistingLender = () => {
   const router = useRouter()
   const { toast } = useToast()
   
-  const [existingLenders, setExistingLenders] = useState<LendersContext>()
-  const [existingTask, setExistingTask] = useState<TaskContext>()
-  const [editedLenderDetails, setEditedLenderDetails] = useState<LendersContext>(null)
+  const [existingLenders, setExistingLenders] = useState<LendersContext>(null)
+  const [existingTask, setExistingTask] = useState<TaskContext>(null)
   const [editedTask, setEditedTask] = useState<TaskContext>(null)
   const [isLoading, setLoading] = useState<boolean>(true)
   const [isConnected, setConnected] = useState<boolean>(false)
@@ -39,13 +38,14 @@ const EditExistingLender = () => {
   }
 
   const updateExistingLender = async () => {
-    const [lendersResponse, tasksResponse] = await Promise.all([updateLender(editedLenderDetails), updateTask(editedTask)])
-    if (lendersResponse.ok && tasksResponse.ok) {
+    // const [lendersResponse, tasksResponse] = await Promise.all([updateLender(editedLenderDetails), updateTask(editedTask)])
+    const taskResponse = await updateTask(editedTask)
+    if (taskResponse.ok) {
       successToast("Successfully updated your lender information!", "Redirecting you back to the previous page.")
       router.back()
     }
     else {
-      failureToast("Oh no! There was an issue updating your lender", lendersResponse.statusText)
+      failureToast("Oh no! There was an issue updating your lender", taskResponse.statusText)
     }
   }
 
@@ -130,6 +130,7 @@ const EditExistingLender = () => {
         subHeaderContent="Edit your existing lender details"
         onUpdate={() => updateExistingLender()}
         onDelete={() => deleteExistingLender()}
+        onDeleteText="Disconnect lender"
         onCancel={() => router.back()}
       />
       {isLoading ? (
@@ -139,9 +140,7 @@ const EditExistingLender = () => {
         <div className="grid auto-rows-max items-start md:gap-8 lg:col-span-2">
           {!!existingLenders?.hasOwnLender ? (
             <LenderDetails
-              existingLenders={existingLenders}
-              editedLenderDetails={editedLenderDetails}
-              setEditedLenderDetails={setEditedLenderDetails}
+              existingLenderDetails={existingLenders}
             />
           ) : (
             <ConnectExistingMortgage

@@ -9,6 +9,7 @@ import EditSubheader from "../../../Edit/EditSubHeader";
 import { getPlaidLiabilities } from "@/client/plaid";
 import ConnectExistingMortgage from "../ConnectExistingMortgage";
 import { useAppContext } from "@/context";
+import { manageRouteName, manageRoutes } from "@/constants/routes";
 
 const EditExistingLender = () => {
   const router = useRouter()
@@ -16,7 +17,7 @@ const EditExistingLender = () => {
   
   const { homeClosingContext, setHomeClosingContext } = useAppContext()
   const existingTask = homeClosingContext?.tasks?.find(t => t?.category === "lenders") ?? {} as TaskContext
-  const [editedLenderDetails, setEditedLenderDetails] = useState<LendersContext>(null)
+  const [editedLenderDetails, setEditedLenderDetails] = useState<LendersContext>(homeClosingContext.lenders ?? null)
   const [editedTask, setEditedTask] = useState<TaskContext>(existingTask ?? null)
   const [isConnected, setConnected] = useState<boolean>(false)
 
@@ -39,8 +40,9 @@ const EditExistingLender = () => {
     const updatedTasks = homeClosingContext.tasks.map(task => {
       if(task.id === existingTask.id) {
         task = editedTask
-      } 
-    })
+      }
+      return task;
+    })    
     setHomeClosingContext({
       ...homeClosingContext,
       lenders: {
@@ -50,7 +52,7 @@ const EditExistingLender = () => {
       tasks: updatedTasks,
     })
     successToast("Successfully updated your lender information!", "Redirecting you back to the previous page.")
-    router.back()
+    router.push(manageRoutes[manageRouteName.DASHBOARD].route)
   }
 
   const deleteExistingLender = async () => {
@@ -121,15 +123,14 @@ const EditExistingLender = () => {
         subHeaderContent="Edit your existing lender details"
         onUpdate={() => updateExistingLender()}
         onDelete={() => deleteExistingLender()}
+        onDeleteText="Disconnect lender"
         onCancel={() => router.back()}
       />
       <div className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
         <div className="grid auto-rows-max items-start md:gap-8 lg:col-span-2">
           {!!homeClosingContext.lenders?.hasOwnLender ? (
             <LenderDetails
-              existingLenders={homeClosingContext.lenders}
-              editedLenderDetails={editedLenderDetails}
-              setEditedLenderDetails={setEditedLenderDetails}
+              existingLenderDetails={homeClosingContext.lenders}
             />
           ) : (
             <ConnectExistingMortgage

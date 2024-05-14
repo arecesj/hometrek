@@ -53,7 +53,7 @@ const FindExistingMortgage = () => {
             ytdInterestPaid: mortgage[0].ytd_interest_paid,
             ytdPrincipalPaid: mortgage[0].ytd_principal_paid,
           }
-        }
+        },
       })
       setConnected(true)
     } else {

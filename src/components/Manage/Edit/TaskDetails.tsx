@@ -20,7 +20,7 @@ const TaskDetails: FC<TaskDetailsProps> = (props) => {
     setEditedTask
   } = props
 
-  const existingCategoryLabel = categories.find(c => c.value === existingTask.category)?.label
+  // const existingCategoryLabel = categories.find(c => c.value === existingTask.category)?.label
   const existingStatusLabel = statuses.find(s => s.value === existingTask.status)?.label
   const existingPriorityLabel = priorities.find(p => p.value === existingTask.priority)?.label
   
@@ -54,8 +54,8 @@ const TaskDetails: FC<TaskDetailsProps> = (props) => {
               }}
             />
           </div>
-          <div className="grid gap-6 sm:grid-cols-3">
-            <div className="grid gap-3">
+          <div className="grid gap-6 sm:grid-cols-2">
+            {/* <div className="grid gap-3">
               <Label htmlFor="category">Categories</Label>
               <Select onValueChange={(category: string) => setEditedTask({...editedTask, category})}>
                 <SelectTrigger id="category" aria-label="Select category">
@@ -69,7 +69,7 @@ const TaskDetails: FC<TaskDetailsProps> = (props) => {
                   ))}
                 </SelectContent>
               </Select>
-            </div>
+            </div> */}
             <div className="grid gap-3">
               <Label htmlFor="status">Status</Label>
               <Select onValueChange={(status: string) => setEditedTask({...editedTask, status})}>

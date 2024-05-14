@@ -7,11 +7,12 @@ type EditSubheaderProps = {
   subHeaderContent: string;
   onUpdate: () => void;
   onDelete: () => void;
+  onDeleteText: string;
   onCancel: () => void;
 }
 
 const EditSubheader: FC<EditSubheaderProps> = (props) => {
-  const { subHeaderContent, onUpdate, onDelete, onCancel } = props
+  const { subHeaderContent, onUpdate, onDelete, onDeleteText, onCancel } = props
   const btnWidth = "w-[150px]"
   
   return (
@@ -37,7 +38,7 @@ const EditSubheader: FC<EditSubheaderProps> = (props) => {
           onClick={() => onDelete()}
           className={btnWidth}
         >
-          Delete lender
+          {onDeleteText}
         </Button>
         <Button
           variant="outline"
