@@ -54,7 +54,9 @@ export const columns: ColumnDef<Task>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex space-x-2">
-          <span className="max-w-[400px] truncate font-medium">
+          {/* This can go back in when cost breakdown is built */}
+          {/* <span className="max-w-[400px] truncate font-medium"> */}
+          <span className="max-w-[400px] font-medium">
             {row.getValue("task")}
           </span>
         </div>
