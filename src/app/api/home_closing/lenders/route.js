@@ -50,6 +50,21 @@ export async function POST(request) {
     const body = await request.json();
     const newLender = lenderValidation.parse(body)
     
+    /*
+    the other way of doing this is directly updating homeClosing
+    however, im not sure about the relational fields so rather break it out into its own steps for now
+    not opposed to refactoring if another way is more performant
+    
+    await prisma.homeClosing.update({
+      where: {
+        userId
+      },
+      data: {
+        lenders: newLender
+      }
+    })
+    */
+    
     const homeClosing = await prisma.homeClosing.findUnique({
       where: {
         userId
