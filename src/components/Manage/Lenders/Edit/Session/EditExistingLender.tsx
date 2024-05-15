@@ -6,11 +6,12 @@ import { useToast } from "@/components/ui/use-toast"
 import TaskDetails from "../../../Edit/TaskDetails";
 import LenderDetails from "../LenderDetails";
 import EditSubheader from "../../../Edit/EditSubHeader";
-import { deleteLender, getLender, updateLender } from "@/client/lenders";
+import { createLender, deleteLender, getLender, updateLender } from "@/client/lenders";
 import { getTask, updateTask } from "@/client/tasks";
 import ConnectExistingMortgage from "../ConnectExistingMortgage";
 import { getPlaidLiabilities } from "@/client/plaid";
 import LoadingSpinner from "@/components/LoadingSpinner";
+import { mapMortgageDetails } from "@/lib/utils";
 
 const EditExistingLender = () => {
   const router = useRouter()
@@ -18,7 +19,7 @@ const EditExistingLender = () => {
   
   const [existingLenders, setExistingLenders] = useState<LendersContext>(null)
   const [existingTask, setExistingTask] = useState<TaskContext>(null)
-  const [editedTask, setEditedTask] = useState<TaskContext>(null)
+  const [editedTask, setEditedTask] = useState<TaskContext>(existingTask)
   const [isLoading, setLoading] = useState<boolean>(true)
   const [isConnected, setConnected] = useState<boolean>(false)
 
@@ -38,7 +39,6 @@ const EditExistingLender = () => {
   }
 
   const updateExistingLender = async () => {
-    // const [lendersResponse, tasksResponse] = await Promise.all([updateLender(editedLenderDetails), updateTask(editedTask)])
     const taskResponse = await updateTask(editedTask)
     if (taskResponse.ok) {
       successToast("Successfully updated your lender information!", "Redirecting you back to the previous page.")
@@ -64,43 +64,27 @@ const EditExistingLender = () => {
     const getPlaidLiabilitiesResp = await getPlaidLiabilities(accessToken)
     if(getPlaidLiabilitiesResp.ok) {
       const { liabilities: { mortgage }} = await getPlaidLiabilitiesResp.json()
-      const m = mortgage[0]
-      const updateLenderResponse = await updateLender({
+
+      let apiResp;
+      const requestBody = {
         hasOwnLender: true,
-          plaidAccessToken: accessToken,
-          mortgageDetails: {
-            accountId: m.account_id,
-            accountNumber: m.account_number,
-            currentLateFee: m.current_late_fee,
-            escrowBalance: m.escrow_balance,
-            hasPMI: m.has_pmi,
-            hasPrepaymentPenalty: m.has_prepayment_penalty,
-            interestRatePercentage: m.interest_rate.percentage,
-            interestRateType: m.interest_rate.type,
-            lastPaymentAmount: m.last_payment_amount,
-            lastPaymentDate: m.last_payment_date,
-            loanTerm: m.loan_term,
-            loanTypeDescription: m.loan_type_description,
-            maturityDate: m.maturity_date,
-            nextMonthlyPayment: m.next_monthly_payment,
-            nextPaymentDueDate: m.next_payment_due_date,
-            originationDate: m.origination_date,
-            originationPrincipalAmount: m.origination_principal_amount,
-            pastDueAmount: m.past_due_amount,
-            city: m.property_address.city,
-            country: m.property_address.country,
-            postalCode: m.property_address.post_code,
-            region: m.property_address.region,
-            street: m.property_address.street,
-            ytdInterestPaid: m.ytd_interest_paid,
-            ytdPrincipalPaid: m.ytd_principal_paid,
-          }
-      })
-      if(updateLenderResponse.ok) {
+        // TODO: How do I want to hash this token?
+        plaidAccessToken: accessToken,
+        mortgageDetails: mapMortgageDetails(mortgage[0])
+      } 
+
+      if(!!existingLenders?.id) {
+        apiResp = await updateLender({
+          id: existingLenders?.id,
+          ...requestBody,
+        })
+      } else {
+        apiResp = await createLender(requestBody)
+      }
+      
+      if(apiResp.ok) {
         successToast("Successfully connected your account.", "Updating the page now!")
         setConnected(true)
-        // TODO: This should be a boolean that triggers another GET for lenders
-        router.refresh()
       } else {
         failureToast("Uh oh! Something went wrong.", "Unable to update lender information right now")
       }
@@ -109,20 +93,20 @@ const EditExistingLender = () => {
     }
   }
 
+  const getDetails = async () => {
+    const [lenderResp, taskResp] = await Promise.all([getLender(), getTask()])
+    const [lenderBody, tasksBody] = await Promise.all([lenderResp.json(), taskResp.json()])
+    const existingTask = tasksBody.tasks?.find(t => t.category === "lenders") ?? {} as TaskContext
+    
+    setExistingLenders(lenderBody.lenders)
+    setExistingTask(existingTask)
+    setEditedTask(existingTask)
+  }
   useEffect(() => {
-    async () => {
-      const lenderResp = await getLender()
-      const lender = await lenderResp.json()
-      setExistingLenders(lender)
-
-      const taskResp = await getTask()
-      const tasks = await taskResp.json()
-      const existingTask = tasks?.find(t => t.category === "lenders") ?? {} as TaskContext
-      setExistingTask(existingTask)
-      setEditedTask(existingTask)
-    }
-    setLoading(false)
-  }, [])
+    if(!existingLenders && !existingTask) getDetails()
+    
+    setLoading(!existingLenders && !existingTask)
+  }, [existingLenders, existingTask])
   
   return(
     <div>
