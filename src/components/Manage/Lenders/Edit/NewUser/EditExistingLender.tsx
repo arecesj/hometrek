@@ -16,7 +16,7 @@ const EditExistingLender = () => {
   const { toast } = useToast()
   
   const { homeClosingContext, setHomeClosingContext } = useAppContext()
-  const existingTask = homeClosingContext?.tasks?.find(t => t?.category === "lenders") ?? {} as TaskContext
+  const existingTask = !!homeClosingContext.tasks ? homeClosingContext?.tasks?.find(t => t?.category === "lenders") : {} as TaskContext
   const [editedLenderDetails, setEditedLenderDetails] = useState<LendersContext>(homeClosingContext.lenders ?? null)
   const [editedTask, setEditedTask] = useState<TaskContext>(existingTask ?? null)
   const [isConnected, setConnected] = useState<boolean>(false)
@@ -56,10 +56,11 @@ const EditExistingLender = () => {
   }
 
   const deleteExistingLender = async () => {
-    const updatedTasks = homeClosingContext.tasks.map(task => {
-      if(task.id === existingTask.id) {
+    const updatedTasks = !!homeClosingContext.tasks && homeClosingContext.tasks.map(task => {
+      if(!!task && task?.id === existingTask.id) {
         task.status = "todo"
-      } 
+      }
+      return task; 
     })
     setHomeClosingContext({
       ...homeClosingContext,
@@ -67,6 +68,7 @@ const EditExistingLender = () => {
       tasks: updatedTasks,
     })
     successToast("Successfully deleted your lender!", "Redirecting you back to the previous page.")
+    setConnected(false)
     router.back()
   }
 

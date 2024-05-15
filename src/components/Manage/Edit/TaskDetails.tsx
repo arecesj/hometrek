@@ -21,8 +21,8 @@ const TaskDetails: FC<TaskDetailsProps> = (props) => {
   } = props
 
   // const existingCategoryLabel = categories.find(c => c.value === existingTask.category)?.label
-  const existingStatusLabel = statuses.find(s => s.value === existingTask.status)?.label
-  const existingPriorityLabel = priorities.find(p => p.value === existingTask.priority)?.label
+  const existingStatusLabel = statuses.find(s => s.value === existingTask?.status)?.label
+  const existingPriorityLabel = priorities.find(p => p.value === existingTask?.priority)?.label
   
   return (
     <div>
