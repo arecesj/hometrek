@@ -56,7 +56,7 @@ export const columns: ColumnDef<Task>[] = [
         <div className="flex space-x-2">
           {/* This can go back in when cost breakdown is built */}
           {/* <span className="max-w-[400px] truncate font-medium"> */}
-          <span className="max-w-[400px] font-medium">
+          <span className="max-w-[600px] font-medium">
             {row.getValue("task")}
           </span>
         </div>
