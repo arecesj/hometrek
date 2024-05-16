@@ -31,7 +31,7 @@ const EditExistingInspection = () => {
   const { toast } = useToast()
   
   const { homeClosingContext, setHomeClosingContext } = useAppContext()
-  const existingTask = !!homeClosingContext.tasks ? homeClosingContext?.tasks?.find(t => t?.category === "lenders") : {} as TaskContext
+  const existingTask = !!homeClosingContext.tasks ? homeClosingContext?.tasks?.find(t => t?.category === "inspections") : {} as TaskContext
   const [isUpdateInspectionDisabled, setUpdateInspectionDisabled] = useState<boolean>(true)
   const [isUpdateTaskDisabled, setUpdateTaskDisabled] = useState<boolean>(true)
 
@@ -126,6 +126,8 @@ const EditExistingInspection = () => {
     successToast("Successfully updated your task!", "")
     setUpdateTaskDisabled(true)
   }
+
+  console.log("HC: ", homeClosingContext)
   
   return(
     <div>
