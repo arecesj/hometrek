@@ -33,7 +33,8 @@ const SideNav = () => {
       appraisals,
       insurance,
       title,
-      closingDay
+      closingDay,
+      tasks
     }
   } = useAppContext()
   
@@ -78,8 +79,8 @@ const SideNav = () => {
                 <BadgeCheck className="h-5 w-5" color="#3e9392"/>
               ) : (
                 <Link
-                  href={manageRoutes[manageRouteName.LENDERS].route}
-                  className={routeContext === manageRouteName.LENDERS ? selectedClass : mutedClass}
+                  href={manageRoutes[(!!tasks?.length || !!lenders) ? manageRouteName.LENDERS_EDIT : manageRouteName.LENDERS].route}
+                  className={(routeContext === manageRouteName.LENDERS || routeContext === manageRouteName.LENDERS_EDIT) ? selectedClass : mutedClass}
                 >
                   <HandCoins className="h-5 w-5"/>
                   <span className="sr-only">Lenders</span>
@@ -96,8 +97,8 @@ const SideNav = () => {
                 <BadgeCheck className="h-5 w-5" color="#3e9392"/>
               ) : (
                 <Link
-                  href={manageRoutes[manageRouteName.INSPECTIONS].route}
-                  className={routeContext === manageRouteName.INSPECTIONS ? selectedClass : mutedClass}
+                  href={manageRoutes[(!!tasks.length || !!inspections) ? manageRouteName.INSPECTIONS_EDIT : manageRouteName.INSPECTIONS].route}
+                  className={(routeContext === manageRouteName.INSPECTIONS || routeContext === manageRouteName.INSPECTIONS_EDIT) ? selectedClass : mutedClass}
                 >
                   <UserRoundSearch className="h-5 w-5"/>
                   <span className="sr-only">Inspections</span>
@@ -114,8 +115,8 @@ const SideNav = () => {
                 <BadgeCheck className="h-5 w-5" color="#3e9392"/>
               ) : (
                 <Link
-                  href={manageRoutes[manageRouteName.APPRAISALS].route}
-                  className={routeContext === manageRouteName.APPRAISALS ? selectedClass : mutedClass}
+                  href={manageRoutes[(!!tasks.length || !!appraisals) ? manageRouteName.APPRAISALS_EDIT : manageRouteName.APPRAISALS].route}
+                  className={(routeContext === manageRouteName.APPRAISALS || routeContext === manageRouteName.APPRAISALS_EDIT) ? selectedClass : mutedClass}
                 >
                   <NotebookPen className="h-5 w-5"/>
                   <span className="sr-only">Appraisals</span>
@@ -132,8 +133,8 @@ const SideNav = () => {
                 <BadgeCheck className="h-5 w-5" color="#3e9392"/>
               ) : (
                 <Link
-                  href={manageRoutes[manageRouteName.INSURANCE].route}
-                  className={routeContext === manageRouteName.INSURANCE ? selectedClass : mutedClass}
+                  href={manageRoutes[(!!tasks.length || !!insurance) ? manageRouteName.INSURANCE_EDIT : manageRouteName.INSURANCE].route}
+                  className={(routeContext === manageRouteName.INSURANCE || routeContext === manageRouteName.INSURANCE_EDIT) ? selectedClass : mutedClass}
                 >
                   <Shield className="h-5 w-5"/>
                   <span className="sr-only">Insurance</span>
@@ -150,8 +151,8 @@ const SideNav = () => {
                 <BadgeCheck className="h-5 w-5" color="#3e9392"/>
               ) : (
                 <Link
-                  href={manageRoutes[manageRouteName.TITLE].route}
-                  className={routeContext === manageRouteName.TITLE ? selectedClass : mutedClass}
+                  href={manageRoutes[(!!tasks.length || !!title) ? manageRouteName.TITLE_EDIT : manageRouteName.TITLE].route}
+                  className={(routeContext === manageRouteName.TITLE || routeContext === manageRouteName.TITLE_EDIT) ? selectedClass : mutedClass}
                 >
                   <ScrollText className="h-5 w-5"/>
                   <span className="sr-only">Title</span>
