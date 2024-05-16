@@ -1,10 +1,10 @@
 'use client'
 
 
-const EditExistingInspection = () => {
+const EditExistingAppraisal = () => {
   return (
     <>Session edit existing appraisal</>
   )  
 }
 
-export default EditExistingInspection
+export default EditExistingAppraisal
