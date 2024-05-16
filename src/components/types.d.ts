@@ -110,7 +110,7 @@ type InspectionsContext = {
   selectedInspector?: SelectedInspector;
   hasInspector?: boolean;
   hasInspected?: boolean;
-  inspectionDetails?: InspectionDetails
+  inspectionDetails?: InspectionDetails;
 }
 
 type OfferedInspectors = YelpBusinesses;
