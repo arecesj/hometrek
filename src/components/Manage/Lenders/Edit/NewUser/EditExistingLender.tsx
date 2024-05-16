@@ -1,6 +1,9 @@
 'use client'
 
 import {  useState } from "react"
+import { useForm } from "react-hook-form"
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from 'next/navigation'
 import { useToast } from "@/components/ui/use-toast"
 import TaskDetails from "../../../Edit/TaskDetails";
@@ -10,6 +13,13 @@ import { getPlaidLiabilities } from "@/client/plaid";
 import ConnectExistingMortgage from "../ConnectExistingMortgage";
 import { useAppContext } from "@/context";
 import { manageRouteName, manageRoutes } from "@/constants/routes";
+import { mapMortgageDetails } from "@/lib/utils";
+
+const TaskFormSchema = z.object({
+  task: z.string().optional(),
+  status: z.string().optional(),
+  priority: z.string().optional(),
+})
 
 const EditExistingLender = () => {
   const router = useRouter()
@@ -17,9 +27,8 @@ const EditExistingLender = () => {
   
   const { homeClosingContext, setHomeClosingContext } = useAppContext()
   const existingTask = !!homeClosingContext.tasks ? homeClosingContext?.tasks?.find(t => t?.category === "lenders") : {} as TaskContext
-  const [editedLenderDetails, setEditedLenderDetails] = useState<LendersContext>(homeClosingContext.lenders ?? null)
-  const [editedTask, setEditedTask] = useState<TaskContext>(existingTask ?? null)
   const [isConnected, setConnected] = useState<boolean>(false)
+  const [isUpdateTaskDisabled, setUpdateTaskDisabled] = useState<boolean>(true)
 
   const successToast = (title: string, description: string) => {
     return toast({
@@ -36,24 +45,24 @@ const EditExistingLender = () => {
     })
   }
 
-  const updateExistingLender = async () => {
-    const updatedTasks = homeClosingContext.tasks.map(task => {
-      if(task.id === existingTask.id) {
-        task = editedTask
-      }
-      return task;
-    })    
-    setHomeClosingContext({
-      ...homeClosingContext,
-      lenders: {
-        ...homeClosingContext.lenders,
-        ...editedLenderDetails
-      },
-      tasks: updatedTasks,
-    })
-    successToast("Successfully updated your lender information!", "Redirecting you back to the previous page.")
-    router.push(manageRoutes[manageRouteName.DASHBOARD].route)
-  }
+  // const updateExistingLender = async () => {
+  //   const updatedTasks = homeClosingContext.tasks.map(task => {
+  //     if(task.id === existingTask.id) {
+  //       task = editedTask
+  //     }
+  //     return task;
+  //   })    
+  //   setHomeClosingContext({
+  //     ...homeClosingContext,
+  //     lenders: {
+  //       ...homeClosingContext.lenders,
+  //       ...editedLenderDetails
+  //     },
+  //     tasks: updatedTasks,
+  //   })
+  //   successToast("Successfully updated your lender information!", "Redirecting you back to the previous page.")
+  //   router.push(manageRoutes[manageRouteName.DASHBOARD].route)
+  // }
 
   const deleteExistingLender = async () => {
     const updatedTasks = !!homeClosingContext.tasks && homeClosingContext.tasks.map(task => {
@@ -76,40 +85,13 @@ const EditExistingLender = () => {
     const getPlaidLiabilitiesResp = await getPlaidLiabilities(accessToken)
     if(getPlaidLiabilitiesResp.ok) {
       const { liabilities: { mortgage }} = await getPlaidLiabilitiesResp.json()
-      const m = mortgage[0]
       setHomeClosingContext({
         ...homeClosingContext,
         lenders: {
           ...homeClosingContext.lenders,
           hasOwnLender: true,
           plaidAccessToken: accessToken,
-          mortgageDetails: {
-            accountId: m.account_id,
-            accountNumber: m.account_number,
-            currentLateFee: m.current_late_fee,
-            escrowBalance: m.escrow_balance,
-            hasPMI: m.has_pmi,
-            hasPrepaymentPenalty: m.has_prepayment_penalty,
-            interestRatePercentage: m.interest_rate.percentage,
-            interestRateType: m.interest_rate.type,
-            lastPaymentAmount: m.last_payment_amount,
-            lastPaymentDate: m.last_payment_date,
-            loanTerm: m.loan_term,
-            loanTypeDescription: m.loan_type_description,
-            maturityDate: m.maturity_date,
-            nextMonthlyPayment: m.next_monthly_payment,
-            nextPaymentDueDate: m.next_payment_due_date,
-            originationDate: m.origination_date,
-            originationPrincipalAmount: m.origination_principal_amount,
-            pastDueAmount: m.past_due_amount,
-            city: m.property_address.city,
-            country: m.property_address.country,
-            postalCode: m.property_address.post_code,
-            region: m.property_address.region,
-            street: m.property_address.street,
-            ytdInterestPaid: m.ytd_interest_paid,
-            ytdPrincipalPaid: m.ytd_principal_paid,
-          }
+          mortgageDetails: mapMortgageDetails(mortgage[0]),
         }
       })
       successToast("Successfully connected your account.", "Updating the page now!")
@@ -119,14 +101,43 @@ const EditExistingLender = () => {
     }
   }
   
+  // TASK FORM
+  // TASK FORM
+  // TASK FORM
+  const taskForm = useForm<z.infer<typeof TaskFormSchema>>({
+    resolver: zodResolver(TaskFormSchema),
+  });
+
+  const updateExistingTask = async (data: z.infer<typeof TaskFormSchema>) => {
+    const { task, status, priority } = data
+    const updatedTasks = homeClosingContext.tasks.map(t => {
+      if(t.category === existingTask.category) {
+        return {
+          ...existingTask,
+          task: !!task?.length ? task : existingTask.task,
+          status: !!status?.length ? status : existingTask.status,
+          priority: !!priority?.length ? priority: existingTask.priority
+        }
+      }
+      return t
+    })
+
+    setHomeClosingContext({
+      ...homeClosingContext,
+      tasks: updatedTasks,
+    })
+
+    successToast("Successfully updated your task!", "")
+    setUpdateTaskDisabled(true)
+  }
+  
   return(
     <div>
       <EditSubheader
         subHeaderContent="Edit your existing lender details"
-        onUpdate={() => updateExistingLender()}
         onDelete={() => deleteExistingLender()}
         onDeleteText="Disconnect lender"
-        onCancel={() => router.back()}
+        onCancel={() => router.push(manageRoutes[manageRouteName.DASHBOARD].route)}
       />
       <div className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
         <div className="grid auto-rows-max items-start md:gap-8 lg:col-span-2">
@@ -143,8 +154,10 @@ const EditExistingLender = () => {
         </div>
         <TaskDetails
           existingTask={existingTask}
-          editedTask={editedTask}
-          setEditedTask={setEditedTask}
+          isUpdateTaskDisabled={isUpdateTaskDisabled}
+          setUpdateTaskDisabled={setUpdateTaskDisabled}
+          form={taskForm}
+          onSubmit={updateExistingTask}
         />
       </div>
     </div>
