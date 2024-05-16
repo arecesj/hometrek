@@ -271,8 +271,8 @@ model Insurance {
   selectedInsurance    SelectedInsurance?
   //manage
   hasInsurance         Boolean?
-  // TODO: canopyAccessToken?
-  // TODO: Figure this out after connecting with Canopy
+  // TODO @arecesj: canopyAccessToken?
+  // TODO @arecesj: Figure this out after connecting with Canopy
   insuranceDetails     InsuranceDetails?
   createdAt            DateTime           @default(now()) @map(name: "created_at")
   updatedAt            DateTime           @updatedAt @map(name: "updated_at")

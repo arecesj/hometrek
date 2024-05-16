@@ -53,7 +53,7 @@ const EditExistingClosingDay = () => {
         hasClosed: !!date && date < new Date(),
         closingDate: date
       }
-      // TODO: I dont think I need this
+      // TODO @arecesj: I dont think I need this
     } else {
       i = {
         hasClosed: false,

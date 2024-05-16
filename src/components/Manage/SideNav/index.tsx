@@ -25,6 +25,7 @@ import { useAppContext } from "@/context";
 
 
 const SideNav = () => {
+  // TODO @arecesj: Fix this for logged in user
   const {
     routeContext,
     homeClosingContext: {

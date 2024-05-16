@@ -80,7 +80,7 @@ export const insuranceValidation = z
     }).optional().nullable(),
     // manage
     hasInsurance: z.boolean().optional(),
-    // TODO: Canopy token?
+    // TODO @arecesj: Canopy token?
     // canopyAccessToken: z.string().optional(),
     insuranceDetails: z.object({}).optional().nullable(),
   })
