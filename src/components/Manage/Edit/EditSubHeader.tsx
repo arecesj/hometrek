@@ -5,14 +5,13 @@ import { Button } from "@/components/ui/button";
 
 type EditSubheaderProps = {
   subHeaderContent: string;
-  onUpdate: () => void;
   onDelete: () => void;
   onDeleteText: string;
   onCancel: () => void;
 }
 
 const EditSubheader: FC<EditSubheaderProps> = (props) => {
-  const { subHeaderContent, onUpdate, onDelete, onDeleteText, onCancel } = props
+  const { subHeaderContent, onDelete, onDeleteText, onCancel } = props
   const btnWidth = "w-[150px]"
   
   return (
@@ -25,28 +24,19 @@ const EditSubheader: FC<EditSubheaderProps> = (props) => {
       </div>
       <div className="flex items-center justify-end space-x-2 py-4 px-6">
         <Button
-          variant="default"
-          size="lg"
-          onClick={() => onUpdate()}
-          className={btnWidth}
-        >
-          Save & Go back
-        </Button>
-        <Button
-          variant="destructive"
-          size="lg"
-          onClick={() => onDelete()}
-          className={btnWidth}
-        >
-          {onDeleteText}
-        </Button>
-        <Button
-          variant="outline"
           size="lg"
           onClick={() => onCancel()}
           className={btnWidth}
         >
-          Go back
+          Back to Dashboard
+        </Button>
+        <Button
+          variant="secondary"
+          size="lg"
+          onClick={() => onDelete()}
+          className={`${btnWidth} text-red-500`}
+        >
+          {onDeleteText}
         </Button>
       </div>
     </div>
