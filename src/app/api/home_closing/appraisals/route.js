@@ -21,7 +21,13 @@ export async function GET(request) {
         userId
       },
       include: {
-        appraisals: true
+        appraisals: {
+          include: {
+            include: {
+              appraisalDetails: true
+            }
+          }
+        }
       }
     })
 
@@ -47,7 +53,7 @@ export async function POST(request) {
   
   try {
     const userId = session.user?.id
-  const body = await request.json();
+    const body = await request.json();
     const newAppraisal = appraisalValidation.parse(body)
     
     const homeClosing = await prisma.homeClosing.findUnique({
@@ -59,6 +65,11 @@ export async function POST(request) {
     const appraisals = await prisma.appraisal.create({
       data: {
         ...newAppraisal,
+        appraisalDetails: {
+          create: {
+            ...newAppraisal.appraisalDetails
+          }
+        },
         homeClosing: {
             connect: {
               id: homeClosing.id

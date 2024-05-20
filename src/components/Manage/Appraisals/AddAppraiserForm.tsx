@@ -1,20 +1,16 @@
 'use client'
 
-import { useState } from "react"
-import { useRouter } from 'next/navigation'
-import { useForm } from "react-hook-form"
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod"
+import { Dispatch, FC, SetStateAction } from "react"
+import { UseFormReturn } from "react-hook-form";
+import { format } from 'date-fns';
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
+  CardFooter
 } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import {
   Form,
   FormControl,
@@ -24,63 +20,34 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
-import { manageRouteName, manageRoutes } from '@/constants/routes'
-import { useAppContext } from '@/context'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { cn } from '@/lib/utils';
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Checkbox } from "@/components/ui/checkbox"
 import { CalendarIcon } from 'lucide-react';
 import { Calendar } from '@/components/ui/calendar';
-import { format } from 'date-fns';
-import { Checkbox } from "@/components/ui/checkbox";
+import { cn } from '@/lib/utils';
 
-const FormSchema = z.object({
-  name: z.string().optional(),
-  cost: z.string().refine((val) => !Number.isNaN(parseInt(val, 10)), {
-    message: "Cost has to be a number"
-  }).optional(),
-  date: z.date().optional(),
-})
-
-const AddExistingAppraiser = () => {
-  const [isDisabled, setDisabled] = useState<boolean>(false)
-  const { homeClosingContext, homeClosingContext: { appraisals } , setHomeClosingContext } = useAppContext()
-  const router = useRouter();
-
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-  });
-
-const onSubmit = (data: z.infer<typeof FormSchema>) => {
-  const { name, date, cost } = data
-  let i: AppraisalsContext;
-  if((name || date || cost) && !isDisabled) {
-    i = {
-      hasAppraiser: true,
-      hasAppraised: !!date && date < new Date(),
-      appraisalDetails: {
-        name,
-        date,
-        cost
-      }
-    }
-  } else {
-    i = {
-      hasAppraiser: isDisabled,
-      hasAppraised: isDisabled,
-      appraisalDetails: null
-    }
-  }
-
-  setHomeClosingContext({
-    ...homeClosingContext,
-    appraisals: {
-      ...appraisals,
-      ...i
-    }
-  })
-  router.push(manageRoutes[manageRouteName.INSURANCE].route)
+type AddAppraiserFormProps = {
+  form: UseFormReturn<{
+    name?: string;
+    cost?: string;
+    date?: Date;
+}, any, undefined>
+  onSubmit: (data: { name?: string; cost?: string; date?: Date; }) => Promise<void>;
+  isDisabled: boolean;
+  setDisabled: Dispatch<SetStateAction<boolean>>;
 }
 
+
+const AddAppraiserForm: FC<AddAppraiserFormProps> = (props) => {
+  const {
+    form,
+    onSubmit,
+    isDisabled,
+    setDisabled
+  } = props
+  
   const formFieldClassName = "w-[100%]"
     return (
       <div className="flex justify-center">
@@ -230,4 +197,4 @@ const onSubmit = (data: z.infer<typeof FormSchema>) => {
     )
 }
 
-export default AddExistingAppraiser;
+export default AddAppraiserForm

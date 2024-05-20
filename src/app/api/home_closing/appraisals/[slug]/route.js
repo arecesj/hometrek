@@ -49,7 +49,12 @@ export async function PATCH(request, { params }) {
     
     const appraisals = await prisma.appraisal.update({
       data: {
-        ...updatedAppraisal
+        ...updatedAppraisal,
+        appraisalDetails: {
+          update: {
+            ...updatedAppraisal.appraisalDetails
+          }
+        }
       },
       where: {
         id

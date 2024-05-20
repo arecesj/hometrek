@@ -47,6 +47,7 @@ const AddInspectorForm: FC<AddInspectorFormProps> = (props) => {
     isDisabled,
     setDisabled
   } = props
+  
   const formFieldClassName = "w-[100%]"
     return (
       <div className="flex justify-center">

@@ -5,7 +5,8 @@ import { useEffect } from "react"
 import { useAppContext } from "@/context"
 import SubHeader from "../Subheader"
 import { manageRouteName } from "@/constants/routes"
-import AddExistingAppraiser from "./AddExistingAppraiser"
+import SessionAddExistingAppraiser from "./Session/AddExistingAppraiser"
+import NewUserAddExistingAppraiser from "./NewUser/AddExistingAppraiser"
 import { isUserAuthenticated } from "@/lib/utils"
 
 const Appraisals = () => {
@@ -22,7 +23,11 @@ const Appraisals = () => {
         previousButtonHref={""}
         showCreateProfileButton={!isUserAuthenticated(status)}
       />
-      <AddExistingAppraiser />
+      {isUserAuthenticated(status) ? (
+        <SessionAddExistingAppraiser />
+      ) : (
+        <NewUserAddExistingAppraiser />
+      )}
     </div>
   )
 }

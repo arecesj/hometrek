@@ -89,8 +89,8 @@ export const appraisalValidation = z
     hasAppraised: z.boolean().optional(),
     inspectionDetails: z.object({
       name: z.string().optional(),
-      date: z.date().optional(),
-      cost: z.number().optional(),
+      date: z.string().optional(),
+      cost: z.string().optional(),
     }).optional().nullable(),
   })
 
@@ -127,8 +127,8 @@ export const titleValidation = z
     hasTitleTransfer: z.boolean().optional(),
     inspectionDetails: z.object({
       name: z.string().optional(),
-      date: z.date().optional(),
-      cost: z.number().optional(),
+      date: z.string().optional(),
+      cost: z.string().optional(),
     }).optional().nullable(),
   })
 
