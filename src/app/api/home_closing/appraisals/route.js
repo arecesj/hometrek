@@ -23,9 +23,7 @@ export async function GET(request) {
       include: {
         appraisals: {
           include: {
-            include: {
-              appraisalDetails: true
-            }
+            appraisalDetails: true
           }
         }
       }

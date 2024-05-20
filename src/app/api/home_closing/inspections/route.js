@@ -23,9 +23,7 @@ export async function GET(request) {
       include: {
         inspections: {
           include: {
-            include: {
-              inspectionDetails: true
-            }
+            inspectionDetails: true
           }
         }
       }
