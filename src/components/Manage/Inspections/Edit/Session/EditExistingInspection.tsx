@@ -74,7 +74,6 @@ const EditExistingInspection = () => {
     }
 
     let resp;
-
     if(!!homeClosingContext?.inspections?.id) {
       resp = await updateInspection({
         id: homeClosingContext?.inspections?.id,
@@ -102,8 +101,7 @@ const EditExistingInspection = () => {
   }
 
   const deleteExistingInspection = async () => {
-    const response = await deleteInspection(homeClosingContext?.inspections?.id ?? "")
-    if (response.ok) {
+    const resetTaskAndRedirect = async () => {
       const editedTask = {
         ...existingTask,
         status: "todo",
@@ -112,8 +110,17 @@ const EditExistingInspection = () => {
       successToast("Successfully deleted your inspection!", "Redirecting you back to the dashboard.")
       router.push(manageRoutes[manageRouteName.DASHBOARD].route)
     }
-    else {
-      failureToast("Oh no! There was an issue deleting your inspection", response.statusText)
+    if(!!homeClosingContext?.inspections?.id) {
+      const response = await deleteInspection(homeClosingContext?.inspections?.id ?? "")
+      if (response.ok) {
+        await resetTaskAndRedirect()
+        
+      }
+      else {
+        failureToast("Oh no! There was an issue deleting your inspection", response.statusText)
+      }
+    } else {
+      await resetTaskAndRedirect()
     }
   }
 
