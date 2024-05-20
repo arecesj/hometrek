@@ -17,7 +17,6 @@ import LoadingSpinner from "@/components/LoadingSpinner";
 import { mapMortgageDetails } from "@/lib/utils";
 import { manageRouteName, manageRoutes } from "@/constants/routes";
 import { useAppContext } from "@/context";
-import { Button } from "@/components/ui/button";
 
 const TaskFormSchema = z.object({
   task: z.string().optional(),
@@ -69,7 +68,7 @@ const EditExistingLender = () => {
         status: "todo",
       }
       await updateTask(editedTask)
-      successToast("Successfully deleted your lender!", "Redirecting you back to the previous page.")
+      successToast("Successfully deleted your lender!", "Redirecting you back to the dashboard.")
       router.push(manageRoutes[manageRouteName.DASHBOARD].route)
     }
     else {
@@ -183,26 +182,26 @@ const EditExistingLender = () => {
         <LoadingSpinner />
       ) : (
         <div className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
-        <div className="grid auto-rows-max items-start md:gap-8 lg:col-span-2">
-          {(!!homeClosingContext?.lenders?.hasOwnLender && !!homeClosingContext?.lenders?.mortgageDetails) ? (
-            <LenderDetails
-              existingLenderDetails={homeClosingContext?.lenders}
-            />
-          ) : (
-            <ConnectExistingMortgage
-              onConnectionSuccess={onConnectionSuccess}
-              isConnected={isConnected}
-            />
-          )}
+          <div className="grid auto-rows-max items-start md:gap-8 lg:col-span-2">
+            {(!!homeClosingContext?.lenders?.hasOwnLender && !!homeClosingContext?.lenders?.mortgageDetails) ? (
+              <LenderDetails
+                existingLenderDetails={homeClosingContext?.lenders}
+              />
+            ) : (
+              <ConnectExistingMortgage
+                onConnectionSuccess={onConnectionSuccess}
+                isConnected={isConnected}
+              />
+            )}
+          </div>
+          <TaskDetails
+            existingTask={existingTask}
+            isUpdateTaskDisabled={isUpdateTaskDisabled}
+            setUpdateTaskDisabled={setUpdateTaskDisabled}
+            form={taskForm}
+            onSubmit={updateExistingTask}
+          />
         </div>
-        <TaskDetails
-          existingTask={existingTask}
-          isUpdateTaskDisabled={isUpdateTaskDisabled}
-          setUpdateTaskDisabled={setUpdateTaskDisabled}
-          form={taskForm}
-          onSubmit={updateExistingTask}
-        />
-      </div>
       )}
     </div>
   )

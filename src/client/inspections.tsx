@@ -1,4 +1,4 @@
-export const getinspection = async () => {
+export const getInspection = async () => {
   return await fetch(`/api/home_closing/inspections`, {
     method: "GET",
     headers: {
