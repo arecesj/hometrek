@@ -5,7 +5,8 @@ import { useEffect } from "react"
 import { useAppContext } from "@/context"
 import SubHeader from "../Subheader"
 import { manageRouteName } from "@/constants/routes"
-import AddExistingTitleAgent from "./AddExistingTitleAgent"
+import SessionAddExistingTitleAgent from "./Session/AddExistingTitleAgent"
+import NewUserAddExistingTitleAgent from "./NewUser/AddExistingTitleAgent"
 import { isUserAuthenticated } from "@/lib/utils"
 // import FindExistingTitle from "./FindExistingTitle"
 
@@ -23,8 +24,13 @@ const Title = () => {
         previousButtonHref={""}
         showCreateProfileButton={!isUserAuthenticated(status)}
       />
+      {/* FindExistingTitle is if we use Canopy for it */}
       {/* <FindExistingTitle /> */}
-      <AddExistingTitleAgent />
+      {isUserAuthenticated(status) ? (
+        <SessionAddExistingTitleAgent />
+      ) : (
+        <NewUserAddExistingTitleAgent />
+      )}
     </div>
   )
 }

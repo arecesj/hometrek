@@ -49,7 +49,12 @@ export async function PATCH(request, { params }) {
     
     const title = await prisma.title.update({
       data: {
-        ...updatedTitle
+        ...updatedTitle,
+        titleDetails: {
+          update: {
+            ...updatedTitle.titleDetails
+          }
+        }
       },
       where: {
         id

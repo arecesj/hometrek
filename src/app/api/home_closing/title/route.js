@@ -21,7 +21,11 @@ export async function GET(request) {
         userId
       },
       include: {
-        title: true
+        title: {
+          include: {
+            titleDetails: true
+          }
+        }
       }
     })
 
@@ -59,6 +63,11 @@ export async function POST(request) {
     const title = await prisma.title.create({
       data: {
         ...newTitle,
+        titleDetails: {
+          create: {
+            ...newTitle.titleDetails
+          }
+        },
         homeClosing: {
             connect: {
               id: homeClosing.id
