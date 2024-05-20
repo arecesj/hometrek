@@ -98,7 +98,7 @@ const SideNav = () => {
                 <BadgeCheck className="h-5 w-5" color="#3e9392"/>
               ) : (
                 <Link
-                  href={manageRoutes[(!!tasks.length || !!inspections) ? manageRouteName.INSPECTIONS_EDIT : manageRouteName.INSPECTIONS].route}
+                  href={manageRoutes[(!!tasks?.length || !!inspections) ? manageRouteName.INSPECTIONS_EDIT : manageRouteName.INSPECTIONS].route}
                   className={(routeContext === manageRouteName.INSPECTIONS || routeContext === manageRouteName.INSPECTIONS_EDIT) ? selectedClass : mutedClass}
                 >
                   <UserRoundSearch className="h-5 w-5"/>
@@ -116,7 +116,7 @@ const SideNav = () => {
                 <BadgeCheck className="h-5 w-5" color="#3e9392"/>
               ) : (
                 <Link
-                  href={manageRoutes[(!!tasks.length || !!appraisals) ? manageRouteName.APPRAISALS_EDIT : manageRouteName.APPRAISALS].route}
+                  href={manageRoutes[(!!tasks?.length || !!appraisals) ? manageRouteName.APPRAISALS_EDIT : manageRouteName.APPRAISALS].route}
                   className={(routeContext === manageRouteName.APPRAISALS || routeContext === manageRouteName.APPRAISALS_EDIT) ? selectedClass : mutedClass}
                 >
                   <NotebookPen className="h-5 w-5"/>
@@ -134,7 +134,7 @@ const SideNav = () => {
                 <BadgeCheck className="h-5 w-5" color="#3e9392"/>
               ) : (
                 <Link
-                  href={manageRoutes[(!!tasks.length || !!insurance) ? manageRouteName.INSURANCE_EDIT : manageRouteName.INSURANCE].route}
+                  href={manageRoutes[(!!tasks?.length || !!insurance) ? manageRouteName.INSURANCE_EDIT : manageRouteName.INSURANCE].route}
                   className={(routeContext === manageRouteName.INSURANCE || routeContext === manageRouteName.INSURANCE_EDIT) ? selectedClass : mutedClass}
                 >
                   <Shield className="h-5 w-5"/>
@@ -152,7 +152,7 @@ const SideNav = () => {
                 <BadgeCheck className="h-5 w-5" color="#3e9392"/>
               ) : (
                 <Link
-                  href={manageRoutes[(!!tasks.length || !!title) ? manageRouteName.TITLE_EDIT : manageRouteName.TITLE].route}
+                  href={manageRoutes[(!!tasks?.length || !!title) ? manageRouteName.TITLE_EDIT : manageRouteName.TITLE].route}
                   className={(routeContext === manageRouteName.TITLE || routeContext === manageRouteName.TITLE_EDIT) ? selectedClass : mutedClass}
                 >
                   <ScrollText className="h-5 w-5"/>

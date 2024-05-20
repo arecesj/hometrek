@@ -7,7 +7,7 @@ import { createLender } from "@/client/lenders"
 import ConnectMortgage from "../ConnectMortgage"
 
 
-const SessionFindExistingMortgage = () => {
+const FindExistingMortgage = () => {
   const [plaidAccessToken, setPlaidAccessToken] = useState<string>("")
   const [isDisabled, setDisabled] = useState<boolean>(false)
   const [isConnected, setConnected] = useState<boolean>(false)
@@ -60,4 +60,4 @@ const SessionFindExistingMortgage = () => {
     )
 }
 
-export default SessionFindExistingMortgage;
+export default FindExistingMortgage;

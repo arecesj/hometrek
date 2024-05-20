@@ -7,6 +7,7 @@ import { getPlaidLiabilities } from "@/client/plaid";
 import { manageRouteName, manageRoutes } from '@/constants/routes'
 import { useToast } from "@/components/ui/use-toast"
 import ConnectMortgage from "../ConnectMortgage"
+import { mapMortgageDetails } from "@/lib/utils";
 
 
 const FindExistingMortgage = () => {
@@ -26,33 +27,7 @@ const FindExistingMortgage = () => {
           ...lenders,
           hasOwnLender: true,
           plaidAccessToken: accessToken,
-          mortgageDetails: {
-            accountId: mortgage[0].account_id,
-            accountNumber: mortgage[0].account_number,
-            currentLateFee: mortgage[0].current_late_fee,
-            escrowBalance: mortgage[0].escrow_balance,
-            hasPMI: mortgage[0].has_pmi,
-            hasPrepaymentPenalty: mortgage[0].has_prepayment_penalty,
-            interestRatePercentage: mortgage[0].interest_rate.percentage,
-            interestRateType: mortgage[0].interest_rate.type,
-            lastPaymentAmount: mortgage[0].last_payment_amount,
-            lastPaymentDate: mortgage[0].last_payment_date,
-            loanTerm: mortgage[0].loan_term,
-            loanTypeDescription: mortgage[0].loan_type_description,
-            maturityDate: mortgage[0].maturity_date,
-            nextMonthlyPayment: mortgage[0].next_monthly_payment,
-            nextPaymentDueDate: mortgage[0].next_payment_due_date,
-            originationDate: mortgage[0].origination_date,
-            originationPrincipalAmount: mortgage[0].origination_principal_amount,
-            pastDueAmount: mortgage[0].past_due_amount,
-            city: mortgage[0].property_address.city,
-            country: mortgage[0].property_address.country,
-            postalCode: mortgage[0].property_address.post_code,
-            region: mortgage[0].property_address.region,
-            street: mortgage[0].property_address.street,
-            ytdInterestPaid: mortgage[0].ytd_interest_paid,
-            ytdPrincipalPaid: mortgage[0].ytd_principal_paid,
-          }
+          mortgage: mapMortgageDetails(mortgage[0]),
         },
       })
       setConnected(true)

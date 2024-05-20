@@ -22,7 +22,32 @@ export const lenderValidation = z
     // manage
     hasOwnLender: z.boolean().optional(),
     plaidAccessToken: z.string().optional(),
-    mortgageDetails: z.object({}).optional(),
+    mortgageDetails: z.object({
+      accountId: z.string(),
+      accountNumber: z.string(),
+      currentLateFee: z.number(),
+      escrowBalance: z.number(),
+      hasPMI: z.boolean(),
+      hasPrepaymentPenalty: z.boolean(),
+      interestRatePercentage: z.number(),
+      interestRateType: z.string(),
+      lastPaymentAmount: z.number(),
+      lastPaymentDate: z.string(),
+      loanTerm: z.string(),
+      loanTypeDescription: z.string(),
+      maturityDate: z.string(),
+      nextMonthlyPayment: z.number(),
+      nextPaymentDueDate: z.string(),
+      originationDate: z.string(),
+      originationPrincipalAmount: z.number(),
+      pastDueAmount: z.number(),
+      city: z.string(),
+      country: z.string(),
+      region: z.string(),
+      street: z.string(),
+      ytdInterestPaid: z.number(),
+      ytdPrincipalPaid: z.number(),
+    }).optional(),
   })
 
 export const inspectionValidation = z

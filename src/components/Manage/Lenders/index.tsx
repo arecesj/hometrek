@@ -2,7 +2,7 @@
 
 import { useSession } from "next-auth/react"
 import { useEffect } from "react";
-import FindExistingMortgage from "./NewUser/FindExistingMortgage";
+import NewUserFindExistingMortgage from "./NewUser/FindExistingMortgage";
 import SessionFindExistingMortgage from "./Session/FindExistingMortgage";
 import SubHeader from "@/components/Manage/Subheader";
 import { useAppContext } from "@/context";
@@ -26,7 +26,7 @@ const Lenders = () => {
       {isUserAuthenticated(status) ? (
         <SessionFindExistingMortgage />
       ) : (
-        <FindExistingMortgage />
+        <NewUserFindExistingMortgage />
       )}
     </div>
   )

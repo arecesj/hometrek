@@ -21,7 +21,11 @@ export async function GET(request) {
         userId
       },
       include: {
-        lenders: true
+        lenders: {
+          include: {
+            mortgageDetails: true
+          }
+        }
       }
     })
 
@@ -29,7 +33,7 @@ export async function GET(request) {
       return NextResponse.json({ message: "The user has no lender information" }, { status: 200 });
     }
     const lenders = homeClosing?.lenders
-    return NextResponse.json({lenders, message: "Successfully retrieves user's lenders information"}, { status: 200 })
+    return NextResponse.json({lenders, message: "Successfully retrieved user's lenders information"}, { status: 200 })
   } catch (error) {
     return NextResponse.json({ message: "Unable to get the user's home closing information at this time." }, { status: 500 });
   }
@@ -68,18 +72,31 @@ export async function POST(request) {
     const homeClosing = await prisma.homeClosing.findUnique({
       where: {
         userId
-      }
+      },
     })
+    
+    const formattedNewLender = {
+      hasOwnLender: newLender.hasOwnLender,
+      plaidAccessToken: newLender.plaidAccessToken,
+      mortgageDetails: {
+        create: {
+          ...newLender.mortgageDetails
+        }
+      }
+    }
     
     const lenders = await prisma.lender.create({
       data: {
-        ...newLender,
+        ...formattedNewLender,
         homeClosing: {
             connect: {
               id: homeClosing.id
             }
         }
       },
+      include: {
+        mortgageDetails: true
+      }
     })
 
     return NextResponse.json({lenders, message: "Successfully created user lender information"}, { status: 201 })

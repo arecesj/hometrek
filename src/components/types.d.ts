@@ -82,13 +82,13 @@ type MortgageDetails = {
   interestRatePercentage?: number;
   interestRateType?: string;
   lastPaymentAmount?: number;
-  lastPaymentDate?: Date;
+  lastPaymentDate?: string;
   loanTerm?: string;
   loanTypeDescription?: string;
-  maturityDate?: Date;
+  maturityDate?: string;
   nextMonthlyPayment?: number;
-  nextPaymentDueDate?: Date;
-  originationDate?: Date;
+  nextPaymentDueDate?: string;
+  originationDate?: string;
   originationPrincipalAmount?: number;
   pastDueAmount?: number;
   city?: string;

@@ -46,14 +46,26 @@ export async function PATCH(request, { params }) {
     const id = params.slug
     const body = await request.json()
     const updatedLender = lenderValidation.parse(body)
+    const formattedUpdatedLender = {
+      hasOwnLender: updatedLender.hasOwnLender,
+      plaidAccessToken: updatedLender.plaidAccessToken,
+      mortgageDetails: {
+        create: {
+          ...updatedLender.mortgageDetails
+        }
+      }
+    }
     
     const lender = await prisma.lender.update({
       data: {
-        ...updatedLender
+        ...formattedUpdatedLender
       },
       where: {
         id
       },
+      include: {
+        mortgageDetails: true,
+      }
     })
 
     return NextResponse.json({ lender, message: "Successfully updated user's lender information"}, { status: 200 })

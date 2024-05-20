@@ -15,6 +15,7 @@ import { categories, priorities, statuses } from "../TaskTable/DataTable/data/da
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { UseFormReturn } from "react-hook-form"
+import LoadingSpinner from "@/components/LoadingSpinner"
 
 type TaskDetailsProps = {
   existingTask: TaskContext;
@@ -60,92 +61,98 @@ const TaskDetails: FC<TaskDetailsProps> = (props) => {
             </CardDescription>
         </CardHeader>
         <CardContent className="p-4 text-sm">
-          <div className="pt-1">
-            <FormField
-              control={form.control}
-              name="task"
-              render={({ field }) => {
-                return (
-                  <FormItem>
-                    <FormLabel>
-                    Description
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        {...field}
-                        defaultValue={existingTask?.task}
-                        onChange={e => {
-                          setUpdateTaskDisabled(false)
-                          field.onChange(e.target.value)
-                        }}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )
-              }}
-            />
-          </div>
-          <div className="grid gap-6 sm:grid-cols-2 pt-3">
-            <div className="grid gap-3">
+          {!existingTask ? (
+            <LoadingSpinner />
+          ) : (
+            <>
+              <div className="pt-1">
               <FormField
                 control={form.control}
-                name="status"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Status</FormLabel>
-                    <Select
-                      onValueChange={e => {
-                        setUpdateTaskDisabled(false)
-                        field.onChange(e)
-                      }}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger id="status" aria-label="Select status">
-                          <SelectValue placeholder={existingStatusLabel} />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {statuses.map((status) =>
-                          <SelectItem key={status.value} value={status.value}>{status.label}</SelectItem>  
-                        )}
-                      </SelectContent>
-                    </Select>
-                  </FormItem>
-                )}
-              />
-            </div>
-            <div className="grid gap-3">
-              <FormField
-                  control={form.control}
-                  name="priority"
-                  render={({ field }) => (
+                name="task"
+                render={({ field }) => {
+                  return (
                     <FormItem>
-                      <FormLabel>Priority</FormLabel>
-                      <Select
-                        onValueChange={e => {
-                          setUpdateTaskDisabled(false)
-                          field.onChange(e)
-                        }}
-                        defaultValue={field.value}
-                      >
-                        <FormControl>
-                          <SelectTrigger id="priority" aria-label="Select priority">
-                            <SelectValue placeholder={existingPriorityLabel} />
-                          </SelectTrigger>
-                        </FormControl>
-                        <SelectContent>
-                          {priorities.map((priority) =>
-                            <SelectItem key={priority.value} value={priority.value}>{priority.label}</SelectItem>  
-                          )}
-                        </SelectContent>
-                      </Select>
+                      <FormLabel>
+                      Description
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          defaultValue={existingTask?.task}
+                          onChange={e => {
+                            setUpdateTaskDisabled(false)
+                            field.onChange(e.target.value)
+                          }}
+                        />
+                      </FormControl>
+                      <FormMessage />
                     </FormItem>
-                  )}
-                />
-            </div>
-          </div>
+                  )
+                }}
+              />
+              </div>
+              <div className="grid gap-6 sm:grid-cols-2 pt-3">
+                <div className="grid gap-3">
+                  <FormField
+                    control={form.control}
+                    name="status"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Status</FormLabel>
+                        <Select
+                          onValueChange={e => {
+                            setUpdateTaskDisabled(false)
+                            field.onChange(e)
+                          }}
+                          defaultValue={field.value}
+                        >
+                          <FormControl>
+                            <SelectTrigger id="status" aria-label="Select status">
+                              <SelectValue placeholder={existingStatusLabel} />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            {statuses.map((status) =>
+                              <SelectItem key={status.value} value={status.value}>{status.label}</SelectItem>  
+                            )}
+                          </SelectContent>
+                        </Select>
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <div className="grid gap-3">
+                  <FormField
+                      control={form.control}
+                      name="priority"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Priority</FormLabel>
+                          <Select
+                            onValueChange={e => {
+                              setUpdateTaskDisabled(false)
+                              field.onChange(e)
+                            }}
+                            defaultValue={field.value}
+                          >
+                            <FormControl>
+                              <SelectTrigger id="priority" aria-label="Select priority">
+                                <SelectValue placeholder={existingPriorityLabel} />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              {priorities.map((priority) =>
+                                <SelectItem key={priority.value} value={priority.value}>{priority.label}</SelectItem>  
+                              )}
+                            </SelectContent>
+                          </Select>
+                        </FormItem>
+                      )}
+                    />
+                </div>
+              </div>
+            </>
+          )}
         </CardContent>
       </Card>
         </form>
