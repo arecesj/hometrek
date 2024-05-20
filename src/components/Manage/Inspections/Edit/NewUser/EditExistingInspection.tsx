@@ -126,8 +126,6 @@ const EditExistingInspection = () => {
     successToast("Successfully updated your task!", "")
     setUpdateTaskDisabled(true)
   }
-
-  console.log("HC: ", homeClosingContext)
   
   return(
     <div>

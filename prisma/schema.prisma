@@ -192,13 +192,13 @@ model SelectedInspector {
 }
 
 model InspectionDetails {
-  id           String    @id @default(cuid())
-  inspectionId String?   @map("inspection_id")
+  id           String   @id @default(cuid())
+  inspectionId String?  @map("inspection_id")
   name         String?
-  date         DateTime?
-  cost         Decimal?
-  createdAt    DateTime  @default(now()) @map(name: "created_at")
-  updatedAt    DateTime  @updatedAt @map(name: "updated_at")
+  date         String?
+  cost         String?
+  createdAt    DateTime @default(now()) @map(name: "created_at")
+  updatedAt    DateTime @updatedAt @map(name: "updated_at")
 
   inspection Inspection? @relation(fields: [inspectionId], references: [id], onDelete: Cascade)
 

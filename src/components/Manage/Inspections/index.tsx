@@ -4,7 +4,8 @@ import { useSession } from "next-auth/react"
 import { useEffect } from "react"
 import { useAppContext } from "@/context"
 import SubHeader from "../Subheader"
-import AddExistingInspector from "./AddExistingInspector"
+import NewUserAddExistingInspector from "./NewUser/AddExistingInspector"
+import SessionAddExistingInspector from "./Session/AddExistingInspector"
 import { manageRouteName } from "@/constants/routes"
 import { isUserAuthenticated } from "@/lib/utils"
 
@@ -22,7 +23,11 @@ const Inspections = () => {
         previousButtonHref={""}
         showCreateProfileButton={!isUserAuthenticated(status)}
       />
-      <AddExistingInspector />
+      {isUserAuthenticated(status) ? (
+        <SessionAddExistingInspector />
+      ) : (
+        <NewUserAddExistingInspector />
+      )}
     </div>
   )
 }

@@ -21,7 +21,13 @@ export async function GET(request) {
         userId
       },
       include: {
-        inspections: true
+        inspections: {
+          include: {
+            include: {
+              inspectionDetails: true
+            }
+          }
+        }
       }
     })
 
@@ -55,10 +61,20 @@ export async function POST(request) {
         userId
       }
     })
+
+    const formattedNewInspection = {
+      hasInspector: newInspection.hasInspector,
+      hasInspected: newInspection.hasInspected,
+      inspectionDetails: {
+        create: {
+          ...newInspection.inspectionDetails
+        }
+      }
+    }
     
     const inspections = await prisma.inspection.create({
       data: {
-        ...newInspection,
+        ...formattedNewInspection,
         homeClosing: {
             connect: {
               id: homeClosing.id

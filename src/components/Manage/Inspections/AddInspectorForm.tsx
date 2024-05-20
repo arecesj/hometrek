@@ -1,10 +1,8 @@
 'use client'
 
-import { useState } from "react"
-import { useRouter } from 'next/navigation'
-import { useForm } from "react-hook-form"
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod"
+import { Dispatch, FC, SetStateAction } from "react"
+import { UseFormReturn } from "react-hook-form";
+import { format } from 'date-fns';
 import {
   Card,
   CardContent,
@@ -22,66 +20,33 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form"
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Checkbox } from "@/components/ui/checkbox"
-import { manageRouteName, manageRoutes } from '@/constants/routes'
-import { useAppContext } from '@/context'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { cn } from '@/lib/utils';
 import { CalendarIcon } from 'lucide-react';
 import { Calendar } from '@/components/ui/calendar';
-import { format } from 'date-fns';
+import { cn } from '@/lib/utils';
 
-const FormSchema = z.object({
-  name: z.string().optional(),
-  cost: z.string().refine((val) => !Number.isNaN(parseInt(val, 10)), {
-    message: "Cost has to be a number"
-  }).optional(),
-  date: z.date().optional(),
-})
-
-const AddExistingInspector = () => {
-  const [isDisabled, setDisabled] = useState<boolean>(false)
-  const { homeClosingContext, homeClosingContext: { inspections } , setHomeClosingContext } = useAppContext()
-  const router = useRouter();
-
-  const form = useForm<z.infer<typeof FormSchema>>({
-    resolver: zodResolver(FormSchema),
-  });
-
-const onSubmit = (data: z.infer<typeof FormSchema>) => {
-  const { name, date, cost } = data
-  let i: InspectionsContext;
-
-  if((name || date || cost) && !isDisabled) {
-    i = {
-      hasInspector: true,
-      hasInspected: !!date && date < new Date(),
-      inspectionDetails: {
-        name,
-        date,
-        cost
-      }
-    }
-  } else {
-    i = {
-      hasInspector: isDisabled,
-      hasInspected: isDisabled,
-      inspectionDetails: null
-    }
-  }
-
-  setHomeClosingContext({
-    ...homeClosingContext,
-    inspections: {
-      ...inspections,
-      ...i
-    }
-  })
-  router.push(manageRoutes[manageRouteName.APPRAISALS].route)
+type AddInspectorFormProps = {
+  form: UseFormReturn<{
+    name?: string;
+    cost?: string;
+    date?: Date;
+}, any, undefined>
+  onSubmit: (data: { name?: string; cost?: string; date?: Date; }) => Promise<void>;
+  isDisabled: boolean;
+  setDisabled: Dispatch<SetStateAction<boolean>>;
 }
 
+
+const AddInspectorForm: FC<AddInspectorFormProps> = (props) => {
+  const {
+    form,
+    onSubmit,
+    isDisabled,
+    setDisabled
+  } = props
   const formFieldClassName = "w-[100%]"
     return (
       <div className="flex justify-center">
@@ -233,4 +198,4 @@ const onSubmit = (data: z.infer<typeof FormSchema>) => {
     )
 }
 
-export default AddExistingInspector;
+export default AddInspectorForm

@@ -46,10 +46,18 @@ export async function PATCH(request, { params }) {
     const id = params.slug
     const body = await request.json()
     const updatedInspection = inspectionValidation.parse(body)
+    const formattedUpdatedInspection = {
+      ...updatedInspection,
+      inspectionDetails: {
+        update: {
+          ...updatedInspection.inspectionDetails
+        }
+      }
+    }
     
     const inspections = await prisma.inspection.update({
       data: {
-        ...updatedInspection
+        ...formattedUpdatedInspection
       },
       where: {
         id

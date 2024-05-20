@@ -67,8 +67,8 @@ export const inspectionValidation = z
     hasInspected: z.boolean().optional(),
     inspectionDetails: z.object({
       name: z.string().optional(),
-      date: z.date().optional(),
-      cost: z.number().optional(),
+      date: z.string().optional(),
+      cost: z.string().optional(),
     }).optional().nullable(),
   })
 
