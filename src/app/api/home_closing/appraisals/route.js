@@ -74,6 +74,9 @@ export async function POST(request) {
             }
         }
       },
+      include: {
+        appraisalDetails: true
+      }
     })
 
     return NextResponse.json({appraisals, message: "Successfully created user appraisal information"}, { status: 201 })

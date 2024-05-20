@@ -79,6 +79,9 @@ export async function POST(request) {
             }
         }
       },
+      include: {
+        inspectionDetails: true
+      }
     })
 
     return NextResponse.json({inspections, message: "Successfully created user inspection information"}, { status: 201 })

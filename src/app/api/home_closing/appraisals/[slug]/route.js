@@ -59,6 +59,9 @@ export async function PATCH(request, { params }) {
       where: {
         id
       },
+      include: {
+        appraisalDetails: true
+      }
     })
 
     return NextResponse.json({ appraisals, message: "Successfully updated user's appraisal information"}, { status: 200 })

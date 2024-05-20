@@ -74,6 +74,9 @@ export async function POST(request) {
             }
         }
       },
+      include: {
+        titleDetails: true
+      }
     })
 
     return NextResponse.json({title, message: "Successfully created user title information"}, { status: 201 })

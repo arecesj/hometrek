@@ -59,6 +59,9 @@ export async function PATCH(request, { params }) {
       where: {
         id
       },
+      include: {
+        titleDetails: true
+      }
     })
 
     return NextResponse.json({ title, message: "Successfully updated user's title information"}, { status: 200 })
