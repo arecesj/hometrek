@@ -140,7 +140,7 @@ const AddTitleAgentForm: FC<AddTitleAgentFormProps> = (props) => {
                     return (
                       <FormItem>
                         <FormLabel className={isDisabled ? "text-slate-300" : ""}>
-                          Title estimate
+                          Total cost
                         </FormLabel>
                         <FormDescription className={isDisabled ? "text-slate-300" : ""}>
                           A rough estimate of the cost of the title transfer

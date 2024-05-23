@@ -18,7 +18,7 @@ const Title = () => {
   return (
     <div>
       <SubHeader
-        subHeaderContent={"Let's keep track of your home title"}
+        subHeaderContent={"Let's keep track of your home title process"}
         showPreviousButton={false}
         previousButtonContent={""}
         previousButtonHref={""}

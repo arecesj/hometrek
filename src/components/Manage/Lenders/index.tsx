@@ -17,7 +17,7 @@ const Lenders = () => {
   return (
     <div>
       <SubHeader
-        subHeaderContent={"Let's get your existing mortgage"}
+        subHeaderContent={"Let's get your lender information"}
         showPreviousButton={false}
         previousButtonContent={""}
         previousButtonHref={""}

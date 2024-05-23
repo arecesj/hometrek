@@ -150,7 +150,7 @@ const AppraisalDetails: FC<AppraisalDetailsProps> = (props) => {
                     return (
                       <FormItem>
                         <FormLabel>
-                          Appraisal price
+                          Total cost
                         </FormLabel>
                         <FormControl>
                           <Input

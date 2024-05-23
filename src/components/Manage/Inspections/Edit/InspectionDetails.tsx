@@ -49,7 +49,7 @@ const InspectionDetails: FC<InspectionDetailsProps> = (props) => {
           <Card>
             <CardHeader className="bg-muted/50">
                 <CardTitle className="group grid grid-cols-2 items-center gap-2 text-lg">
-                  Enter your home inspection information
+                  Enter your home inspector information
                   <div className="flex justify-end space-x-2">
                     <Button
                       type="submit"
@@ -71,7 +71,7 @@ const InspectionDetails: FC<InspectionDetailsProps> = (props) => {
                     return (
                       <FormItem>
                         <FormLabel>
-                          Home Inspection Company
+                          Home inspection company
                         </FormLabel>
                         <FormControl>
                           <Input
@@ -150,7 +150,7 @@ const InspectionDetails: FC<InspectionDetailsProps> = (props) => {
                     return (
                       <FormItem>
                         <FormLabel>
-                          Inspection price
+                          Total cost
                         </FormLabel>
                         <FormControl>
                           <Input

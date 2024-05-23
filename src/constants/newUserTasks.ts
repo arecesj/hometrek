@@ -41,7 +41,7 @@ export const generateNewUserTasks = (homeClosingContext: HomeClosingContext) => 
     },
     {
       id: `HT${uuidv4()}`,
-      task: "Share the status with your realty and / or legal teams",
+      task: "Share the status with your realty and/or legal teams",
       status: closingDay?.hasClosed ? "done" : "inprogress",
       category: "closingday",
       priority: "high"

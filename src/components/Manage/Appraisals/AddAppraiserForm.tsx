@@ -70,7 +70,7 @@ const AddAppraiserForm: FC<AddAppraiserFormProps> = (props) => {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className={isDisabled ? "text-slate-300" : ""}>
-                          Home appraiser company
+                          Home appraisal company
                         </FormLabel>
                         <FormDescription className={isDisabled ? "text-slate-300" : ""}>
                           The company working with you
@@ -141,7 +141,7 @@ const AddAppraiserForm: FC<AddAppraiserFormProps> = (props) => {
                       return (
                         <FormItem>
                           <FormLabel className={isDisabled ? "text-slate-300" : ""}>
-                            Appraisal price
+                            Total cost
                           </FormLabel>
                           <FormDescription className={isDisabled ? "text-slate-300" : ""}>
                             A rough estimate of the cost of the home appraisal

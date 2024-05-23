@@ -57,7 +57,7 @@ const AddInspectorForm: FC<AddInspectorFormProps> = (props) => {
               <CardHeader className="px-7 bg-muted/50">
                 <div className="grid gap-0.5">
                   <CardTitle className="group flex items-center gap-2 text-lg">
-                    Enter your home inspection information
+                    Enter your home inspector information
                   </CardTitle>
                 </div>
                 {/* <CardDescription>Deets for the inspa</CardDescription> */}
@@ -143,7 +143,7 @@ const AddInspectorForm: FC<AddInspectorFormProps> = (props) => {
                       return (
                         <FormItem>
                           <FormLabel className={isDisabled ? "text-slate-300" : ""}>
-                            Inspection price
+                            Total cost
                           </FormLabel>
                           <FormDescription className={isDisabled ? "text-slate-300" : ""}>
                             A rough estimate of the cost of the home inspection

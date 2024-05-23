@@ -34,7 +34,7 @@ const ConnectMortgage: FC<ConnectMortgageProps> = (props) => {
         </CardTitle>
       </div>
       <CardDescription>
-        {"Let's get your mortgage information"}
+        {"Let's learn more about your loan provider"}
       </CardDescription>
     </CardHeader>
     <CardContent className="p-7">
