@@ -11,7 +11,7 @@ export const categories = [
   },
   {
     value: "appraisals",
-    label: "Appraisals",
+    label: "Appraisal",
   },
   {
     value: "insurance",

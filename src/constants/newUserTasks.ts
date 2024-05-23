@@ -6,42 +6,42 @@ export const generateNewUserTasks = (homeClosingContext: HomeClosingContext) => 
   return [
     {
       id: `HT${uuidv4()}`,
-      task: "Connect HomeTrek with your mortgage lender via Plaid's secure platform",
+      task: "Manage your mortgage lender via our secure platform",
       status: lenders?.hasOwnLender ? "done" : "todo",
       category: "lenders",
       priority: "medium"
     },
     {
       id: `HT${uuidv4()}`,
-      task: "Input your inspection information so that we can blah blah blah",
+      task: "Track the status of your home inspection",
       status: inspections?.hasInspected ? "done" : inspections?.hasInspector ? "inprogress" : "todo",
       category: "inspections",
       priority: "medium"
     },
     {
       id: `HT${uuidv4()}`,
-      task: "Add in your appraiser's information so that we can help you keep track",
+      task: "Add in your appraiser to know your home's value",
       status: appraisals?.hasAppraised ? "done" : appraisals?.hasAppraiser ? "inprogress" : "todo",
       category: "appraisals",
       priority: "medium"
     },
     {
       id: `HT${uuidv4()}`,
-      task: "Connect HomeTrek with your insurance provider via Canopy Connect's secure platform",
+      task: "Connect your insurance provider via our secure platform",
       status: insurance?.hasInsurance ? "done" : "todo",
       category: "insurance",
       priority: "medium"
     },
     {
       id: `HT${uuidv4()}`,
-      task: "Connect HomeTrek blah blah blah",
+      task: "Select your home title company",
       status: (title?.hasTitleAgent && title?.hasTitleTransfer) ? "done" : (title?.hasTitleAgent || title?.hasTitleTransfer) ? "inprogress" : "todo",
       category: "title",
       priority: "medium"
     },
     {
       id: `HT${uuidv4()}`,
-      task: "Gotta close this stuff out, man!",
+      task: "Share the status with your realty and / or legal teams",
       status: closingDay?.hasClosed ? "done" : "inprogress",
       category: "closingday",
       priority: "high"

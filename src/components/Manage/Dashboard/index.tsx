@@ -20,7 +20,7 @@ const Dashboard = () => {
   return (
     <div>
       <SubHeader
-        subHeaderContent={"Where we track it all"}
+        subHeaderContent={"A quick glance into what's left"}
         showPreviousButton={false}
         previousButtonContent={""}
         previousButtonHref={""}
