@@ -60,7 +60,7 @@ const AddInspectorForm: FC<AddInspectorFormProps> = (props) => {
                     Enter your home inspection information
                   </CardTitle>
                 </div>
-                <CardDescription>Deets for the inspa</CardDescription>
+                {/* <CardDescription>Deets for the inspa</CardDescription> */}
               </CardHeader>
               <CardContent className="p-7 w-full grid grid-cols-2 gap-6">
                 <div className={formFieldClassName}>
@@ -70,7 +70,7 @@ const AddInspectorForm: FC<AddInspectorFormProps> = (props) => {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className={isDisabled ? "text-slate-300" : ""}>
-                          Home Inspection Company
+                          Home inspection company
                         </FormLabel>
                         <FormDescription className={isDisabled ? "text-slate-300" : ""}>
                           The company working with you

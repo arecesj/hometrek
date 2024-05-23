@@ -301,6 +301,7 @@ model InsuranceDetails {
   noPolicies            Boolean?       @map("no_policies")
   noDocuments           String?        @map("no_documents")
   policy                PolicyDetails?
+  agent                 AgentDetails?
   createdAt             DateTime       @default(now()) @map(name: "created_at")
   updatedAt             DateTime       @updatedAt @map(name: "updated_at")
 
@@ -478,6 +479,25 @@ model NamedInsured {
   policyDetails PolicyDetails? @relation(fields: [policyDetailsId], references: [id], onDelete: Cascade)
 
   @@unique([policyDetailsId])
+}
+
+model AgentDetails {
+  id                 String  @id @default(cuid())
+  insuranceDetailsId String? @map("insurance_details_id")
+  agentInfoId        String? @map("agent_info_id")
+  addressId          String? @map("address_id_id")
+  agencyName         String? @map("agent_name")
+  agentFullName      String? @map("agent_full_name")
+  phoneNumber        String? @map("phone_number")
+  email              String?
+  policyIds          String? @map("policyIds")
+
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @updatedAt @map(name: "updated_at")
+
+  insuranceDetails InsuranceDetails? @relation(fields: [insuranceDetailsId], references: [id], onDelete: Cascade)
+
+  @@unique([insuranceDetailsId])
 }
 
 // TITLE

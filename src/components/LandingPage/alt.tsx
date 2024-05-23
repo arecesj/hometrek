@@ -18,11 +18,11 @@ const Alt = () => {
           </div>
           <div className="flex gap-4">
             <Button asChild size="lg" className=" w-[150px] text-white bg-[hsl(0,0%,8%)] hover:bg-transparent hover:border hover:text-[hsl(0,0%,8%)] hover:border-[hsl(0,0%,8%)] py-3 px-6 rounded-xl">
-              <Link href="/manage/lenders">Manage</Link>
+              <Link href="/manage/lenders">Get Started</Link>
             </Button>
-            <Button asChild size="lg" className=" w-[150px] text-white bg-[hsl(0,0%,8%)] hover:bg-transparent hover:border hover:text-[hsl(0,0%,8%)] hover:border-[hsl(0,0%,8%)] py-3 px-6 rounded-xl">
+            {/* <Button asChild size="lg" className=" w-[150px] text-white bg-[hsl(0,0%,8%)] hover:bg-transparent hover:border hover:text-[hsl(0,0%,8%)] hover:border-[hsl(0,0%,8%)] py-3 px-6 rounded-xl">
               <Link href="/trek/lenders">Trek</Link>
-            </Button>
+            </Button> */}
           </div>
         </div>
       </div>

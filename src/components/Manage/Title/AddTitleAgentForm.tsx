@@ -59,7 +59,7 @@ const AddTitleAgentForm: FC<AddTitleAgentFormProps> = (props) => {
                   Enter your home title agent information
                 </CardTitle>
               </div>
-              <CardDescription>Deets for the title agent</CardDescription>
+              {/* <CardDescription>Deets for the title agent</CardDescription> */}
             </CardHeader>
             <CardContent className="p-7 w-full grid grid-cols-2 gap-6">
               <div className={formFieldClassName}>
@@ -69,7 +69,7 @@ const AddTitleAgentForm: FC<AddTitleAgentFormProps> = (props) => {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className={isDisabled ? "text-slate-300" : ""}>
-                        Title Agent Company
+                        Title company
                       </FormLabel>
                       <FormDescription className={isDisabled ? "text-slate-300" : ""}>
                         The company working with you
@@ -95,7 +95,7 @@ const AddTitleAgentForm: FC<AddTitleAgentFormProps> = (props) => {
                         Date of title transfer
                       </FormLabel>
                       <FormDescription className={isDisabled ? "text-slate-300" : ""}>
-                      Select the date of the home title transger
+                      Select the date of the home title transfer
                       </FormDescription>
                       <Popover>
                         <PopoverTrigger asChild>
@@ -140,10 +140,10 @@ const AddTitleAgentForm: FC<AddTitleAgentFormProps> = (props) => {
                     return (
                       <FormItem>
                         <FormLabel className={isDisabled ? "text-slate-300" : ""}>
-                          Title Agent estimate
+                          Title estimate
                         </FormLabel>
                         <FormDescription className={isDisabled ? "text-slate-300" : ""}>
-                          A rough estimate of the cost of the title agent
+                          A rough estimate of the cost of the title transfer
                         </FormDescription>
                         <FormControl>
                           <Input

@@ -60,7 +60,7 @@ const AddAppraiserForm: FC<AddAppraiserFormProps> = (props) => {
                     Enter your home appraiser information
                   </CardTitle>
                 </div>
-                <CardDescription>Deets for the apraisa</CardDescription>
+                {/* <CardDescription>Deets for the apraisa</CardDescription> */}
               </CardHeader>
               <CardContent className="p-7 w-full grid grid-cols-2 gap-6">
                 <div className={formFieldClassName}>
@@ -70,7 +70,7 @@ const AddAppraiserForm: FC<AddAppraiserFormProps> = (props) => {
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className={isDisabled ? "text-slate-300" : ""}>
-                          Home Appraiser Company
+                          Home appraiser company
                         </FormLabel>
                         <FormDescription className={isDisabled ? "text-slate-300" : ""}>
                           The company working with you
