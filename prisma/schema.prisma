@@ -60,7 +60,7 @@ model HomeClosing {
   id          String      @id @default(cuid())
   userId      String      @map("user_id")
   state       String?
-  zipCode     String?
+  zipCode     String?     @map("zip_code")
   lenders     Lender?
   inspections Inspection?
   appraisals  Appraisal?
@@ -89,8 +89,8 @@ model Lender {
   potentialDownPayment String?
   selectedLender       SelectedLender?
   // manage
-  hasOwnLender         Boolean?
-  plaidAccessToken     String?
+  hasOwnLender         Boolean?         @map("has_own_lender")
+  plaidAccessToken     String?          @map("plaid_access_token")
   mortgageDetails      MortgageDetails?
   createdAt            DateTime         @default(now()) @map(name: "created_at")
   updatedAt            DateTime         @updatedAt @map(name: "updated_at")
@@ -105,9 +105,9 @@ model SelectedLender {
   lenderId                 String   @map("lender_id")
   name                     String
   nmls                     String
-  minCreditScore           String
-  minDownPaymentPercentage String
-  currInterestRate         String
+  minCreditScore           String   @map("min_credit_score")
+  minDownPaymentPercentage String   @map("min_down_payment_percentage")
+  currInterestRate         String   @map("curr_interest_rate")
   createdAt                DateTime @default(now()) @map(name: "created_at")
   updatedAt                DateTime @updatedAt @map(name: "updated_at")
 
@@ -162,8 +162,8 @@ model Inspection {
   // trek
   selectedInspector SelectedInspector?
   // manage
-  hasInspector      Boolean?
-  hasInspected      Boolean?
+  hasInspector      Boolean?           @map("has_inspector")
+  hasInspected      Boolean?           @map("has_inspected")
   inspectionDetails InspectionDetails?
   createdAt         DateTime           @default(now()) @map(name: "created_at")
   updatedAt         DateTime           @updatedAt @map(name: "updated_at")
@@ -215,8 +215,8 @@ model Appraisal {
   //trek
   selectedAppraiser SelectedAppraiser?
   //manage
-  hasAppraiser      Boolean?
-  hasAppraised      Boolean?
+  hasAppraiser      Boolean?           @map("has_appraiser")
+  hasAppraised      Boolean?           @map("has_appraised")
   appraisalDetails  AppraisalDetails?
   createdAt         DateTime           @default(now()) @map(name: "created_at")
   updatedAt         DateTime           @updatedAt @map(name: "updated_at")
@@ -245,13 +245,13 @@ model SelectedAppraiser {
 }
 
 model AppraisalDetails {
-  id          String    @id @default(cuid())
-  appraisalId String?   @map("appraisal_id")
+  id          String   @id @default(cuid())
+  appraisalId String?  @map("appraisal_id")
   name        String?
-  date        DateTime?
+  date        String?
   cost        Decimal?
-  createdAt   DateTime  @default(now()) @map(name: "created_at")
-  updatedAt   DateTime  @updatedAt @map(name: "updated_at")
+  createdAt   DateTime @default(now()) @map(name: "created_at")
+  updatedAt   DateTime @updatedAt @map(name: "updated_at")
 
   appraisal Appraisal? @relation(fields: [appraisalId], references: [id], onDelete: Cascade)
 
@@ -266,13 +266,12 @@ model Insurance {
   id                   String             @id @default(cuid())
   homeClosingId        String?            @map("home_closing_id")
   //trek
-  potentialHomePrice   String?
-  potentialDownPayment String?
+  potentialHomePrice   String?            @map("potential_home_price")
+  potentialDownPayment String?            @map("potential_down_payment")
   selectedInsurance    SelectedInsurance?
   //manage
-  hasInsurance         Boolean?
-  // TODO @arecesj: canopyAccessToken?
-  // TODO @arecesj: Figure this out after connecting with Canopy
+  hasInsurance         Boolean?           @map("has_insurance")
+  canopyPullId         String?            @map("canopy_pulled_id")
   insuranceDetails     InsuranceDetails?
   createdAt            DateTime           @default(now()) @map(name: "created_at")
   updatedAt            DateTime           @updatedAt @map(name: "updated_at")
@@ -296,15 +295,189 @@ model SelectedInsurance {
 }
 
 model InsuranceDetails {
-  id          String  @id @default(cuid())
-  insuranceId String? @map("insurance_id")
-
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @updatedAt @map(name: "updated_at")
+  id                    String         @id @default(cuid())
+  insuranceId           String?        @map("insurance_id")
+  insuranceProviderName String?        @map("insurance_provider_name")
+  noPolicies            Boolean?       @map("no_policies")
+  noDocuments           String?        @map("no_documents")
+  policy                PolicyDetails?
+  createdAt             DateTime       @default(now()) @map(name: "created_at")
+  updatedAt             DateTime       @updatedAt @map(name: "updated_at")
 
   insurance Insurance? @relation(fields: [insuranceId], references: [id], onDelete: Cascade)
 
   @@unique([insuranceId])
+}
+
+model PolicyDetails {
+  id                               String         @id @default(cuid())
+  insuranceDetailsId               String?        @map("insurance_details_id")
+  policyId                         String?        @map("policy_id")
+  name                             String?
+  carrierPolicyNumber              String?        @map("carrier_policy_number")
+  policyType                       String?        @map("policy_type")
+  effectiveDate                    String?        @map("effective_date")
+  expiryDate                       String?        @map("expiry_date")
+  renewalDate                      String?        @map("renewal_date")
+  canceledDate                     String?        @map("canceled_date")
+  totalPremiumCents                Int?           @map("total_premium_cents")
+  carrierName                      String?        @map("carrier_name")
+  status                           String?
+  limitedAccess                    Boolean?       @map("limited_access")
+  formOfBusiness                   String?        @map("form_of_business")
+  deductibleCents                  Int?           @map("deductible_cents")
+  paidInFull                       Boolean?       @map("paid_in_full")
+  amountDueCents                   Int?           @map("amount_due_cents")
+  amountPaidCents                  Int?           @map("amount_paid_cents")
+  isSelected                       Boolean?       @map("is_selected")
+  totalEstimatedAnnualPremiumCents Int?           @map("total_estimated_annual_premium_cents")
+  totalMinimumPremiumCents         Int?           @map("total_minimum_premium_cents")
+  totalDepositPremiumCents         Int?           @map("total_deposit_premium_cents")
+  isMonoline                       Boolean?       @map("is_monoline")
+  dwellings                        Dwelling?
+  namedInsureds                    NamedInsured[]
+  createdAt                        DateTime       @default(now()) @map(name: "created_at")
+  updatedAt                        DateTime       @updatedAt @map(name: "updated_at")
+
+  insuranceDetails InsuranceDetails? @relation(fields: [insuranceDetailsId], references: [id], onDelete: Cascade)
+
+  @@unique([insuranceDetailsId])
+}
+
+model Dwelling {
+  id                             String            @id @default(cuid())
+  policyDetailsId                String?           @map("policy_details_id")
+  dwellingId                     String?           @map("dwelling_id")
+  replacementCostCents           Int?              @map("replacement_cost_cents")
+  cashValueCents                 Int?              @map("cash_value_cents")
+  propertyDataFetched            Boolean?          @map("property_data_fetched")
+  lossSettlementType             String?           @map("loss_settlement_type")
+  extendedReplacementCostPercent Int?              @map("extended_replacement_cost_percent")
+  addressId                      String?           @map("address_id")
+  fullAddress                    String?           @map("full_address")
+  country                        String?
+  addressNature                  String?           @map("address_nature")
+  number                         String?
+  street                         String?
+  addressType                    String?           @map("address_type")
+  city                           String?
+  state                          String?
+  secUnitType                    String?           @map("sec_unit_type")
+  secUnitNum                     String?           @map("sec_unit_num")
+  zip                            String?
+  coverage                       CoverageDetails[]
+  propertyData                   PropertyData?
+  createdAt                      DateTime          @default(now()) @map(name: "created_at")
+  updatedAt                      DateTime          @updatedAt @map(name: "updated_at")
+
+  policyDetails PolicyDetails? @relation(fields: [policyDetailsId], references: [id], onDelete: Cascade)
+
+  @@unique([policyDetailsId])
+}
+
+model CoverageDetails {
+  id                      String   @id @default(cuid())
+  dwellingId              String?  @map("dwelling_id")
+  dwellingCoverageId      String?  @map("dwelling_coverage_id")
+  name                    String?
+  friendlyName            String?  @map("friendly_name")
+  premiumCents            Int?     @map("premium_cents")
+  perPersonLimitCents     Int?     @map("per_person_limit_cents")
+  perPersonUnlimited      Boolean? @map("per_person_unlimited")
+  perIncidentLimitCents   Int?     @map("per_incident_limit_cents")
+  perIncidentUnlimited    Boolean? @map("per_incident_unlimited")
+  perIncidentLimitPercent Int?     @map("per_incident_limit_percent")
+  deductibleCents         Int?     @map("deductible_cents")
+  deductiblePercent       String?  @map("deductible_precent")
+  isDeclined              Boolean? @map("is_declined")
+  createdAt               DateTime @default(now()) @map(name: "created_at")
+  updatedAt               DateTime @updatedAt @map(name: "updated_at")
+
+  dwelling Dwelling? @relation(fields: [dwellingId], references: [id], onDelete: Cascade)
+
+  @@unique([dwellingId])
+}
+
+model PropertyData {
+  id                            String   @id @default(cuid())
+  dwellingId                    String?  @map("dwelling_id")
+  canopyDwellingId              String?  @map("canopy_dwelling_id")
+  propertyDataId                String?  @map("property_data_id")
+  apn                           String?
+  class                         String?
+  subType                       String?  @map("sub_type")
+  yearBuilt                     Int?     @map("year_built")
+  constructionType              String?  @map("construction_type")
+  wallType                      String?  @map("wall_type")
+  foundationType                String?  @map("foundation_type")
+  frameType                     String?  @map("frame_type")
+  roofCover                     String?  @map("roof_cover")
+  roofShape                     String?  @map("roof_shape")
+  coolingType                   String?  @map("cooling_type")
+  heatingType                   String?  @map("heating_type")
+  heatingFuel                   String?  @map("heating_fuel")
+  energyType                    String?  @map("energy_type")
+  sewerType                     String?  @map("sewer_type")
+  buildingShape                 String?  @map("building_shape")
+  constructionQuality           String?  @map("construction_quality")
+  hasFireplace                  Boolean? @map("has_fireplace")
+  numFireplaces                 Int?     @map("num_fireplaces")
+  fireplaceType                 String?  @map("fireplace_type")
+  hasPool                       Boolean? @map("has_pool")
+  poolType                      String?  @map("pool_type")
+  squareFt                      Int?     @map("square_ft")
+  numBeds                       Int?     @map("num_beds")
+  numBathsFull                  Int?     @map("num_baths_full")
+  numBathsPartial               Int?     @map("num_baths_partial")
+  numStories                    Int?     @map("num_stories")
+  numUnits                      Int?     @map("num_units")
+  garageType                    String?  @map("garage_type")
+  garageSquareFt                Int?     @map("garage_square_ft")
+  numParkingSpaces              Int?     @map("num_parking_spaces")
+  assessedImprovementValueCents Int?     @map("assessed_improvement_value_cents")
+  assessedLandValueCents        Int?     @map("assessed_land_value_cents")
+  assessedTotalValueCents       Int?     @map("assessed_total_value_cents")
+  marketImprovementValueCents   Int?     @map("market_improvement_value_cents")
+  marketLandValueCents          Int?     @map("market_land_value_cents")
+  marketTotalValueCents         Int?     @map("market_total_value_cents")
+  owner1FirstName               String?  @map("owner1_first_name")
+  owner1LastName                String?  @map("owner1_last_name")
+  owner2FirstName               String?  @map("owner2_first_name")
+  owner2LastName                String?  @map("owner2_last_name")
+  owner3FirstName               String?  @map("owner3_first_name")
+  owner3LastName                String?  @map("owner3_last_name")
+  owner4FirstName               String?  @map("owner4_first_name")
+  owner4LastName                String?  @map("owner4_last_name")
+  firstMortgageAmountCents      Int?     @map("first_mortgage_amount_cents")
+  firstMortgageLender           String?  @map("first_mortgage_lender")
+  secondMortgageAmountCents     Int?     @map("second_mortgage_amount_cents")
+  secondMortgageLender          String?  @map("second_mortgage_lender")
+  purchaseDate                  String?  @map("purchase_date")
+  purchasePriceCents            Int?     @map("purchase_price_cents")
+  lastUpdateDate                String?  @map("last_update_date")
+  createdAt                     DateTime @default(now()) @map(name: "created_at")
+  updatedAt                     DateTime @updatedAt @map(name: "updated_at")
+
+  dwelling Dwelling? @relation(fields: [dwellingId], references: [id], onDelete: Cascade)
+
+  @@unique([dwellingId])
+}
+
+model NamedInsured {
+  id                    String   @id @default(cuid())
+  policyDetailsId       String?  @map("policy_details_id")
+  namedInsuredId        String?  @map("named_insured_id")
+  firstName             String?  @map("first_name")
+  middleName            String?  @map("middle_name")
+  lastName              String?  @map("last_name")
+  fullName              String?  @map("full_name")
+  isPrimaryNamedInsured Boolean? @map("is_primary_named_insured")
+  createdAt             DateTime @default(now()) @map(name: "created_at")
+  updatedAt             DateTime @updatedAt @map(name: "updated_at")
+
+  policyDetails PolicyDetails? @relation(fields: [policyDetailsId], references: [id], onDelete: Cascade)
+
+  @@unique([policyDetailsId])
 }
 
 // TITLE
@@ -317,8 +490,8 @@ model Title {
   // trek
   selectedTitleAgent SelectedTitleAgent?
   //manage
-  hasTitleAgent      Boolean?
-  hasTitleTransfer   Boolean?
+  hasTitleAgent      Boolean?            @map("has_title_agent")
+  hasTitleTransfer   Boolean?            @map("has_title_transfer")
   titleDetails       TitleDetails?
   createdAt          DateTime            @default(now()) @map(name: "created_at")
   updatedAt          DateTime            @updatedAt @map(name: "updated_at")
