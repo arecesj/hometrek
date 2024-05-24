@@ -194,6 +194,7 @@ type InsuranceDetails = {
   // will need its own table
   // only grab HOMEOWNERS (pull.policies.filter(p => p.policy_type === "HOMEOWNERS")) - let's not store what we don't need
   policy?: PolicyDetails;
+  agent: AgentDetails;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -202,6 +203,7 @@ type PolicyDetails = {
   id?: string;
   policyId?: string;
   name?: string;
+  description?: string;
   carrierPolicyNumber?: string;
   policyType?: string;
   effectiveDate?: string;
@@ -226,7 +228,7 @@ type PolicyDetails = {
   // As a new feature; we can ask which one we want to store - should be an easy build
   dwellings?: Dwelling;
   // store all since people usually buy a house with their partner
-  namedInsured?: NamedInsured[];
+  namedInsureds?: NamedInsured[];
   createdAt?: string;
   updatedAt?: string;
 }
@@ -254,7 +256,7 @@ type Dwelling = {
   secUnitNum?: string;
   zip?: string
   // store all since they're all part of the insurance
-  coverage?: CoverageDetails[];
+  coverages?: CoverageDetails[];
   propertyData?: PropertyData;
   createdAt?: string;
   updatedAt?: string;
@@ -273,7 +275,7 @@ type CoverageDetails = {
   perIncidentLimitPercent?: number;
   deductibleCents?: number;
   deductiblePercent?: string;
-  isDeclined: boolean;
+  isDeclined?: boolean;
   createdAt?: string;
   updatedAt?: string;
 }
@@ -349,6 +351,17 @@ type NamedInsured = {
   isPrimaryNamedInsured?: boolean;
   createdAt?: string;
   updatedAt?: string;
+}
+
+type AgentDetails = {
+  agentInfoId?: string;
+  addressId?: string;
+  agencyName?: string;
+  agentFullName?: string;
+  phoneNumber?: string;
+  email?: string;
+  // This will be JSON - not worth its own table
+  policyIds?: string;
 }
 
 // TITLE CONTEXT
@@ -471,4 +484,154 @@ type YelpLocation = {
 type YelpAttributes = {
   business_temp_closed: string | null;
   waitlist_reservation: string | null;
+}
+
+type CanopyConnectInsurancePull = {
+  insurance_provider_name: string;
+  no_policies: boolean;
+  no_documents: boolean;
+  policies: CanopyPolicyDetails[];
+  agents: CanopyAgent[];
+}
+
+type CanopyPolicyDetails = {
+  policy_id: string;
+  name: string;
+  description: string;
+  carrier_policy_number: string;
+  policy_type: string;
+  effective_date: string;
+  expiry_date: string;
+  renewal_date: string;
+  canceled_date: string | null;
+  total_premium_cents: number;
+  carrier_name: string;
+  status: string;
+  limited_access: boolean;
+  form_of_business: string | null;
+  deductible_cents: number | null;
+  paid_in_full: boolean;
+  amount_due_cents: number | null;
+  amount_paid_cents: number | null;
+  is_selected: boolean;
+  total_estimated_annual_premium_cents: number | null;
+  total_minimum_premium_cents: number | null;
+  total_deposit_premium_cents: number | null;
+  is_monoline: boolean;
+  dwellings: CanopyDwelling[];
+  named_insureds: CanopyNamedInsureds[];
+}
+
+type CanopyDwelling = {
+  dwelling_id: string;
+  replacement_cost_cents: number;
+  cash_value_cents: number;
+  property_data_fetched: boolean;
+  loss_settlement_type: string;
+  extended_replacement_cost_percent: number;
+  address: {
+      address_id: string;
+      full_address: string;
+      country: string | null;
+      address_nature: string;
+      number: string;
+      street: string;
+      type: string;
+      city: string;
+      state: string;
+      sec_unit_type: string;
+      sec_unit_num: string;
+      zip: string;
+  };
+  coverages: CanopyCoverageDetails[];
+  property_data: {
+      dwelling_id: string;
+      property_data_id: string;
+      apn: string;
+      class: string;
+      sub_type: string;
+      year_built: number;
+      construction_type: string;
+      wall_type: string;
+      foundation_type: string;
+      frame_type: string;
+      roof_cover: string;
+      roof_shape: string;
+      cooling_type: string;
+      heating_type: string;
+      heating_fuel: string;
+      energy_type: string;
+      sewer_type: string;
+      building_shape: string;
+      construction_quality: string;
+      has_fireplace: boolean;
+      num_fireplaces: number;
+      fireplace_type: string;
+      has_pool: boolean;
+      pool_type: string;
+      square_ft: number;
+      num_beds: number;
+      num_baths_full: number;
+      num_baths_partial: number;
+      num_stories: number;
+      num_units: number;
+      garage_type: string;
+      garage_square_ft: number;
+      num_parking_spaces: number;
+      assessed_improvement_value_cents: number;
+      assessed_land_value_cents: number;
+      assessed_total_value_cents: number;
+      market_improvement_value_cents: number;
+      market_land_value_cents: number;
+      market_total_value_cents: number;
+      owner1_first_name: string;
+      owner1_last_name: string;
+      owner2_first_name: string | null;
+      owner2_last_name: string | null;
+      owner3_first_name: string | null;
+      owner3_last_name: string | null;
+      owner4_first_name: string | null;
+      owner4_last_name: string | null;
+      first_mortgage_amount_cents: number | null;
+      first_mortgage_lender: string | null;
+      second_mortgage_amount_cents: number | null;
+      second_mortgage_lender: string | null;
+      purchase_date: string;
+      purchase_price_cents: number;
+      last_update_date: string;
+  };
+}
+
+type CanopyCoverageDetails = {
+  dwelling_coverage_id: string;
+  name: string;
+  friendly_name: string;
+  premium_cents: number | null;
+  per_person_limit_cents: number | null;
+  per_person_unlimited: boolean;
+  per_incident_limit_cents: number | null;
+  per_incident_unlimited: boolean;
+  per_incident_limit_percent: string | null;
+  deductible_cents: number | null;
+  deductible_percent: string | null;
+  is_declined: boolean;
+}
+
+type CanopyNamedInsureds = {
+  named_insured_id: string;
+  first_name: string;
+  middle_name: string | null;
+  last_name: string;
+  full_name: string;
+  is_primary_named_insured: boolean;
+}
+
+type CanopyAgent = {
+  agent_info_id: string;
+  address_id: string;
+  agency_name: string;
+  agent_full_name: string;
+  phone_number: string;
+  email: string;
+  policy_ids: string[];
 }

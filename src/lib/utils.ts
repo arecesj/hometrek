@@ -68,32 +68,75 @@ export const subtractNumStrings = (ns1: string, ns2: string) => {
 
 export const isUserAuthenticated = (status: string) => status === "authenticated"
 
+const  snakeToCamel = (obj: { [key: string]: any }): { [key: string]: any } => {
+  const newObj: { [key: string]: any } = {};
+  for (const key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+          const camelKey = key.replace(/_(\w)/g, (_, letter) => letter.toUpperCase());
+          newObj[camelKey] = obj[key];
+      }
+  }
+  return newObj;
+}
+
 export const mapMortgageDetails = (mortgage) => {
+  const m = snakeToCamel(mortgage)
+  delete m.propertyAddress
+  
   return {
-    accountId: mortgage.account_id,
-    accountNumber: mortgage.account_number,
-    currentLateFee: mortgage.current_late_fee,
-    escrowBalance: mortgage.escrow_balance,
-    hasPMI: mortgage.has_pmi,
-    hasPrepaymentPenalty: mortgage.has_prepayment_penalty,
+    ...m,
     interestRatePercentage: mortgage.interest_rate.percentage,
     interestRateType: mortgage.interest_rate.type,
-    lastPaymentAmount: mortgage.last_payment_amount,
-    lastPaymentDate: mortgage.last_payment_date,
-    loanTerm: mortgage.loan_term,
-    loanTypeDescription: mortgage.loan_type_description,
-    maturityDate: mortgage.maturity_date,
-    nextMonthlyPayment: mortgage.next_monthly_payment,
-    nextPaymentDueDate: mortgage.next_payment_due_date,
-    originationDate: mortgage.origination_date,
-    originationPrincipalAmount: mortgage.origination_principal_amount,
-    pastDueAmount: mortgage.past_due_amount,
     city: mortgage.property_address.city,
     country: mortgage.property_address.country,
     postalCode: mortgage.property_address.post_code,
     region: mortgage.property_address.region,
     street: mortgage.property_address.street,
-    ytdInterestPaid: mortgage.ytd_interest_paid,
-    ytdPrincipalPaid: mortgage.ytd_principal_paid,
   }
+}
+
+export const mapInsuranceDetails = (insurance: CanopyConnectInsurancePull): InsuranceDetails => {
+  const homeOwnersPolicy = insurance.policies.find(p => p.policy_type === "HOMEOWNERS")
+  if(!homeOwnersPolicy) return {} as InsuranceDetails
+
+  const propertyData = snakeToCamel(homeOwnersPolicy.dwellings[0].property_data)
+  const coverages: CoverageDetails[] = homeOwnersPolicy.dwellings[0].coverages.map((c: CanopyCoverageDetails): CoverageDetails => {
+    return snakeToCamel(c)
+  })
+
+  const dwellings: Dwelling = {
+    ...snakeToCamel(homeOwnersPolicy.dwellings[0]),
+    ...snakeToCamel(homeOwnersPolicy.dwellings[0].address),
+    addressType: homeOwnersPolicy.dwellings[0].address.type,
+    coverages,
+    propertyData,
+  }
+
+  const namedInsureds: NamedInsured[] = homeOwnersPolicy.named_insureds.map((n: CanopyNamedInsureds): NamedInsured => {
+    return snakeToCamel(n)
+  })
+
+  const policy = {
+    ...snakeToCamel(homeOwnersPolicy),
+    dwellings,
+    namedInsureds
+  }
+
+  let agent;
+  if(!insurance.agents[0]) {
+    agent =  null
+  } else {
+    agent = {
+      ...snakeToCamel(insurance.agents[0]),
+      policyIds: JSON.stringify(insurance.agents[0].policy_ids),
+    }
+  } 
+
+  return {
+    insuranceProviderName: insurance.insurance_provider_name,
+    noPolicies: insurance.no_policies,
+    noDocuments: insurance.no_documents,
+    policy,
+    agent,
+  } as InsuranceDetails
 }

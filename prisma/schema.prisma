@@ -315,6 +315,7 @@ model PolicyDetails {
   insuranceDetailsId               String?        @map("insurance_details_id")
   policyId                         String?        @map("policy_id")
   name                             String?
+  description                      String?
   carrierPolicyNumber              String?        @map("carrier_policy_number")
   policyType                       String?        @map("policy_type")
   effectiveDate                    String?        @map("effective_date")
@@ -366,7 +367,7 @@ model Dwelling {
   secUnitType                    String?           @map("sec_unit_type")
   secUnitNum                     String?           @map("sec_unit_num")
   zip                            String?
-  coverage                       CoverageDetails[]
+  coverages                      CoverageDetails[]
   propertyData                   PropertyData?
   createdAt                      DateTime          @default(now()) @map(name: "created_at")
   updatedAt                      DateTime          @updatedAt @map(name: "updated_at")
