@@ -176,10 +176,10 @@ type AppraisalDetails = {
 type InsuranceContext = {
   id?: string;
   // trek
-  selectedPolicy: any;
+  selectedPolicy?: any;
   //  manage
   hasInsurance: boolean;
-  canopyPullId: string;
+  canopyPullId?: string;
   insuranceDetails?: InsuranceDetails;
   createdAt?: string;
   updatedAt?: string;

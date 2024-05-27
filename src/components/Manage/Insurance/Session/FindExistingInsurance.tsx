@@ -15,25 +15,51 @@ import { manageRouteName, manageRoutes } from '@/constants/routes'
 import { useAppContext } from '@/context'
 import CanopyButton from '@/components/CanopyButton'
 import { Checkbox } from "@/components/ui/checkbox"
+import { createInsurance } from "@/client/insurance"
+import { useToast } from "@/components/ui/use-toast"
 
 
 const FindExistingInsurance = () => {
   const [isDisabled, setDisabled] = useState<boolean>(false)
   const [isConnected, setConnected] = useState<boolean>(false)
   const { homeClosingContext, homeClosingContext: { insurance } , setHomeClosingContext } = useAppContext()
-  const router = useRouter();
+  const router = useRouter()
+  const { toast } = useToast()
 
-  const onConnectionSuccess = (accessToken: string) => {
-    setHomeClosingContext({
-      ...homeClosingContext,
-      insurance: {
-        ...insurance,
-        hasInsurance: true,
-        insuranceDetails: {},
-      }
+  const successToast = (title: string, description: string) => {
+    return toast({
+      title,
+      description,
     })
-    // router.push(manageRoutes[manageRouteName.TITLE].route)
-    setConnected(true)
+  }
+
+  const failureToast = (title: string, description: string) => {
+    return toast({
+      variant: "destructive",
+      title,
+      description,
+    })
+  }
+
+  const onConnectionSuccess = async (pullId: string) => {
+    const resp = await createInsurance({canopyPullId: pullId, hasInsurance: true})
+    if(resp.ok) {
+      successToast("Successfully requested your insurance information!", "Canopy is working hard to get all of that information for you")
+      // do i need to do this still for the side nav or tasks? - tbh low on things I need done?
+      setHomeClosingContext({
+        ...homeClosingContext,
+          insurance: {
+            ...insurance,
+            hasInsurance: true,
+            canopyPullId: pullId,
+          }
+      })
+      router.push(manageRoutes[manageRouteName.TITLE].route)
+    } else {
+      failureToast("Oh no! There was an issue getting your insurance information", "")
+    }
+    
+    router.push(manageRoutes[manageRouteName.TITLE].route)
   }
 
   const onNext = () => {
@@ -78,8 +104,11 @@ const FindExistingInsurance = () => {
           <div className="flex items-center justify-center space-x-2 py-4 px-6">
             <CanopyButton
               className="w-[275px] h-[80px]"
-              isDisabled
-              isConnected
+              isDisabled={isDisabled}
+              isConnected={isConnected}
+              setConnected={setConnected}
+              onConnectionSuccess={onConnectionSuccess}
+              failureToast={failureToast}
             />
           </div>
           <div className="pl-1 flex justify-center space-x-2">
