@@ -57,8 +57,8 @@ export async function POST(request) {
 
     const newHomeClosing = await prisma.homeClosing.create({
       data: {
-        state: state,
-        zipCode: zipCode,
+        state,
+        zipCode,
         lenders: {
           create: lenders
         },

@@ -176,7 +176,7 @@ const Signup = () => {
                 variant="outline"
                 className="w-full"
                 disabled={isCreating}
-                onClick={() => signIn('google')}
+                onClick={() => signIn('google', { callbackUrl:"/google_auth" })}
                 >
                 Sign up with Google
               </Button>
