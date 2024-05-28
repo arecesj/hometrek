@@ -27,7 +27,7 @@ const Alt = () => {
         </div>
       </div>
       <div className="b relative h-[700px] w-full overflow-hidden brightness-90">
-        <Image fill src={spanish_home} alt="img" className="w-full object-cover" />
+        <Image fill src={spanish_home} alt="img" className="w-full object-cover rounded-lg" />
       </div>
     </div>
   )

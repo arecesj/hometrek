@@ -26,19 +26,22 @@ const Navigation: FC<NavigationProps> = ({ isHome }) => {
   return (
     <div>
       <div className='flex justify-between lg:items-center px-5 py-6 lg:px-14'>
-        {isHome ? homeTrekImage : (
+        {isHome ? (
+          <div className="lg:mr-16">
+            {homeTrekImage}
+          </div>) : (
           <a href="/" className="lg:mr-16">
           {homeTrekImage}
         </a>
         )}
-        {/* <div className="hidden lg:flex lg:grow text-[hsl(0,0%,41%)] lg:items-center">
+        <div className="hidden lg:flex lg:grow text-[hsl(0,0%,41%)] lg:items-center">
           <ul className="flex">
-            <li className="mr-6"><a href="" className="hover:text-[hsl(0,0%,8%)]">Features</a></li>
-            <li className="mr-6"><a href="" className="hover:text-[hsl(0,0%,8%)]">Company</a></li>
-            <li className="mr-6"><a href="" className="hover:text-[hsl(0,0%,8%)]">Careers</a></li>
-            <li className="mr-6"><a href="" className="hover:text-[hsl(0,0%,8%)]">About</a></li>
+            <li className="mr-6"><a href="/get-involved" className="hover:text-[hsl(0,0%,8%)]">Get Involved</a></li>
+            <li className="mr-6"><a href="/resources/blog" className="hover:text-[hsl(0,0%,8%)]">Resources</a></li>
+            {/* <li className="mr-6"><a href="" className="hover:text-[hsl(0,0%,8%)]">Careers</a></li>
+            <li className="mr-6"><a href="" className="hover:text-[hsl(0,0%,8%)]">About</a></li> */}
           </ul>
-        </div> */}
+        </div>
         
         <div className="hidden lg:flex lg:items-center text-[hsl(0,0%,41%)] space-x-2">
           {isUserAuthenticated(status) ? (
