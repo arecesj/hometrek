@@ -4,15 +4,12 @@ import { NextResponse } from "next/server";
 export async function GET(request, { params }) {  
   const pullId = params.slug
   try {
-    // const resp = await fetch(`https://app.usecanopy.com/api/v1.0.0/teams/${process.env.CANOPY_TEAM_ID}/pulls/${pullId}`, {
-    const resp = await fetch(`https://app.usecanopy.com/api/v1.0.0/teams/b7570e3e-3b39-44e3-8081-9a30d7d8b29e/pulls/${pullId}`, {
+    const resp = await fetch(`https://app.usecanopy.com/api/v1.0.0/teams/${process.env.CANOPY_TEAM_ID}/pulls/${pullId}`, {
       method: 'GET',
       headers: {
         'accept': 'application/json',
-        // 'x-canopy-client-id': process.env.CANOPY_CLIENT_ID,
-        // 'x-canopy-client-secret': process.env.CANOPY_CLIENT_SECRET,
-        'x-canopy-client-id': '18c235bc-2268-40a5-9aa8-34748f2c8bc8',
-        'x-canopy-client-secret': 'TEmPsu8GgZv4uSmxysdOoDKsIfzGt2o82cmkkjWIiqMPGcjQfCTAWRNB+AiUlkLp',
+        'x-canopy-client-id': process.env.CANOPY_CLIENT_ID,
+        'x-canopy-client-secret': process.env.CANOPY_CLIENT_SECRET,
       },
       
     })
