@@ -89,9 +89,9 @@ export async function POST(request) {
       data: {
         ...formattedNewLender,
         homeClosing: {
-            connect: {
-              id: homeClosing.id
-            }
+          connect: {
+            id: homeClosing.id
+          }
         }
       },
       include: {

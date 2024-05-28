@@ -50,11 +50,11 @@ const FindExistingTitle = () => {
         </CardHeader>
         <CardContent className="p-7">
           <div className="flex items-center justify-center space-x-2 py-4 px-6">
-            <CanopyButton
+            {/* <CanopyButton
               className="w-[275px] h-[80px]"
               isDisabled
               isConnected
-            />
+            /> */}
             <div>
               - OR -
             </div>

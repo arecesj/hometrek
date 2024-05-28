@@ -68,9 +68,9 @@ export const authOptions: NextAuthOptions = {
     })
   ],
   callbacks: {
-    async jwt({ token, user, account, isNewUser }) {
+    async jwt({ token, user, account, trigger }) {
       if (user) {
-        if(isNewUser && account.provider === "google") {
+        if(trigger === "signUp" && account.provider === "google") {
           await prisma.homeClosing.create({
             data: {
               user: {
