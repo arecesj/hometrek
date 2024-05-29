@@ -1,12 +1,12 @@
 'use client'
 
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
 import { useSession } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import Loading from "@/components/LoadingSpinner"
 import { useAppContext } from "@/context"
 import { useToast } from "@/components/ui/use-toast"
-import { createHomeClosing, getHomeClosing, updateHomeClosing } from "@/client/homeClosing"
+import { updateHomeClosing } from "@/client/homeClosing"
 import { manageRouteName, manageRoutes } from "@/constants/routes"
 import { generateNewUserTasks } from "@/constants/newUserTasks"
 
@@ -14,6 +14,7 @@ import { generateNewUserTasks } from "@/constants/newUserTasks"
 const GoogleAuth = () => {
   const { data: session, status } = useSession()
   const { homeClosingContext } = useAppContext()
+  const [ allowCreate, setCreate ] = useState<boolean>(true)
   const router = useRouter()
   const { toast } = useToast()
 
@@ -44,7 +45,8 @@ const GoogleAuth = () => {
   }
 
   useEffect(() => {
-    if(!!session) {
+    if(!!session && allowCreate) {
+      setCreate(false)
       newHomeClosing()
       router.push(manageRoutes[manageRouteName.DASHBOARD].route)
     }
