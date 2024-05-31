@@ -3,7 +3,7 @@ import Hero from "@/components/NewLandingPage/Hero"
 import Features from "@/components/NewLandingPage/Features"
 import FeaturesBlocks from "@/components/NewLandingPage/FeaturesBlocks"
 import Testimonials from "@/components/NewLandingPage/Testimonials"
-import Newsletter from "@/components/NewLandingPage/Newsletter"
+import Connect from "@/components/NewLandingPage/Connect"
 import Footer from "@/components/NewLandingPage/Footer"
 
 export const metadata = {
@@ -19,7 +19,7 @@ export default function Home() {
       <Features />
       <FeaturesBlocks />
       <Testimonials />
-      <Newsletter />
+      <Connect />
       <Footer />
     </>
   )
