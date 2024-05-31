@@ -3,10 +3,10 @@ import colors from "@/images/colors.jpg"
 
 export default function Hero() {
   return (
-    <section className="relative">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 bg-gradient-to-r from-pink-300 to-yellow-200">
+    <section className="relative bg-gradient-to-r from-pink-300 to-yellow-100">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Image */}
-        <div className="hidden md:block lg:block xl:block" aria-hidden="true">
+        {/* <div className="hidden md:block lg:block xl:block" aria-hidden="true">
           <Image
           src={colors}
           alt="colors"
@@ -14,7 +14,7 @@ export default function Hero() {
           objectFit="cover"
           priority
           />
-        </div>
+        </div> */}
         {/* Hero content */}
         <div className="pt-32 pb-12 md:pt-52 md:pb-60">
           {/* Section header */}
