@@ -27,13 +27,13 @@ export default function Testimonials() {
         <div className="py-12 md:py-20">
 
           {/* Section header */}
-          <div className="max-w-3xl mx-auto text-center pb-8 md:pb-8">
-            {/* <h2 className="h2 mb-4">{`Some early accomplishments but we're just getting started`}</h2> */}
+          {/* <div className="max-w-3xl mx-auto text-center pb-8 md:pb-8">
+            <h2 className="h2 mb-4">{`Some early accomplishments but we're just getting started`}</h2>
             <h2 className="h2 mb-4">Our team</h2>
-            {/* <p className="text-xl text-gray-600" data-aos="zoom-y-out">
+            <p className="text-xl text-gray-600" data-aos="zoom-y-out">
               {`We're obsessed with learning as much as we can about our customers and yours`}
-            </p> */}
-          </div>
+            </p>
+          </div> */}
 
           {/* Items */}
           {/* <div className="max-w-sm md:max-w-4xl mx-auto grid gap-2 grid-cols-4 md:grid-cols-5">
@@ -92,8 +92,7 @@ export default function Testimonials() {
 
             </div>
           </div> */}
-          <div className="max-w-3xl mx-auto grid gap-6 md:grid-cols-2 lg:grid-cols-2 items-start md:max-w-2xl lg:max-w-none" data-aos="zoom-y-out">
-              {/* Testimonial */}
+          {/* <div className="max-w-3xl mx-auto grid gap-6 md:grid-cols-2 lg:grid-cols-2 items-start md:max-w-2xl lg:max-w-none" data-aos="zoom-y-out">
             <div className="relative flex items-start border-2 border-gray-200 rounded bg-white">
               <div className="text-center px-12 py-8 pt-20 mx-4 md:mx-0">
                 <div className="absolute top-0 -mt-8 left-1/2 transform -translate-x-1/2">
@@ -108,7 +107,6 @@ export default function Testimonials() {
                 </div>
               </div>
             </div>
-              {/* Testimonial */}
             <div className="relative flex items-start border-2 border-gray-200 rounded bg-white">
               <div className="text-center px-12 py-8 pt-20 mx-4 md:mx-0">
                 <div className="absolute top-0 -mt-8 left-1/2 transform -translate-x-1/2">
@@ -123,7 +121,7 @@ export default function Testimonials() {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
         </div>
       </div>

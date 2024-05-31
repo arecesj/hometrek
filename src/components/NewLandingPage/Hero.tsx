@@ -40,7 +40,11 @@ export default function Hero() {
               home closing platform
             </h1>
             <div className="max-w-3xl mx-auto">
-              <p className="text-xl text-gray-900 mb-8" data-aos="zoom-y-out" data-aos-delay="150">Save time and money while avoiding the usual headaches</p>
+              <p className="text-xl text-gray-900 mb-8" data-aos="zoom-y-out" data-aos-delay="150">
+                Be the realtor that saves home buyers time and money
+                <br />
+                while avoiding the usual headaches
+                </p>
               <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center" data-aos="zoom-y-out" data-aos-delay="300">
                 <div>
                   <a className="btn text-black bg-white hover:bg-gray-900 hover:text-white w-full mb-4 sm:w-auto sm:mb-0" href="/signup">Get Started</a>

@@ -37,9 +37,7 @@ export default function Features() {
           <div className="max-w-3xl mx-auto text-center pb-12 md:pb-16">
             <h1 className="h2 mb-4">A secure, modern home closing experience</h1>
             <p className="text-xl text-gray-600">
-            It is about time someone brought home
-            <br/>
-            closing out of the Middle Ages
+              {`It’s time to make home closing less stressful for home buyers `}
             </p>
           </div>
 
@@ -76,7 +74,7 @@ export default function Features() {
                 >
                   <div>
                     <div className="font-bold leading-snug tracking-tight mb-1">Avoid junk fees</div>
-                    <div className="text-gray-600">Be the hero that saves your home buyer money by avoiding the ever increasing junk fees</div>
+                    <div className="text-gray-600">Be the agent that saves your home buyer money by avoiding the ever increasing junk fees</div>
                   </div>
                   <div className="flex justify-center items-center w-8 h-8 bg-gray-900 rounded-full shadow flex-shrink-0 ml-3">
                     <DollarSign className="h-4 w-4" color="white" />
@@ -88,8 +86,8 @@ export default function Features() {
                   onClick={(e) => { e.preventDefault(); setTab(3); }}
                 >
                   <div>
-                    <div className="font-bold leading-snug tracking-tight mb-1">Built with security in mind</div>
-                    <div className="text-gray-600">Take collaboration to the next level with security and administrative features built for teams.</div>
+                    <div className="font-bold leading-snug tracking-tight mb-1">Built with security & scalability in mind</div>
+                    <div className="text-gray-600">Manage all real estate deals and never worry about leaking buyer data</div>
                   </div>
                   <div className="flex justify-center items-center w-8 h-8 bg-gray-900 rounded-full shadow flex-shrink-0 ml-3">
                     <Lock className="h-4 w-4" color="white" />

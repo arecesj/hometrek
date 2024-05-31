@@ -9,7 +9,7 @@ export default function Newsletter() {
           <div className="relative bg-gray-900 rounded py-10 px-8 md:py-16 md:px-12 shadow-2xl overflow-hidden" data-aos="zoom-y-out">
 
             {/* Background illustration */}
-            <div className="absolute right-0 bottom-15 pointer-events-none hidden lg:block" aria-hidden="true">
+            <div className="absolute right-0 bottom-4 pointer-events-none hidden lg:block" aria-hidden="true">
               {/* <svg width="428" height="328" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <radialGradient cx="35.542%" cy="34.553%" fx="35.542%" fy="34.553%" r="96.031%" id="ni-a">
@@ -45,16 +45,19 @@ export default function Newsletter() {
               {/* CTA content */}
               <div className="text-center lg:text-left lg:max-w-xl">
                 <h3 className="h3 text-gray-100 mb-2">If you want to chat, so do we</h3>
-                <p className="text-gray-200 text-lg mb-6"> Shoot us a note at <a href="mailto:info@hometrek.ai" className="underline">info@hometrek.ai</a> or enter your email below and we will right get back to you</p>
+                {/* <p className="text-gray-200 text-lg mb-6"> Shoot us a note at <a href="mailto:info@hometrek.ai" className="underline">info@hometrek.ai</a> or enter your email below and we will right get back to you</p> */}
+                <p className="text-gray-200 text-lg mb-6"> Shoot us a note at <a href="mailto:info@hometrek.ai" className="underline">info@hometrek.ai</a> 
+                <br />
+                and we will right get back to you</p>
 
                 {/* CTA form */}
-                <form className="w-full lg:w-auto">
+                {/* <form className="w-full lg:w-auto">
                   <div className="flex flex-col sm:flex-row justify-center max-w-xs mx-auto sm:max-w-md lg:mx-0">
                     <input type="email" className="form-input w-full appearance-none bg-gray-200 border border-gray-700 focus:border-gray-600 rounded-sm px-4 py-3 mb-2 sm:mb-0 sm:mr-2 text-white placeholder-gray-500" placeholder="Your email…" aria-label="Your email…" />
                     <a className="btn text-white bg-blue-600 hover:bg-blue-700 shadow" href="#0">Connect</a>
                   </div>
-                  <p className="text-sm text-gray-200 mt-3">{`Don't worry, we won't spam you. What hate junk mail, too.`}</p>
-                </form>
+                  <p className="text-sm text-gray-200 mt-3">{`Don't worry, we won't spam you. We hate junk mail, too.`}</p>
+                </form> */}
               </div>
 
             </div>
