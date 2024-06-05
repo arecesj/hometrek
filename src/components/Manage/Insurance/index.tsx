@@ -6,9 +6,9 @@ import { useSession } from "next-auth/react"
 import { useAppContext } from "@/context"
 import SubHeader from "../Subheader"
 import { manageRouteName } from "@/constants/routes"
-import SessionFindExistingInsurance from "./Session/FindExistingInsurance"
 import { isUserAuthenticated } from "@/lib/utils"
 import LoadingSpinner from "@/components/LoadingSpinner"
+import FindExistingInsurance from "./Session/FindExistingInsurance"
 
 const Insurance = () => {
   const { data: session, status } = useSession()
@@ -40,7 +40,7 @@ const Insurance = () => {
             previousButtonHref={""}
             showCreateProfileButton={!isUserAuthenticated(status)}
           />
-          <SessionFindExistingInsurance />
+          <FindExistingInsurance />
         </>
       )}
     </div>
