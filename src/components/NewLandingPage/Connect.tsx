@@ -45,10 +45,8 @@ export default function Newsletter() {
               {/* CTA content */}
               <div className="text-center lg:text-left lg:max-w-xl">
                 <h3 className="h3 text-gray-100 mb-2">If you want to chat, so do we</h3>
-                {/* <p className="text-gray-200 text-lg mb-6"> Shoot us a note at <a href="mailto:info@hometrek.ai" className="underline">info@hometrek.ai</a> or enter your email below and we will right get back to you</p> */}
-                <p className="text-gray-200 text-lg mb-6"> Shoot us a note at <a href="mailto:info@hometrek.ai" className="underline">info@hometrek.ai</a> 
-                <br />
-                and we will right get back to you</p>
+                {/* <p className="text-gray-200 text-lg mb-6"> Shoot us a note at <a href="mailto:info@hometrek.ai" className="underline">info@hometrek.ai</a> or enter your email below and we will get right back to you</p> */}
+                <p className="text-gray-200 text-lg mb-6"> Shoot us a note at <a href="mailto:info@hometrek.ai" className="underline">info@hometrek.ai</a> and we will get right back to you</p>
 
                 {/* CTA form */}
                 {/* <form className="w-full lg:w-auto">

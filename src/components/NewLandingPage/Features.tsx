@@ -49,7 +49,7 @@ export default function Features() {
               <div className="md:pr-4 lg:pr-12 xl:pr-16 mb-8">
                 <h3 className="h3 mb-3">Simple, yet robust</h3>
                 <p className="text-xl text-gray-600">
-                From finding the ideal mortgage lender to getting home buyers the key to their dream homes, close deals safer and faster
+                From finding the ideal lender for a customer to handing off keys to a dream home, close deals safer and faster
                 </p>
               </div>
               {/* Tabs buttons */}
@@ -61,7 +61,7 @@ export default function Features() {
                 >
                   <div>
                     <div className="font-bold leading-snug tracking-tight mb-1">Easy to use</div>
-                    <div className="text-gray-600">Help home buyers focus on what is important and avoid any unnecessary distractions </div>
+                    <div className="text-gray-600">Help home buyers focus on what is important and avoid any unnecessary distractions</div>
                   </div>
                   <div className="flex justify-center items-center w-8 h-8 bg-gray-900 rounded-full shadow flex-shrink-0 ml-3">
                     <MousePointer2 className="h-5 w-5" color="white"/>
@@ -87,7 +87,7 @@ export default function Features() {
                 >
                   <div>
                     <div className="font-bold leading-snug tracking-tight mb-1">Built with security & scalability in mind</div>
-                    <div className="text-gray-600">Manage all real estate deals and never worry about leaking buyer data</div>
+                    <div className="text-gray-600">Manage all real estate deals and never worry about leaking personal data</div>
                   </div>
                   <div className="flex justify-center items-center w-8 h-8 bg-gray-900 rounded-full shadow flex-shrink-0 ml-3">
                     <Lock className="h-4 w-4" color="white" />
