@@ -6,30 +6,31 @@ import { useSession } from "next-auth/react";
 import { useAppContext } from "@/context";
 import { manageRouteName } from "@/constants/routes";
 import { isUserAuthenticated } from "@/lib/utils";
-import SessionEditExistingInspection from "./Session/EditExistingInspection";
+import SessionEditExistingInsurance from "./Session/EditExistingInsurance";
 import LoadingSpinner from "@/components/LoadingSpinner"
 
-const InspectionsEdit = () => {
+const InsuranceEdit = () => {
   const { data: session, status } = useSession()
   const { setRouteContext } = useAppContext()
   const [isLoading, setLoading] = useState<boolean>(true)
   const router = useRouter()
-  
-  useEffect(() => setRouteContext(manageRouteName.INSPECTIONS_EDIT), [])
+
+  useEffect(() => setRouteContext(manageRouteName.INSURANCE_EDIT), [])
+
   useEffect(() => {
     if(!isUserAuthenticated(status)) router.push('/login')
     if(isUserAuthenticated(status)) setLoading(false)
   }, [status])
-
+  
   return(
-    <>
+    <div>
       {isLoading ? (
         <LoadingSpinner />
       ) : (
-        <SessionEditExistingInspection />
+        <SessionEditExistingInsurance />
       )}
-    </>
+    </div>
   )
 }
 
-export default InspectionsEdit;
+export default InsuranceEdit;

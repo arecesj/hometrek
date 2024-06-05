@@ -76,9 +76,9 @@ const EditExistingLender = () => {
       lenders: null,
       tasks: updatedTasks,
     })
-    successToast("Successfully deleted your lender!", "Redirecting you back to the previous page.")
+    successToast("Successfully deleted your lender!", "Redirecting you back to the dashboard.")
     setConnected(false)
-    router.back()
+    router.push(manageRoutes[manageRouteName.DASHBOARD].route)
   }
 
   const onConnectionSuccess = async (accessToken: string) => {

@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Logo from './Logo'
 import MobileMenu from './MobileMenu'
-import { ArrowRight } from 'lucide-react'
 
 export default function Header() {
 
@@ -37,7 +36,7 @@ export default function Header() {
             {/* Desktop sign in links */}
             <ul className="flex grow justify-end flex-wrap items-center">
               <li>
-                <Link href="/login" className="font-medium text-gray-900 hover:text-gray-600 px-5 py-3 flex items-center transition duration-150 ease-in-out">Sign in</Link>
+                <Link href="/login" className="font-medium text-gray-900 hover:text-gray-600 px-5 py-3 flex items-center transition duration-150 ease-in-out">Log in</Link>
               </li>
               <li>
                 <Link href="/signup" className="btn-sm text-white bg-gray-900 hover:text-gray-900 hover:bg-gray-200 ml-3">
