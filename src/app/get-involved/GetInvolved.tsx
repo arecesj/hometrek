@@ -5,7 +5,7 @@ import five from "@/images/five.jpg"
 
 const GetInvolved = () => {
   return (
-    <div className="w-full lg:grid lg:min-h-[700px] lg:grid-cols-2 xl:min-h-[700px]">
+    <div className="w-full lg:grid lg:min-h-[700px] lg:grid-cols-2 xl:min-h-[700px] py-20">
       <div className="b relative h-[700px] w-full overflow-hidden brightness-90">
         <Image fill src={five} alt="img" className="w-full object-cover rounded-lg" />
       </div>
