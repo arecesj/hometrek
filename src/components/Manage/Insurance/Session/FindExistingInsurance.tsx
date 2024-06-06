@@ -62,8 +62,9 @@ const FindExistingInsurance = () => {
     router.push(manageRoutes[manageRouteName.TITLE].route)
   }
 
-  const onNext = () => {
+  const onNext = async () => {
     if(isDisabled) {
+      await createInsurance({ hasInsurance: true})
       setHomeClosingContext({
         ...homeClosingContext,
         insurance: {
@@ -75,7 +76,8 @@ const FindExistingInsurance = () => {
     router.push(manageRoutes[manageRouteName.TITLE].route)
   }
 
-  const onSkip = () => {
+  const onSkip = async () => {
+    await createInsurance({ hasInsurance: false})
     setHomeClosingContext({
       ...homeClosingContext,
       insurance: {
@@ -148,4 +150,4 @@ const FindExistingInsurance = () => {
     )
 }
 
-export default FindExistingInsurance;
+export default FindExistingInsurance
